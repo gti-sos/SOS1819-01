@@ -3,7 +3,7 @@ var path = require("path");
 var app = express();
 var port = process.env.PORT;
 
-app.use("/", express.static(path.join(__dirname, "public")));
+app.use("/",  express.static(path.join(__dirname, "public")));
 
 app.get("/hello", (req, res) => {
 	res.send("hello");
