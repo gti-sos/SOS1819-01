@@ -22,8 +22,21 @@ exports.init = () => {
 	_setData(nData)
 };
 
-exports.getAll = (cb) => {
-	cb(_data);
+exports.getAll = (query, cb) => {
+	var res = [];
+	_data.forEach(function (e) {
+		var add = false;
+		for (var key in query) {
+			if (key === 'from' && e.year >= parseInt(query[key]) && (!query['to']) || e.year <= parseInt(query['to']))
+				add = true; 
+			if (key === 'country' || key === 'type')
+				add = e.country.filter(value => query[key].includes(value)).length > 0;
+			if (e[key] == query[key] || Object.keys(query).length === 0) 
+				add = true;	
+		}
+		if (add) res.push(e);
+	});
+	cb(res);
 };
 
 exports.getById = function (id, cb) {

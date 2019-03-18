@@ -6,7 +6,7 @@ exports.init = function (req, res) {
 };
 
 exports.list = function (req, res) {
-	Model.getAll((data) => {
+	Model.getAll(req.query, (data) => {
 		res.send(data);
 	});
 };
