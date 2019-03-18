@@ -1,7 +1,7 @@
 {
-  "name": "sos1819-06",
+  "name": "sos1819-01",
   "version": "0.1.0",
-  "description": "Link-up between the data of each european football league, its uefa ranking, and the best ranked clubs",
+  "description": "Find the relationship between investment and schooling with GDP growth in contrast to public spending and investment in R & D",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -9,16 +9,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gti-sos/SOS1819-06.git"
+    "url": "git+https://github.com/gti-sos/SOS1819-01.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gti-sos/SOS1819-06/issues"
+    "url": "https://github.com/gti-sos/SOS1819-01/issues"
   },
-  "homepage": "https://github.com/gti-sos/SOS1819-06#readme",
+  "homepage": "https://github.com/gti-sos/SOS1819-01#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "morgan": "latest"
   }
 }

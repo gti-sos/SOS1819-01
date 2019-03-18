@@ -2,12 +2,18 @@ var express = require("express");
 var path = require("path");
 var app = express();
 var port = process.env.PORT || 8000;
+var morgan = require('morgan');
+var bodyParser = require('body-parser');
 
 app.use("/",  express.static(path.join(__dirname, "public")));
+app.use(morgan('tiny'));
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/hello", (req, res) => {
-	res.send("hello");
-});
+app.use("/api/v1/major-disasters", require('./api/major-disasters'));
+//app.use("/api/v1/hurricanes", require('./api/hurricanes'));
+//app.use("/api/v1/testing-of-nuclear-bombs", require('./api/testing-of-nuclear-bombs'));
+
+
 
 //-------JuanAPI
 
@@ -87,3 +93,5 @@ app.put("/hurricanes/:name", (req,res)=>{
 app.listen(port, () => {
 	console.log("servidor corriendo en puerto " + port);
 });
+
+exports = module.exports = app;
