@@ -9,9 +9,9 @@ app.use("/",  express.static(path.join(__dirname, "public")));
 app.use(morgan('tiny'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//app.use("/api/v1/major-disasters", require('./api/major-disasters'));
+app.use("/api/v1/major-disasters", require('./api/major-disasters'));
 //app.use("/api/v1/hurricanes", require('./api/hurricanes'));
-app.use("/api/v1/testing-of-nuclear-bombs", require('./api/testing-of-nuclear-bombs'));
+//app.use("/api/v1/testing-of-nuclear-bombs", require('./api/testing-of-nuclear-bombs'));
 //process.env.NODE_ENV === 'production'
 
 
@@ -120,11 +120,8 @@ app.get("/testing-nuclear-bombs",(req,res)=>{
 
 //POST /testing-nuclear-bombs
 app.post("/testing-nuclear-bombs",(req,res)=>{
-        
     var newBomb = req.body;
-    
     bombs.push(newBomb)
-    
     res.sendStatus(201);
 })
 
