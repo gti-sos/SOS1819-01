@@ -95,32 +95,14 @@ app.put("/hurricanes/:name", (req, res) => {
 
 //-------JoseAPI---------------------------------------------
 
-var bombs = [{
-    country: "Canada",
-    year: "1959",
-    maxYield: "10000",
-    shot: "5",
-    hob: "0",
-}, {
-    country: "Australia",
-    year: "1963",
-    maxYield: "100000",
-    shot: "1",
-    hob: "136",
-}, {
-    country: "EEUU",
-    year: "1951",
-    maxYield: "320000",
-    shot: "68",
-    hob: "35",
-}]
+var bombs = []
 
 
 
 
 app.get("/api/v1/testing-of-nuclear-bombs/loadInitialData", (req, res) => {
 
-    var bombs = [{
+    var bombs1 = [{
         country: "Canada",
         year: "1959",
         maxYield: "10000",
@@ -139,6 +121,8 @@ app.get("/api/v1/testing-of-nuclear-bombs/loadInitialData", (req, res) => {
         shot: "68",
         hob: "35",
     }]
+    
+    bombs = bombs1;
     
     res.send(bombs);
 
