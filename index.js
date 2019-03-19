@@ -118,7 +118,7 @@ var bombs = [{
 
 
 
-app.get("/testing-nuclear-bombs/loadInitialData", (req, res) => {
+app.get("/api/v1/testing-of-nuclear-bombs/loadInitialData", (req, res) => {
 
     var bombs = [{
         country: "Canada",
@@ -145,13 +145,13 @@ app.get("/testing-nuclear-bombs/loadInitialData", (req, res) => {
 })
 
 // GET /testing-nuclear-bombs
-app.get("/testing-nuclear-bombs", (req, res) => {
+app.get("/api/v1/testing-of-nuclear-bombs", (req, res) => {
     res.send(bombs);
 })
 
 
 //POST /testing-nuclear-bombs
-app.post("/testing-nuclear-bombs",(req,res)=>{
+app.post("/api/v1/testing-of-nuclear-bombs",(req,res)=>{
     var newBomb = req.body;
     bombs.push(newBomb)
     res.sendStatus(201);
@@ -159,7 +159,7 @@ app.post("/testing-nuclear-bombs",(req,res)=>{
 
 
 //DELETE /testing-nuclear-bombs
-app.delete("/testing-nuclear-bombs", (req, res) => {
+app.delete("/api/v1/testing-of-nuclear-bombs", (req, res) => {
 
     bombs = [];
 
@@ -168,7 +168,7 @@ app.delete("/testing-nuclear-bombs", (req, res) => {
 
 //GET /testing-nuclear-bombs/EEUU
 
-app.get("/testing-nuclear-bombs/:country", (req, res) => {
+app.get("/api/v1/testing-of-nuclear-bombs/:country", (req, res) => {
 
     var country = req.params.country;
 
@@ -187,7 +187,7 @@ app.get("/testing-nuclear-bombs/:country", (req, res) => {
 
 
 //PUT /testing-nuclear-bombs/EEUU
-app.put("/testing-nuclear-bombs/:country", (req, res) => {
+app.put("/api/v1/testing-of-nuclear-bombs/:country", (req, res) => {
 
     var country = req.params.country;
     var updatedBomb = req.body;
@@ -216,7 +216,7 @@ app.put("/testing-nuclear-bombs/:country", (req, res) => {
 });
 
 //DELETE /testing-nuclear-bombs/EEUU
-app.delete("/testing-nuclear-bombs/:country", (req, res) => {
+app.delete("/api/v1/testing-of-nuclear-bombs/:country", (req, res) => {
 
     var country = req.params.country;
     var found = false;
@@ -237,12 +237,12 @@ app.delete("/testing-nuclear-bombs/:country", (req, res) => {
 });
 
 //POST /testing-nuclear-bombs/EEUU
-app.post("/testing-nuclear-bombs/:country", (req, res) => {
+app.post("/api/v1/testing-of-nuclear-bombs/:country", (req, res) => {
 
     res.sendStatus(405);
 });
 
-app.put("/testing-nuclear-bombs/", (req, res) => {
+app.put("/api/v1/testing-of-nuclear-bombs/", (req, res) => {
 
     res.sendStatus(405);
 })
