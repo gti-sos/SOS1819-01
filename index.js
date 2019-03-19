@@ -90,6 +90,79 @@ app.put("/hurricanes/:name", (req,res)=>{
 
 });
 
+/*app.get("/hurricanes?year=xxx", (req,res)=>{
+
+    var name = req.params.name;
+
+    var filteredHurricanes = hurricanes.filter((c) =>{
+       return c.name == name; 
+    })
+    
+    if (filteredHurricanes.length >= 1){
+        res.send(filteredHurricanes[0]);
+    }else{
+        res.sendStatus(404);
+    }
+
+});
+
+app.get("/hurricanes/speed", (req,res)=>{
+
+    var name = req.params.name;
+
+    var filteredHurricanes = hurricanes.filter((c) =>{
+       return c.name == name; 
+    })
+    
+    if (filteredHurricanes.length >= 1){
+        res.send(filteredHurricanes[0]);
+    }else{
+        res.sendStatus(404);
+    }
+
+});
+
+
+app.get("/hurricane/Katrina?from=2000&to=2016", (req,res)=>{
+
+    var name = req.params.name;
+
+    var filteredHurricanes = hurricanes.filter((c) =>{
+       return c.name == name; 
+    })
+    
+    if (filteredHurricanes.length >= 1){
+        res.send(filteredHurricanes[0]);
+    }else{
+        res.sendStatus(404);
+    }
+
+});
+
+app.get("/hurricane?from=1995&to=2000", (req,res)=>{
+
+    var name = req.params.name;
+
+    var filteredHurricanes = hurricanes.filter((c) =>{
+       return c.name == name; 
+    })
+    
+    if (filteredHurricanes.length >= 1){
+        res.send(filteredHurricanes[0]);
+    }else{
+        res.sendStatus(404);
+    }
+
+});
+
+app.delete("/hurricanes/Katrina", (req,res)=>{
+    
+    hurricanes =  [];
+
+    res.sendStatus(200);
+});
+*/
+
 app.listen(port, () => {
 	console.log("servidor corriendo en puerto " + port);
 });
