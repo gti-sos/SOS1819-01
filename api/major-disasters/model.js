@@ -20,22 +20,32 @@ exports.init = () => {
 		{"id": 9, "country": ["United States", "Canada"], "year":2010, "no-inflation": 60, "inflation": 69.70, "death": 11, "type": ["contamination"], "event": "Deepwater Horizon oil spill"}
 	];
 	_setData(nData)
+	console.log(_data);
 };
 
-exports.getAll = (query, cb) => {
+exports.getAll = (cb) => {
+	cb(_data);
+};
+
+exports.getFiltered = (query, cb) => {
 	var res = [];
-	_data.forEach(function (e) {
-		var add = false;
-		for (var key in query) {
-			if (key === 'from' && e.year >= parseInt(query[key]) && (!query['to']) || e.year <= parseInt(query['to']))
-				add = true; 
-			if (key === 'country' || key === 'type')
-				add = e.country.filter(value => query[key].includes(value)).length > 0;
-			if (e[key] == query[key] || Object.keys(query).length === 0) 
-				add = true;	
-		}
-		if (add) res.push(e);
-	});
+	//console.log('getting all', _data)
+	if (Object.keys(query).length === 0) {
+		res = _data
+	} else {
+		_data.forEach(function (e) {
+			var add = false;
+			for (var key in query) {
+				if (key === 'from' && e.year >= parseInt(query[key]) && (!query['to']) || e.year <= parseInt(query['to']))
+					add = true; 
+				if (key === 'country' || key === 'type')
+					add = e.country.filter(value => query[key].includes(value)).length > 0;
+				if (e[key] == query[key] || Object.keys(query).length === 0) 
+					add = true;	
+			}
+			if (add) res.push(e);
+		});
+	}
 	cb(res);
 };
 
@@ -64,4 +74,16 @@ exports.update = function (id, obj, cb) {
 		}
 	}
 	cb(err);
+};
+
+exports.destroy = function (id, cb) {
+	_data = _data.filter((e) => {
+		return e.id != id;
+	});
+	cb(_data);
+};
+
+exports.destroyAll = function (cb) {
+	_setData([]);
+	cb();
 };

@@ -6,7 +6,8 @@ exports.init = function (req, res) {
 };
 
 exports.list = function (req, res) {
-	Model.getAll(req.query, (data) => {
+	Model.getFiltered(req.query, (data) => {
+		//console.log("GETTING QUERY", req.query, data)
 		res.send(data);
 	});
 };
@@ -33,9 +34,15 @@ exports.update = function (req, res) {
 };
 
 exports.destroy = function (req, res) {
-	res.status(204).end();
+	Model.destroy(req.params.id, function () {
+		res.status(204).end();
+	});
+	
 };
 
 exports.destroyAll = function (req, res) {
-	res.status(204).end();
+	Model.destroyAll(function () {
+		res.status(204).end();
+	});
+	
 };
