@@ -154,7 +154,7 @@ app.get("/api/v1/testing-of-nuclear-bombs/loadInitialData", (req, res) => {
     
     bombs = bombs1;
     
-    res.send(bombs);
+    res.status(200).send(bombs);
 
 })
 
