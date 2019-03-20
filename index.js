@@ -154,7 +154,7 @@ app.get("/api/v1/testing-of-nuclear-bombs/loadInitialData", (req, res) => {
     
     bombs = bombs1;
     
-    res.send(bombs);
+    res.status(200).send(bombs);
 
 })
 
@@ -258,7 +258,7 @@ app.post("/api/v1/testing-of-nuclear-bombs/:country", (req, res) => {
 
 app.put("/api/v1/testing-of-nuclear-bombs/", (req, res) => {
 
-    res.sendStatus(409);
+    res.sendStatus(405);
 })
 
 
