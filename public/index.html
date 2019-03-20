@@ -18,7 +18,7 @@
 <h2>APIs:</h2>
 
 <a href="https://sos1819-01.herokuapp.com/api/v1/hurricanes/docs"><h3>https://sos1819-01.herokuapp.com/api/v1/hurricanes/docs</a> (developed by <a href="https://github.com/30ner">Juan Jiménez Ballina</a>)</h3>
-<a href="https://sos1819-01.herokuapp.com/api/v1/majors-disasters/docs"><h3>https://sos1819-01.herokuapp.com/api/v1/majors-disasters/docs</a> (developed by <a href="https://github.com/berruimar">Bernabé Ruiz Martínez</a>)</h3>
+<a href="https://sos1819-01.herokuapp.com/api/v1/major-disasters/docs"><h3>https://sos1819-01.herokuapp.com/api/v1/major-disasters/docs</a> (developed by <a href="https://github.com/berruimar">Bernabé Ruiz Martínez</a>)</h3>
 <a href="https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/docs"><h3>https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/docs</a> (developed by <a href="https://github.com/josbarolm">José María Barrero Olmedo</a>)</h3>
     </body>
 </html>
