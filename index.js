@@ -17,38 +17,66 @@ app.use("/api/v1/major-disasters", require('./api/major-disasters'));
 
 //-------JuanAPI----------------------------
 
-var hurricanes = [{
-    name: "Katrina",
-    year: "2005",
-    country: "EEUU",
-    speed: "280",
-    damagesuntil2008: "81,2",
-    mbar: "902"
-}]
+var hurricanes = [];
 
-app.get("/hurricanes", (req, res) => {
+
+app.get("/api/v1/hurricanes/loadInitialData", (req, res) => {
+    hurricanes = [{
+        name: "Katrina",
+        year: "2005",
+        country: "EEUU",
+        speed: 280,
+        damagesuntil2008: 81.2,
+        mbar: 902
+    }, {
+        name: "Mitch",
+        year: "1998",
+        country: "EEUU",
+        speed: 285,
+        damagesuntil2008: 5.8,
+        mbar: 905
+    }];
+    res.sendStatus(200);
+});
+
+app.get("/api/v1/hurricanes", (req, res) => {
     res.send(hurricanes);
-})
+});
 
-app.post("/hurricanes", (req, res) => {
+app.post("/api/v1/hurricanes", (req, res) => {
 
     var newHurricane = req.body;
 
-    hurricanes.push(newHurricane)
+    hurricanes.push(newHurricane);
 
     res.sendStatus(201);
-})
+});
 
-app.delete("/hurricanes", (req, res) => {
+app.post("/api/v1/hurricanes/:name", (req, res) => {
+    res.sendStatus(405);
+});
+
+app.put("/api/v1/hurricanes", (req, res) => {
+    res.sendStatus(405);
+});
+
+app.delete("/api/v1/hurricanes", (req, res) => {
 
     hurricanes = [];
 
     res.sendStatus(200);
 });
 
+app.delete("/api/v1/hurricanes/:name", (req, res) => {
+    hurricanes = hurricanes.filter((c) => {
+        return c.name != req.params.name;
+    });
+    res.sendStatus(200);
+});
+
 // GET /hurricanes/Katrina
 
-app.get("/hurricanes/:name", (req, res) => {
+app.get("/api/v1/hurricanes/:name", (req, res) => {
 
     var name = req.params.name;
 
@@ -65,7 +93,7 @@ app.get("/hurricanes/:name", (req, res) => {
 
 });
 
-app.put("/hurricanes/:name", (req, res) => {
+app.put("/api/v1/hurricanes/:name", (req, res) => {
 
     var name = req.params.name;
     var updatedContact = req.body;
@@ -83,10 +111,12 @@ app.put("/hurricanes/:name", (req, res) => {
 
     });
 
-    if (found == false) {
+
+    if (updatedContact.name != req.params.name) {
+        res.sendStatus(409);
+    } else if (!found) {
         res.sendStatus(404);
-    }
-    else {
+    } else {
         hurricanes = updatedHurricanes;
         res.sendStatus(200);
     }
