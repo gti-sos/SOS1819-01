@@ -258,7 +258,7 @@ app.post("/api/v1/testing-of-nuclear-bombs/:country", (req, res) => {
 
 app.put("/api/v1/testing-of-nuclear-bombs/", (req, res) => {
 
-    res.sendStatus(409);
+    res.sendStatus(405);
 })
 
 
