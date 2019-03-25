@@ -84,7 +84,7 @@ exports.destroy = function (req, res) {
 };
 
 exports.destroyAll = function (req, res) {
-	MajorDisaster.deleteMany({}, function () {
+	MajorDisaster.deleteMany({}, function (err) {
 		let code = (err) ? 404 : 204;
 		let msg = (err) ? "Not Found" : "No Content";
 		res.status(code).json({code: code, msg: msg});
