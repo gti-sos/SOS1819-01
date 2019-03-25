@@ -17,7 +17,7 @@ exports.init = async function (req, res) {
 			new MajorDisaster(e).save();
 		});
 		await Promise.all(promises);
-		res.status(200).end();
+		res.status(200).json({code:400, msg: "OK"});
 	}
 }
 
@@ -59,13 +59,13 @@ exports.create = function (req, res) {
 	let majorDisaster = new MajorDisaster(req.body);
 	majorDisaster.save(function (err) {
 		let code = err ? 400 : 201;
-		let msg = (400) ? "Bad Request" : "Created";
+		let msg = err ? "Bad Request" : "Created";
 		res.status(code).json({code: code, msg: msg});
 	});
 };
 
 exports.update = function (req, res) {
-	if (req.params._id !== req.body._id)
+	if (req.params._id !== req.body.id)
 		return res.status(409).json({code: 409, msg: "Conflict"});
 
 	MajorDisaster.updateOne({_id: req.params.id}, req.body, function (err) {
