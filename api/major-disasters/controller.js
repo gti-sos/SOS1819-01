@@ -8,7 +8,7 @@ exports.init = async function (req, res) {
 	let err = undefined;
 	if (number > 0) {
 		err = new Error();
-		err.message = "majorDisasters is already populated!";
+		err.message = "collection majorDisasters is already populated!";
 		err.name = "populationError";
 		err.httpCode = 405;
 		res.status(err.httpCode).send(err);
@@ -18,7 +18,6 @@ exports.init = async function (req, res) {
 		});
 		await Promise.all(promises);
 		res.status(200).end();
-
 	}
 }
 
@@ -50,6 +49,8 @@ exports.list = async function (req, res) {
 
 exports.get = function (req, res) {
 	MajorDisaster.findById(req.params.id, function (err, data) {
+		if (err)
+			return res.status(404).json({code: 404, msg: "Not Found"});
 		res.json(data);
 	});
 };
@@ -57,27 +58,35 @@ exports.get = function (req, res) {
 exports.create = function (req, res) {
 	let majorDisaster = new MajorDisaster(req.body);
 	majorDisaster.save(function (err) {
-		let code = (err) ? 401 : 201;
-		let msg = (err) ? err.message : ""; 
-		res.status(code).send(msg);
+		let code = err ? 400 : 201;
+		let msg = (400) ? "Bad Request" : "Created";
+		res.status(code).json({code: code, msg: msg});
 	});
 };
 
 exports.update = function (req, res) {
+	if (req.params._id !== req.body._id)
+		return res.status(409).json({code: 409, msg: "Conflict"});
+
 	MajorDisaster.updateOne({_id: req.params.id}, req.body, function (err) {
 		let code = (err) ? 404 : 200;
-		res.status(code).send(err);
+		let msg = (err) ? "Not Found" : "OK";
+		res.status(code).json({code: code, msg: msg});
 	});
 };
 
 exports.destroy = function (req, res) {
 	MajorDisaster.deleteOne({_id: req.params.id}, function (err) {
-		res.status((err) ? 404 : 204).end();
+		let code = (err) ? 404 : 204;
+		let msg = (err) ? "Not Found" : "No Content";
+		res.status(code).json({code: code, msg: msg});
 	});
 };
 
 exports.destroyAll = function (req, res) {
 	MajorDisaster.deleteMany({}, function () {
-		res.status(204).end();
+		let code = (err) ? 404 : 204;
+		let msg = (err) ? "Not Found" : "No Content";
+		res.status(code).json({code: code, msg: msg});
 	});
 };
