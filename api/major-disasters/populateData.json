@@ -1,0 +1,11 @@
+[
+	{"country": ["Japan"], "year": 2011, "no-inflation": 360, "inflation": 411.30, "death": 15894, "type": ["earthquake", "tsunami"], "event": "Tōhoku earthquake and tsunami"},
+	{"country": ["Japan"], "year":1995, "no-inflation": 197, "inflation": 329.80, "death":	5502, "type": ["earthquake"], "event": "Great Hanshin earthquake"},
+	{"country": ["China"], "year":2008, "no-inflation": 148, "inflation": 176.40, "death":	87587, "type": ["earthquake"], "event": "Sichuan earthquake"},
+	{"country": ["United States"], "year":2005, "no-inflation": 125, "inflation":	165, "death": 1245, "type":	["cyclone"], "event": "Hurricane Katrina"},
+	{"country": ["United States"], "year":2017, "no-inflation": 125, "inflation":	129.50, "death":	107, "type": ["cyclone"], "event": " Hurricane Harvey"},
+	{"country": ["Puerto Rico, Dominica, Guadeloupe"], "year":2017, "no-inflation":	91.60, "inflation":94.90, "death": 3057, "type": ["cylone"], "event": "Hurricane Maria"},
+	{"country": ["United States, Haiti, Saint Martin"], "year":2012, "no-inflation":	68.7, "inflation":76.30, "death": 233, "type":["cyclone"], "event": "Hurricane Sandy"},
+	{"country": ["United States"], "year":2017, "no-inflation": 64, "inflation": 66.50, "death":134, "type": ["cyclone"], "event":	"Hurricane Irma"},
+	{"country": ["United States", "Canada"], "year":2010, "no-inflation": 60, "inflation": 69.70, "death": 11, "type": ["contamination"], "event": "Deepwater Horizon oil spill"}
+]

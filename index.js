@@ -3,11 +3,15 @@ var path = require("path");
 var app = express();
 var port = process.env.PORT || 8080;
 var morgan = require('morgan');
-var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+//const mongoAddress = "mongodb://127.0.0.1:27017/sos1819";
+const mongoAddress = "mongodb+srv://admin:sos1819@cluster-sos1819-accsm.mongodb.net/sos1819?retryWrites=true"
+mongoose.connect(mongoAddress, {useNewUrlParser: true});
 
+app.use(express.urlencoded({extended: true}));
 app.use("/", express.static(path.join(__dirname, "public")));
 app.use(morgan('tiny'));
-app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/v1/major-disasters", require('./api/major-disasters'));
 //app.use("/api/v1/hurricanes", require('./api/hurricanes'));

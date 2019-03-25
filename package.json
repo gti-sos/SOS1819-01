@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/gti-sos/SOS1819-01#readme",
   "dependencies": {
+    "async": "^2.6.2",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "mongoose": "^5.4.19",
     "morgan": "^1.9.1"
   }
 }
