@@ -4,10 +4,12 @@ var app = express();
 var port = process.env.PORT || 8080;
 var morgan = require('morgan');
 var mongoose = require('mongoose');
+
+//direccion local
 //const mongoAddress = "mongodb://127.0.0.1:27017/sos1819";
 const mongoAddress = "mongodb+srv://admin:sos1819@cluster-sos1819-accsm.mongodb.net/sos1819?retryWrites=true"
-mongoose.connect(mongoAddress, {useNewUrlParser: true});
 
+mongoose.connect(mongoAddress, {useNewUrlParser: true});
 app.use(express.urlencoded({extended: true}));
 app.use("/", express.static(path.join(__dirname, "public")));
 app.use(morgan('tiny'));
@@ -267,7 +269,8 @@ app.put("/api/v1/testing-of-nuclear-bombs/", (req, res) => {
 
 
 app.listen(port, () => {
-    console.log("servidor corriendo en puerto " + port);
+    console.log("servidor corriendo en puerto ", port);
+    console.log("Base de datos corriendo en", mongoAddress);
 });
 
 exports = module.exports = app;
