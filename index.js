@@ -20,8 +20,6 @@ app.use("/api/v1/secure/major-disasters", require('./api/authMiddleware'), requi
 
 //app.use("/api/v1/hurricanes", require('./api/hurricanes'));
 //app.use("/api/v1/testing-of-nuclear-bombs", require('./api/testing-of-nuclear-bombs'));
-
-
 //process.env.NODE_ENV === 'production'
 
 
