@@ -68,7 +68,7 @@ exports.create = async function (req, res) {
 };
 
 exports.update = function (req, res) {
-	if (req.params._id !== req.body.id)
+	if (req.params.id !== req.body._id)
 		return res.status(400).json({code: 400, msg: "Bad Request"});
 
 	MajorDisaster.updateOne({_id: req.params.id}, req.body, function (err) {
