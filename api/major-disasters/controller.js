@@ -49,7 +49,7 @@ exports.list = async function (req, res) {
 
 exports.get = function (req, res) {
 	MajorDisaster.findById(req.params.id, function (err, data) {
-		if (err)
+		if (err || !data)
 			return res.status(404).json({code: 404, msg: "Not Found"});
 		res.json(data);
 	});
@@ -77,7 +77,7 @@ exports.update = function (req, res) {
 
 exports.destroy = function (req, res) {
 	MajorDisaster.deleteOne({_id: req.params.id}, function (err) {
-		let code = (err) ? 404 : 204;
+		let code = (err) ? 404 : 200;
 		let msg = (err) ? "Not Found" : "No Content";
 		res.status(code).json({code: code, msg: msg});
 	});
@@ -85,7 +85,7 @@ exports.destroy = function (req, res) {
 
 exports.destroyAll = function (req, res) {
 	MajorDisaster.deleteMany({}, function (err) {
-		let code = (err) ? 404 : 204;
+		let code = (err) ? 404 : 200;
 		let msg = (err) ? "Not Found" : "No Content";
 		res.status(code).json({code: code, msg: msg});
 	});
