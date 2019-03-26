@@ -8,14 +8,7 @@ var mongoose = require('mongoose');
 //const mongoAddress = "mongodb://127.0.0.1:27017/sos1819";
 
 //direccion remota 
-const MongoClient = require("mongodb").MongoClient;
 const mongoAddress = "mongodb+srv://admin:sos1819@cluster-sos1819-accsm.mongodb.net/sos1819?retryWrites=true";
-const client = new MongoClient(mongoAddress, { useNewUrlParser: true });
-var bombs;
-client.connect(err =>{
-    bombs = client.db("sos1819").collection("testing-of-nuclear-bombs");
-    console.log("Conneted");
-})
 
 mongoose.connect(mongoAddress, {useNewUrlParser: true});
 app.use(express.urlencoded({extended: true}));
@@ -139,6 +132,16 @@ app.put("/api/v1/hurricanes/:name", (req, res) => {
 });
 
 //-------JoseAPI---------------------------------------------
+const MongoClient = require("mongodb").MongoClient;
+const uri = "mongodb+srv://pema:pema@sos-wj0yb.mongodb.net/sos1819?retryWrites=true";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+
+var bombs;
+
+client.connect(err => {
+    bombs = client.db("sos1819").collection("bombs");
+    console.log("Connected")
+});
 
 
 app.get("/api/v1/testing-of-nuclear-bombs/loadInitialData", (req, res) => {
@@ -174,23 +177,31 @@ app.get("/api/v1/testing-of-nuclear-bombs/loadInitialData", (req, res) => {
         shot: 50,
         hob: 175,
     }]
-    
-    bombs = bombs1;
-    
+     bombs = bombs1;
+        
     res.status(200).send(bombs);
 
 })
 
 // GET /testing-nuclear-bombs
 app.get("/api/v1/testing-of-nuclear-bombs", (req, res) => {
-    res.send(bombs);
-})
+    
+    bombs.find({}).toArray((err,bombsArray)=>{
+        if(err)
+            console.log("Error " + err)
+            
+        res.send(bombsArray);       
+    });
+    
+});
 
 
 //POST /testing-nuclear-bombs
 app.post("/api/v1/testing-of-nuclear-bombs",(req,res)=>{
     var newBomb = req.body;
-    bombs.push(newBomb)
+    
+    bombs.insert(newBomb);
+    
     res.sendStatus(201);
 })
 
@@ -198,7 +209,7 @@ app.post("/api/v1/testing-of-nuclear-bombs",(req,res)=>{
 //DELETE /testing-nuclear-bombs
 app.delete("/api/v1/testing-of-nuclear-bombs", (req, res) => {
 
-    bombs = [];
+    bombs.remove();
 
     res.sendStatus(200);
 });
@@ -207,17 +218,19 @@ app.delete("/api/v1/testing-of-nuclear-bombs", (req, res) => {
 
 app.get("/api/v1/testing-of-nuclear-bombs/:country", (req, res) => {
 
-    var country = req.params.country;
+    var country1 = req.params.country;
+    
+    var filteredBombs;
 
-    var filteredBombs = bombs.filter((c) => {
-        return c.country == country;
-    })
+    bombs.find({ "country" : country1 }).toArray((err,bombsArray)=>{
+        filteredBombs = bombsArray;    
+    });
 
-    if (filteredBombs.length >= 1) {
-        res.send(filteredBombs[0]);
+    if (filteredBombs == []) {
+        res.sendStatus(404);
     }
     else {
-        res.sendStatus(404);
+        res.send(filteredBombs[0]);
     }
 
 });
