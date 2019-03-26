@@ -57,7 +57,7 @@ exports.get = function (req, res) {
 
 exports.create = async function (req, res) {
 	let majorDisaster = new MajorDisaster(req.body);
-	const disasterCount = MajorDisaster.count({event: req.body.event});
+	const disasterCount = await MajorDisaster.countDocuments({event: req.body.event});
 	if (disasterCount > 0) {
 		return res.status(code).json({code: 409, msg: "Conflict"});
 	}
