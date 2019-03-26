@@ -1,6 +1,6 @@
 {
   "name": "sos1819-01",
-  "version": "0.1.0",
+  "version": "7.1.0",
   "description": "Find the relationship between investment and schooling with GDP growth in contrast to public spending and investment in R & D",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,7 @@
   "bugs": {
     "url": "https://github.com/gti-sos/SOS1819-01/issues"
   },
+  "engines" : { "node" : ">=7" },
   "homepage": "https://github.com/gti-sos/SOS1819-01#readme",
   "dependencies": {
     "async": "^2.6.2",
