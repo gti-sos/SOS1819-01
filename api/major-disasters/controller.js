@@ -3,25 +3,29 @@ const Model = require('./model.js');
 const MajorDisaster = mongoose.model("MajorDisaster");
 const populateData = require("./populateData.json");
 
-exports.init = async function (req, res) {
-	const number = await MajorDisaster.countDocuments({});
-	let err = undefined;
-	if (number > 0) {
-		err = new Error();
-		err.message = "collection majorDisasters is already populated!";
-		err.name = "populationError";
-		err.httpCode = 405;
-		res.status(err.httpCode).json(err);
-	} else {
-		const promises = populateData.map(function (e) {
-			new MajorDisaster(e).save();
-		});
-		await Promise.all(promises);
-		res.status(200).json({code: 200, msg: "OK"});
-	}
+exports.init = function (req, res) {
+	//const count = await MajorDisaster.countDocuments({});
+	MajorDisaster.countDocuments({}, function (er, count) {
+		let err = undefined;
+		if (count > 0) {
+			err = new Error();
+			err.message = "collection majorDisasters is already populated!";
+			err.name = "populationError";
+			err.httpCode = 405;
+			res.status(err.httpCode).json(err);
+		} else {
+			const promises = populateData.map(function (e) {
+				new MajorDisaster(e).save();
+			});
+			Promise.all(promises).then(function () {
+				res.status(200).json({code: 200, msg: "OK"});
+			});
+		}
+	});
+	
 }
 
-exports.list = async function (req, res) {
+exports.list = function (req, res) {
 	let search = {fields: {}, page: undefined, limit: undefined};
 
 	for (let key in req.query) {
@@ -55,15 +59,17 @@ exports.get = function (req, res) {
 	});
 };
 
-exports.create = async function (req, res) {
+exports.create = function (req, res) {
 	let majorDisaster = new MajorDisaster(req.body);
-	const count = await MajorDisaster.countDocuments({event: req.body.event});
-	if (count > 0) 
-		return res.status(409).json({code: 409, msg: "Conflict"});
-	majorDisaster.save(function (err, data) {
-		let code = err ? 400 : 201;
-		let msg = err ? "Bad Request" : "Created";
-		res.status(code).json({code: code, msg: msg, data: data});
+	//const count = await MajorDisaster.countDocuments({event: req.body.event});
+	MajorDisaster.countDocuments({event: req.body.event}, function (er, count) {
+		if (count > 0) 
+			return res.status(409).json({code: 409, msg: "Conflict"});
+		majorDisaster.save(function (err, data) {
+			let code = err ? 400 : 201;
+			let msg = err ? "Bad Request" : "Created";
+			res.status(code).json({code: code, msg: msg, data: data});
+		});
 	});
 };
 
