@@ -8,7 +8,14 @@ var mongoose = require('mongoose');
 //const mongoAddress = "mongodb://127.0.0.1:27017/sos1819";
 
 //direccion remota 
-const mongoAddress = "mongodb+srv://admin:sos1819@cluster-sos1819-accsm.mongodb.net/sos1819?retryWrites=true"
+const MongoClient = require("mongodb").MongoClient;
+const mongoAddress = "mongodb+srv://admin:sos1819@cluster-sos1819-accsm.mongodb.net/sos1819?retryWrites=true";
+const client = new MongoClient(mongoAddress, { useNewUrlParser: true });
+var bombs;
+client.connect(err =>{
+    bombs = client.db("sos1819").collection("testing-of-nuclear-bombs");
+    console.log("Conneted");
+})
 
 mongoose.connect(mongoAddress, {useNewUrlParser: true});
 app.use(express.urlencoded({extended: true}));
@@ -133,31 +140,39 @@ app.put("/api/v1/hurricanes/:name", (req, res) => {
 
 //-------JoseAPI---------------------------------------------
 
-var bombs = []
-
-
-
 
 app.get("/api/v1/testing-of-nuclear-bombs/loadInitialData", (req, res) => {
 
     var bombs1 = [{
-        country: "Canada",
-        year: "1959",
-        maxYield: "10000",
-        shot: "5",
-        hob: "0",
+        country: "canada",
+        year: 1959,
+        maxYield: 10000,
+        shot: 5,
+        hob: 0,
     }, {
-        country: "Australia",
-        year: "1963",
-        maxYield: "100000",
-        shot: "1",
-        hob: "136",
+        country: "australia",
+        year: 1963,
+        maxYield: 100000,
+        shot: 1,
+        hob: 136,
     }, {
-        country: "EEUU",
-        year: "1951",
-        maxYield: "320000",
-        shot: "68",
-        hob: "35",
+        country: "islandia",
+        year: 1958,
+        maxYield: 40000,
+        shot: 5,
+        hob: 0,
+    }, {
+        country: "eeuu",
+        year: 1951,
+        maxYield: 320000,
+        shot: 68,
+        hob: 35,
+    }, {
+        country: "eeuu",
+        year: 1961,
+        maxYield: 40000,
+        shot: 50,
+        hob: 175,
     }]
     
     bombs = bombs1;
