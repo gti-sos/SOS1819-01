@@ -11,13 +11,13 @@ exports.init = async function (req, res) {
 		err.message = "collection majorDisasters is already populated!";
 		err.name = "populationError";
 		err.httpCode = 405;
-		res.status(err.httpCode).send(err);
+		res.status(err.httpCode).json(err);
 	} else {
 		const promises = populateData.map(function (e) {
 			new MajorDisaster(e).save();
 		});
 		await Promise.all(promises);
-		res.status(200).json({code:400, msg: "OK"});
+		res.status(200).json({code: 200, msg: "OK"});
 	}
 }
 
@@ -57,10 +57,10 @@ exports.get = function (req, res) {
 
 exports.create = function (req, res) {
 	let majorDisaster = new MajorDisaster(req.body);
-	majorDisaster.save(function (err) {
+	majorDisaster.save(function (err, data) {
 		let code = err ? 400 : 201;
 		let msg = err ? "Bad Request" : "Created";
-		res.status(code).json({code: code, msg: msg});
+		res.status(code).json({code: code, msg: msg, data: data});
 	});
 };
 
