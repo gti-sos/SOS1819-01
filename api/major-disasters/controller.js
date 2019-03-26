@@ -55,8 +55,12 @@ exports.get = function (req, res) {
 	});
 };
 
-exports.create = function (req, res) {
+exports.create = async function (req, res) {
 	let majorDisaster = new MajorDisaster(req.body);
+	const disasterCount = MajorDisaster.count({event: req.body.event});
+	if (disasterCount > 0) {
+		return res.status(code).json({code: 409, msg: "Conflict"});
+	}
 	majorDisaster.save(function (err, data) {
 		let code = err ? 400 : 201;
 		let msg = err ? "Bad Request" : "Created";
@@ -66,7 +70,7 @@ exports.create = function (req, res) {
 
 exports.update = function (req, res) {
 	if (req.params._id !== req.body.id)
-		return res.status(409).json({code: 409, msg: "Conflict"});
+		return res.status(400).json({code: 400, msg: "Bad Request"});
 
 	MajorDisaster.updateOne({_id: req.params.id}, req.body, function (err) {
 		let code = (err) ? 404 : 200;
