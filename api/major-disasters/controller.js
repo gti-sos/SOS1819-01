@@ -55,17 +55,19 @@ exports.get = function (req, res) {
 	});
 };
 
-exports.create = async function (req, res) {
+exports.create = function (req, res) {
 	let majorDisaster = new MajorDisaster(req.body);
-	const disasterCount = await MajorDisaster.countDocuments({event: req.body.event});
-	if (disasterCount > 0) {
-		return res.status(code).json({code: 409, msg: "Conflict"});
-	}
-	majorDisaster.save(function (err, data) {
-		let code = err ? 400 : 201;
-		let msg = err ? "Bad Request" : "Created";
-		res.status(code).json({code: code, msg: msg, data: data});
+	MajorDisaster.countDocuments({event: req.body.event});
+	MajorDisaster.countDocuments({event: req.body.event}, function (err, count) {
+		if (count > 0) 
+			return res.status(409).json({code: 409, msg: "Conflict"});
+		majorDisaster.save(function (err, data) {
+			let code = err ? 400 : 201;
+			let msg = err ? "Bad Request" : "Created";
+			res.status(code).json({code: code, msg: msg, data: data});
+		});
 	});
+	
 };
 
 exports.update = function (req, res) {
