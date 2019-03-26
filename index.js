@@ -197,10 +197,13 @@ app.get("/api/v1/testing-of-nuclear-bombs", (req, res) => {
 
 
 //POST /testing-nuclear-bombs
-app.post("/api/v1/testing-of-nuclear-bombs",(req,res)=>{
+app.post("/api/v1/testing-of-nuclear-bombs",(req, res)=>{
+    
     var newBomb = req.body;
     
-    bombs.insert(newBomb);
+    console.log(req.body);
+    
+    bombs.insertOne(newBomb);
     
     res.sendStatus(201);
 })
@@ -219,19 +222,17 @@ app.delete("/api/v1/testing-of-nuclear-bombs", (req, res) => {
 app.get("/api/v1/testing-of-nuclear-bombs/:country", (req, res) => {
 
     var country1 = req.params.country;
-    
-    var filteredBombs;
 
-    bombs.find({ "country" : country1 }).toArray((err,bombsArray)=>{
-        filteredBombs = bombsArray;    
+    bombs.find({country : country1 }).toArray((err,bombsArray)=>{
+        if (bombsArray == []) {
+            res.sendStatus(404);
+        }
+        else {
+            res.send(bombsArray);
+    }    
     });
 
-    if (filteredBombs == []) {
-        res.sendStatus(404);
-    }
-    else {
-        res.send(filteredBombs[0]);
-    }
+   
 
 });
 
