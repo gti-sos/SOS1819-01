@@ -4,8 +4,6 @@ var app = express();
 var port = process.env.PORT || 8080;
 var morgan = require('morgan');
 var mongoose = require('mongoose');
-const MongoClient = require("mongodb").MongoClient;
-var ObjectID = require('mongodb').ObjectID;
 //direccion local
 //const mongoAddress = "mongodb://127.0.0.1:27017/sos1819";
 
@@ -30,13 +28,16 @@ app.use("/api/v1/secure/hurricanebs",require('./api/authMiddleware'), require('.
 
 var hurricanes = [];
 
+const MongoClient2 = require("mongodb").MongoClient;
 const url2 = "mongodb+srv://juajimbal:1234@cluster0-jate4.mongodb.net/test?retryWrites=true";
-const client2 = new MongoClient(url2, { useNewUrlParser: true });
+const client2 = new MongoClient2(url2, { useNewUrlParser: true });
 
-var hurricanes;
+var ObjectID = require('mongodb').ObjectID;
+
+//var hurricanes;
 
 client2.connect(err => {
-    hurricanes = client2.db("test").collection("hurricanes");
+    hurricanes = client2.db("sos1819").collection("hurricanes");
     console.log("Connected")
 });
 
@@ -81,7 +82,7 @@ app.get("/api/v1/hurricanes/loadInitialData", (req, res) => {
         if(c>0){
             res.sendStatus(409);
         } else {
-            bombs.insertMany(hurricanesAux,function(err,r){
+            hurricanes.insertMany(hurricanesAux,function(err,r){
                 res.sendStatus(200);
             });
         }
@@ -132,11 +133,11 @@ app.post("/api/v1/hurricanes",(req, res)=>{
         }
     }
  
-    bombs.countDocuments(newHurricane,function(err,c){
+    hurricanes.countDocuments(newHurricane,function(err,c){
         if(c>0){
             res.sendStatus(409);
         } else {
-            bombs.insertOne(newHurricane,function(err,r){
+            hurricanes.insertOne(newHurricane,function(err,r){
                 res.sendStatus(201);
             });
         }
@@ -192,7 +193,7 @@ app.get("/api/v1/hurricanes/:name", (req, res) => {
     var idAux = req.params.name;
     console.log(idAux);
 
-    bombs.findOne({ _id : new ObjectID(idAux) }, function (err, result) {
+    hurricanes.findOne({ _name : new ObjectID(idAux) }, function (err, result) {
         if (!result) {
             res.sendStatus(404);
         }
@@ -236,7 +237,7 @@ app.put("/api/v1/hurricanes/:name", (req, res) => {
 
     delete req.body._name;
     
-    bombs.updateOne({_name: new ObjectID(req.params.name)},{$set: req.body}, function (err,c) {
+    hurricanes.updateOne({_name: new ObjectID(req.params.name)},{$set: req.body}, function (err,c) {
         if(c && c.matchedCount==0){
           return res.sendStatus(404);  
         }
@@ -320,7 +321,7 @@ app.get("/api/v1/secure/hurricanes/loadInitialData", (req, res) => {
         if(c>0){
             res.sendStatus(409);
         } else {
-            bombs.insertMany(hurricanesAux,function(err,r){
+            hurricanes.insertMany(hurricanesAux,function(err,r){
                 res.sendStatus(200);
             });
         }
@@ -366,12 +367,12 @@ app.post("/api/v1/secure/hurricanes",(req, res)=>{
             return res.sendStatus(400);
         }
     }
- 
-    bombs.countDocuments(newHurricane,function(err,c){
+
+        hurricanes.countDocuments(newHurricane,function(err,c){
         if(c>0){
             res.sendStatus(409);
         } else {
-            bombs.insertOne(newHurricane,function(err,r){
+            hurricanes.insertOne(newHurricane,function(err,r){
                 res.sendStatus(201);
             });
         }
@@ -411,7 +412,7 @@ app.get("/api/v1/secure/hurricanes/:name", (req, res) => {
     var idAux = req.params.name;
     console.log(idAux);
 
-    bombs.findOne({ _id : new ObjectID(idAux) }, function (err, result) {
+    hurricanes.findOne({ _name : new ObjectID(idAux) }, function (err, result) {
         if (!result) {
             res.sendStatus(404);
         }
@@ -437,7 +438,7 @@ app.put("/api/v1/secure/hurricanes/:name", (req, res) => {
 
     delete req.body._name;
     
-    bombs.updateOne({_name: new ObjectID(req.params.name)},{$set: req.body}, function (err,c) {
+    hurricanes.updateOne({_name: new ObjectID(req.params.name)},{$set: req.body}, function (err,c) {
         if(c && c.matchedCount==0){
           return res.sendStatus(404);  
         }
@@ -452,7 +453,7 @@ app.put("/api/v1/secure/hurricanes/:name", (req, res) => {
 
 
 //-------JoseAPI---------------------------------------------
-//const MongoClient = require("mongodb").MongoClient;
+const MongoClient = require("mongodb").MongoClient;
 const uri = "mongodb+srv://pema:pema@sos-wj0yb.mongodb.net/sos1819?retryWrites=true";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
