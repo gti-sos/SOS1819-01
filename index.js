@@ -193,7 +193,7 @@ app.get("/api/v1/hurricanes/:name", (req, res) => {
     var idAux = req.params.name;
     console.log(idAux);
 
-    hurricanes.findOne({ _id : new ObjectID(idAux) }, function (err, result) {
+    hurricanes.findOne({ _name : new ObjectID(idAux) }, function (err, result) {
         if (!result) {
             res.sendStatus(404);
         }
@@ -412,7 +412,7 @@ app.get("/api/v1/secure/hurricanes/:name", (req, res) => {
     var idAux = req.params.name;
     console.log(idAux);
 
-    hurricanes.findOne({ _id : new ObjectID(idAux) }, function (err, result) {
+    hurricanes.findOne({ _name : new ObjectID(idAux) }, function (err, result) {
         if (!result) {
             res.sendStatus(404);
         }
