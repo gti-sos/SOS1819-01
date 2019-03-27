@@ -4,6 +4,8 @@ var app = express();
 var port = process.env.PORT || 8080;
 var morgan = require('morgan');
 var mongoose = require('mongoose');
+const MongoClient = require("mongodb").MongoClient;
+var ObjectID = require('mongodb').ObjectID;
 //direccion local
 //const mongoAddress = "mongodb://127.0.0.1:27017/sos1819";
 
@@ -28,16 +30,13 @@ app.use("/api/v1/secure/hurricanebs",require('./api/authMiddleware'), require('.
 
 var hurricanes = [];
 
-const MongoClient2 = require("mongodb").MongoClient;
-const url2 = "mongodb+srv://juajimbal:d7Hn5c3&gFVT@cluster0-jate4.mongodb.net/test?retryWrites=true";
-const client2 = new MongoClient2(url2, { useNewUrlParser: true });
+const url2 = "mongodb+srv://juajimbal:1234@cluster0-jate4.mongodb.net/test?retryWrites=true";
+const client2 = new MongoClient(url2, { useNewUrlParser: true });
 
-var ObjectID = require('mongodb').ObjectID;
-
-//var hurricanes;
+var hurricanes;
 
 client2.connect(err => {
-    bombs = client2.db("sos1819").collection("hurricanes");
+    hurricanes = client2.db("test").collection("hurricanes");
     console.log("Connected")
 });
 
@@ -453,7 +452,7 @@ app.put("/api/v1/secure/hurricanes/:name", (req, res) => {
 
 
 //-------JoseAPI---------------------------------------------
-const MongoClient = require("mongodb").MongoClient;
+//const MongoClient = require("mongodb").MongoClient;
 const uri = "mongodb+srv://pema:pema@sos-wj0yb.mongodb.net/sos1819?retryWrites=true";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
