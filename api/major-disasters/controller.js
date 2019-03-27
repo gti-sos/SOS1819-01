@@ -78,7 +78,7 @@ exports.create = function (req, res) {
 exports.update = function (req, res) {
 	if (req.body._id && req.params.id !== req.body._id)
 		return res.status(400).json({code: 400, msg: "Bad Request"});
-	MajorDisaster.findOne({_id: req.params.id}).then(function (doc) {
+	MajorDisaster.findOne({_id: req.params.id}).then(function (err, doc) {
 		//console.log(doc, doc instanceof MajorDisaster);
 		//res.json(doc);
 		if (!doc) return res.sendStatus(404);
@@ -93,8 +93,9 @@ exports.update = function (req, res) {
 		}
 		doc.validate(function (err) {
 			if (err) return res.sendStatus(400);
-			doc.save();
-			res.sendStatus(200);
+			doc.save(function () {
+				res.sendStatus(200);
+			});
 		});
 	});
 	/*
