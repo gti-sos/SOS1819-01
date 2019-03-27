@@ -93,9 +93,11 @@ exports.update = function (req, res) {
 		}
 		doc.validate(function (err) {
 			if (err) return res.sendStatus(400);
-			doc.save();
+			doc.save()
 			res.sendStatus(200);
 		});
+	}).catch(function (err) {
+		res.status(400).send(err);
 	});
 	/*
 	MajorDisaster.updateOne({_id: req.params.id}, req.body, function (err) {
