@@ -121,7 +121,7 @@ app.get("/api/v1/hurricanes", (req, res) => {
 });
 
 */
-app.get("/api/v1/hurricanes", (req, res) => {
+app.get("/v1/hurricanes", (req, res) => {
     res.send(hurricanes);
 });
 
