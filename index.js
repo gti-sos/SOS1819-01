@@ -468,7 +468,7 @@ client.connect(err => {
 
 
 app.get("/api/v1/testing-of-nuclear-bombs/docs", (req, res)=>{
-   res.redirect("https://documenter.getpostman.com/view/6919343/S17tQ7ZH%22");
+   res.redirect("https://documenter.getpostman.com/view/6914151/S17usmtd");
 });
 
 app.get("/api/v1/testing-of-nuclear-bombs/loadInitialData", (req, res) => {
