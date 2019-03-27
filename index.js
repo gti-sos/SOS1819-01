@@ -121,9 +121,9 @@ app.get("/api/v1/hurricanes", (req, res) => {
 });
 
 
-//app.get("/api/v1/hurricanes", (req, res) => {
-//    res.send(hurricanes);
-//});
+app.get("/api/v1/hurricanes", (req, res) => {
+    res.send(hurricanes);
+});
 
 app.post("/api/v1/hurricanes",(req, res)=>{
     
