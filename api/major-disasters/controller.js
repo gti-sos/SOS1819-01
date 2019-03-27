@@ -97,6 +97,8 @@ exports.update = function (req, res) {
 				res.sendStatus(200);
 			});
 		});
+	}).catch(function (err) {
+		res.status(400).send(err);
 	});
 	/*
 	MajorDisaster.updateOne({_id: req.params.id}, req.body, function (err) {
