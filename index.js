@@ -34,6 +34,10 @@ const client2 = new MongoClient2(url2, { useNewUrlParser: true });
 
 var ObjectID = require('mongodb').ObjectID;
 
+app.get("/api/v1/hurricanes/docs", (req, res)=>{
+   res.redirect("https://documenter.getpostman.com/view/6916951/S17ut6v5");
+});
+
 //var hurricanes;
 
 client2.connect(err => {
