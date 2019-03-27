@@ -37,7 +37,7 @@ var ObjectID = require('mongodb').ObjectID;
 //var hurricanes;
 
 client2.connect(err => {
-    bombs = client2.db("sos1819").collection("hurricanes");
+    hurricanes = client2.db("sos1819").collection("hurricanes");
     console.log("Connected")
 });
 
@@ -82,7 +82,7 @@ app.get("/api/v1/hurricanes/loadInitialData", (req, res) => {
         if(c>0){
             res.sendStatus(409);
         } else {
-            bombs.insertMany(hurricanesAux,function(err,r){
+            hurricanes.insertMany(hurricanesAux,function(err,r){
                 res.sendStatus(200);
             });
         }
@@ -133,11 +133,11 @@ app.post("/api/v1/hurricanes",(req, res)=>{
         }
     }
  
-    bombs.countDocuments(newHurricane,function(err,c){
+    hurricanes.countDocuments(newHurricane,function(err,c){
         if(c>0){
             res.sendStatus(409);
         } else {
-            bombs.insertOne(newHurricane,function(err,r){
+            hurricanes.insertOne(newHurricane,function(err,r){
                 res.sendStatus(201);
             });
         }
@@ -193,7 +193,7 @@ app.get("/api/v1/hurricanes/:name", (req, res) => {
     var idAux = req.params.name;
     console.log(idAux);
 
-    bombs.findOne({ _id : new ObjectID(idAux) }, function (err, result) {
+    hurricanes.findOne({ _id : new ObjectID(idAux) }, function (err, result) {
         if (!result) {
             res.sendStatus(404);
         }
@@ -237,7 +237,7 @@ app.put("/api/v1/hurricanes/:name", (req, res) => {
 
     delete req.body._name;
     
-    bombs.updateOne({_name: new ObjectID(req.params.name)},{$set: req.body}, function (err,c) {
+    hurricanes.updateOne({_name: new ObjectID(req.params.name)},{$set: req.body}, function (err,c) {
         if(c && c.matchedCount==0){
           return res.sendStatus(404);  
         }
@@ -321,7 +321,7 @@ app.get("/api/v1/secure/hurricanes/loadInitialData", (req, res) => {
         if(c>0){
             res.sendStatus(409);
         } else {
-            bombs.insertMany(hurricanesAux,function(err,r){
+            hurricanes.insertMany(hurricanesAux,function(err,r){
                 res.sendStatus(200);
             });
         }
@@ -367,12 +367,12 @@ app.post("/api/v1/secure/hurricanes",(req, res)=>{
             return res.sendStatus(400);
         }
     }
- 
-    bombs.countDocuments(newHurricane,function(err,c){
+
+        hurricanes.countDocuments(newHurricane,function(err,c){
         if(c>0){
             res.sendStatus(409);
         } else {
-            bombs.insertOne(newHurricane,function(err,r){
+            hurricanes.insertOne(newHurricane,function(err,r){
                 res.sendStatus(201);
             });
         }
@@ -412,7 +412,7 @@ app.get("/api/v1/secure/hurricanes/:name", (req, res) => {
     var idAux = req.params.name;
     console.log(idAux);
 
-    bombs.findOne({ _id : new ObjectID(idAux) }, function (err, result) {
+    hurricanes.findOne({ _id : new ObjectID(idAux) }, function (err, result) {
         if (!result) {
             res.sendStatus(404);
         }
@@ -438,7 +438,7 @@ app.put("/api/v1/secure/hurricanes/:name", (req, res) => {
 
     delete req.body._name;
     
-    bombs.updateOne({_name: new ObjectID(req.params.name)},{$set: req.body}, function (err,c) {
+    hurricanes.updateOne({_name: new ObjectID(req.params.name)},{$set: req.body}, function (err,c) {
         if(c && c.matchedCount==0){
           return res.sendStatus(404);  
         }
