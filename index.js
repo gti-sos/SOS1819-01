@@ -19,8 +19,8 @@ app.use("/api/v1/major-disasters", require('./api/major-disasters'));
 app.use("/api/v1/secure/major-disasters", require('./api/authMiddleware'), require('./api/major-disasters'));
 app.use("/api/v1/secure/testing-of-nuclear-bombs", require('./api/authMiddleware'));
 
-//app.use("/api/v1/hurricanes", require('./api/hurricanes'));
-//app.use("/api/v1/testing-of-nuclear-bombs", require('./api/testing-of-nuclear-bombs'));
+app.use("/api/v1/hurricanes", require('./api/hurricanes'));
+app.use("/api/v1/secure/hurricanebs",require('./api/authMiddleware'), require('./api/hurricanes'));
 //process.env.NODE_ENV === 'production'
 
 
@@ -28,9 +28,21 @@ app.use("/api/v1/secure/testing-of-nuclear-bombs", require('./api/authMiddleware
 
 var hurricanes = [];
 
+const MongoClient2 = require("mongodb").MongoClient;
+const url2 = "mongodb+srv://juajimbal:sos1819@cluster0-jate4.mongodb.net/test?retryWrites=true";
+const client2 = new MongoClient2(url2, { useNewUrlParser: true });
+
+var ObjectID = require('mongodb').ObjectID;
+
+//var hurricanes;
+
+client2.connect(err => {
+    bombs = client2.db("sos1819").collection("hurricanes");
+    console.log("Connected")
+});
 
 app.get("/api/v1/hurricanes/loadInitialData", (req, res) => {
-    hurricanes = [{
+    var hurricanesAux = [{
         name: "Katrina",
         year: "2005",
         country: "EEUU",
@@ -44,14 +56,96 @@ app.get("/api/v1/hurricanes/loadInitialData", (req, res) => {
         speed: 285,
         damagesuntil2008: 5.8,
         mbar: 905
+    }, {
+        name: "Andrew",
+        year: "1992",
+        country: "EEUU",
+        speed: 280,
+        damagesuntil2008: 52.4,
+        mbar: 922
+    }, {
+        name: "Ike",
+        year: "2008",
+        country: "Islas de Sotavento",
+        speed: 230,
+        damagesuntil2008: 32,
+        mbar: 935
+    }, {
+        name: "Wilma",
+        year: "2005",
+        country: "Centro América",
+        speed: 295,
+        damagesuntil2008: 29.1,
+        mbar: 882
     }];
-    res.sendStatus(200);
+    hurricanes.countDocuments({},function(err,c){
+        if(c>0){
+            res.sendStatus(409);
+        } else {
+            bombs.insertMany(hurricanesAux,function(err,r){
+                res.sendStatus(200);
+            });
+        }
+    });
 });
 
 app.get("/api/v1/hurricanes", (req, res) => {
-    res.send(hurricanes);
+    
+    let search = {fields: {}, page: 0, limit: 100};
+
+    for (let key in req.query) {
+        if (["from", "to"].indexOf(key) > -1) {
+            var nCondition = (key === "from") ? "$gt" : "$lt";
+            if (!search.fields.year) 
+                search.fields.year = {};
+            search.fields.year[nCondition] = parseInt(req.query[key]);
+        } else if (["page", "limit"].indexOf(key) > -1)
+            search[key] = parseInt(req.query[key]);
+        else if (["country", "type"].indexOf(key) > -1)
+            search.fields[key] = {"$in": req.query[key]};
+        else 
+            search.fields[key] = req.query[key];
+    }
+    
+    hurricanes.find(search.fields).limit(search.limit).skip(search.page * search.limit).toArray((err,hurricanesArray)=>{
+        if(err)
+            console.log("Error " + err)
+            
+        res.send(hurricanesArray);       
+    });
+    
 });
 
+
+//app.get("/api/v1/hurricanes", (req, res) => {
+//    res.send(hurricanes);
+//});
+
+app.post("/api/v1/hurricanes",(req, res)=>{
+    
+    var newHurricane = req.body;
+    
+    var keys = ["name","year","country","speed","damagesuntil2008","mbar"];
+    
+    for (var i = keys.length - 1; i >= 0; i--) {
+        if (!newHurricane.hasOwnProperty(keys[i])) {
+            return res.sendStatus(400);
+        }
+    }
+ 
+    bombs.countDocuments(newHurricane,function(err,c){
+        if(c>0){
+            res.sendStatus(409);
+        } else {
+            bombs.insertOne(newHurricane,function(err,r){
+                res.sendStatus(201);
+            });
+        }
+    });
+   
+});
+
+/*
 app.post("/api/v1/hurricanes", (req, res) => {
 
     var newHurricane = req.body;
@@ -59,7 +153,7 @@ app.post("/api/v1/hurricanes", (req, res) => {
     hurricanes.push(newHurricane);
 
     res.sendStatus(201);
-});
+});*/
 
 app.post("/api/v1/hurricanes/:name", (req, res) => {
     res.sendStatus(405);
@@ -71,10 +165,19 @@ app.put("/api/v1/hurricanes", (req, res) => {
 
 app.delete("/api/v1/hurricanes", (req, res) => {
 
+    hurricanes.remove({},function(err,r){
+        res.sendStatus(200);
+    });
+    
+});
+
+/*app.delete("/api/v1/hurricanes", (req, res) => {
+
     hurricanes = [];
 
     res.sendStatus(200);
 });
+*/
 
 app.delete("/api/v1/hurricanes/:name", (req, res) => {
     hurricanes = hurricanes.filter((c) => {
@@ -85,6 +188,21 @@ app.delete("/api/v1/hurricanes/:name", (req, res) => {
 
 // GET /hurricanes/Katrina
 
+app.get("/api/v1/hurricanes/:name", (req, res) => {
+
+    var idAux = req.params.name;
+    console.log(idAux);
+
+    bombs.findOne({ _id : new ObjectID(idAux) }, function (err, result) {
+        if (!result) {
+            res.sendStatus(404);
+        }
+        else {
+            res.send(result);
+        }
+    });
+});
+/*
 app.get("/api/v1/hurricanes/:name", (req, res) => {
 
     var name = req.params.name;
@@ -101,7 +219,36 @@ app.get("/api/v1/hurricanes/:name", (req, res) => {
     }
 
 });
+*/
 
+app.put("/api/v1/hurricanes/:name", (req, res) => {
+    
+    if (req.body._name && req.params.name !== req.body._name)
+        return res.sendStatus(400);    
+        
+    var keys = ["name","year","country","speed","damagesuntil2008","mbar"];
+    
+    for (var i = keys.length - 1; i >= 0; i--) {
+        if (!req.body.hasOwnProperty(keys[i])) {
+            return res.sendStatus(400);
+        }
+    }
+    
+
+    delete req.body._name;
+    
+    bombs.updateOne({_name: new ObjectID(req.params.name)},{$set: req.body}, function (err,c) {
+        if(c && c.matchedCount==0){
+          return res.sendStatus(404);  
+        }
+        let code = (err) ? 404 : 200;
+        let msg = (err) ? "Not Found" : "OK";
+        res.status(code).json({code: code, msg: msg});
+    })
+
+
+});
+/*
 app.put("/api/v1/hurricanes/:name", (req, res) => {
 
     var name = req.params.name;
@@ -131,6 +278,179 @@ app.put("/api/v1/hurricanes/:name", (req, res) => {
     }
 
 });
+*/
+//--------------------------------------------------------------
+app.get("/api/v1/secure/hurricanes/loadInitialData", (req, res) => {
+    var hurricanesAux = [{
+        name: "Katrina",
+        year: "2005",
+        country: "EEUU",
+        speed: 280,
+        damagesuntil2008: 81.2,
+        mbar: 902
+    }, {
+        name: "Mitch",
+        year: "1998",
+        country: "EEUU",
+        speed: 285,
+        damagesuntil2008: 5.8,
+        mbar: 905
+    }, {
+        name: "Andrew",
+        year: "1992",
+        country: "EEUU",
+        speed: 280,
+        damagesuntil2008: 52.4,
+        mbar: 922
+    }, {
+        name: "Ike",
+        year: "2008",
+        country: "Islas de Sotavento",
+        speed: 230,
+        damagesuntil2008: 32,
+        mbar: 935
+    }, {
+        name: "Wilma",
+        year: "2005",
+        country: "Centro América",
+        speed: 295,
+        damagesuntil2008: 29.1,
+        mbar: 882
+    }];
+    hurricanes.countDocuments({},function(err,c){
+        if(c>0){
+            res.sendStatus(409);
+        } else {
+            bombs.insertMany(hurricanesAux,function(err,r){
+                res.sendStatus(200);
+            });
+        }
+    });
+});
+
+app.get("/api/v1/secure/hurricanes", (req, res) => {
+    
+    let search = {fields: {}, page: 0, limit: 100};
+
+    for (let key in req.query) {
+        if (["from", "to"].indexOf(key) > -1) {
+            var nCondition = (key === "from") ? "$gt" : "$lt";
+            if (!search.fields.year) 
+                search.fields.year = {};
+            search.fields.year[nCondition] = parseInt(req.query[key]);
+        } else if (["page", "limit"].indexOf(key) > -1)
+            search[key] = parseInt(req.query[key]);
+        else if (["country", "type"].indexOf(key) > -1)
+            search.fields[key] = {"$in": req.query[key]};
+        else 
+            search.fields[key] = req.query[key];
+    }
+    
+    hurricanes.find(search.fields).limit(search.limit).skip(search.page * search.limit).toArray((err,hurricanesArray)=>{
+        if(err)
+            console.log("Error " + err)
+            
+        res.send(hurricanesArray);       
+    });
+    
+});
+
+
+app.post("/api/v1/secure/hurricanes",(req, res)=>{
+    
+    var newHurricane = req.body;
+    
+    var keys = ["name","year","country","speed","damagesuntil2008","mbar"];
+    
+    for (var i = keys.length - 1; i >= 0; i--) {
+        if (!newHurricane.hasOwnProperty(keys[i])) {
+            return res.sendStatus(400);
+        }
+    }
+ 
+    bombs.countDocuments(newHurricane,function(err,c){
+        if(c>0){
+            res.sendStatus(409);
+        } else {
+            bombs.insertOne(newHurricane,function(err,r){
+                res.sendStatus(201);
+            });
+        }
+    });
+   
+});
+
+
+app.post("/api/v1/secure/hurricanes/:name", (req, res) => {
+    res.sendStatus(405);
+});
+
+app.put("/api/v1/secure/hurricanes", (req, res) => {
+    res.sendStatus(405);
+});
+
+app.delete("/api/v1/secure/hurricanes", (req, res) => {
+
+    hurricanes.remove({},function(err,r){
+        res.sendStatus(200);
+    });
+    
+});
+
+
+app.delete("/api/v1/secure/hurricanes/:name", (req, res) => {
+    hurricanes = hurricanes.filter((c) => {
+        return c.name != req.params.name;
+    });
+    res.sendStatus(200);
+});
+
+// GET /hurricanes/Katrina
+
+app.get("/api/v1/secure/hurricanes/:name", (req, res) => {
+
+    var idAux = req.params.name;
+    console.log(idAux);
+
+    bombs.findOne({ _id : new ObjectID(idAux) }, function (err, result) {
+        if (!result) {
+            res.sendStatus(404);
+        }
+        else {
+            res.send(result);
+        }
+    });
+});
+
+app.put("/api/v1/secure/hurricanes/:name", (req, res) => {
+    
+    if (req.body._name && req.params.name !== req.body._name)
+        return res.sendStatus(400);    
+        
+    var keys = ["name","year","country","speed","damagesuntil2008","mbar"];
+    
+    for (var i = keys.length - 1; i >= 0; i--) {
+        if (!req.body.hasOwnProperty(keys[i])) {
+            return res.sendStatus(400);
+        }
+    }
+    
+
+    delete req.body._name;
+    
+    bombs.updateOne({_name: new ObjectID(req.params.name)},{$set: req.body}, function (err,c) {
+        if(c && c.matchedCount==0){
+          return res.sendStatus(404);  
+        }
+        let code = (err) ? 404 : 200;
+        let msg = (err) ? "Not Found" : "OK";
+        res.status(code).json({code: code, msg: msg});
+    })
+
+
+});
+
+
 
 //-------JoseAPI---------------------------------------------
 const MongoClient = require("mongodb").MongoClient;
