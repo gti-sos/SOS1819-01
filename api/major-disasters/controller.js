@@ -93,9 +93,8 @@ exports.update = function (req, res) {
 		}
 		doc.validate(function (err) {
 			if (err) return res.sendStatus(400);
-			doc.save(function () {
-				res.sendStatus(200);
-			});
+			doc.save()
+			res.sendStatus(200);
 		});
 	}).catch(function (err) {
 		res.status(400).send(err);
