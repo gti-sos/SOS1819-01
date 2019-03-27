@@ -12,13 +12,14 @@ exports.init = function (req, res) {
 			err.message = "collection majorDisasters is already populated!";
 			err.name = "populationError";
 			err.httpCode = 405;
-			res.status(err.httpCode).json(err);
+			res.sendStatus(err.httpCode);
 		} else {
 			const promises = populateData.map(function (e) {
 				new MajorDisaster(e).save();
 			});
 			Promise.all(promises).then(function () {
-				res.status(200).json({code: 200, msg: "OK"});
+				res.sendStatus(200);
+				//res.status(200).json({code: 200, msg: "OK"});
 			});
 		}
 	});
@@ -33,7 +34,7 @@ exports.list = function (req, res) {
 			var nCondition = (key === "from") ? "$gt" : "$lt";
 			if (!search.fields.year) 
 				search.fields.year = {};
-			search.fields.year[nCondition] = req.query[key];
+			search.fields.year[nCondition] = parseInt(req.query[key]);
 		} else if (["page", "limit"].indexOf(key) > -1)
 			search[key] = parseInt(req.query[key]);
 		else if (["country", "type"].indexOf(key) > -1)
@@ -54,7 +55,8 @@ exports.list = function (req, res) {
 exports.get = function (req, res) {
 	MajorDisaster.findById(req.params.id, function (err, data) {
 		if (err || !data)
-			return res.status(404).json({code: 404, msg: "Not Found"});
+			return res.sendStatus(404);
+			//return res.status(404).json({code: 404, msg: "Not Found"});
 		res.json(data);
 	});
 };
@@ -76,19 +78,40 @@ exports.create = function (req, res) {
 exports.update = function (req, res) {
 	if (req.body._id && req.params.id !== req.body._id)
 		return res.status(400).json({code: 400, msg: "Bad Request"});
-
+	MajorDisaster.findOne({_id: req.params.id}).then(function (doc) {
+		//console.log(doc, doc instanceof MajorDisaster);
+		//res.json(doc);
+		if (!doc) return res.sendStatus(404);
+		//console.log(Object.keys(doc._doc), Object.keys(req.body));
+		var oKeys = Object.keys(doc._doc).filter((x) => { return x !== "__v"; });
+		//console.log(oKeys, Object.keys(req.body))
+		if (!oKeys.every(val => Object.keys(req.body).includes(val))) return res.sendStatus(400);
+		//if ((Object.keys(doc).length) !== Object.keys(req.body).length) return res.sendStatus(400);
+		delete req.body._id;
+		for (var key in req.body) {
+			doc[key] = req.body[key];
+		}
+		doc.validate(function (err) {
+			if (err) return res.sendStatus(400);
+			doc.save();
+			res.sendStatus(200);
+		});
+	});
+	/*
 	MajorDisaster.updateOne({_id: req.params.id}, req.body, function (err) {
 		let code = (err) ? 404 : 200;
 		let msg = (err) ? "Not Found" : "OK";
 		res.status(code).json({code: code, msg: msg});
 	});
+	*/
 };
 
 exports.destroy = function (req, res) {
 	MajorDisaster.deleteOne({_id: req.params.id}, function (err) {
 		let code = (err) ? 404 : 200;
 		let msg = (err) ? "Not Found" : "No Content";
-		res.status(code).json({code: code, msg: msg});
+		res.sendStatus(code);
+		//res.status(code).json({code: code, msg: msg});
 	});
 };
 
@@ -96,6 +119,7 @@ exports.destroyAll = function (req, res) {
 	MajorDisaster.deleteMany({}, function (err) {
 		let code = (err) ? 404 : 200;
 		let msg = (err) ? "Not Found" : "No Content";
-		res.status(code).json({code: code, msg: msg});
+		res.sendStatus(code);
+		//res.status(code).json({code: code, msg: msg});
 	});
 };
