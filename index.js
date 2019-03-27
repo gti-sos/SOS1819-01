@@ -29,7 +29,7 @@ app.use("/api/v1/secure/hurricanebs",require('./api/authMiddleware'), require('.
 var hurricanes = [];
 
 const MongoClient2 = require("mongodb").MongoClient;
-const url2 = "mongodb+srv://juajimbal:d7Hn5c3&gFVT@cluster0-jate4.mongodb.net/test?retryWrites=true";
+const url2 = "mongodb+srv://juajimbal:1234@cluster0-jate4.mongodb.net/test?retryWrites=true";
 const client2 = new MongoClient2(url2, { useNewUrlParser: true });
 
 var ObjectID = require('mongodb').ObjectID;
