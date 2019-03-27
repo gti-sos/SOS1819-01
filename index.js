@@ -554,7 +554,7 @@ app.post("/api/v1/testing-of-nuclear-bombs",(req, res)=>{
     
     var keys = ["country","year","maxYield","shot","hob"];
     
-    for (var i = keys.length - 1; i >= 0; i--) {
+    for (var i = keys.length-1; i >= 0; i--) {
         if (!newBomb.hasOwnProperty(keys[i])) {
             return res.sendStatus(400);
         }
