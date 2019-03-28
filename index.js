@@ -50,35 +50,35 @@ client2.connect(err => {
 app.get("/api/v1/hurricanes/loadInitialData", (req, res) => {
     var hurricanesAux = [{
         name: "Katrina",
-        year: "2005",
+        year: 2005,
         country: "EEUU",
         speed: 280,
         damagesuntil2008: 81.2,
         mbar: 902
     }, {
         name: "Mitch",
-        year: "1998",
+        year: 1998,
         country: "EEUU",
         speed: 285,
         damagesuntil2008: 5.8,
         mbar: 905
     }, {
         name: "Andrew",
-        year: "1992",
+        year: 1992,
         country: "EEUU",
         speed: 280,
         damagesuntil2008: 52.4,
         mbar: 922
     }, {
         name: "Ike",
-        year: "2008",
+        year: 2008,
         country: "Islas de Sotavento",
         speed: 230,
         damagesuntil2008: 32,
         mbar: 935
     }, {
         name: "Wilma",
-        year: "2005",
+        year: 2005,
         country: "Centro América",
         speed: 295,
         damagesuntil2008: 29.1,
