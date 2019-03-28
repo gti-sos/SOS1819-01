@@ -193,22 +193,22 @@ app.delete("/api/v1/hurricanes/:name", (req, res) => {
 });
 
 // GET /hurricanes/Katrina
+/*
+app.get("/api/v1/hurricanes/:name", (req, res) => {
 
-app.get("/api/v1/hurricanes/:id", (req, res) => {
-
-    var idAux = req.params.id;
+    var idAux = req.params.name;
     console.log(idAux);
 
-    hurricanes.findOne({ _id : new ObjectID(idAux) }, function (err, result) {
+    hurricanes.findOne({ _name : new ObjectID(idAux) }, function (err, result) {
         if (!result) {
             res.sendStatus(404);
         }
         else {
-            res.json(result);
+            res.send(result);
         }
     });
 });
-/*
+*/
 app.get("/api/v1/hurricanes/:name", (req, res) => {
 
     var name = req.params.name;
@@ -225,7 +225,7 @@ app.get("/api/v1/hurricanes/:name", (req, res) => {
     }
 
 });
-*/
+
 
 app.put("/api/v1/hurricanes/:name", (req, res) => {
     
