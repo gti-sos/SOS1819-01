@@ -600,7 +600,7 @@ app.get("/api/v1/testing-of-nuclear-bombs/:id", (req, res) => {
             res.sendStatus(404);
         }
         else {
-            res.send(result);
+            res.json(result);
         }
     });
 
