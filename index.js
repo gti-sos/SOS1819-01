@@ -193,7 +193,7 @@ app.delete("/api/v1/hurricanes/:name", (req, res) => {
 });
 
 // GET /hurricanes/Katrina
-/*
+
 app.get("/api/v1/hurricanes/:name", (req, res) => {
 
     var idAux = req.params.name;
@@ -208,7 +208,7 @@ app.get("/api/v1/hurricanes/:name", (req, res) => {
         }
     });
 });
-*/
+/*
 app.get("/api/v1/hurricanes/:name", (req, res) => {
 
     var name = req.params.name;
@@ -225,7 +225,7 @@ app.get("/api/v1/hurricanes/:name", (req, res) => {
     }
 
 });
-
+*/
 
 app.put("/api/v1/hurricanes/:name", (req, res) => {
     
