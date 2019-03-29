@@ -250,6 +250,36 @@ app.get("/api/v1/hurricanes/:name", (req, res) => {
 
 });
 */
+
+app.put("/api/v1/hurricanes/:id", (req, res) => {
+    
+    if (req.body._id && req.params.id !== req.body._id)
+        return res.sendStatus(400);    
+        
+    var keys = ["name","year","country","speed","damagesuntil2008","mbar"];
+    
+    for (var i = keys.length - 1; i >= 0; i--) {
+        if (!req.body.hasOwnProperty(keys[i])) {
+            return res.sendStatus(400);
+        }
+    }
+    
+
+    delete req.body._id;
+    
+    bombs.updateOne({_id: new ObjectID(req.params.id)},{$set: req.body}, function (err,c) {
+        if(c && c.matchedCount==0){
+          return res.sendStatus(404);  
+        }
+        let code = (err) ? 404 : 200;
+        let msg = (err) ? "Not Found" : "OK";
+        res.status(code).json({code: code, msg: msg});
+    })
+
+
+});
+
+/*
 app.put("/api/v1/hurricanes/:name", (req, res) => {
     
     if (req.body._name && req.params.name !== req.body._name)
@@ -276,7 +306,7 @@ app.put("/api/v1/hurricanes/:name", (req, res) => {
     })
 
 
-});
+});*/
 /*
 app.put("/api/v1/hurricanes/:name", (req, res) => {
 
