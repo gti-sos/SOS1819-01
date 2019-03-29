@@ -133,17 +133,17 @@ app.post("/api/v1/hurricanes",(req, res)=>{
     
     var keys = ["name","year","country","speed","damagesuntil2008","mbar"];
     
-    for (var i = keys.length - 1; i >= 0; i--) {
+    for (var i = keys.length-1; i >= 0; i--) {
         if (!newHurricane.hasOwnProperty(keys[i])) {
             return res.sendStatus(400);
         }
     }
  
-    hurricanes.countDocuments(newHurricane,function(err,c){
+    bombs.countDocuments(newHurricane,function(err,c){
         if(c>0){
             res.sendStatus(409);
         } else {
-            hurricanes.insertOne(newHurricane,function(err,r){
+            bombs.insertOne(newHurricane,function(err,r){
                 res.sendStatus(201);
             });
         }
