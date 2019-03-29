@@ -169,6 +169,15 @@ app.put("/api/v1/hurricanes", (req, res) => {
     res.sendStatus(405);
 });
 
+app.delete("/api/v1/hurricanes/:id", (req, res) => {
+
+    var idAux = req.params.id;
+
+    hurricanes.remove({_id:new ObjectID(idAux)},function(err,r){
+        res.sendStatus(200);
+    });
+});
+/*
 app.delete("/api/v1/hurricanes", (req, res) => {
 
     hurricanes.remove({},function(err,r){
@@ -176,7 +185,7 @@ app.delete("/api/v1/hurricanes", (req, res) => {
     });
     
 });
-
+*/
 /*app.delete("/api/v1/hurricanes", (req, res) => {
 
     hurricanes = [];
@@ -223,7 +232,7 @@ app.get("/api/v1/hurricanes/:name", (req, res) => {
         }
     });
 });*/
-
+/*
 app.get("/api/v1/hurricanes/:name", (req, res) => {
 
     var name = req.params.name;
@@ -240,7 +249,7 @@ app.get("/api/v1/hurricanes/:name", (req, res) => {
     }
 
 });
-
+*/
 app.put("/api/v1/hurricanes/:name", (req, res) => {
     
     if (req.body._name && req.params.name !== req.body._name)
