@@ -177,7 +177,7 @@ app.delete("/api/v1/hurricanes/:id", (req, res) => {
         res.sendStatus(200);
     });
 });
-/*
+
 app.delete("/api/v1/hurricanes", (req, res) => {
 
     hurricanes.remove({},function(err,r){
@@ -185,14 +185,14 @@ app.delete("/api/v1/hurricanes", (req, res) => {
     });
     
 });
-*/
+/*
 app.delete("/api/v1/hurricanes", (req, res) => {
 
     hurricanes = [];
 
     res.sendStatus(200);
 });
-
+*/
 
 app.delete("/api/v1/hurricanes/:name", (req, res) => {
     hurricanes = hurricanes.filter((c) => {
