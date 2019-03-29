@@ -139,11 +139,11 @@ app.post("/api/v1/hurricanes",(req, res)=>{
         }
     }
  
-    bombs.countDocuments(newHurricane,function(err,c){
+    hurricanes.countDocuments(newHurricane,function(err,c){
         if(c>0){
             res.sendStatus(409);
         } else {
-            bombs.insertOne(newHurricane,function(err,r){
+            hurricanes.insertOne(newHurricane,function(err,r){
                 res.sendStatus(201);
             });
         }
