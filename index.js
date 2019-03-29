@@ -339,38 +339,40 @@ app.put("/api/v1/hurricanes/:name", (req, res) => {
 });
 */
 //--------------------------------------------------------------
+
+
 app.get("/api/v1/secure/hurricanes/loadInitialData", (req, res) => {
     var hurricanesAux = [{
         name: "Katrina",
-        year: "2005",
+        year: 2005,
         country: "EEUU",
         speed: 280,
         damagesuntil2008: 81.2,
         mbar: 902
     }, {
         name: "Mitch",
-        year: "1998",
+        year: 1998,
         country: "EEUU",
         speed: 285,
         damagesuntil2008: 5.8,
         mbar: 905
     }, {
         name: "Andrew",
-        year: "1992",
+        year: 1992,
         country: "EEUU",
         speed: 280,
         damagesuntil2008: 52.4,
         mbar: 922
     }, {
         name: "Ike",
-        year: "2008",
+        year: 2008,
         country: "Islas de Sotavento",
         speed: 230,
         damagesuntil2008: 32,
         mbar: 935
     }, {
         name: "Wilma",
-        year: "2005",
+        year: 2005,
         country: "Centro América",
         speed: 295,
         damagesuntil2008: 29.1,
@@ -421,13 +423,13 @@ app.post("/api/v1/secure/hurricanes",(req, res)=>{
     
     var keys = ["name","year","country","speed","damagesuntil2008","mbar"];
     
-    for (var i = keys.length - 1; i >= 0; i--) {
+    for (var i = keys.length-1; i >= 0; i--) {
         if (!newHurricane.hasOwnProperty(keys[i])) {
             return res.sendStatus(400);
         }
     }
-
-        hurricanes.countDocuments(newHurricane,function(err,c){
+ 
+    hurricanes.countDocuments(newHurricane,function(err,c){
         if(c>0){
             res.sendStatus(409);
         } else {
@@ -448,6 +450,15 @@ app.put("/api/v1/secure/hurricanes", (req, res) => {
     res.sendStatus(405);
 });
 
+app.delete("/api/v1/secure/hurricanes/:id", (req, res) => {
+
+    var idAux = req.params.id;
+
+    hurricanes.remove({_id:new ObjectID(idAux)},function(err,r){
+        res.sendStatus(200);
+    });
+});
+
 app.delete("/api/v1/secure/hurricanes", (req, res) => {
 
     hurricanes.remove({},function(err,r){
@@ -456,7 +467,6 @@ app.delete("/api/v1/secure/hurricanes", (req, res) => {
     
 });
 
-
 app.delete("/api/v1/secure/hurricanes/:name", (req, res) => {
     hurricanes = hurricanes.filter((c) => {
         return c.name != req.params.name;
@@ -464,26 +474,26 @@ app.delete("/api/v1/secure/hurricanes/:name", (req, res) => {
     res.sendStatus(200);
 });
 
-// GET /hurricanes/Katrina
 
-app.get("/api/v1/secure/hurricanes/:name", (req, res) => {
+app.get("/api/v1/secure/hurricanes/:id", (req, res) => {
 
-    var idAux = req.params.name;
+    var idAux = req.params.id;
     console.log(idAux);
 
-    hurricanes.findOne({ _name : new ObjectID(idAux) }, function (err, result) {
+    hurricanes.findOne({ _id : new ObjectID(idAux) }, function (err, result) {
         if (!result) {
             res.sendStatus(404);
         }
         else {
-            res.send(result);
+            res.json(result);
         }
     });
 });
 
-app.put("/api/v1/secure/hurricanes/:name", (req, res) => {
+
+app.put("/api/v1/secure/hurricanes/:id", (req, res) => {
     
-    if (req.body._name && req.params.name !== req.body._name)
+    if (req.body._id && req.params.id !== req.body._id)
         return res.sendStatus(400);    
         
     var keys = ["name","year","country","speed","damagesuntil2008","mbar"];
@@ -495,9 +505,9 @@ app.put("/api/v1/secure/hurricanes/:name", (req, res) => {
     }
     
 
-    delete req.body._name;
+    delete req.body._id;
     
-    hurricanes.updateOne({_name: new ObjectID(req.params.name)},{$set: req.body}, function (err,c) {
+    hurricanes.updateOne({_id: new ObjectID(req.params.id)},{$set: req.body}, function (err,c) {
         if(c && c.matchedCount==0){
           return res.sendStatus(404);  
         }
