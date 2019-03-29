@@ -267,7 +267,7 @@ app.put("/api/v1/hurricanes/:id", (req, res) => {
 
     delete req.body._id;
     
-    bombs.updateOne({_id: new ObjectID(req.params.id)},{$set: req.body}, function (err,c) {
+    hurricanes.updateOne({_id: new ObjectID(req.params.id)},{$set: req.body}, function (err,c) {
         if(c && c.matchedCount==0){
           return res.sendStatus(404);  
         }
