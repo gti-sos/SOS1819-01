@@ -95,6 +95,14 @@ app.get("/api/v1/hurricanes/loadInitialData", (req, res) => {
     });
 });
 
+
+app.get("/api/v1/hurricanes", (req, res) => {
+    var aux=hurricanes
+    if (req.params.name) {
+        aux.filter(name => name==req.params.name)
+    }
+    res.send(aux)
+})
 app.get("/api/v1/hurricanes", (req, res) => {
     
     let search = {fields: {}, page: 0, limit: 100};
