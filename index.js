@@ -95,7 +95,7 @@ app.get("/api/v1/hurricanes/loadInitialData", (req, res) => {
     });
 });
 
-
+/*
 app.get("/api/v1/hurricanes", (req, res) => {
     var aux=hurricanes
     if (req.params.name) {
@@ -103,6 +103,7 @@ app.get("/api/v1/hurricanes", (req, res) => {
     }
     res.send(aux)
 })
+*/
 app.get("/api/v1/hurricanes", (req, res) => {
     
     let search = {fields: {}, page: 0, limit: 100};
@@ -115,8 +116,8 @@ app.get("/api/v1/hurricanes", (req, res) => {
             search.fields.year[nCondition] = parseInt(req.query[key]);
         } else if (["page", "limit"].indexOf(key) > -1)
             search[key] = parseInt(req.query[key]);
-        else if (["country", "type"].indexOf(key) > -1)
-            search.fields[key] = {"$in": req.query[key]};
+       // else if (["country", "type"].indexOf(key) > -1)
+         //   search.fields[key] = {"$in": req.query[key]};
         else 
             search.fields[key] = req.query[key];
     }
