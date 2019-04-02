@@ -26,7 +26,7 @@ exports.list = function (req, res) {
 
 	for (let key in req.query) {
 		if (["from", "to"].indexOf(key) > -1) {
-			var nCondition = (key === "from") ? "$gt" : "$lt";
+			var nCondition = (key === "from") ? "$gte" : "$lte";
 			if (!search.fields.year) 
 				search.fields.year = {};
 			search.fields.year[nCondition] = parseInt(req.query[key]);
@@ -61,11 +61,10 @@ exports.create = function (req, res) {
 	//const count = await MajorDisaster.countDocuments({event: req.body.event});
 	MajorDisaster.countDocuments({event: req.body.event}, function (er, count) {
 		if (count > 0) 
-			return res.status(409).json({code: 409, msg: "Conflict"});
+			return res.sendStatus(409).json({code: 409, msg: "Conflict"});
 		majorDisaster.save(function (err, data) {
-			let code = err ? 400 : 201;
-			let msg = err ? "Bad Request" : "Created";
-			res.status(code).json({code: code, msg: msg, data: data});
+			res.sendStatus(err ? 400 : 201);
+			//res.status(code).json({code: code, msg: msg, data: data});
 		});
 	});
 };
@@ -77,7 +76,7 @@ exports.update = function (req, res) {
 		//console.log(doc, doc instanceof MajorDisaster);
 		//res.json(doc);
 		//console.log(Object.keys(doc._doc), Object.keys(req.body));
-		var oKeys = Object.keys(doc._doc).filter((x) => { return ["__v", "_id"].indexOf(x) !== -1; });
+		var oKeys = Object.keys(doc._doc).filter((x) => { return ["__v", "_id"].indexOf(x) === -1; });
 		console.log(oKeys);
 
 		//console.log(oKeys, Object.keys(req.body))
@@ -99,18 +98,12 @@ exports.update = function (req, res) {
 
 exports.destroy = function (req, res) {
 	MajorDisaster.deleteOne({event: req.params.event}, function (err) {
-		let code = (err) ? 404 : 200;
-		let msg = (err) ? "Not Found" : "No Content";
-		res.sendStatus(code);
-		//res.status(code).json({code: code, msg: msg});
+		res.sendStatus((err) ? 404 : 200);
 	});
 };
 
 exports.destroyAll = function (req, res) {
 	MajorDisaster.deleteMany({}, function (err) {
-		let code = (err) ? 404 : 200;
-		let msg = (err) ? "Not Found" : "No Content";
-		res.sendStatus(code);
-		//res.status(code).json({code: code, msg: msg});
+		res.sendStatus((err) ? 404 : 200);
 	});
 };
