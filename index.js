@@ -31,24 +31,24 @@ const client2 = new MongoClient(uri2, { useNewUrlParser: true });
 client.connect(err => {
     var bombs = client.db("sos1819").collection("bombs");
     bombsAPI.register(app,bombs);
-    console.log("Connected 1");
+    console.log("Connected DB Jose");
 });
 
 client2.connect(err => {
     var hurricanes = client2.db("sos1819").collection("hurricanes");
-    console.log("Connected")
+    hurricanesAPI.register(app, hurricanes);
+    console.log("Connected DB Juan");
 });
 
 
-mongoose.connect(mongoAddress, {useNewUrlParser: true});
+mongoose.connect(mongoAddress, {useNewUrlParser: true}).then(function () {
+    app.use("/api/v1/major-disasters", require('./api/major-disasters'));
+    app.use("/api/v1/secure/major-disasters", require('./api/authMiddleware'), require('./api/major-disasters'));
+    console.log("Connected DB Bernabé");
+});
 
 
-//require("./api/hurricanes")(app);
 
-
-app.use("/api/v1/major-disasters", require('./api/major-disasters'));
-
-app.use("/api/v1/secure/major-disasters", require('./api/authMiddleware'), require('./api/major-disasters'));
 
 
 
