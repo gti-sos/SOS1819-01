@@ -148,7 +148,6 @@ app.delete("/api/v1/hurricanes/:name", (req, res) => {
     hurricanes.remove({name : nameAux},function(err,r){
         res.sendStatus(200);
     });
-    res.sendStatus(200);
 });
 
 // GET /hurricanes/Katrina
