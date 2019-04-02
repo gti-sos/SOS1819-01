@@ -6,10 +6,10 @@ var morgan = require('morgan');
 var mongoose = require('mongoose');
 var bodyParser = require("body-parser");
 
-var hurricanesAPI = require("./api/hurricanes")
+//var hurricanesAPI = require("./api/hurricanes")
 app.use(bodyParser.json());
 
-hurricanesAPI(app)
+//hurricanesAPI(app)
 //direccion local
 //const mongoAddress = "mongodb://127.0.0.1:27017/sos1819";
 
