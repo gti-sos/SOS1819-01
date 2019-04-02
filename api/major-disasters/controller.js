@@ -26,7 +26,7 @@ exports.list = function (req, res) {
 
 	for (let key in req.query) {
 		if (["from", "to"].indexOf(key) > -1) {
-			var nCondition = (key === "from") ? "$gt" : "$lt";
+			var nCondition = (key === "from") ? "$gte" : "$lte";
 			if (!search.fields.year) 
 				search.fields.year = {};
 			search.fields.year[nCondition] = parseInt(req.query[key]);
