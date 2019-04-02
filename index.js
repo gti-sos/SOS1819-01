@@ -16,7 +16,9 @@ app.use(bodyParser.json());
 //direccion remota 
 const mongoAddress = "mongodb+srv://admin:sos1819@cluster-sos1819-accsm.mongodb.net/sos1819?retryWrites=true";
 
+
 mongoose.connect(mongoAddress, {useNewUrlParser: true});
+require("./api/testing-of-nuclear-bombs")(app);
 app.use(express.urlencoded({extended: true}));
 app.use("/", express.static(path.join(__dirname, "public")));
 app.use(morgan('tiny'));
@@ -34,7 +36,7 @@ app.use("/api/v1/secure/hurricanes",require('./api/authMiddleware'));
 
 
 //-------JoseAPI---------------------------------------------
-const MongoClient = require("mongodb").MongoClient;
+/*const MongoClient = require("mongodb").MongoClient;
 const uri = "mongodb+srv://pema:pema@sos-wj0yb.mongodb.net/sos1819?retryWrites=true";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
@@ -412,7 +414,7 @@ app.post("/api/v1/secure/testing-of-nuclear-bombs/:id", (req, res) => {
 app.put("/api/v1/secure/testing-of-nuclear-bombs/", (req, res) => {
 
     res.sendStatus(405);
-})
+})*/
 
 
 app.listen(port, () => {

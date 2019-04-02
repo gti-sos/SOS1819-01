@@ -6,13 +6,8 @@ const populateData = require("./populateData.json");
 exports.init = function (req, res) {
 	//const count = await MajorDisaster.countDocuments({});
 	MajorDisaster.countDocuments({}, function (er, count) {
-		let err = undefined;
 		if (count > 0) {
-			err = new Error();
-			err.message = "collection majorDisasters is already populated!";
-			err.name = "populationError";
-			err.httpCode = 405;
-			res.sendStatus(err.httpCode);
+			res.sendStatus(405);
 		} else {
 			const promises = populateData.map(function (e) {
 				new MajorDisaster(e).save();
@@ -44,7 +39,7 @@ exports.list = function (req, res) {
 	}
 
 	//console.log(search);
-	MajorDisaster.find(search.fields).limit(search.limit).skip(search.page * search.limit).exec(function (err, data) {
+	MajorDisaster.find(search.fields).select("-__v -_id").limit(search.limit).skip(search.page * search.limit).exec(function (err, data) {
 		if (err)
 			return res.send(err);
 		res.json(data);	
@@ -53,7 +48,7 @@ exports.list = function (req, res) {
 };
 
 exports.get = function (req, res) {
-	MajorDisaster.findById(req.params.id, function (err, data) {
+	MajorDisaster.findOne({event: req.params.event}).select("-__v -_id").exec(function (err, data) {
 		if (err || !data)
 			return res.sendStatus(404);
 			//return res.status(404).json({code: 404, msg: "Not Found"});
@@ -76,40 +71,34 @@ exports.create = function (req, res) {
 };
 
 exports.update = function (req, res) {
-	if (req.body._id && req.params.id !== req.body._id)
+	if (req.body.event && req.params.event !== req.body.event)
 		return res.status(400).json({code: 400, msg: "Bad Request"});
-	MajorDisaster.findOne({_id: req.params.id}).then(function (doc) {
+	MajorDisaster.findOne({event: req.params.event}).then(function (doc) {
 		//console.log(doc, doc instanceof MajorDisaster);
 		//res.json(doc);
-		if (!doc) return res.sendStatus(404);
 		//console.log(Object.keys(doc._doc), Object.keys(req.body));
-		var oKeys = Object.keys(doc._doc).filter((x) => { return x !== "__v"; });
+		var oKeys = Object.keys(doc._doc).filter((x) => { return (["__v", "_id"].indexOf(x)  !== "__v" || x !== "_id"); });
+		console.log(oKeys);
+
 		//console.log(oKeys, Object.keys(req.body))
 		if (!oKeys.every(val => Object.keys(req.body).includes(val))) return res.sendStatus(400);
 		//if ((Object.keys(doc).length) !== Object.keys(req.body).length) return res.sendStatus(400);
-		delete req.body._id;
+		//delete req.body._id;
 		for (var key in req.body) {
 			doc[key] = req.body[key];
 		}
 		doc.validate(function (err) {
 			if (err) return res.sendStatus(400);
-			doc.save()
+			doc.save();
 			res.sendStatus(200);
 		});
 	}).catch(function (err) {
 		res.status(400).send(err);
 	});
-	/*
-	MajorDisaster.updateOne({_id: req.params.id}, req.body, function (err) {
-		let code = (err) ? 404 : 200;
-		let msg = (err) ? "Not Found" : "OK";
-		res.status(code).json({code: code, msg: msg});
-	});
-	*/
 };
 
 exports.destroy = function (req, res) {
-	MajorDisaster.deleteOne({_id: req.params.id}, function (err) {
+	MajorDisaster.deleteOne({event: req.params.event}, function (err) {
 		let code = (err) ? 404 : 200;
 		let msg = (err) ? "Not Found" : "No Content";
 		res.sendStatus(code);
