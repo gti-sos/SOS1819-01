@@ -1,10 +1,10 @@
 module.exports=function(app){
     
+app.use("/api/v1/secure/testing-of-nuclear-bombs", require('../authMiddleware'));
+    
 const MongoClient = require("mongodb").MongoClient;
 const uri = "mongodb+srv://pema:pema@sos-wj0yb.mongodb.net/sos1819?retryWrites=true";
 const client = new MongoClient(uri, { useNewUrlParser: true });
-
-var ObjectID = require('mongodb').ObjectID;
 
 var bombs;
 
@@ -20,38 +20,8 @@ app.get("/api/v1/testing-of-nuclear-bombs/docs", (req, res)=>{
 
 app.get("/api/v1/testing-of-nuclear-bombs/loadInitialData", (req, res) => {
 
-    var bombsAux = [{
-        country: "canada",
-        year: 1959,
-        maxYield: 10000,
-        shot: 5,
-        hob: 0,
-    }, {
-        country: "australia",
-        year: 1963,
-        maxYield: 100000,
-        shot: 1,
-        hob: 136,
-    }, {
-        country: "islandia",
-        year: 1958,
-        maxYield: 40000,
-        shot: 5,
-        hob: 0,
-    }, {
-        country: "eeuu",
-        year: 1951,
-        maxYield: 320000,
-        shot: 68,
-        hob: 35,
-    }, {
-        country: "eeuu",
-        year: 1961,
-        maxYield: 40000,
-        shot: 50,
-        hob: 175,
-    }]
-    
+    var bombsAux = require("./populateData.json")
+
     bombs.countDocuments({},function(err,c){
         if(c>0){
             res.sendStatus(409);
@@ -84,7 +54,7 @@ app.get("/api/v1/testing-of-nuclear-bombs", (req, res) => {
             search.fields[key] = req.query[key];
     }
     
-    bombs.find(search.fields).limit(search.limit).skip(search.page * search.limit).toArray((err,bombsArray)=>{
+    bombs.find(search.fields, {fields:{_id:0}}).limit(search.limit).skip(search.page * search.limit).toArray((err,bombsArray)=>{
         if(err)
             console.log("Error " + err)
             
@@ -99,7 +69,7 @@ app.post("/api/v1/testing-of-nuclear-bombs",(req, res)=>{
     
     var newBomb = req.body;
     
-    var keys = ["country","year","maxYield","shot","hob"];
+    var keys = ["name","country","year","maxYield","shot","hob"];
     
     for (var i = keys.length-1; i >= 0; i--) {
         if (!newBomb.hasOwnProperty(keys[i])) {
@@ -131,12 +101,11 @@ app.delete("/api/v1/testing-of-nuclear-bombs", (req, res) => {
 
 //GET /testing-nuclear-bombs/EEUU
 
-app.get("/api/v1/testing-of-nuclear-bombs/:id", (req, res) => {
+app.get("/api/v1/testing-of-nuclear-bombs/:name", (req, res) => {
 
-    var idAux = req.params.id;
-    console.log(idAux);
+    var nameAux = req.params.name;
 
-    bombs.findOne({ _id : new ObjectID(idAux) }, function (err, result) {
+    bombs.findOne({ name : nameAux },{fields:{_id:0}}, function (err, result) {
         if (!result) {
             res.sendStatus(404);
         }
@@ -151,12 +120,12 @@ app.get("/api/v1/testing-of-nuclear-bombs/:id", (req, res) => {
 
 
 //PUT /testing-nuclear-bombs/EEUU
-app.put("/api/v1/testing-of-nuclear-bombs/:id", (req, res) => {
+app.put("/api/v1/testing-of-nuclear-bombs/:name", (req, res) => {
     
-    if (req.body._id && req.params.id !== req.body._id)
+    if (req.body.name && req.params.name !== req.body.name)
         return res.sendStatus(400);    
         
-    var keys = ["country","year","maxYield","shot","hob"];
+    var keys = ["name","country","year","maxYield","shot","hob"];
     
     for (var i = keys.length - 1; i >= 0; i--) {
         if (!req.body.hasOwnProperty(keys[i])) {
@@ -164,10 +133,8 @@ app.put("/api/v1/testing-of-nuclear-bombs/:id", (req, res) => {
         }
     }
     
-
-    delete req.body._id;
     
-    bombs.updateOne({_id: new ObjectID(req.params.id)},{$set: req.body}, function (err,c) {
+    bombs.updateOne({name: req.body.name},{$set: req.body}, function (err,c) {
         if(c && c.matchedCount==0){
           return res.sendStatus(404);  
         }
@@ -180,17 +147,17 @@ app.put("/api/v1/testing-of-nuclear-bombs/:id", (req, res) => {
 });
 
 //DELETE /testing-nuclear-bombs/EEUU
-app.delete("/api/v1/testing-of-nuclear-bombs/:id", (req, res) => {
+app.delete("/api/v1/testing-of-nuclear-bombs/:name", (req, res) => {
 
-    var idAux = req.params.id;
+    var nameAux = req.params.name;
 
-    bombs.remove({_id:new ObjectID(idAux)},function(err,r){
+    bombs.remove({name : nameAux},function(err,r){
         res.sendStatus(200);
     });
 });
 
 //POST /testing-nuclear-bombs/EEUU
-app.post("/api/v1/testing-of-nuclear-bombs/:id", (req, res) => {
+app.post("/api/v1/testing-of-nuclear-bombs/:name", (req, res) => {
     res.sendStatus(405);
 });
 
@@ -199,40 +166,18 @@ app.put("/api/v1/testing-of-nuclear-bombs/", (req, res) => {
     res.sendStatus(405);
 })
 
-app.get("/api/v1/secure/testing-of-nuclear-bombs/loadInitialData", (req, res) => {
+/////////////////////////////////////////////////////////////////////////SECURE///////////////////////////////////////////////////////////////
 
-    var bombsAux = [{
-        country: "canada",
-        year: 1959,
-        maxYield: 10000,
-        shot: 5,
-        hob: 0,
-    }, {
-        country: "australia",
-        year: 1963,
-        maxYield: 100000,
-        shot: 1,
-        hob: 136,
-    }, {
-        country: "islandia",
-        year: 1958,
-        maxYield: 40000,
-        shot: 5,
-        hob: 0,
-    }, {
-        country: "eeuu",
-        year: 1951,
-        maxYield: 320000,
-        shot: 68,
-        hob: 35,
-    }, {
-        country: "eeuu",
-        year: 1961,
-        maxYield: 40000,
-        shot: 50,
-        hob: 175,
-    }]
+var apiKey = "sos1819-01-1234567890";
+
+app.get("/api/v1/secure/testing-of-nuclear-bombs/loadInitialData", (req, res) => {
     
+    if (!req.headers["sos1819-token"] || req.headers["sos1819-token"] !== apiKey)
+	    return res.status(401).json({code: 401, msg: "Unauthorized"});
+	
+
+    var bombsAux = require("./populateData.json")
+
     bombs.countDocuments({},function(err,c){
         if(c>0){
             res.sendStatus(409);
@@ -243,11 +188,13 @@ app.get("/api/v1/secure/testing-of-nuclear-bombs/loadInitialData", (req, res) =>
         }
     });
     
-
 })
 
 // GET /testing-nuclear-bombs
 app.get("/api/v1/secure/testing-of-nuclear-bombs", (req, res) => {
+    
+    if (!req.headers["sos1819-token"] || req.headers["sos1819-token"] !== apiKey)
+	    return res.status(401).json({code: 401, msg: "Unauthorized"});
     
     let search = {fields: {}, page: 0, limit: 100};
 
@@ -265,7 +212,7 @@ app.get("/api/v1/secure/testing-of-nuclear-bombs", (req, res) => {
             search.fields[key] = req.query[key];
     }
     
-    bombs.find(search.fields).limit(search.limit).skip(search.page * search.limit).toArray((err,bombsArray)=>{
+    bombs.find(search.fields, {fields:{_id:0}}).limit(search.limit).skip(search.page * search.limit).toArray((err,bombsArray)=>{
         if(err)
             console.log("Error " + err)
             
@@ -278,11 +225,14 @@ app.get("/api/v1/secure/testing-of-nuclear-bombs", (req, res) => {
 //POST /testing-nuclear-bombs
 app.post("/api/v1/secure/testing-of-nuclear-bombs",(req, res)=>{
     
+    if (!req.headers["sos1819-token"] || req.headers["sos1819-token"] !== apiKey)
+	    return res.status(401).json({code: 401, msg: "Unauthorized"});
+    
     var newBomb = req.body;
     
-    var keys = ["country","year","maxYield","shot","hob"];
+    var keys = ["name","country","year","maxYield","shot","hob"];
     
-    for (var i = keys.length - 1; i >= 0; i--) {
+    for (var i = keys.length-1; i >= 0; i--) {
         if (!newBomb.hasOwnProperty(keys[i])) {
             return res.sendStatus(400);
         }
@@ -304,6 +254,9 @@ app.post("/api/v1/secure/testing-of-nuclear-bombs",(req, res)=>{
 //DELETE /testing-nuclear-bombs
 app.delete("/api/v1/secure/testing-of-nuclear-bombs", (req, res) => {
 
+    if (!req.headers["sos1819-token"] || req.headers["sos1819-token"] !== apiKey)
+	    return res.status(401).json({code: 401, msg: "Unauthorized"});
+
     bombs.remove({},function(err,r){
         res.sendStatus(200);
     });
@@ -312,17 +265,19 @@ app.delete("/api/v1/secure/testing-of-nuclear-bombs", (req, res) => {
 
 //GET /testing-nuclear-bombs/EEUU
 
-app.get("/api/v1/secure/testing-of-nuclear-bombs/:id", (req, res) => {
+app.get("/api/v1/secure/testing-of-nuclear-bombs/:name", (req, res) => {
+    
+    if (!req.headers["sos1819-token"] || req.headers["sos1819-token"] !== apiKey)
+	    return res.status(401).json({code: 401, msg: "Unauthorized"});
 
-    var idAux = req.params.id;
-    console.log(idAux);
+    var nameAux = req.params.name;
 
-    bombs.findOne({ _id : new ObjectID(idAux) }, function (err, result) {
+    bombs.findOne({ name : nameAux },{fields:{_id:0}}, function (err, result) {
         if (!result) {
             res.sendStatus(404);
         }
         else {
-            res.send(result);
+            res.json(result);
         }
     });
 
@@ -332,12 +287,15 @@ app.get("/api/v1/secure/testing-of-nuclear-bombs/:id", (req, res) => {
 
 
 //PUT /testing-nuclear-bombs/EEUU
-app.put("/api/v1/secure/testing-of-nuclear-bombs/:id", (req, res) => {
+app.put("/api/v1/secure/testing-of-nuclear-bombs/:name", (req, res) => {
+
+    if (!req.headers["sos1819-token"] || req.headers["sos1819-token"] !== apiKey)
+	    return res.status(401).json({code: 401, msg: "Unauthorized"});
     
-    if (req.body._id && req.params.id !== req.body._id)
+    if (req.body.name && req.params.name !== req.body.name)
         return res.sendStatus(400);    
         
-    var keys = ["country","year","maxYield","shot","hob"];
+    var keys = ["name","country","year","maxYield","shot","hob"];
     
     for (var i = keys.length - 1; i >= 0; i--) {
         if (!req.body.hasOwnProperty(keys[i])) {
@@ -345,10 +303,8 @@ app.put("/api/v1/secure/testing-of-nuclear-bombs/:id", (req, res) => {
         }
     }
     
-
-    delete req.body._id;
     
-    bombs.updateOne({_id: new ObjectID(req.params.id)},{$set: req.body}, function (err,c) {
+    bombs.updateOne({name: req.body.name},{$set: req.body}, function (err,c) {
         if(c && c.matchedCount==0){
           return res.sendStatus(404);  
         }
@@ -361,23 +317,33 @@ app.put("/api/v1/secure/testing-of-nuclear-bombs/:id", (req, res) => {
 });
 
 //DELETE /testing-nuclear-bombs/EEUU
-app.delete("/api/v1/secure/testing-of-nuclear-bombs/:id", (req, res) => {
+app.delete("/api/v1/secure/testing-of-nuclear-bombs/:name", (req, res) => {
 
-    var idAux = req.params.id;
+    if (!req.headers["sos1819-token"] || req.headers["sos1819-token"] !== apiKey)
+	    return res.status(401).json({code: 401, msg: "Unauthorized"});
 
-    bombs.remove({_id:new ObjectID(idAux)},function(err,r){
+    var nameAux = req.params.name;
+
+    bombs.remove({name : nameAux},function(err,r){
         res.sendStatus(200);
     });
 });
 
 //POST /testing-nuclear-bombs/EEUU
-app.post("/api/v1/secure/testing-of-nuclear-bombs/:id", (req, res) => {
+app.post("/api/v1/secure/testing-of-nuclear-bombs/:name", (req, res) => {
+    if (!req.headers["sos1819-token"] || req.headers["sos1819-token"] !== apiKey)
+	    return res.status(401).json({code: 401, msg: "Unauthorized"});
+	    
     res.sendStatus(405);
 });
 
 app.put("/api/v1/secure/testing-of-nuclear-bombs/", (req, res) => {
+    
+    if (!req.headers["sos1819-token"] || req.headers["sos1819-token"] !== apiKey)
+	    return res.status(401).json({code: 401, msg: "Unauthorized"});
 
     res.sendStatus(405);
 })
+
 
 }
