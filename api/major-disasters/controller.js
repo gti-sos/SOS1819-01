@@ -71,7 +71,7 @@ exports.create = function (req, res) {
 
 exports.update = function (req, res) {
 	if (req.body.event && req.params.event !== req.body.event)
-		return res.status(409).json({code: 409, msg: "Bad Request"});
+		return res.sendStatus(409);
 	MajorDisaster.findOne({event: req.params.event}).then(function (doc) {
 		//console.log(doc, doc instanceof MajorDisaster);
 		//res.json(doc);
