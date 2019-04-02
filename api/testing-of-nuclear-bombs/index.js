@@ -42,7 +42,7 @@ app.get("/api/v1/testing-of-nuclear-bombs", (req, res) => {
 
     for (let key in req.query) {
         if (["from", "to"].indexOf(key) > -1) {
-            var nCondition = (key === "from") ? "$gt" : "$lt";
+            var nCondition = (key === "from") ? "$gte" : "$lt";
             if (!search.fields.year) 
                 search.fields.year = {};
             search.fields.year[nCondition] = parseInt(req.query[key]);
