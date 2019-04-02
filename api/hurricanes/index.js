@@ -79,7 +79,7 @@ app.post("/api/v1/hurricanes",(req, res)=>{
     var newHurricane = req.body;
     
     var keys = ["name","year","country","speed","damagesuntil2008","mbar"];
-    
+    console.log(req.body);
     for (var i = keys.length-1; i >= 0; i--) {
         if (!newHurricane.hasOwnProperty(keys[i])) {
             return res.sendStatus(400);
