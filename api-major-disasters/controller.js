@@ -10,7 +10,7 @@ exports.init = function (req, res) {
 			res.sendStatus(405);
 		} else {
 			const promises = populateData.map(function (e) {
-				new MajorDisaster(e).save();
+				return new MajorDisaster(e).save();
 			});
 			Promise.all(promises).then(function () {
 				res.sendStatus(200);
