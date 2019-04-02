@@ -6,10 +6,10 @@ var morgan = require('morgan');
 var mongoose = require('mongoose');
 var bodyParser = require("body-parser");
 
-var hurricanesAPI = require("./api/hurricanes")
+//var hurricanesAPI = require("./api/hurricanes")
 app.use(bodyParser.json());
 
-hurricanesAPI(app)
+//hurricanesAPI(app)
 //direccion local
 //const mongoAddress = "mongodb://127.0.0.1:27017/sos1819";
 
@@ -19,6 +19,7 @@ const mongoAddress = "mongodb+srv://admin:sos1819@cluster-sos1819-accsm.mongodb.
 
 mongoose.connect(mongoAddress, {useNewUrlParser: true});
 require("./api/testing-of-nuclear-bombs")(app);
+require("./api/hurricanes")(app);
 app.use(express.urlencoded({extended: true}));
 app.use("/", express.static(path.join(__dirname, "public")));
 app.use(morgan('tiny'));

@@ -1,10 +1,3 @@
-var express = require('express');
-var router = express.Router();
-
-router.get('/', function (req, res) {
-	res.json({"aa": "bb"})
-})
-
 //-------JuanAPI----------------------------
 module.exports = function(app){
 var hurricanes = [];
@@ -507,4 +500,3 @@ app.put("/api/v1/secure/hurricanes/:id", (req, res) => {
 
 });
 }
-module.exports = router;
