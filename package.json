@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test-api1": "newman run https://www.getpostman.com/collections/a4e554c52652db1ae87e" ,   
-    "test-api2": "newman run https://www.getpostman.com/collections/e932bf9cc89cbcf15301"
+    "test": "newman run https://www.getpostman.com/collections/a4e554c52652db1ae87e && newman run https://www.getpostman.com/collections/e932bf9cc89cbcf15301",
+    "test-api1": "newman run https://www.getpostman.com/collections/a4e554c52652db1ae87e",   
+    "test-api2": "newman run https://www.getpostman.com/collections/e932bf9cc89cbcf15301",
+    "test-api3": ""
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,7 @@
     "mongodb": "^3.2.2",
     "mongoose": "^5.4.19",
     "mongoose": "^5.4.20",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "newman": "latest"
   }
 }
