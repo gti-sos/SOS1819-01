@@ -20,38 +20,8 @@ app.get("/api/v1/testing-of-nuclear-bombs/docs", (req, res)=>{
 
 app.get("/api/v1/testing-of-nuclear-bombs/loadInitialData", (req, res) => {
 
-    var bombsAux = [{
-        country: "canada",
-        year: 1959,
-        maxYield: 10000,
-        shot: 5,
-        hob: 0,
-    }, {
-        country: "australia",
-        year: 1963,
-        maxYield: 100000,
-        shot: 1,
-        hob: 136,
-    }, {
-        country: "islandia",
-        year: 1958,
-        maxYield: 40000,
-        shot: 5,
-        hob: 0,
-    }, {
-        country: "eeuu",
-        year: 1951,
-        maxYield: 320000,
-        shot: 68,
-        hob: 35,
-    }, {
-        country: "eeuu",
-        year: 1961,
-        maxYield: 40000,
-        shot: 50,
-        hob: 175,
-    }]
-    
+    var bombsAux = require("./populateData.json")
+
     bombs.countDocuments({},function(err,c){
         if(c>0){
             res.sendStatus(409);
@@ -131,12 +101,12 @@ app.delete("/api/v1/testing-of-nuclear-bombs", (req, res) => {
 
 //GET /testing-nuclear-bombs/EEUU
 
-app.get("/api/v1/testing-of-nuclear-bombs/:id", (req, res) => {
+app.get("/api/v1/testing-of-nuclear-bombs/:name", (req, res) => {
 
-    var idAux = req.params.id;
-    console.log(idAux);
+    var nameAux = req.params.name;
+    console.log(nameAux);
 
-    bombs.findOne({ _id : new ObjectID(idAux) }, function (err, result) {
+    bombs.findOne({ name : nameAux }, function (err, result) {
         if (!result) {
             res.sendStatus(404);
         }
@@ -151,12 +121,12 @@ app.get("/api/v1/testing-of-nuclear-bombs/:id", (req, res) => {
 
 
 //PUT /testing-nuclear-bombs/EEUU
-app.put("/api/v1/testing-of-nuclear-bombs/:id", (req, res) => {
+app.put("/api/v1/testing-of-nuclear-bombs/:name", (req, res) => {
     
-    if (req.body._id && req.params.id !== req.body._id)
+    if (req.body.name && req.params.name !== req.body.name)
         return res.sendStatus(400);    
         
-    var keys = ["country","year","maxYield","shot","hob"];
+    var keys = ["name","country","year","maxYield","shot","hob"];
     
     for (var i = keys.length - 1; i >= 0; i--) {
         if (!req.body.hasOwnProperty(keys[i])) {
@@ -164,10 +134,8 @@ app.put("/api/v1/testing-of-nuclear-bombs/:id", (req, res) => {
         }
     }
     
-
-    delete req.body._id;
     
-    bombs.updateOne({_id: new ObjectID(req.params.id)},{$set: req.body}, function (err,c) {
+    bombs.updateOne({name: req.body.name},{$set: req.body}, function (err,c) {
         if(c && c.matchedCount==0){
           return res.sendStatus(404);  
         }
@@ -180,17 +148,17 @@ app.put("/api/v1/testing-of-nuclear-bombs/:id", (req, res) => {
 });
 
 //DELETE /testing-nuclear-bombs/EEUU
-app.delete("/api/v1/testing-of-nuclear-bombs/:id", (req, res) => {
+app.delete("/api/v1/testing-of-nuclear-bombs/:name", (req, res) => {
 
-    var idAux = req.params.id;
+    var nameAux = req.params.name;
 
-    bombs.remove({_id:new ObjectID(idAux)},function(err,r){
+    bombs.remove({name : nameAux},function(err,r){
         res.sendStatus(200);
     });
 });
 
 //POST /testing-nuclear-bombs/EEUU
-app.post("/api/v1/testing-of-nuclear-bombs/:id", (req, res) => {
+app.post("/api/v1/testing-of-nuclear-bombs/:name", (req, res) => {
     res.sendStatus(405);
 });
 
@@ -201,37 +169,7 @@ app.put("/api/v1/testing-of-nuclear-bombs/", (req, res) => {
 
 app.get("/api/v1/secure/testing-of-nuclear-bombs/loadInitialData", (req, res) => {
 
-    var bombsAux = [{
-        country: "canada",
-        year: 1959,
-        maxYield: 10000,
-        shot: 5,
-        hob: 0,
-    }, {
-        country: "australia",
-        year: 1963,
-        maxYield: 100000,
-        shot: 1,
-        hob: 136,
-    }, {
-        country: "islandia",
-        year: 1958,
-        maxYield: 40000,
-        shot: 5,
-        hob: 0,
-    }, {
-        country: "eeuu",
-        year: 1951,
-        maxYield: 320000,
-        shot: 68,
-        hob: 35,
-    }, {
-        country: "eeuu",
-        year: 1961,
-        maxYield: 40000,
-        shot: 50,
-        hob: 175,
-    }]
+    var bombsAux = require("./populateData.json")
     
     bombs.countDocuments({},function(err,c){
         if(c>0){
@@ -280,7 +218,7 @@ app.post("/api/v1/secure/testing-of-nuclear-bombs",(req, res)=>{
     
     var newBomb = req.body;
     
-    var keys = ["country","year","maxYield","shot","hob"];
+    var keys = ["name","country","year","maxYield","shot","hob"];
     
     for (var i = keys.length - 1; i >= 0; i--) {
         if (!newBomb.hasOwnProperty(keys[i])) {
