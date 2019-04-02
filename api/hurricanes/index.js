@@ -116,15 +116,6 @@ app.put("/api/v1/hurricanes", (req, res) => {
     res.sendStatus(405);
 });
 
-app.delete("/api/v1/hurricanes/:id", (req, res) => {
-
-    var idAux = req.params.id;
-
-    hurricanes.remove({_id:new ObjectID(idAux)},function(err,r){
-        res.sendStatus(200);
-    });
-});
-
 app.delete("/api/v1/hurricanes", (req, res) => {
 
     hurricanes.remove({},function(err,r){
