@@ -18,14 +18,15 @@ const mongoAddress = "mongodb+srv://admin:sos1819@cluster-sos1819-accsm.mongodb.
 
 
 mongoose.connect(mongoAddress, {useNewUrlParser: true});
-require("./api/testing-of-nuclear-bombs")(app);
+var kk = require("./api/testing-of-nuclear-bombs")(app);
 require("./api/hurricanes")(app);
+
 app.use(express.urlencoded({extended: true}));
 app.use("/", express.static(path.join(__dirname, "public")));
 app.use(morgan('tiny'));
 
 app.use("/api/v1/major-disasters", require('./api/major-disasters'));
-app.use("/api/v1/secure/major-disasters", require('./api/authMiddleware'), require('./api/major-disasters'));
+app.use("/api/v1/secure/major-disasters", require('./api/authMiddleware'));
 app.use("/api/v1/secure/testing-of-nuclear-bombs", require('./api/authMiddleware'));
 
 //app.use("/api/v1/hurricanes", require('./api/hurricanes'));
