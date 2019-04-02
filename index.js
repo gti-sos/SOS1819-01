@@ -19,6 +19,7 @@ const mongoAddress = "mongodb+srv://admin:sos1819@cluster-sos1819-accsm.mongodb.
 
 mongoose.connect(mongoAddress, {useNewUrlParser: true});
 require("./api/testing-of-nuclear-bombs")(app);
+require("./api/hurricanes")(app);
 app.use(express.urlencoded({extended: true}));
 app.use("/", express.static(path.join(__dirname, "public")));
 app.use(morgan('tiny'));
