@@ -61,7 +61,7 @@ exports.create = function (req, res) {
 	//const count = await MajorDisaster.countDocuments({event: req.body.event});
 	MajorDisaster.countDocuments({event: req.body.event}, function (er, count) {
 		if (count > 0) 
-			return res.sendStatus(409).json({code: 409, msg: "Conflict"});
+			return res.sendStatus(409);
 		majorDisaster.save(function (err, data) {
 			res.sendStatus(err ? 400 : 201);
 			//res.status(code).json({code: code, msg: msg, data: data});
