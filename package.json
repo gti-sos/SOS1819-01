@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test-api1": "newman run https://www.getpostman.com/collections/a4e554c52652db1ae87e"    
+    "test-api1": "newman run https://www.getpostman.com/collections/a4e554c52652db1ae87e" ,   
+    "test-api2": "newman run https://www.getpostman.com/collections/e932bf9cc89cbcf15301"
   },
   "repository": {
     "type": "git",

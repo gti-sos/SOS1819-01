@@ -42,18 +42,10 @@ client2.connect(err => {
 
 
 mongoose.connect(mongoAddress, {useNewUrlParser: true}).then(function () {
-    app.use("/api/v1/major-disasters", require('./api/major-disasters'));
-    app.use("/api/v1/secure/major-disasters", require('./api/authMiddleware'), require('./api/major-disasters'));
+    app.use("/api/v1/major-disasters", require('./api-major-disasters'));
+    app.use("/api/v1/secure/major-disasters", require('./api-major-disasters/authMiddleware'), require('./api-major-disasters'));
     console.log("Connected DB Bernabé");
 });
-
-
-
-
-
-
-
-
 
 app.listen(port, () => {
     console.log("Servidor de NodeJS corriendo en", process.env.IP || "localhost", port);
