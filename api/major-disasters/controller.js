@@ -92,7 +92,8 @@ exports.update = function (req, res) {
 			res.sendStatus(200);
 		});
 	}).catch(function (err) {
-		res.status(400).send(err);
+		res.sendStatus(400);
+		//res.status(400).send(err);
 	});
 };
 
