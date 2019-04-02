@@ -77,7 +77,7 @@ exports.update = function (req, res) {
 		//res.json(doc);
 		//console.log(Object.keys(doc._doc), Object.keys(req.body));
 		var oKeys = Object.keys(doc._doc).filter((x) => { return ["__v", "_id"].indexOf(x) === -1; });
-		console.log(oKeys);
+		//console.log(oKeys);
 
 		//console.log(oKeys, Object.keys(req.body))
 		if (!oKeys.every(val => Object.keys(req.body).includes(val))) return res.sendStatus(400);
