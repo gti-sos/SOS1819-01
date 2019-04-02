@@ -6,7 +6,11 @@ var port = process.env.PORT || 8080;
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 var bodyParser = require("body-parser");
+
+
 var bombsAPI = require("./api-testing-of-nuclear-bombs");
+var hurricanesAPI = require("./api-hurricanes");
+
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}));
@@ -18,18 +22,28 @@ app.use(morgan('tiny'));
 /////////Conexion APIJOSE/////////
 const MongoClient = require("mongodb").MongoClient;
 const uri = "mongodb+srv://pema:pema@sos-wj0yb.mongodb.net/sos1819?retryWrites=true";
+const uri2 = "mongodb+srv://juajimbal:1234@cluster0-jate4.mongodb.net/test?retryWrites=true";
+
 const client = new MongoClient(uri, { useNewUrlParser: true });
+const client2 = new MongoClient(uri2, { useNewUrlParser: true });
+
 
 client.connect(err => {
     var bombs = client.db("sos1819").collection("bombs");
     bombsAPI.register(app,bombs);
+    console.log("Connected 1");
+});
+
+client2.connect(err => {
+    var hurricanes = client2.db("sos1819").collection("hurricanes");
     console.log("Connected")
 });
+
 
 mongoose.connect(mongoAddress, {useNewUrlParser: true});
 
 
-require("./api/hurricanes")(app);
+//require("./api/hurricanes")(app);
 
 
 app.use("/api/v1/major-disasters", require('./api/major-disasters'));

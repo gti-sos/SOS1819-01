@@ -25,7 +25,6 @@ app.get("/api/v1/testing-of-nuclear-bombs/loadInitialData", (req, res) => {
 
 // GET /testing-nuclear-bombs
 app.get("/api/v1/testing-of-nuclear-bombs", (req, res) => {
-    
     let search = {fields: {}, page: 0, limit: 100};
 
     for (let key in req.query) {

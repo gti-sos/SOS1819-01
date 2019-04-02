@@ -1,23 +1,15 @@
+
+var hurricanesAPI = {};
+module.exports = hurricanesAPI;
+
 //-------JuanAPI----------------------------
-module.exports = function(app){
-var hurricanes = [];
+hurricanesAPI.register = function(app, hurricanes){
 
-const MongoClient2 = require("mongodb").MongoClient;
-const url2 = "mongodb+srv://juajimbal:1234@cluster0-jate4.mongodb.net/test?retryWrites=true";
-const client2 = new MongoClient2(url2, { useNewUrlParser: true });
-
-var ObjectID = require('mongodb').ObjectID;
 
 app.get("/api/v1/hurricanes/docs", (req, res)=>{
    res.redirect("https://documenter.getpostman.com/view/6916951/S17ut6v5");
 });
 
-//var hurricanes;
-
-client2.connect(err => {
-    hurricanes = client2.db("sos1819").collection("hurricanes");
-    console.log("Connected")
-});
 
 app.get("/api/v1/hurricanes/loadInitialData", (req, res) => {
     var hurricanesAux = require("./populateData.json")
@@ -30,7 +22,7 @@ app.get("/api/v1/hurricanes/loadInitialData", (req, res) => {
                 res.sendStatus(200);
             });
         }
-    });
+    }); 
 });
 
 /*

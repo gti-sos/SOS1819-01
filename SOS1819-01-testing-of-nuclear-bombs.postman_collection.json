@@ -1,0 +1,886 @@
+{
+	"info": {
+		"_postman_id": "16ff15a6-2926-4847-9b44-6c93a5d1a19b",
+		"name": "SOS1819-01-testing-of-nuclear-bombs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get LoadInitialData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8f173fa1-eb7f-4bb6-ab4d-3d56266dd039",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/loadInitialData",
+					"protocol": "https",
+					"host": [
+						"sos1819-01",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"testing-of-nuclear-bombs",
+						"loadInitialData"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get /testing-of-nuclear-bombs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "57ec1161-46ce-4b96-81ef-2fd18e5342c4",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Response array is the same size as populate array\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(5);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs",
+					"protocol": "https",
+					"host": [
+						"sos1819-01",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"testing-of-nuclear-bombs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get con busqueda",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "57ec1161-46ce-4b96-81ef-2fd18e5342c4",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Response array is the same size as populate array\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(2);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs?from=1959&to=1963",
+					"protocol": "https",
+					"host": [
+						"sos1819-01",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"testing-of-nuclear-bombs"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "1959"
+						},
+						{
+							"key": "to",
+							"value": "1963"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get con paginacion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "57ec1161-46ce-4b96-81ef-2fd18e5342c4",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Response array is the same size as populate array\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(1);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs?page=0&limit=1",
+					"protocol": "https",
+					"host": [
+						"sos1819-01",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"testing-of-nuclear-bombs"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "limit",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post /testing-of-nuclear-bombs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "39508997-2904-418d-8066-50d6605c7b5c",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"dalas\",\n    \"country\": \"eeuu\",\n    \"year\": 1955,\n    \"maxYield\": 3200,\n    \"shot\": 100,\n    \"hob\": 90\n}"
+				},
+				"url": {
+					"raw": "https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs",
+					"protocol": "https",
+					"host": [
+						"sos1819-01",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"testing-of-nuclear-bombs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post con menos parametros 400",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "740f6e27-5677-46e6-aebb-39cb174b5ac7",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"dalas\",\n    \"country\": \"eeuu\",\n    \"year\": 1955\n}"
+				},
+				"url": {
+					"raw": "https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs",
+					"protocol": "https",
+					"host": [
+						"sos1819-01",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"testing-of-nuclear-bombs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post recurso ya existente 409",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "404e1736-c24b-4dc7-b056-174e088dbbd4",
+						"exec": [
+							"pm.test(\"Status code is 409\", function () {",
+							"    pm.response.to.have.status(409);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"dalas\",\n    \"country\": \"eeuu\",\n    \"year\": 1955,\n    \"maxYield\": 3200,\n    \"shot\": 100,\n    \"hob\": 90\n}"
+				},
+				"url": {
+					"raw": "https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs",
+					"protocol": "https",
+					"host": [
+						"sos1819-01",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"testing-of-nuclear-bombs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get recurso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "373114de-d3c1-46d2-b2e4-a6d916ad8787",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Response has the expected value\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"dalas\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "country",
+							"value": "Spain",
+							"type": "text"
+						},
+						{
+							"key": "year ",
+							"value": "1955",
+							"type": "text"
+						},
+						{
+							"key": "maxYields",
+							"value": "5000",
+							"type": "text"
+						},
+						{
+							"key": "shot",
+							"value": "9",
+							"type": "text"
+						},
+						{
+							"key": "hob",
+							"value": "189",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/dalas",
+					"protocol": "https",
+					"host": [
+						"sos1819-01",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"testing-of-nuclear-bombs",
+						"dalas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a recurso inexistente 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7c262380-59e9-4ba9-acde-8660e20197fe",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"_id\": \"5c9b7089fbeb7700044ad850\",\n        \"country\": \"canada\",\n        \"year\": 1959,\n        \"maxYield\": 5000,\n        \"shot\": 5,\n        \"hob\": 0\n}"
+				},
+				"url": {
+					"raw": "https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/dalas2",
+					"protocol": "https",
+					"host": [
+						"sos1819-01",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"testing-of-nuclear-bombs",
+						"dalas2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put recurso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "23d28b6f-b8b2-479a-b5df-c5283415ed02",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"dalas\",\n    \"country\": \"eeuu\",\n    \"year\": 1955,\n    \"maxYield\": 500,\n    \"shot\": 100,\n    \"hob\": 90\n}"
+				},
+				"url": {
+					"raw": "https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/dalas",
+					"protocol": "https",
+					"host": [
+						"sos1819-01",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"testing-of-nuclear-bombs",
+						"dalas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put menos recursos 400",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "190700e5-58e5-4147-b0cc-e8f04d1d53f0",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"dalas\",\n    \"country\": \"eeuu\",\n    \"year\": 1955,\n    \"maxYield\": 500\n}"
+				},
+				"url": {
+					"raw": "https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/dalas",
+					"protocol": "https",
+					"host": [
+						"sos1819-01",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"testing-of-nuclear-bombs",
+						"dalas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put mal name 400",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f698211e-d685-4ed8-be66-ab35b05477cc",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"dalas\",\n    \"country\": \"eeuu\",\n    \"year\": 1955,\n    \"maxYield\": 500,\n    \"shot\": 100,\n    \"hob\": 90\n}"
+				},
+				"url": {
+					"raw": "https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/dalas2",
+					"protocol": "https",
+					"host": [
+						"sos1819-01",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"testing-of-nuclear-bombs",
+						"dalas2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete recurso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6df5fa04-fc8a-449c-a09a-525890930881",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "country",
+							"value": "canada",
+							"type": "text"
+						},
+						{
+							"key": "year ",
+							"value": "1963",
+							"type": "text"
+						},
+						{
+							"key": "maxYields",
+							"value": "5000",
+							"type": "text"
+						},
+						{
+							"key": "shot",
+							"value": "9",
+							"type": "text"
+						},
+						{
+							"key": "hob",
+							"value": "189",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "122",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/dalas",
+					"protocol": "https",
+					"host": [
+						"sos1819-01",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"testing-of-nuclear-bombs",
+						"dalas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post no permitido 405",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "402b910f-c8b6-4449-95bd-dd1e1d51afcd",
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "country",
+							"value": "Spain",
+							"type": "text"
+						},
+						{
+							"key": "year ",
+							"value": "1955",
+							"type": "text"
+						},
+						{
+							"key": "maxYields",
+							"value": "5000",
+							"type": "text"
+						},
+						{
+							"key": "shot",
+							"value": "9",
+							"type": "text"
+						},
+						{
+							"key": "hob",
+							"value": "189",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/dalas",
+					"protocol": "https",
+					"host": [
+						"sos1819-01",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"testing-of-nuclear-bombs",
+						"dalas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put no permitido 405",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a154f50d-2598-42cd-b722-ab994d04f662",
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "country",
+							"value": "Spain",
+							"type": "text"
+						},
+						{
+							"key": "year ",
+							"value": "1955",
+							"type": "text"
+						},
+						{
+							"key": "maxYields",
+							"value": "5000",
+							"type": "text"
+						},
+						{
+							"key": "shot",
+							"value": "9",
+							"type": "text"
+						},
+						{
+							"key": "hob",
+							"value": "189",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs",
+					"protocol": "https",
+					"host": [
+						"sos1819-01",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"testing-of-nuclear-bombs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete total",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "269ccdda-ade8-4cc4-aa20-ba30945e94b5",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs",
+					"protocol": "https",
+					"host": [
+						"sos1819-01",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"testing-of-nuclear-bombs"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
