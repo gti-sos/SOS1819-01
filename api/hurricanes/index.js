@@ -142,8 +142,11 @@ app.delete("/api/v1/hurricanes", (req, res) => {
 */
 
 app.delete("/api/v1/hurricanes/:name", (req, res) => {
-    hurricanes = hurricanes.filter((c) => {
-        return c.name != req.params.name;
+    
+    var nameAux = req.params.name;
+    
+    hurricanes.remove({name : nameAux},function(err,r){
+        res.sendStatus(200);
     });
     res.sendStatus(200);
 });
