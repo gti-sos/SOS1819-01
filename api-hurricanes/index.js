@@ -44,16 +44,15 @@ app.get("/api/v1/hurricanes", (req, res) => {
             if (!search.fields.year) 
                 search.fields.year = {};
             search.fields.year[nCondition] = parseInt(req.query[key]);
-        } else if (["page", "limit"].indexOf(key) > -1)
+        } else if (["offset", "limit"].indexOf(key) > -1)
             search[key] = parseInt(req.query[key]);
        // else if (["country", "type"].indexOf(key) > -1)
          //   search.fields[key] = {"$in": req.query[key]};
-        else if(search.fields.speed){
-             search.fields.speed = {};
-            search.fields.speed[nCondition] = parseInt(req.query[key]);}
-        else
+      
+        else{
+   
             search.fields[key] = req.query[key];
-    }
+}    }
     
     hurricanes.find(search.fields, {fields: {_id: 0}}).limit(search.limit).skip(search.page * search.limit).toArray((err,hurricanesArray)=>{
         if(err)
