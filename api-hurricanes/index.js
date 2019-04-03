@@ -50,10 +50,7 @@ app.get("/api/v1/hurricanes", (req, res) => {
          //   search.fields[key] = {"$in": req.query[key]};
       
         else{
-              if(search.fields.speed){
-             search.fields.speed = {};
-            search.fields.speed[nCondition] = parseInt(req.query[key]);}
-        
+   
             search.fields[key] = req.query[key];
 }    }
     
