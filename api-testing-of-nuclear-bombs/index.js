@@ -26,7 +26,7 @@ app.get("/api/v1/testing-of-nuclear-bombs/loadInitialData", (req, res) => {
 // GET /testing-nuclear-bombs
 app.get("/api/v1/testing-of-nuclear-bombs", (req, res) => {
     
-    let search = {fields: {}, page: 0, limit: 100};
+    let search = {fields: {}, offset : 0, limit: 100};
 
     for (let key in req.query) {
         if (["from", "to"].indexOf(key) > -1) {
@@ -34,7 +34,7 @@ app.get("/api/v1/testing-of-nuclear-bombs", (req, res) => {
             if (!search.fields.year) 
                 search.fields.year = {};
             search.fields.year[nCondition] = parseInt(req.query[key]);
-        } else if (["page", "limit"].indexOf(key) > -1)
+        } else if (["offset", "limit"].indexOf(key) > -1)
             search[key] = parseInt(req.query[key]);
         else if (["country", "type"].indexOf(key) > -1)
             search.fields[key] = {"$in": req.query[key]};
