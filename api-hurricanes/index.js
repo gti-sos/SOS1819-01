@@ -48,7 +48,10 @@ app.get("/api/v1/hurricanes", (req, res) => {
             search[key] = parseInt(req.query[key]);
        // else if (["country", "type"].indexOf(key) > -1)
          //   search.fields[key] = {"$in": req.query[key]};
-        else 
+        else if(search.fields.speed){
+             search.fields.speed = {};
+            search.fields.speed[nCondition] = parseInt(req.query[key]);}
+        else
             search.fields[key] = req.query[key];
     }
     
