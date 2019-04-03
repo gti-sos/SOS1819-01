@@ -70,7 +70,8 @@ exports.create = function (req, res) {
 };
 
 exports.update = function (req, res) {
-	if (req.body.event && req.params.everyent !== req.body.event)
+	console.log(req.body)
+	if (req.body.event && req.params.event !== req.body.event)
 		return res.sendStatus(400);
 	MajorDisaster.findOne({event: req.params.event}).then(function (doc) {
 		//console.log(doc, doc instanceof MajorDisaster);
@@ -78,7 +79,6 @@ exports.update = function (req, res) {
 		//console.log(Object.keys(doc._doc), Object.keys(req.body));
 		var oKeys = Object.keys(doc._doc).filter((x) => { return ["__v", "_id"].indexOf(x) === -1; });
 		//console.log(oKeys);
-
 		//console.log(oKeys, Object.keys(req.body))
 		if (!oKeys.every(val => Object.keys(req.body).includes(val))) return res.sendStatus(400);
 		//if ((Object.keys(doc).length) !== Object.keys(req.body).length) return res.sendStatus(400);
