@@ -30,7 +30,7 @@ exports.list = function (req, res) {
 			if (!search.fields.year) 
 				search.fields.year = {};
 			search.fields.year[nCondition] = parseInt(req.query[key]);
-		} else if (["page", "limit"].indexOf(key) > -1)
+		} else if (["offset", "limit"].indexOf(key) > -1)
 			search[key] = parseInt(req.query[key]);
 		else if (["country", "type"].indexOf(key) > -1)
 			search.fields[key] = {"$in": req.query[key]};
@@ -70,7 +70,7 @@ exports.create = function (req, res) {
 };
 
 exports.update = function (req, res) {
-	if (req.body.event && req.params.event !== req.body.event)
+	if (req.body.event && req.params.everyent !== req.body.event)
 		return res.sendStatus(400);
 	MajorDisaster.findOne({event: req.params.event}).then(function (doc) {
 		//console.log(doc, doc instanceof MajorDisaster);
