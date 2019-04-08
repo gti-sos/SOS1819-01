@@ -1,0 +1,131 @@
+p
+div(class="row")
+	div(class="col-md-5")
+	h3(class="text-center") Mini-Postman
+p
+ol(class="list-group list-group-flush")
+	li(class="list-group-item row")
+		div(class="form-group col-md-12")
+			p
+			div(class="row")
+				div(class="col-md-10")
+					h5 GET ...{{apiUrl}}/loadInitialData
+				div(class="col-md-2")
+					button(class="btn btn-success" ng-click="populate()") Send
+			p
+				pre HTTP STATUS CODE: {{tests.eight.response.status}}
+
+	li(class="list-group-item row")
+		div(class="form-group col-md-12")
+			p
+			div(class="row")
+				div(class="col-md-10")
+					h5 GET a un conjunto de recursos ...{{apiUrl}}
+				div(Class="col-md-2")
+					button(class="btn btn-success" ng-click="list()") Send
+			p
+			pre HTTP STATUS CODE: {{tests.four.response.status}}
+			pre(style="white-space : normal;") RESPONSE: {{tests.four.response.data}}
+	
+	li(class="list-group-item row")
+		div(class="form-group col-md-12")
+			p
+			h5 GET a recurso ...{{apiUrl}}/
+			p
+			div(class="row")
+				div(class="col-md-10")
+					input(type="text" ng-model="tests.zero.event" class="form-control")
+				div(class="col-md-2")
+					button(class="btn btn-success" ng-click="get(tests.zero.event)") Send
+			p
+			pre HTTP STATUS CODE: {{tests.zero.response.status}}
+			pre(style="white-space : normal;") RESPONSE: {{tests.zero.response.data}}
+	
+
+	li(class="list-group-item row")
+		div(class="form-group col-md-12")
+			p
+			h5 POST a un conjunto de recursos ...{{apiUrl}}
+			p
+			div(class="row")
+				div(class="col-md-10")
+					input(ng-model="tests.one.data" class="form-control")
+				div(class="col-md-2")
+					button(class="btn btn-primary" ng-click="add()") Send
+			p
+			pre HTTP STATUS CODE: {{tests.one.response.status}}
+			pre RESPONSE: {{tests.one.response.data}}
+
+	li(class="list-group-item row")
+		div(class="form-group col-md-12")
+			p
+			h5 POST a un recurso ...{{apiUrl}}
+			p
+			div(class="row")
+				div(class="col-md-10")
+					input(ng-model="tests.six.data" class="form-control")
+				div(class="col-md-2")
+					button(class="btn btn-primary" ng-click="addBad(tests.six.event)") Send
+			p
+			pre HTTP STATUS CODE: {{tests.six.response.status}}
+			pre RESPONSE: {{tests.six.response.data}}
+
+	li(class="list-group-item row")
+		div(class="form-group col-md-12")
+			p
+			div(class="row")
+				div(class="col-md-5")
+					h5 PUT a un recurso ...{{apiUrl}}/
+				div(class="col-md-5")
+					input(type="text" ng-model="tests.two.event" class="form-control form-control-sm")
+				div(class="col-md-1")
+			p
+				 
+			div(class="row")
+				div(class="col-md-10")
+					input(ng-model="tests.two.data" class="form-control")
+				div(class="col-md-2")
+					button(class="btn btn-warning" ng-click="update(tests.two.event)") Send
+			p
+			pre HTTP STATUS CODE: {{tests.two.response.status}}
+			pre RESPONSE: {{tests.two.response.data}}
+	
+	li(class="list-group-item row")
+		div(class="form-group col-md-12")
+			p
+			h5 PUT a un conjunto de recursos ...{{apiUrl}}
+			p
+			div(class="row")
+				div(class="col-md-10")
+					input(ng-model="tests.seven.data" class="form-control")
+				div(class="col-md-2")
+					button(class="btn btn-warning" ng-click="updateBad()") Send
+			p
+			pre HTTP STATUS CODE: {{tests.seven.response.status}}
+			pre RESPONSE: {{tests.seven.response.data}}
+
+	li(class="list-group-item row")
+		div(class="form-group col-md-12")
+			p
+			h5 DELETE a recurso ...{{apiUrl}}/
+			p
+			div(class="row")
+				div(class="col-md-10")
+					input(type="text" ng-model="tests.three.event" class="form-control")
+				div(class="col-md-2")
+					button(class="btn btn-danger" ng-click="remove(tests.three.event)") Send
+			p
+			pre HTTP STATUS CODE: {{tests.three.response.status}}
+			pre RESPONSE: {{tests.three.response.data}}
+
+	li(class="list-group-item row")
+		div(class="form-group col-md-12")
+			p
+			div(class="row")
+				div(class="col-md-10")
+					h5 DELETE a un conjunto de recursos ...{{apiUrl}}
+				div(class="col-md-2")
+					button(class="btn btn-danger" ng-click="removeAll()") Send
+			p
+			pre HTTP STATUS CODE: {{tests.five.response.status}}
+			pre RESPONSE: {{tests.five.response.data}}

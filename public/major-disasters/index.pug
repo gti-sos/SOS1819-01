@@ -1,0 +1,40 @@
+html(ng-app="majorDisastersApp")
+	head
+		title Major disasters
+		link(rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css")
+		
+
+		<!--########################## ANGULAR CORE ###########################-->
+		#script(defer src="bower_components/angular/angular.js")
+		script(src="/bower_components/angular/angular.min.js")
+		script(src="/bower_components/angular-route/angular-route.min.js")
+		<!--###################################################################-->
+		
+		<!--########################## APP MODULES ############################-->
+		script(src="/major-disasters/app/app.js")
+		script(src="/major-disasters/app/mini-postman/minipostman.app.js")
+		<!--################################################################## -->
+		
+		<!--######################## APP COMPONENTS ###########################-->
+		
+		<!--################################################################## -->
+		
+		<!--########################## APP FILTERS ###########################-->
+	
+		<!--###################################################################-->
+		
+		<!--######################## APP CONTROLLERS ##########################-->
+		script(src="/major-disasters/app/mini-postman/minipostman.controller.js")
+		<!--###################################################################-->
+		
+		<!--######################### APP FACTORIES ###########################-->
+		script(src="/major-disasters/app/mini-postman/minipostman.factory.js")
+		<!--###################################################################-->
+		
+		<!--######################### APP DIRECTIVES ##########################-->
+
+		<!--###################################################################-->
+				
+	body
+		div(ng-view class="container")
+		

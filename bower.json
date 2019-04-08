@@ -1,0 +1,24 @@
+{
+  "name": "sos1819-01",
+  "description": "Find the relationship between investment and schooling with GDP growth in contrast to public spending and investment in R & D",
+  "main": "index.js",
+  "authors": [
+    "berruimar <47628541+berruimar@users.noreply.github.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/gti-sos/SOS1819-01",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.7.8",
+    "bootstrap": "^4.3.1",
+    "angular-route": "^1.7.8"
+  }
+}

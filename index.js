@@ -1,28 +1,30 @@
-const mongoAddress = "mongodb+srv://admin:sos1819@cluster-sos1819-accsm.mongodb.net/sos1819?retryWrites=true";
-var express = require("express");
-var path = require("path");
-var app = express();
-var port = process.env.PORT || 8080;
-var morgan = require('morgan');
-var mongoose = require('mongoose');
-var bodyParser = require("body-parser");
+const express = require("express");
+const path = require("path");
+const app = express();
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+const bodyParser = require("body-parser");
+const pug = require('pug');
+const bombsAPI = require("./api-testing-of-nuclear-bombs");
+const hurricanesAPI = require("./api-hurricanes");
+const MongoClient = require("mongodb").MongoClient;
 
 
-var bombsAPI = require("./api-testing-of-nuclear-bombs");
-var hurricanesAPI = require("./api-hurricanes");
+app.use(morgan('dev'));
+app.set('views', [path.join(__dirname, 'public/major-disasters')]);
+app.set('view engine', 'pug');
 
-
+app.use(express.static(path.join(__dirname, "public")));
+app.use("/major-disasters", require('./routes.js'));
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}));
-app.use("/", express.static(path.join(__dirname, "public")));
-app.use(morgan('tiny'));
 
-//direccion remota 
 
 /////////Conexion APIJOSE/////////
-const MongoClient = require("mongodb").MongoClient;
 const uri = "mongodb+srv://pema:pema@sos-wj0yb.mongodb.net/sos1819?retryWrites=true";
 const uri2 = "mongodb+srv://juajimbal:1234@cluster0-jate4.mongodb.net/test?retryWrites=true";
+const uri3 = "mongodb+srv://admin:sos1819@cluster-sos1819-accsm.mongodb.net/sos1819?retryWrites=true";
+
 
 const client = new MongoClient(uri, { useNewUrlParser: true });
 const client2 = new MongoClient(uri2, { useNewUrlParser: true });
@@ -41,15 +43,14 @@ client2.connect(err => {
 });
 
 
-mongoose.connect(mongoAddress, {useNewUrlParser: true}).then(function () {
+mongoose.connect(uri3, {useNewUrlParser: true}).then(function () {
     app.use("/api/v1/major-disasters", require('./api-major-disasters'));
     app.use("/api/v1/secure/major-disasters", require('./api-major-disasters/authMiddleware'), require('./api-major-disasters'));
     console.log("Connected DB Bernabé");
 });
 
-app.listen(port, () => {
-    console.log("Servidor de NodeJS corriendo en", process.env.IP || "localhost", port);
-    console.log("Base de datos corriendo en", mongoAddress);
+app.listen(process.env.PORT || 8080, () => {
+    console.log("Servidor de NodeJS corriendo en", process.env.IP || "localhost", process.env.PORT || 8080);
 });
 
 exports = module.exports = app;

@@ -18,8 +18,7 @@ exports.init = function (req, res) {
 			});
 		}
 	});
-	
-}
+};
 
 exports.list = function (req, res) {
 	let search = {fields: {}, page: undefined, limit: undefined};
@@ -70,19 +69,11 @@ exports.create = function (req, res) {
 };
 
 exports.update = function (req, res) {
-	console.log(req.body)
 	if (req.body.event && req.params.event !== req.body.event)
 		return res.sendStatus(400);
 	MajorDisaster.findOne({event: req.params.event}).then(function (doc) {
-		//console.log(doc, doc instanceof MajorDisaster);
-		//res.json(doc);
-		//console.log(Object.keys(doc._doc), Object.keys(req.body));
 		var oKeys = Object.keys(doc._doc).filter((x) => { return ["__v", "_id"].indexOf(x) === -1; });
-		//console.log(oKeys);
-		//console.log(oKeys, Object.keys(req.body))
 		if (!oKeys.every(val => Object.keys(req.body).includes(val))) return res.sendStatus(400);
-		//if ((Object.keys(doc).length) !== Object.keys(req.body).length) return res.sendStatus(400);
-		//delete req.body._id;
 		for (var key in req.body) {
 			doc[key] = req.body[key];
 		}
@@ -93,13 +84,14 @@ exports.update = function (req, res) {
 		});
 	}).catch(function (err) {
 		res.sendStatus(400);
-		//res.status(400).send(err);
 	});
 };
 
 exports.destroy = function (req, res) {
-	MajorDisaster.deleteOne({event: req.params.event}, function (err) {
-		res.sendStatus((err) ? 404 : 200);
+	MajorDisaster.deleteOne({event: req.params.event}).catch(function (err) {
+		res.sendStatus(400);
+	}).then(function (result) {
+		return (result.n === 0) ? res.sendStatus(404) : res.sendStatus(200);
 	});
 };
 
