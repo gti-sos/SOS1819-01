@@ -2,9 +2,9 @@
     <head>
         
         <title>Mini Postman</title>
-        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" >
-        <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="/public/fe-jjb/bower_components/angular/angular.min.js"></script>
+        <link rel="stylesheet" href="/fe-jjb/bower_components/bootstrap/dist/css/bootstrap.min.css" >
+        <script src="/fe-jjb/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/fe-jjb/bower_components/angular/angular.min.js"></script>
         
         <script src="juan-fe-app.js"></script>
         <script src="juan-fe-controller.js"></script>
@@ -12,19 +12,26 @@
     </head>
     
     <body ng-controller="MainCtrl">
-        <h1>My minipostman</h1>
-    
-            <label>URL:<input class="form-control text-center" ng-model="url"/></label>
-      
-            <button class="btn btn-success" ng-click="get()">Get</button>
-            <button class="btn btn-danger" ng-click="delete()">Delete</button>
-            <button class="btn btn-primary" ng-click="put()">Put</button>
-            <button class="btn btn-warning" ng-click="post()">Post</button>
-            
-        </div>
+            <div class="container">
+                <h1 class="text-center">My minipostman</h1>
+                <label>URL:<input ng-model="url" class="form-control text-center" ng-model="url"/></label>
+                <button class="btn btn-success" ng-click="get()">Get</button>
+                <button class="btn btn-danger" ng-click="delete()">Delete</button>
+                <button class="btn btn-primary" ng-click="put()">Put</button>
+                <button class="btn btn-warning" ng-click="post()">Post</button>
+            </div>
   
-        <div>
-            <textarea class="form-control" rows="20" ng-model="data"></textarea>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">   
+                    Body             
+                    <textarea class="form-control" rows="20" ng-model="body"></textarea>
+                </div>
+                <div class="col-md-6">   
+                    Response {{status}}   
+                    <textarea class="form-control" rows="20" ng-model="data"></textarea>
+                </div>
+            </div>
         </div>
     </body>
 </html>
