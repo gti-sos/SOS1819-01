@@ -26,7 +26,6 @@ angular.module('majorDisastersApp.miniPostman')
 
 		$scope.list = function () {
 			MajorDisaster.list({offset: 0, limit: 0}).then(function	 (res) {
-				console.log(res)
 				$scope.tests.four.response = {data: res.data, status: res.status};
 			}).catch(function (res) {
 				$scope.tests.four.response = {data: res.data, status: res.status};

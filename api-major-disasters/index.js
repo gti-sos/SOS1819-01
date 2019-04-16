@@ -3,6 +3,7 @@ var router = express.Router();
 var controller = require('./controller.js');
 
 router.get('/loadInitialData', controller.init);
+router.get('/count', controller.count);
 router.get('/docs', (req, res, next) => res.redirect("https://documenter.getpostman.com/view/6919343/S17tQ7ZH"));
 router.get('', controller.list);
 router.get('/:event', controller.get);

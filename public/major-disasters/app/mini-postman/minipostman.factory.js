@@ -12,6 +12,9 @@ angular.module('majorDisastersApp.miniPostman')
 	        }, cache: false });
 	        //return deferred.promise;
 	      },
+	      count: function () {
+	      	return $http.get(this.apiUrl + '/count');
+	      },
 	      get: function (id) {
 	        return $http.get(this.apiUrl + '/' + id, {cache: false});
 	      },

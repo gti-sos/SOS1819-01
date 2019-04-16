@@ -20,8 +20,15 @@ exports.init = function (req, res) {
 	});
 };
 
+exports.count = function (req, res) {
+	MajorDisaster.countDocuments({}, function (err, count) {
+		if (err) return res.json(err);
+		res.json({count: count});
+	});
+};
+
 exports.list = function (req, res) {
-	let search = {fields: {}, page: undefined, limit: undefined};
+	let search = {fields: {}, offset: undefined, limit: undefined};
 
 	for (let key in req.query) {
 		if (["from", "to"].indexOf(key) > -1) {
@@ -38,7 +45,7 @@ exports.list = function (req, res) {
 	}
 
 	//console.log(search);
-	MajorDisaster.find(search.fields).select("-__v -_id").limit(search.limit).skip(search.page * search.limit).exec(function (err, data) {
+	MajorDisaster.find(search.fields).select("-__v -_id").limit(search.limit).skip(search.offset * search.limit).exec(function (err, data) {
 		if (err)
 			return res.send(err);
 		res.json(data);	

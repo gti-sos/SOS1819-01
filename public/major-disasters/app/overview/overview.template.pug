@@ -1,0 +1,31 @@
+div(class="container-fluid")
+	div(class="row")
+		table(class="table")
+			thead
+				tr
+					td Event
+					td Year
+					td Type
+					td Country
+					td Deaths
+					td Cost
+					td Cost (inflation)
+			tbody
+				tr(ng-repeat="d in data track by d.event")
+					td 
+						span {{d.event}}
+					td 
+						span {{d.year}}
+					td
+						span(ng-repeat="nc in d.type") {{nc}}
+					td
+						span(ng-repeat="nc in d.country")  {{nc}}
+					td 
+						span {{d.death}}
+					td 
+						span {{d.inflation}}
+					td 
+						span {{d["no-inflation"]}}
+	div(class="row")
+		div(class="col-sm-1" ng-repeat="item in [].constructor(pagination.count) track by $index") 
+			span(ng-click="navigate($index)") {{$index + 1}}

@@ -1,0 +1,1 @@
+angular.module('majorDisastersApp.overview', ['majorDisastersApp', 'majorDisastersApp.miniPostman']);
