@@ -90,8 +90,8 @@ exports.create = function (req, res) {
 exports.update = function (req, res) {
 	if (req.body.event && req.params.event !== req.body.event) return res.sendStatus(400);
 	MajorDisaster.findOne({event: req.params.event}).then(function (doc) {
-		var oKeys = Object.keys(doc._doc).filter(e => {return e !== '_id' || e !== "-__v";})
 		if (!doc) return res.sendStatus(404);
+		var oKeys = Object.keys(doc._doc).filter(e => {return e !== '_id' || e !== "-__v";});
 		if (!oKeys.every(val => Object.keys(req.body).includes(val))) return res.sendStatus(400);
 		for (var key in req.body) doc[key] = req.body[key];
 		doc.validate(function (vErr) {
