@@ -1,1 +1,1 @@
-angular.module('majorDisastersApp.overview', ['majorDisastersApp', 'majorDisastersApp.miniPostman']);
+angular.module('majorDisastersApp.overview', ['majorDisastersApp', 'majorDisastersApp.miniPostman', 'ngDialog']);

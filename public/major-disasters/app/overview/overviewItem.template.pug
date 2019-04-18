@@ -1,0 +1,53 @@
+style.
+	 .ngdialog.ngdialog-theme-default .ngdialog-content  {width: 45%;}
+
+div(class="container-fluid")
+	form(name="formItem" ng-submit="submit()")
+		fieldset(class="form-group")
+			legend Evento
+			input(name="event" ng-disabled="operation === 'modify'" required ng-trim="true" ng-model="nData.event" class="form-control" type="text" placeholder="Event")
+		
+		div(class="row")
+			fieldset(class="col col-md-6 form-group")
+				legend Año
+				input(name="year" required ng-model="nData.year" class="form-control" type="number" min="0" step="1" placeholder="Year")
+			fieldset(class="col ol-md-6 form-group")
+				legend Muertes
+				input(name="death" required ng-model="nData.death" class="form-control" type="number" placeholder="Deaths" min="0" step="1")
+		div(class="row")
+			fieldset(class="col col-md-6 form-group")
+				legend Coste
+				input(name="inflation" required ng-model="nData.inflation" class="form-control" type="number" placeholder="Cost" min="0" step="0.1")
+			fieldset(class="col col-md-6 form-group")
+				legend Coste (inflación)
+				input(required ng-model="nData['no-inflation']" class="form-control" type="number" placeholder="Cost /w CPI" min="0" step="0.1")
+
+		fieldset
+			legend Tipo
+			div(class="btn-group form-group" role="group")
+				button(type="button" class="btn btn-dark btn-xs" ng-click="removeFromArray('type', $index)" ng-repeat="nc in nData.type track by $index") 
+					i(class="fas fa-times")
+					span &nbsp;&nbsp;{{nc}}
+			div(class="row form-group")
+				div(class="col col-md-10")
+					input(novalidate ng-class="{'border border-danger': !tmp.type.valid}" ng-trim="true" ng-model="tmp.type.val" class="form-control" type="text" placeholder="Introduce un tipo")
+					small(ng-if="!tmp.type.valid" class="text-danger") Debe haber al menos un tipo
+				div(class="col col-md-2")
+					button(type="button" ng-disabled="!tmp.type.val" ng-click="addToArray('type')" class="btn btn-outline-success btn-lg btn-block")
+						i(class="fas fa-plus")
+
+		fieldset
+			legend Pais
+			div(class="btn-group form-group" role="group")
+				button(type="button" class="btn btn-dark btn-xs" ng-click="removeFromArray('country', $index)" ng-repeat="nc in nData.country track by $index")
+					i(class="fas fa-times")
+					span &nbsp;&nbsp;{{nc}}
+			div(class="row form-group")
+				div(class="col col-md-10")
+					input( novalidate ng-model="tmp.country.val" class="form-control" type="text" placeholder="Introduce un pais" ng-class="{'border border-danger': !tmp.country.valid}")
+					small(ng-if="!tmp.country.valid" class="text-danger") Debe haber al menos un pais
+				iv(class="col col-md-2")
+					button(type="button" ng-disabled="!tmp.country.val" ng-click="addToArray('country')" class="btn btn-lg btn-outline-success btn-block")
+						i(class="fas fa-plus")
+		fieldset
+			button(type="submit" ng-disabled="formItem.$pristine || !tmp.country.valid || !tmp.type.valid" class="btn-block btn btn-info") {{operation == "modify" ? 'Aplicar' : 'Crear'}}

@@ -8,11 +8,22 @@ angular.module('majorDisastersApp', ['ngRoute', "majorDisastersApp.miniPostman",
 			})
 			.when('/overview', {
 				templateUrl: '/major-disasters/overview/overview.template.pug',
-				controller: 'overviewCtrl'
+				controller: 'overviewCtrl',
+				resolve: {
+					initialData: function (MajorDisaster) {
+						var pagination = {offset: 0, limit: 10, count: 0};
+						var promises = [MajorDisaster.list(pagination), MajorDisaster.count()];
+						return Promise.all(promises).then(function (res) {
+							pagination.count = Math.ceil(res[1].data.count / pagination.limit);
+							return {data: res[0].data, pagination: pagination};
+						}).catch(function (res) {
+							//console.log(res);
+							return {data: [], pagination: pagination};
+						});
+					}
+				}
 			})
-			.when('/', {
-				redirectTo: "/overview"
-			});
+			.when('/', {redirectTo: "/overview"});
 	});
 /*
 	.run(function ($location) {

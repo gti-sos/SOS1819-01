@@ -3,8 +3,32 @@ const Model = require('./model.js');
 const MajorDisaster = mongoose.model("MajorDisaster");
 const populateData = require("./populateData.json");
 
+function buildSearch (req) {
+	let search = {fields: {}, offset: undefined, limit: undefined};
+	for (let key in req.query) {
+		if (req.query[key]) {
+			if (["from", "to"].indexOf(key) > -1) {
+				var nCondition = (key === "from") ? "$gte" : "$lte";
+				if (!search.fields.year) 
+					search.fields.year = {};
+				search.fields.year[nCondition] = parseInt(req.query[key]);
+			} else if (["offset", "limit"].indexOf(key) > -1)
+				search[key] = parseInt(req.query[key]);
+			else if (["country", "type"].indexOf(key) > -1)
+				search.fields[key] = {"$in": new RegExp(req.query[key], 'i')};
+			else if (key === 'event')
+				search.fields[key] = new RegExp(req.query[key], 'i');
+			else
+				search.fields[key] = req.query[key];
+		}
+	}
+	return search;
+}
+
+
 exports.init = function (req, res) {
 	//const count = await MajorDisaster.countDocuments({});
+
 	MajorDisaster.countDocuments({}, function (er, count) {
 		if (count > 0) {
 			res.sendStatus(405);
@@ -15,36 +39,24 @@ exports.init = function (req, res) {
 			Promise.all(promises).then(function () {
 				res.sendStatus(200);
 				//res.status(200).json({code: 200, msg: "OK"});
+			}).catch(function () {
+				res.sendStatus(400);
 			});
 		}
 	});
 };
 
 exports.count = function (req, res) {
-	MajorDisaster.countDocuments({}, function (err, count) {
+	var search = buildSearch(req);
+	console.log(search.fields);
+	MajorDisaster.countDocuments(search.fields, function (err, count) {
 		if (err) return res.json(err);
 		res.json({count: count});
 	});
 };
 
 exports.list = function (req, res) {
-	let search = {fields: {}, offset: undefined, limit: undefined};
-
-	for (let key in req.query) {
-		if (["from", "to"].indexOf(key) > -1) {
-			var nCondition = (key === "from") ? "$gte" : "$lte";
-			if (!search.fields.year) 
-				search.fields.year = {};
-			search.fields.year[nCondition] = parseInt(req.query[key]);
-		} else if (["offset", "limit"].indexOf(key) > -1)
-			search[key] = parseInt(req.query[key]);
-		else if (["country", "type"].indexOf(key) > -1)
-			search.fields[key] = {"$in": req.query[key]};
-		else 
-			search.fields[key] = req.query[key];
-	}
-
-	//console.log(search);
+	var search = buildSearch(req);
 	MajorDisaster.find(search.fields).select("-__v -_id").limit(search.limit).skip(search.offset * search.limit).exec(function (err, data) {
 		if (err)
 			return res.send(err);
@@ -76,20 +88,23 @@ exports.create = function (req, res) {
 };
 
 exports.update = function (req, res) {
-	if (req.body.event && req.params.event !== req.body.event)
-		return res.sendStatus(400);
+	if (req.body.event && req.params.event !== req.body.event) return res.sendStatus(400);
 	MajorDisaster.findOne({event: req.params.event}).then(function (doc) {
-		var oKeys = Object.keys(doc._doc).filter((x) => { return ["__v", "_id"].indexOf(x) === -1; });
+		var oKeys = Object.keys(doc._doc).filter(e => {return e !== '_id' || e !== "-__v";})
+		if (!doc) return res.sendStatus(404);
 		if (!oKeys.every(val => Object.keys(req.body).includes(val))) return res.sendStatus(400);
-		for (var key in req.body) {
-			doc[key] = req.body[key];
-		}
-		doc.validate(function (err) {
-			if (err) return res.sendStatus(400);
-			doc.save();
-			res.sendStatus(200);
+		for (var key in req.body) doc[key] = req.body[key];
+		doc.validate(function (vErr) {
+			console.log('vErr', vErr);
+			if (vErr) return res.sendStatus(400);
+			doc.save(function (sErr) {
+				console.log('sErr', sErr);
+				if (sErr) return res.sendStatus(400);
+				res.sendStatus(200);
+			});
 		});
 	}).catch(function (err) {
+		console.log(err);
 		res.sendStatus(400);
 	});
 };

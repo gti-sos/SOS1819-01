@@ -4,16 +4,30 @@ angular.module('majorDisastersApp.miniPostman')
 	    return {
 	      apiUrl: '/api/v1/major-disasters',
 	      list: function (config) {
-	        return $http.get(this.apiUrl + '/', { params: {
-	          offset: config.offset,
-	          limit: config.limit
+	        var validKeys = ["from", "to", "offset", "limit", "inflation", "no-inflation", "death", "year", "country", "type", "event"];
+	        var search = {};
+	        for (var key in config) {
+	        	if (validKeys.indexOf(key) > -1 && config[key])
+	        		search[key] = config[key];
+	        }
+	      	console.log(search)
+	        return $http.get(this.apiUrl + '/', { params: search
+	          //offset: config.offset,
+	          //limit: config.limit
 	          //sort: config.sort,
 	          //filter: config.filter
-	        }, cache: false });
+	        , cache: false });
 	        //return deferred.promise;
 	      },
-	      count: function () {
-	      	return $http.get(this.apiUrl + '/count');
+	      count: function (config) {
+	      	config = (config) ? config : {};
+	      	var validKeys = ["from", "to","inflation", "no-inflation", "death", "year", "country", "type", "event"];
+	      	var search = {};
+	      	for (var key in config) {
+	      		if (validKeys.indexOf(key) > -1 && config[key])
+	      			search[key] = config[key];
+	      	}
+	      	return $http.get(this.apiUrl + '/count', {cache: false, params: search});
 	      },
 	      get: function (id) {
 	        return $http.get(this.apiUrl + '/' + id, {cache: false});
@@ -38,6 +52,6 @@ angular.module('majorDisastersApp.miniPostman')
 	      },
 	      populate: function () {
 	      	return $http.get(this.apiUrl + '/loadInitialData', {cache: false});
-	      }
+	      },
 	    };
 	  });

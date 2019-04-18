@@ -1,7 +1,7 @@
 [
   {
-    "inflation": 360,
-    "no-inflation": 411.3,
+    "no-inflation": 360,
+    "inflation": 411.3,
     "country": [
       "Japan"
     ],
@@ -14,8 +14,8 @@
     "death": 15894
   },
   {
-    "inflation": 197,
-    "no-inflation": 329.8,
+    "no-inflation": 197,
+    "inflation": 329.8,
     "country": [
       "Japan"
     ],
@@ -27,8 +27,8 @@
     "death": 6434
   },
   {
-    "inflation": 148,
-    "no-inflation": 176.4,
+    "no-inflation": 148,
+    "inflation": 176.4,
     "country": [
       "China"
     ],
@@ -40,8 +40,8 @@
     "death": 87587
   },
   {
-    "inflation": 125,
-    "no-inflation": 164.9,
+    "no-inflation": 125,
+    "inflation": 164.9,
     "country": [
       "United States"
     ],
@@ -53,8 +53,8 @@
     "death": 1836
   },
   {
-    "inflation": 125,
-    "no-inflation": 129.5,
+    "no-inflation": 125,
+    "inflation": 129.5,
     "country": [
       "United States"
     ],
@@ -66,8 +66,8 @@
     "death": 107
   },
   {
-    "inflation": 91.6,
-    "no-inflation": 94.9,
+    "no-inflation": 91.6,
+    "inflation": 94.9,
     "country": [
       "Puerto Rico",
       "Dominica",
@@ -81,8 +81,8 @@
     "death": 8498
   },
   {
-    "inflation": 68.7,
-    "no-inflation": 76.3,
+    "no-inflation": 68.7,
+    "inflation": 76.3,
     "country": [
       "United States",
       "Haiti",
@@ -96,8 +96,8 @@
     "death": 233
   },
   {
-    "inflation": 64.8,
-    "no-inflation": 66.5,
+    "no-inflation": 64.8,
+    "inflation": 66.5,
     "country": [
       "United States",
       "Sint Maarten",
@@ -111,8 +111,8 @@
     "death": 134
   },
   {
-    "inflation": 100,
-    "no-inflation": 116.1,
+    "no-inflation": 100,
+    "inflation": 116.1,
     "country": [
       "United States"
     ],
@@ -124,8 +124,8 @@
     "death": 11
   },
   {
-    "inflation": 53.25,
-    "no-inflation": 115.8,
+    "no-inflation": 53.25,
+    "inflation": 115.8,
     "country": [
       "United States",
       "Canada"
@@ -138,8 +138,8 @@
     "death": 17000
   },
   {
-    "inflation": 56.1,
-    "no-inflation": 60.3,
+    "no-inflation": 56.1,
+    "inflation": 60.3,
     "country": [
       "United States",
       "Canada"
@@ -152,8 +152,8 @@
     "death": 104
   },
   {
-    "inflation": 49,
-    "no-inflation": 81,
+    "no-inflation": 49,
+    "inflation": 81,
     "country": [
       "United States"
     ],
@@ -165,8 +165,8 @@
     "death": 57
   },
   {
-    "inflation": 45.7,
-    "no-inflation": 49.8,
+    "no-inflation": 45.7,
+    "inflation": 49.8,
     "country": [
       "Thailand"
     ],
@@ -178,8 +178,8 @@
     "death": 815
   },
   {
-    "inflation": 40,
-    "no-inflation": 44.6,
+    "no-inflation": 40,
+    "inflation": 44.6,
     "country": [
       "New Zealand"
     ],
@@ -191,8 +191,8 @@
     "death": 185
   },
   {
-    "inflation": 433,
-    "no-inflation": 700,
+    "no-inflation": 433,
+    "inflation": 700,
     "country": [
       "Soviet Union",
       "Ukraine",
@@ -206,8 +206,8 @@
     "death": 46
   },
   {
-    "inflation": 38,
-    "no-inflation": 43.3,
+    "no-inflation": 38,
+    "inflation": 43.3,
     "country": [
       "United States",
       "Haiti",
@@ -221,8 +221,8 @@
     "death": 214
   },
   {
-    "inflation": 28,
-    "no-inflation": 36.2,
+    "no-inflation": 28,
+    "inflation": 36.2,
     "country": [
       "Japan"
     ],
@@ -234,8 +234,8 @@
     "death": 68
   },
   {
-    "inflation": 27.4,
-    "no-inflation": 34.4,
+    "no-inflation": 27.4,
+    "inflation": 34.4,
     "country": [
       "United States",
       "Mexico",
@@ -249,8 +249,8 @@
     "death": 87
   },
   {
-    "inflation": 27.3,
-    "no-inflation": 47.6,
+    "no-inflation": 27.3,
+    "inflation": 47.6,
     "country": [
       "United States"
     ],
@@ -262,8 +262,8 @@
     "death": 65
   },
   {
-    "inflation": 26.1,
-    "no-inflation": 33.9,
+    "no-inflation": 26.1,
+    "inflation": 33.9,
     "country": [
       "United States",
       "Grenada",
@@ -277,8 +277,8 @@
     "death": 124
   },
   {
-    "inflation": 135,
-    "no-inflation": 186.9,
+    "no-inflation": 135,
+    "inflation": 186.9,
     "country": [
       "United States"
     ],
@@ -290,8 +290,8 @@
     "death": 2996
   },
   {
-    "inflation": 18.5,
-    "no-inflation": 23.2,
+    "no-inflation": 18.5,
+    "inflation": 23.2,
     "country": [
       "United States"
     ],
@@ -303,8 +303,8 @@
     "death": 125
   },
   {
-    "inflation": 19.2,
-    "no-inflation": 24.6,
+    "no-inflation": 19.2,
+    "inflation": 24.6,
     "country": [
       "Czech Republic",
       "Germany",
@@ -318,8 +318,8 @@
     "death": 110
   },
   {
-    "inflation": 17.6,
-    "no-inflation": 23.9,
+    "no-inflation": 17.6,
+    "inflation": 23.9,
     "country": [
       "France",
       "Germany",
@@ -333,8 +333,8 @@
     "death": 140
   },
   {
-    "inflation": 16.9,
-    "no-inflation": 21.9,
+    "no-inflation": 16.9,
+    "inflation": 21.9,
     "country": [
       "United States",
       "Jamaica",
@@ -348,8 +348,8 @@
     "death": 35
   },
   {
-    "inflation": 15.8,
-    "no-inflation": 17,
+    "no-inflation": 15.8,
+    "inflation": 17,
     "country": [
       "Italy"
     ],
@@ -361,8 +361,8 @@
     "death": 27
   },
   {
-    "inflation": 15.1,
-    "no-inflation": 15.4,
+    "no-inflation": 15.1,
+    "inflation": 15.4,
     "country": [
       "Haiti",
       "United States",
@@ -376,8 +376,8 @@
     "death": 603
   },
   {
-    "inflation": 20,
-    "no-inflation": 34.1,
+    "no-inflation": 20,
+    "inflation": 34.1,
     "country": [
       "United States"
     ],
@@ -389,8 +389,8 @@
     "death": 47
   },
   {
-    "inflation": 15,
-    "no-inflation": 28.8,
+    "no-inflation": 15,
+    "inflation": 28.8,
     "country": [
       "United Kingdom",
       "Germany",
@@ -404,8 +404,8 @@
     "death": 197
   },
   {
-    "inflation": 15,
-    "no-inflation": 19.4,
+    "no-inflation": 15,
+    "inflation": 19.4,
     "country": [
       "Indonesia",
       "Sri Lanka",
@@ -420,8 +420,8 @@
     "death": 280000
   },
   {
-    "inflation": 14.2,
-    "no-inflation": 15.5,
+    "no-inflation": 14.2,
+    "inflation": 15.5,
     "country": [
       "United States",
       "Puerto Rico",
@@ -435,8 +435,8 @@
     "death": 58
   },
   {
-    "inflation": 13,
     "no-inflation": 13,
+    "inflation": 13,
     "country": [
       "United States"
     ],
@@ -448,8 +448,8 @@
     "death": 53
   },
   {
-    "inflation": 12.9,
-    "no-inflation": 14.7,
+    "no-inflation": 12.9,
+    "inflation": 14.7,
     "country": [
       "Myanmar"
     ],
@@ -461,8 +461,8 @@
     "death": 138366
   },
   {
-    "inflation": 12.7,
-    "no-inflation": 13.2,
+    "no-inflation": 12.7,
+    "inflation": 13.2,
     "country": [
       "France"
     ],
@@ -474,8 +474,8 @@
     "death": 130
   },
   {
-    "inflation": 18.9,
-    "no-inflation": 27.7,
+    "no-inflation": 18.9,
+    "inflation": 27.7,
     "country": [
       "Turkey"
     ],
@@ -487,8 +487,8 @@
     "death": 17127
   },
   {
-    "inflation": 10.4,
-    "no-inflation": 11,
+    "no-inflation": 10.4,
+    "inflation": 11,
     "country": [
       "China"
     ],
@@ -500,8 +500,8 @@
     "death": 12
   },
   {
-    "inflation": 10.2,
-    "no-inflation": 11.1,
+    "no-inflation": 10.2,
+    "inflation": 11.1,
     "country": [
       "United States"
     ],
@@ -513,8 +513,8 @@
     "death": 348
   },
   {
-    "inflation": 15,
-    "no-inflation": 15.4,
+    "no-inflation": 15,
+    "inflation": 15.4,
     "country": [
       "United States"
     ],
@@ -526,8 +526,8 @@
     "death": 13
   },
   {
-    "inflation": 10,
-    "no-inflation": 29.6,
+    "no-inflation": 10,
+    "inflation": 29.6,
     "country": [
       "United States"
     ],
@@ -539,8 +539,8 @@
     "death": 10000
   },
   {
-    "inflation": 10,
-    "no-inflation": 18,
+    "no-inflation": 10,
+    "inflation": 18,
     "country": [
       "Japan"
     ],
@@ -552,8 +552,8 @@
     "death": 64
   },
   {
-    "inflation": 10,
-    "no-inflation": 12.1,
+    "no-inflation": 10,
+    "inflation": 12.1,
     "country": [
       "United Kingdom",
       "France",
@@ -567,8 +567,8 @@
     "death": 44
   },
   {
-    "inflation": 10,
-    "no-inflation": 11.3,
+    "no-inflation": 10,
+    "inflation": 11.3,
     "country": [
       "United States"
     ],
@@ -580,8 +580,8 @@
     "death": 16
   },
   {
-    "inflation": 9.8,
-    "no-inflation": 12.7,
+    "no-inflation": 9.8,
+    "inflation": 12.7,
     "country": [
       "United States",
       "The Bahamas"
@@ -594,8 +594,8 @@
     "death": 50
   },
   {
-    "inflation": 9.5,
-    "no-inflation": 18.7,
+    "no-inflation": 9.5,
+    "inflation": 18.7,
     "country": [
       "United States",
       "Puerto Rico",
@@ -609,8 +609,8 @@
     "death": 60
   },
   {
-    "inflation": 9.5,
-    "no-inflation": 9.7,
+    "no-inflation": 9.5,
+    "inflation": 9.7,
     "country": [
       "Canada"
     ],
@@ -622,8 +622,8 @@
     "death": 2
   },
   {
-    "inflation": 9.4,
-    "no-inflation": 14.1,
+    "no-inflation": 9.4,
+    "inflation": 14.1,
     "country": [
       "Puerto Rico",
       "United States",
@@ -637,8 +637,8 @@
     "death": 604
   },
   {
-    "inflation": 9.4,
     "no-inflation": 9.4,
+    "inflation": 9.4,
     "country": [
       "United States"
     ],
@@ -650,8 +650,8 @@
     "death": 44
   },
   {
-    "inflation": 9,
-    "no-inflation": 11.7,
+    "no-inflation": 9,
+    "inflation": 11.7,
     "country": [
       "Japan"
     ],
@@ -663,8 +663,8 @@
     "death": 28
   },
   {
-    "inflation": 8.5,
-    "no-inflation": 11.8,
+    "no-inflation": 8.5,
+    "inflation": 11.8,
     "country": [
       "United States"
     ],
@@ -676,8 +676,8 @@
     "death": 55
   },
   {
-    "inflation": 8.3,
-    "no-inflation": 9.5,
+    "no-inflation": 8.3,
+    "inflation": 9.5,
     "country": [
       "United States",
       "Cuba",
@@ -691,8 +691,8 @@
     "death": 153
   },
   {
-    "inflation": 8.1,
-    "no-inflation": 16,
+    "no-inflation": 8.1,
+    "inflation": 16,
     "country": [
       "Haiti"
     ],
@@ -704,8 +704,8 @@
     "death": 220000
   },
   {
-    "inflation": 7.9,
-    "no-inflation": 10.3,
+    "no-inflation": 7.9,
+    "inflation": 10.3,
     "country": [
       "Haiti",
       "United States",
@@ -719,8 +719,8 @@
     "death": 3035
   },
   {
-    "inflation": 7.13,
-    "no-inflation": 7.4,
+    "no-inflation": 7.13,
+    "inflation": 7.4,
     "country": [
       "Philippines",
       "Vietnam",
@@ -734,8 +734,8 @@
     "death": 196
   },
   {
-    "inflation": 7,
-    "no-inflation": 13.8,
+    "no-inflation": 7,
+    "inflation": 13.8,
     "country": [
       "United States",
       "Canada"
@@ -748,8 +748,8 @@
     "death": 0
   },
   {
-    "inflation": 6.5,
-    "no-inflation": 9.6,
+    "no-inflation": 6.5,
+    "inflation": 9.6,
     "country": [
       "United States",
       "The Bahamas",
@@ -763,8 +763,8 @@
     "death": 74
   },
   {
-    "inflation": 6.2,
     "no-inflation": 6.2,
+    "inflation": 6.2,
     "country": [
       "Iran",
       "Iraq"
@@ -777,8 +777,8 @@
     "death": 630
   },
   {
-    "inflation": 6.2,
-    "no-inflation": 7.1,
+    "no-inflation": 6.2,
+    "inflation": 7.1,
     "country": [
       "Taiwan",
       "China",
@@ -792,8 +792,8 @@
     "death": 789
   },
   {
-    "inflation": 6.1,
-    "no-inflation": 9.1,
+    "no-inflation": 6.1,
+    "inflation": 9.1,
     "country": [
       "Honduras",
       "Nicaragua",
@@ -807,8 +807,8 @@
     "death": 11374
   },
   {
-    "inflation": 6.1,
-    "no-inflation": 7,
+    "no-inflation": 6.1,
+    "inflation": 7,
     "country": [
       "France",
       "Spain",
@@ -822,8 +822,8 @@
     "death": 75
   },
   {
-    "inflation": 6.01,
-    "no-inflation": 8.6,
+    "no-inflation": 6.01,
+    "inflation": 8.6,
     "country": [
       "China",
       "South Korea",
@@ -837,8 +837,8 @@
     "death": 75
   },
   {
-    "inflation": 6,
-    "no-inflation": 7.01,
+    "no-inflation": 6,
+    "inflation": 7.01,
     "country": [
       "France",
       "Spain",
@@ -852,8 +852,8 @@
     "death": 26
   },
   {
-    "inflation": 6,
-    "no-inflation": 6.3,
+    "no-inflation": 6,
+    "inflation": 6.3,
     "country": [
       "Canada"
     ],
@@ -865,8 +865,8 @@
     "death": 5
   },
   {
-    "inflation": 5.5,
-    "no-inflation": 7.1,
+    "no-inflation": 5.5,
+    "inflation": 7.1,
     "country": [
       "United Kingdom",
       "Denmark",
@@ -880,8 +880,8 @@
     "death": 24
   },
   {
-    "inflation": 5.5,
-    "no-inflation": 7.3,
+    "no-inflation": 5.5,
+    "inflation": 7.3,
     "country": [
       "United States"
     ],
@@ -893,8 +893,8 @@
     "death": 51
   },
   {
-    "inflation": 5,
-    "no-inflation": 11.4,
+    "no-inflation": 5,
+    "inflation": 11.4,
     "country": [
       "Mexico"
     ],
@@ -906,8 +906,8 @@
     "death": 35000
   },
   {
-    "inflation": 5,
-    "no-inflation": 7.9,
+    "no-inflation": 5,
+    "inflation": 7.9,
     "country": [
       "China"
     ],
@@ -919,8 +919,8 @@
     "death": 590
   },
   {
-    "inflation": 4.7,
-    "no-inflation": 7.6,
+    "no-inflation": 4.7,
+    "inflation": 7.6,
     "country": [
       "Mexico",
       "Guatemala",
@@ -934,8 +934,8 @@
     "death": 63
   },
   {
-    "inflation": 4.6,
-    "no-inflation": 4.8,
+    "no-inflation": 4.6,
+    "inflation": 4.8,
     "country": [
       "Philippines",
       "China",
@@ -949,8 +949,8 @@
     "death": 7403
   },
   {
-    "inflation": 4.4,
-    "no-inflation": 5.2,
+    "no-inflation": 4.4,
+    "inflation": 5.2,
     "country": [
       "Oman"
     ],
@@ -962,8 +962,8 @@
     "death": 78
   },
   {
-    "inflation": 4.2,
-    "no-inflation": 4.4,
+    "no-inflation": 4.2,
+    "inflation": 4.4,
     "country": [
       "Mexico"
     ],
@@ -975,8 +975,8 @@
     "death": 123
   },
   {
-    "inflation": 4,
-    "no-inflation": 8.8,
+    "no-inflation": 4,
+    "inflation": 8.8,
     "country": [
       "United Kingdom",
       "France",
@@ -990,8 +990,8 @@
     "death": 22
   },
   {
-    "inflation": 3.1,
-    "no-inflation": 5.4,
+    "no-inflation": 3.1,
+    "inflation": 5.4,
     "country": [
       "United States"
     ],
@@ -1003,8 +1003,8 @@
     "death": 6
   },
   {
-    "inflation": 4,
     "no-inflation": 4,
+    "inflation": 4,
     "country": [
       "Mexico"
     ],
@@ -1016,8 +1016,8 @@
     "death": 370
   },
   {
-    "inflation": 3,
-    "no-inflation": 6.2,
+    "no-inflation": 3,
+    "inflation": 6.2,
     "country": [
       "Mexico",
       "Jamaica",
@@ -1031,8 +1031,8 @@
     "death": 318
   },
   {
-    "inflation": 2.9,
-    "no-inflation": 3.1,
+    "no-inflation": 2.9,
+    "inflation": 3.1,
     "country": [
       "United States"
     ],
@@ -1044,8 +1044,8 @@
     "death": 22
   },
   {
-    "inflation": 3.2,
-    "no-inflation": 6.9,
+    "no-inflation": 3.2,
+    "inflation": 6.9,
     "country": [
       "United States"
     ],
@@ -1057,8 +1057,8 @@
     "death": 7
   },
   {
-    "inflation": 2.8,
-    "no-inflation": 3.1,
+    "no-inflation": 2.8,
+    "inflation": 3.1,
     "country": [
       "United States"
     ],
@@ -1070,8 +1070,8 @@
     "death": 158
   },
   {
-    "inflation": 2.68,
-    "no-inflation": 3.7,
+    "no-inflation": 2.68,
+    "inflation": 3.7,
     "country": [
       "France"
     ],
@@ -1083,8 +1083,8 @@
     "death": 29
   },
   {
-    "inflation": 2.5,
     "no-inflation": 2.5,
+    "inflation": 2.5,
     "country": [
       "United States"
     ],
@@ -1097,8 +1097,8 @@
     "death": 2
   },
   {
-    "inflation": 2.5,
     "no-inflation": 2.5,
+    "inflation": 2.5,
     "country": [
       "United States"
     ],
@@ -1110,8 +1110,8 @@
     "death": 0
   },
   {
-    "inflation": 2.2,
     "no-inflation": 2.2,
+    "inflation": 2.2,
     "country": [
       "United States"
     ],
@@ -1123,8 +1123,8 @@
     "death": 0
   },
   {
-    "inflation": 2.1,
     "no-inflation": 2.1,
+    "inflation": 2.1,
     "country": [
       "United States"
     ],
@@ -1136,8 +1136,8 @@
     "death": 0
   },
   {
-    "inflation": 2,
-    "no-inflation": 2.2,
+    "no-inflation": 2,
+    "inflation": 2.2,
     "country": [
       "Italy"
     ],
@@ -1149,8 +1149,8 @@
     "death": 33
   },
   {
-    "inflation": 1.4,
     "no-inflation": 1.4,
+    "inflation": 1.4,
     "country": [
       "Fiji"
     ],
@@ -1162,8 +1162,8 @@
     "death": 44
   },
   {
-    "inflation": 2,
-    "no-inflation": 2.7,
+    "no-inflation": 2,
+    "inflation": 2.7,
     "country": [
       "United States"
     ],
@@ -1175,8 +1175,8 @@
     "death": 15
   },
   {
-    "inflation": 1.1,
-    "no-inflation": 3.8,
+    "no-inflation": 1.1,
+    "inflation": 3.8,
     "country": [
       "United States"
     ],
@@ -1188,8 +1188,8 @@
     "death": 0
   },
   {
-    "inflation": 1,
-    "no-inflation": 2.3,
+    "no-inflation": 1,
+    "inflation": 2.3,
     "country": [
       "Colombia"
     ],
@@ -1201,8 +1201,8 @@
     "death": 22540
   },
   {
-    "inflation": 1.1,
-    "no-inflation": 4.9,
+    "no-inflation": 1.1,
+    "inflation": 4.9,
     "country": [
       "Australia"
     ],
@@ -1214,8 +1214,8 @@
     "death": 71
   },
   {
-    "inflation": 1.3,
-    "no-inflation": 1.4,
+    "no-inflation": 1.3,
+    "inflation": 1.4,
     "country": [
       "France"
     ],
@@ -1227,8 +1227,8 @@
     "death": 0
   },
   {
-    "inflation": 0.7,
-    "no-inflation": 1.3,
+    "no-inflation": 0.7,
+    "inflation": 1.3,
     "country": [
       "Philippines"
     ],
@@ -1240,8 +1240,8 @@
     "death": 800
   },
   {
-    "inflation": 0.7,
-    "no-inflation": 0.8,
+    "no-inflation": 0.7,
+    "inflation": 0.8,
     "country": [
       "Canada"
     ],
