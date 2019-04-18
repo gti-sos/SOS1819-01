@@ -51,9 +51,12 @@ div(class="test")
 					td
 						label Coste (2019)
 						input(ng-change="navigate()" placeholder="Coste (sin inflación)" ng-model-options='{ debounce: 250 }' ng-model="filter['no-inflation']" class="form-control" type="number" step="1" min="1")
-					td(colspan="1")
-						button(type="button" ng-click="removeAll()" class="btn btn-block btn-danger")
-							i(class="fas fa-times")
+					td
+						div(class="d-flex flex-row justify-content-center align-items-center")
+							p
+								span &nbsp;
+								button(type="button" ng-click="removeAll()" class="align-middle btn btn-lg btn-block btn-danger")
+									i(class="fas fa-times")
 
 			tbody(ng-class="{'blur-on-load': loading}")
 				tr(ng-repeat="d in data track by $index")
