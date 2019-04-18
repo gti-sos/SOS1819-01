@@ -33,13 +33,25 @@ angular.module('majorDisastersApp.miniPostman')
 	        return $http.get(this.apiUrl + '/' + id, {cache: false});
 	      },
 	      add: function (data) {
-	        return $http.post(this.apiUrl, data);
+	      	var validKeys = ["inflation", "no-inflation", "death", "year", "country", "type", "event"];
+	      	var validData = {};
+	      	for (var key in data) {
+	      		if (validKeys.indexOf(key) > -1 && data[key])
+	      			validData[key] = data[key];
+	      	}
+	        return $http.post(this.apiUrl, validData);
 	      },
 	      addBad: function (id, data) {
 		    return $http.post(this.apiUrl + '/' + id, data);
 	      },
 	      update: function (id, data) {
-	        return $http.put(this.apiUrl + '/' + id, data);
+	      	var validKeys = ["inflation", "no-inflation", "death", "year", "country", "type", "event"];
+	      	var validData = {};
+	      	for (var key in data) {
+	      		if (validKeys.indexOf(key) > -1 && data[key])
+	      			validData[key] = data[key];
+	      	}
+	        return $http.put(this.apiUrl + '/' + id, validData);
 	      },
 	      updateBad: function (data) {
 	      	return $http.put(this.apiUrl, data);

@@ -2,7 +2,7 @@
 
 function buildStatusPopup (data) {
 	return popupConfig = {
-		template: '/major-disasters/overview/overviewPopup.template.pug',
+		template: '/ui/v1/major-disasters/overview/overviewPopup.template.pug',
 		className: 'ngdialog-theme-plain',
 		disableAnimation: true,
 		controller: 'overviewPopupCtrl',
@@ -46,11 +46,9 @@ angular.module('majorDisastersApp.overview')
 						$scope.data = res[0].data;
 						$scope.filter.count = Math.ceil(res[1].data.count / $scope.filter.limit);
 						$scope.loading = false;
-						//console.log(res);
 					});
 				}).catch((res) => {
 					$scope.loading = false;
-					//console.log(res);
 				});
 			}
 		};
@@ -96,7 +94,7 @@ angular.module('majorDisastersApp.overview')
 
 		$scope.create = () => {
 			ngDialog.open({
-				template: '/major-disasters/overview/overviewItem.template.pug',
+				template: '/ui/v1/major-disasters/overview/overviewItem.template.pug',
 				controller: "overviewModItemCtrl",
 				data: {
 					operation: 'create',
@@ -111,7 +109,6 @@ angular.module('majorDisastersApp.overview')
 					}
 				}, preCloseCallback: reloadTableData
 			});
-			//window.alert(JSON.stringify(item))
 		};
 
 		$scope.remove = (id) => {
@@ -122,9 +119,6 @@ angular.module('majorDisastersApp.overview')
 					$scope.filter.count = Math.ceil(res[1].data.count / $scope.filter.limit);
 					ngDialog.open(buildStatusPopup(rRes));
 				});
-				//$q.all([MajorDisaster.list(processFilter()), MajorDisaster.count($scope.filter)]).then((res) => {
-				//	
-				//});
 			}).catch((rRes) => {
 				ngDialog.open(buildStatusPopup(rRes));
 			});
