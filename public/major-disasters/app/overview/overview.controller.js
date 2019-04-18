@@ -143,7 +143,7 @@ angular.module('majorDisastersApp.overview')
 
 		$scope.modify = (item) => {
 			ngDialog.open({
-				template: '/major-disasters/overview/overviewItem.template.pug',
+				template: '/ui/v1/major-disasters/overview/overviewItem.template.pug',
 				controller: "overviewModItemCtrl",
 				data: {
 					operation: 'modify',

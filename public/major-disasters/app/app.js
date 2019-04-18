@@ -3,11 +3,11 @@ angular.module('majorDisastersApp', ['ngRoute', "majorDisastersApp.miniPostman",
   		$routeProvider
 			
 			.when('/mini-postman', {
-			    templateUrl: '/major-disasters/mini-postman/minipostman.template.pug',
+			    templateUrl: '/ui/v1/major-disasters/mini-postman/minipostman.template.pug',
 			    controller: 'miniPostmanCtrl'
 			})
 			.when('/overview', {
-				templateUrl: '/major-disasters/overview/overview.template.pug',
+				templateUrl: '/ui/v1/major-disasters/overview/overview.template.pug',
 				controller: 'overviewCtrl',
 				resolve: {
 					initialData: function (MajorDisaster) {
