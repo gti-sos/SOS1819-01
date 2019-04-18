@@ -1,0 +1,81 @@
+<html ng-app="Fronti">
+    <head>
+        <title>Hurricanes</title>
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+        <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="contacts-app.js"></script>
+        <script type="text/javascript" src="main-ctrl.js"></script>
+    </head>
+    <body ng-controller="juan-fe-controller">
+        <h1>Contacts</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Year</th>
+                    <th>Country</th>
+                    <th>Speed</th>
+                    <th>Damages Until 2008</th>
+                    <th>mbar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="hurricane in hurricanes">
+                    <td>{{ hurricane.name }}</td>
+                    <td>{{ hurricane.year }}</td>
+                    <td>{{ hurricane.country }}</td>
+                    <td>{{ hurricane.speed }}</td>
+                    <td>{{ hurricane.damages-until-2008 }}</td>
+                    <td>{{ hurricane.mbar }}</td>
+                    <td>
+                        <button
+                            class="btn btn-danger"
+                            ng-click="delete(hurricane.name)";
+                        >Borrar</button></button>
+                    </td>
+                </tr>
+                
+                </tr>
+                <tr>
+                    <td>
+                        <input
+                            class = "form-control"
+                            ng-model = "hur.name"
+                            value = "new name"/>
+                    </td><td>
+                        <input
+                            ng-model = "hur.year"
+                            class = "form-control"
+                            value = "new year"/>
+                    </td><td>
+                        <input 
+                            ng-model = "hur.country"
+                            class = "form-control"
+                            value = "new country"/>
+                    </td><td>
+                        <input 
+                            ng-model = "hur.speed"
+                            class = "form-control"
+                            value = "new speed"/>
+                    </td><td>
+                        <input 
+                            ng-model = "hur.damages-until-2008"
+                            class = "form-control"
+                            value = "new damages-until-2008"/>
+                    </td><td>
+                        <input 
+                            ng-model = "hur.mbar"
+                            class = "form-control"
+                            value = "new mbar"/>
+                    </td><td>
+                        <button
+                            class="btn btn-primary"
+                            ng-click="post()"
+                            >Añadir</button>
+                    </td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
