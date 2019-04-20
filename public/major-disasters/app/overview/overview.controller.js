@@ -43,8 +43,7 @@ angular.module('majorDisastersApp.overview')
 		}
 
 		$scope.navigate = (index) => {
-			if (index < 0) return;
-			if (!index) index = 0;
+			index = (index) ? index : 0;
 			reloadTableData(index, function (res) {
 				$scope.filter.offset = index;
 			});
@@ -66,7 +65,7 @@ angular.module('majorDisastersApp.overview')
 			console.log(arguments)
 			$scope.loading = true;
 			var filterObj = JSON.parse(JSON.stringify($scope.filter));
-			if (typeof index === 'function' || !index) {
+			if (typeof index === 'function' || index != null) {
 				cb = index;
 				index = $scope.filter.offset;
 			}

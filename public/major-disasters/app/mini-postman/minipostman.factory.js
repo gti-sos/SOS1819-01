@@ -11,7 +11,7 @@ angular.module('majorDisastersApp.miniPostman')
 				  	if (validKeys.indexOf(key) > -1 && config[key] !== "" && config[key] != null)
 				  		search[key] = config[key];
 				  }
-					console.log(search)
+					//console.log(search)
 				  return $http.get(this.__apiUrl + '/', { params: search
 				    //offset: config.offset,
 				    //limit: config.limit
