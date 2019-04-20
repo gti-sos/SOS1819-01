@@ -32,25 +32,25 @@ div(class="test")
 						input(ng-change="navigate()" ng-model-options='{ debounce: 50 }' ng-model="filter.event" class="form-control" type="text" placeholder="Evento")
 					td(colspan="2")
 						label(for="a") Desde
-						input(id="a" ng-change="navigate()" ng-model-options='{ debounce: 250 }' ng-model="filter.from" placeholder="Desde" class="form-control" type="number" step="1" min="1")
+						input(id="a" ng-change="navigate()" ng-model-options='{ debounce: 50 }' ng-model="filter.from" placeholder="Desde" class="form-control" type="number" step="1" min="1")
 					td(colspan="2")
 						label(for="b") Hasta
-						input(id="b" ng-change="navigate()" ng-model-options='{ debounce: 250 }' ng-model="filter.to" placeholder="hasta" class="form-control" type="number" step="1" min="1")
+						input(id="b" ng-change="navigate()" ng-model-options='{ debounce: 50 }' ng-model="filter.to" placeholder="hasta" class="form-control" type="number" step="1" min="1")
 					td(colspan="3")
 						label Tipo
-						input(ng-change="navigate()" ng-model-options='{ debounce: 250 }' ng-model="filter.type" class="form-control" type="text" placeholder="Tipo")
+						input(ng-change="navigate()" ng-model-options='{ debounce: 50 }' ng-model="filter.type" class="form-control" type="text" placeholder="Tipo")
 					td(colspan="2")
 						label Pais
-						input(ng-change="navigate()" ng-model-options='{ debounce: 250 }' ng-model="filter.country" class="form-control" type="text" placeholder="País")
+						input(ng-change="navigate()" ng-model-options='{ debounce: 50 }' ng-model="filter.country" class="form-control" type="text" placeholder="País")
 					td
 						label Muertes
-						input(ng-change="navigate()" ng-model-options='{ debounce: 250 }' ng-model="filter.death" class="form-control" type="number" placeholder="Muertes"  step="1" min="0")
+						input(ng-change="navigate()" ng-model-options='{ debounce: 50 }' ng-model="filter.death" class="form-control" type="number" placeholder="Muertes"  step="0.01" min="0")
 					td
 						label Coste
-						input(ng-change="navigate()" ng-model-options='{ debounce: 250 }' ng-model="filter.inflation" class="form-control" placeholder="Coste" type="number" step="1" min="1")
+						input(ng-change="navigate()" ng-model-options='{ debounce: 50 }' ng-model="filter.inflation" class="form-control" placeholder="Coste" type="number" step="0.01" min="0")
 					td
 						label Coste sin inflación
-						input(ng-change="navigate()" placeholder="Coste (sin inflación)" ng-model-options='{ debounce: 250 }' ng-model="filter['no-inflation']" class="form-control" type="number" step="1" min="1")
+						input(ng-change="navigate()" placeholder="Coste (sin inflación)" ng-model-options='{ debounce: 250 }' ng-model="filter['no-inflation']" class="form-control" type="number" step="0.01" min="0")
 					td
 						div(class="d-flex flex-row justify-content-center align-items-center")
 							p
