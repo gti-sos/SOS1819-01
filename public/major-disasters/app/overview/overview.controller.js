@@ -35,26 +35,8 @@ angular.module('majorDisastersApp.overview')
 
 		};
 
-
-		$scope.create = () => {
-			if (validate($scope.nData)) {
-				$scope.nData.country = $scope.nData.country.split(',').map(e => {return e.trim();});
-				$scope.nData.type = $scope.nData.type.split(',').map(e => {return e.trim();});
-				$scope.loading = true;
-				MajorDisaster.add($scope.nData).then(() => {
-					$q.all([MajorDisaster.list($scope.filter), MajorDisaster.count()]).then((res) => {
-						$scope.data = res[0].data;
-						$scope.filter.count = Math.ceil(res[1].data.count / $scope.filter.limit);
-						$scope.loading = false;
-					});
-				}).catch((res) => {
-					$scope.loading = false;
-				});
-			}
-		};
-
-		function processFilter () {
-			var obj = JSON.parse(JSON.stringify($scope.filter));
+		function processFilter (obj) {
+			//var obj = JSON.parse(JSON.stringify($scope.filter));
 			obj.country = (obj.country) ? obj.country.split(',').map(e => {if (e) return e.trim(); }) : obj.country;
 			obj.type = (obj.type) ? obj.type.split(',').map(e => {if (e) return e.trim(); }) : obj.type;
 			return obj;
@@ -63,8 +45,9 @@ angular.module('majorDisastersApp.overview')
 		$scope.navigate = (index) => {
 			if (index < 0) return;
 			if (!index) index = 0;
-			$scope.filter.offset = index;
-			reloadTableData(function (res) {});
+			reloadTableData(index, function (res) {
+				$scope.filter.offset = index;
+			});
 			/*
 			$q.all([MajorDisaster.list(processFilter()), MajorDisaster.count($scope.filter)]).then((res) => {
 				$scope.loading = false;
@@ -79,16 +62,22 @@ angular.module('majorDisastersApp.overview')
 			*/
 		};
 
-		var reloadTableData = function (cb) {
+		var reloadTableData = function (index, cb) {
 			$scope.loading = true;
-			$q.all([MajorDisaster.list(processFilter()), MajorDisaster.count($scope.filter)]).then((res) => {
+			var filterObj = JSON.parse(JSON.stringify($scope.filter));
+			if (typeof index === 'function') {
+				cb = index;
+				index = $scope.filter.offset;
+			}
+			filterObj.offset = index;
+			$q.all([MajorDisaster.v1.list(processFilter(filterObj)), MajorDisaster.v2.count(filterObj)]).then((res) => {
 				$scope.data = res[0].data;
 				$scope.filter.count = Math.ceil(res[1].data.count / $scope.filter.limit);
 				$scope.loading = false;
-				if (cb && typeof cb === "function") cb(res);
+				if (cb) cb(res);
 			}).catch(function (res) {
 				$scope.loading = false;
-				if (cb && typeof cb === "function") cb(res);
+				if (cb) cb(res);
 			});
 		};
 
@@ -112,7 +101,7 @@ angular.module('majorDisastersApp.overview')
 		};
 
 		$scope.remove = (id) => {
-			MajorDisaster.remove(id).then((rRes) => {
+			MajorDisaster.v1.remove(id).then((rRes) => {
 				if ($scope.data.length === 1 && $scope.filter.offset > 0) $scope.filter.offset -= 1;
 				reloadTableData(function (res) {
 					$scope.data = res[0].data;
@@ -126,12 +115,14 @@ angular.module('majorDisastersApp.overview')
 
 		$scope.removeAll = () => {
 			if (window.confirm("¿Borrar TODOS los elementos?"))
-				MajorDisaster.removeAll().then(function (res) {
-					reloadTableData(function () {});
-					buildStatusPopup(res);
+				MajorDisaster.v1.removeAll().then(function (res) {
+					reloadTableData(function () {
+						buildStatusPopup(res);
+					});
 				}).catch(function (res) {
-					reloadTableData(function () {});
-					buildStatusPopup(res);
+					reloadTableData(function () {
+						buildStatusPopup(res);
+					});
 				});
 		};
 
@@ -181,14 +172,12 @@ angular.module('majorDisastersApp.overview')
 			if ($scope.formItem.$valid) {
 				if ($scope.nData.type.length > 0 && $scope.nData.country.length > 0) {
 					var action = ($scope.operation === 'modify') ? 
-						MajorDisaster.update($scope.nData.event, $scope.nData):
-						MajorDisaster.add($scope.nData);
+						MajorDisaster.v1.update($scope.nData.event, $scope.nData) :
+						MajorDisaster.v1.add($scope.nData);
 					action.then((res) => {
-						//console.log('success', res);
 						ngDialog.close($scope.ngDialogId);
 						ngDialog.open(buildStatusPopup(res));
 					}).catch((res) => {
-
 						ngDialog.open(buildStatusPopup(res));
 					});
 				} else {
@@ -221,6 +210,9 @@ angular.module('majorDisastersApp.overview')
 					break;
 				case 409:
 					data = {msg: "El recurso ya existe", type: "warning"};
+					break;
+				case 502:
+					data = {msg: "Operación no disponible", type: "warning"};
 					break;
 				default:
 					data = {msg: "La operación se ha completado con éxito", type: "success"};

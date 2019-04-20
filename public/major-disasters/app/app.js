@@ -12,7 +12,7 @@ angular.module('majorDisastersApp', ['ngRoute', "majorDisastersApp.miniPostman",
 				resolve: {
 					initialData: function (MajorDisaster) {
 						var pagination = {offset: 0, limit: 10, count: 0};
-						var promises = [MajorDisaster.list(pagination), MajorDisaster.count()];
+						var promises = [MajorDisaster.v1.list(pagination), MajorDisaster.v2.count()];
 						return Promise.all(promises).then(function (res) {
 							pagination.count = Math.ceil(res[1].data.count / pagination.limit);
 							return {data: res[0].data, pagination: pagination};

@@ -1,8 +1,8 @@
 style.
 	.blur-on-load {
-		filter: blur(2px);
-		-webkit-filter: blur(2px);
-		opacity: 0.2;
+		filter: blur(1px);
+		-webkit-filter: blur(1px);
+		opacity: 0.5;
 	}
 	.table-responsive {
 	    display: table;
@@ -29,7 +29,7 @@ div(class="test")
 				tr
 					td
 						label Evento
-						input(ng-change="navigate()" ng-model-options='{ debounce: 250 }' ng-model="filter.event" class="form-control" type="text" placeholder="Evento")
+						input(ng-change="navigate()" ng-model-options='{ debounce: 50 }' ng-model="filter.event" class="form-control" type="text" placeholder="Evento")
 					td(colspan="2")
 						label(for="a") Desde
 						input(id="a" ng-change="navigate()" ng-model-options='{ debounce: 250 }' ng-model="filter.from" placeholder="Desde" class="form-control" type="number" step="1" min="1")
@@ -49,7 +49,7 @@ div(class="test")
 						label Coste
 						input(ng-change="navigate()" ng-model-options='{ debounce: 250 }' ng-model="filter.inflation" class="form-control" placeholder="Coste" type="number" step="1" min="1")
 					td
-						label Coste (2019)
+						label Coste sin inflación
 						input(ng-change="navigate()" placeholder="Coste (sin inflación)" ng-model-options='{ debounce: 250 }' ng-model="filter['no-inflation']" class="form-control" type="number" step="1" min="1")
 					td
 						div(class="d-flex flex-row justify-content-center align-items-center")
@@ -87,7 +87,7 @@ div(class="test")
 					td(colspan="13")
 						div(class="d-flex justify-content-around")
 							div(class="btn-group")
-								button(ng-click="navigate($index)" class="btn btn-primary btn-lg" ng-repeat="item in [].constructor(filter.count) track by $index" ng-class="{'btn-info': $index == filter.offset}") {{$index + 1}}
+								button(ng-disabled="loading" ng-click="navigate($index)" class="btn btn-primary btn-lg" ng-repeat="item in [].constructor(filter.count) track by $index" ng-class="{'btn-info': $index == filter.offset}") {{$index + 1}}
 					td(colspan="1")
 						button(type="button" ng-click="create()" class="btn btn-block btn-success")
 							i(class="fas fa-plus")

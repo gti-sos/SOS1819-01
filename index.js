@@ -8,8 +8,9 @@ const pug = require('pug');
 const bombsAPI = require("./api-testing-of-nuclear-bombs");
 const hurricanesAPI = require("./api-hurricanes");
 const MongoClient = require("mongodb").MongoClient;
+const compression = require('compression');
 
-
+app.use(compression());
 app.use(morgan('dev'));
 app.set('views', [path.join(__dirname, 'public/major-disasters')]);
 app.set('view engine', 'pug');
@@ -44,7 +45,13 @@ client2.connect(err => {
 
 
 mongoose.connect(uri3, {useNewUrlParser: true}).then(function () {
-    app.use("/api/v1/major-disasters", require('./api-major-disasters'));
+    app.use("/api/:version/major-disasters", function (req, res, next) {
+        req._apiVersion = req.params.version;
+        next();
+    }, require('./api-major-disasters'));
+    //app.use("/api/:version/major-disasters", require('./api-major-disasters'));
+    //app.use("/api/v2/major-disasters", require('./api-major-disasters'));
+    
     app.use("/api/v1/secure/major-disasters", require('./api-major-disasters/authMiddleware'), require('./api-major-disasters'));
     console.log("Connected DB Bernabé");
 });

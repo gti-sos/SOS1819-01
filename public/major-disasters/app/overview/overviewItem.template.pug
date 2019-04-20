@@ -5,22 +5,22 @@ div(class="container-fluid")
 	form(name="formItem" ng-submit="submit()")
 		fieldset(class="form-group")
 			legend Evento
-			input(name="event" ng-disabled="operation === 'modify'" required ng-trim="true" ng-model="nData.event" class="form-control" type="text" placeholder="Event")
+			input(name="event" ng-disabled="operation === 'modify'" required ng-trim="true" ng-model="nData.event" class="form-control" type="text" placeholder="Evento")
 		
 		div(class="row")
 			fieldset(class="col col-md-6 form-group")
 				legend Año
-				input(name="year" required ng-model="nData.year" class="form-control" type="number" min="0" step="1" placeholder="Year")
+				input(name="year" required ng-model="nData.year" class="form-control" type="number" min="0" step="1" placeholder="Año")
 			fieldset(class="col ol-md-6 form-group")
 				legend Muertes
-				input(name="death" required ng-model="nData.death" class="form-control" type="number" placeholder="Deaths" min="0" step="1")
+				input(name="death" required ng-model="nData.death" class="form-control" type="number" placeholder="Muertes" min="0" step="1")
 		div(class="row")
 			fieldset(class="col col-md-6 form-group")
 				legend Coste
-				input(name="inflation" required ng-model="nData.inflation" class="form-control" type="number" placeholder="Cost" min="0" step="0.1")
+				input(name="inflation" required ng-model="nData.inflation" class="form-control" type="number" placeholder="Coste" min="0" step="0.01")
 			fieldset(class="col col-md-6 form-group")
-				legend Coste (inflación)
-				input(required ng-model="nData['no-inflation']" class="form-control" type="number" placeholder="Cost /w CPI" min="0" step="0.1")
+				legend Coste (sin inflación)
+				input(required ng-model="nData['no-inflation']" class="form-control" type="number" placeholder="Coste sin inflación" min="0" step="0.01")
 
 		fieldset
 			legend Tipo

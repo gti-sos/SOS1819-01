@@ -24,101 +24,103 @@ function buildSearch (req) {
 	}
 	return search;
 }
+exports.test = function (arg) {
+	console.log('hey', arg)
+	return arg;
+}
 
+exports.api = {
+	v1: {
+		init: function (req, res) {
+			//const count = await MajorDisaster.countDocuments({});
 
-exports.init = function (req, res) {
-	//const count = await MajorDisaster.countDocuments({});
-
-	MajorDisaster.countDocuments({}, function (er, count) {
-		if (count > 0) {
-			res.sendStatus(405);
-		} else {
-			const promises = populateData.map(function (e) {
-				return new MajorDisaster(e).save();
+			MajorDisaster.countDocuments({}, function (er, count) {
+				if (count > 0) {
+					res.sendStatus(405);
+				} else {
+					const promises = populateData.map(function (e) {
+						return new MajorDisaster(e).save();
+					});
+					Promise.all(promises).then(function () {
+						res.sendStatus(200);
+						//res.status(200).json({code: 200, msg: "OK"});
+					}).catch(function () {
+						res.sendStatus(400);
+					});
+				}
 			});
-			Promise.all(promises).then(function () {
-				res.sendStatus(200);
-				//res.status(200).json({code: 200, msg: "OK"});
-			}).catch(function () {
+		},
+		list: function (req, res) {
+			var search = buildSearch(req);
+			MajorDisaster.find(search.fields).select("-__v -_id").limit(search.limit).skip(search.offset * search.limit).exec(function (err, data) {
+				if (err)
+					return res.send(err);
+				res.json(data);	
+			});
+			
+		},
+		get: function (req, res) {
+			MajorDisaster.findOne({event: req.params.event}).select("-__v -_id").exec(function (err, data) {
+				if (err || !data)
+					return res.sendStatus(404);
+					//return res.status(404).json({code: 404, msg: "Not Found"});
+				res.json(data);
+			});
+		},
+		create: function (req, res) {
+			let majorDisaster = new MajorDisaster(req.body);
+			//const count = await MajorDisaster.countDocuments({event: req.body.event});
+			MajorDisaster.countDocuments({event: req.body.event}, function (er, count) {
+				if (count > 0) 
+					return res.sendStatus(409);
+				majorDisaster.save(function (err, data) {
+					res.sendStatus(err ? 400 : 201);
+					//res.status(code).json({code: code, msg: msg, data: data});
+				});
+			});
+		},
+		update: function (req, res) {
+			if (req.body.event && req.params.event !== req.body.event) return res.sendStatus(400);
+			MajorDisaster.findOne({event: req.params.event}).then(function (doc) {
+				if (!doc) return res.sendStatus(404);
+				var oKeys = Object.keys(doc._doc).filter(e => {return e !== '_id' && e !== "__v";});
+				if (!oKeys.every(val => Object.keys(req.body).includes(val))) return res.sendStatus(400);
+				for (var key in req.body) doc[key] = req.body[key];
+				doc.validate(function (vErr) {
+					console.log('vErr', vErr);
+					if (vErr) return res.sendStatus(400);
+					doc.save(function (sErr) {
+						console.log('sErr', sErr);
+						if (sErr) return res.sendStatus(400);
+						res.sendStatus(200);
+					});
+				});
+			}).catch(function (err) {
+				console.log(err);
 				res.sendStatus(400);
 			});
-		}
-	});
-};
-
-exports.count = function (req, res) {
-	var search = buildSearch(req);
-	console.log(search.fields);
-	MajorDisaster.countDocuments(search.fields, function (err, count) {
-		if (err) return res.json(err);
-		res.json({count: count});
-	});
-};
-
-exports.list = function (req, res) {
-	var search = buildSearch(req);
-	MajorDisaster.find(search.fields).select("-__v -_id").limit(search.limit).skip(search.offset * search.limit).exec(function (err, data) {
-		if (err)
-			return res.send(err);
-		res.json(data);	
-	});
-	
-};
-
-exports.get = function (req, res) {
-	MajorDisaster.findOne({event: req.params.event}).select("-__v -_id").exec(function (err, data) {
-		if (err || !data)
-			return res.sendStatus(404);
-			//return res.status(404).json({code: 404, msg: "Not Found"});
-		res.json(data);
-	});
-};
-
-exports.create = function (req, res) {
-	let majorDisaster = new MajorDisaster(req.body);
-	//const count = await MajorDisaster.countDocuments({event: req.body.event});
-	MajorDisaster.countDocuments({event: req.body.event}, function (er, count) {
-		if (count > 0) 
-			return res.sendStatus(409);
-		majorDisaster.save(function (err, data) {
-			res.sendStatus(err ? 400 : 201);
-			//res.status(code).json({code: code, msg: msg, data: data});
-		});
-	});
-};
-
-exports.update = function (req, res) {
-	if (req.body.event && req.params.event !== req.body.event) return res.sendStatus(400);
-	MajorDisaster.findOne({event: req.params.event}).then(function (doc) {
-		if (!doc) return res.sendStatus(404);
-		var oKeys = Object.keys(doc._doc).filter(e => {return e !== '_id' && e !== "__v";});
-		if (!oKeys.every(val => Object.keys(req.body).includes(val))) return res.sendStatus(400);
-		for (var key in req.body) doc[key] = req.body[key];
-		doc.validate(function (vErr) {
-			console.log('vErr', vErr);
-			if (vErr) return res.sendStatus(400);
-			doc.save(function (sErr) {
-				console.log('sErr', sErr);
-				if (sErr) return res.sendStatus(400);
-				res.sendStatus(200);
+		},
+		destroy: function (req, res) {
+			MajorDisaster.deleteOne({event: req.params.event}).catch(function (err) {
+				res.sendStatus(400);
+			}).then(function (result) {
+				return (result.n === 0) ? res.sendStatus(404) : res.sendStatus(200);
 			});
-		});
-	}).catch(function (err) {
-		console.log(err);
-		res.sendStatus(400);
-	});
-};
-
-exports.destroy = function (req, res) {
-	MajorDisaster.deleteOne({event: req.params.event}).catch(function (err) {
-		res.sendStatus(400);
-	}).then(function (result) {
-		return (result.n === 0) ? res.sendStatus(404) : res.sendStatus(200);
-	});
-};
-
-exports.destroyAll = function (req, res) {
-	MajorDisaster.deleteMany({}, function (err) {
-		res.sendStatus((err) ? 404 : 200);
-	});
+		},
+		destroyAll: function (req, res) {
+			MajorDisaster.deleteMany({}, function (err) {
+				res.sendStatus((err) ? 404 : 200);
+			});
+		}
+	},
+	v2: {
+		count: function (req, res) {
+			var search = buildSearch(req);
+			console.log(search.fields);
+			MajorDisaster.countDocuments(search.fields, function (err, count) {
+				if (err) return res.json(err);
+				res.json({count: count});
+			});
+		}
+	}
 };
