@@ -27,28 +27,28 @@ div(class="test")
 				//	td
 				//	td
 				tr
-					td
+					td(ng-class="{'font-weight-bold': filter.event}")
 						label Evento
 						input(ng-change="navigate()" ng-model-options='{ debounce: 50 }' ng-model="filter.event" class="form-control" type="text" placeholder="Evento")
-					td(colspan="2")
+					td(ng-class="{'font-weight-bold': filter.from}" colspan="2")
 						label(for="a") Desde
 						input(id="a" ng-change="navigate()" ng-model-options='{ debounce: 50 }' ng-model="filter.from" placeholder="Desde" class="form-control" type="number" step="1" min="1")
-					td(colspan="2")
+					td(ng-class="{'font-weight-bold': filter.to}" colspan="2")
 						label(for="b") Hasta
 						input(id="b" ng-change="navigate()" ng-model-options='{ debounce: 50 }' ng-model="filter.to" placeholder="hasta" class="form-control" type="number" step="1" min="1")
-					td(colspan="3")
+					td(ng-class="{'font-weight-bold': filter.type}" colspan="3")
 						label Tipo
 						input(ng-change="navigate()" ng-model-options='{ debounce: 50 }' ng-model="filter.type" class="form-control" type="text" placeholder="Tipo")
-					td(colspan="2")
+					td(ng-class="{'font-weight-bold': filter.country}" colspan="2")
 						label Pais
 						input(ng-change="navigate()" ng-model-options='{ debounce: 50 }' ng-model="filter.country" class="form-control" type="text" placeholder="País")
-					td
+					td(ng-class="{'font-weight-bold': filter.death}")
 						label Muertes
 						input(ng-change="navigate()" ng-model-options='{ debounce: 50 }' ng-model="filter.death" class="form-control" type="number" placeholder="Muertes"  step="0.01" min="0")
-					td
+					td(ng-class="{'font-weight-bold': filter.inflation}")
 						label Coste
 						input(ng-change="navigate()" ng-model-options='{ debounce: 50 }' ng-model="filter.inflation" class="form-control" placeholder="Coste" type="number" step="0.01" min="0")
-					td
+					td(ng-class="{'font-weight-bold': filter['no-inflation']}")
 						label Coste sin inflación
 						input(ng-change="navigate()" placeholder="Coste (sin inflación)" ng-model-options='{ debounce: 250 }' ng-model="filter['no-inflation']" class="form-control" type="number" step="0.01" min="0")
 					td
@@ -60,21 +60,21 @@ div(class="test")
 
 			tbody(ng-class="{'blur-on-load': loading}")
 				tr(ng-repeat="d in data track by $index")
-					td 
+					td(ng-class="{'border font-weight-bold': filter.event}")
 						span {{d.event}}
-					td(colspan="4")
+					td(ng-class="{'border font-weight-bold': filter.from || filter.to}" colspan="4")
 						span {{d.year}}
-					td(colspan="3")
+					td(ng-class="{'border font-weight-bold': filter.type}" colspan="3")
 						span(ng-repeat="nType in d.type track by $index") 
 							span {{nType}}
 							span(ng-if="!$last") , 
-					td(colspan="2")
+					td(ng-class="{'border font-weight-bold': filter.country}" colspan="2")
 						span(ng-repeat="nCountry in d.country track by $index") {{nCountry}}{{(!$last) ? ',' : '' }}&nbsp;
-					td 
+					td(ng-class="{'border font-weight-bold': filter.death}")
 						span {{d.death}}
-					td 
+					td(ng-class="{'border font-weight-bold': filter.inflation}")
 						span {{d.inflation}}
-					td 
+					td(ng-class="{'border font-weight-bold': filter['no-inflation']}")
 						span {{d["no-inflation"]}}
 
 					td(class="btn-group")

@@ -62,11 +62,13 @@ angular.module('majorDisastersApp.overview')
 		};
 
 		var reloadTableData = function (index, cb) {
-			console.log(arguments)
 			$scope.loading = true;
 			var filterObj = JSON.parse(JSON.stringify($scope.filter));
-			if (typeof index === 'function' || index != null) {
+			if (typeof index === 'function') {
 				cb = index;
+				index = $scope.filter.offset;
+			}
+			if (index == null) {
 				index = $scope.filter.offset;
 			}
 			filterObj.offset = index;
