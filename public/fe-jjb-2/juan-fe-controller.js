@@ -4,6 +4,18 @@ app.controller("juan-fe-controller", function ($scope,$http) {
     console.log("juan-fe-controller initialized!");
     $scope.url = "/api/v1/hurricanes";
     
+    refresh();
+    
+    function refresh(){
+        $http.get($scope.url).then(function (response){
+            $scope.data = JSON.stringify(response.data, null, 2);
+            $scope.status = response.status + " " + response.statusText;
+        }).catch(function (response) {
+            $scope.data = JSON.stringify(response.data, null, 2);
+            $scope.status = response.status + " " + response.statusText;
+        });
+    };
+    
     $http.get("api/v1/hurricanes").then(function(res){
         console.log("Datos recibidos"+JSON.stringify(res.data,null,2));
         
@@ -38,6 +50,7 @@ app.controller("juan-fe-controller", function ($scope,$http) {
             $scope.data = JSON.stringify(response.data, null, 2);
             $scope.status = response.status + " " + response.statusText;
         });
+        refresh()
     };
 
     $scope.put = function () {
@@ -55,6 +68,7 @@ app.controller("juan-fe-controller", function ($scope,$http) {
             $scope.data = JSON.stringify(response.data, null, 2);
             $scope.status = response.status + " " + response.statusText;
         });
+        refresh();
     };
 
     $scope.delete = function (){
@@ -65,5 +79,25 @@ app.controller("juan-fe-controller", function ($scope,$http) {
             $scope.data = JSON.stringify(response.data, null, 2);
             $scope.status = response.status + " " + response.statusText;
         });
+    };
+    //TODO
+    $scope.filtra= function(from,to){
+        $http.get($scope.url+"?from="+from+"&to="+to).then(function (response){
+            $scope.data = JSON.stringify(response.data, null, 2);
+            $scope.status = response.status + " " + response.statusText;
+        }).catch(function (response) {
+            $scope.data = JSON.stringify(response.data, null, 2);
+            $scope.status = response.status + " " + response.statusText;
+        });
+    };
+    $scope.borraTodo= function(){
+         $http.delete($scope.url).then(function (response){
+            $scope.data = JSON.stringify(response.data, null, 2);
+            $scope.status = response.status + " " + response.statusText;
+        }).catch(function (response) {
+            $scope.data = JSON.stringify(response.data, null, 2);
+            $scope.status = response.status + " " + response.statusText;
+        });
+        refresh();
     };
 });

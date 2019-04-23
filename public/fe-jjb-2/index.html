@@ -75,6 +75,34 @@
                     </td>
                     
                 </tr>
+                </tr>
+                <tr>
+                    <td>
+                        <input
+                            class = "form-control"
+                            ng-model = "hur.from"
+                            value = "Desde"/>
+                    </td>
+                    <td>
+                        <input
+                            class = "form-control"
+                            ng-model = "hur.to"
+                            value = "Hasta"/>
+                    </td><td>
+                        <button
+                            class="btn btn-primary"
+                            ng-click="filtra(hur.from,hur.to)"
+                            >Filtrar por año</button>
+                    </td>
+                </tr>
+                <tr>
+                   <td>
+                        <button
+                            class="btn btn-primary"
+                            ng-click="borraTodo()"
+                            >Borrar Datos</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </body>
