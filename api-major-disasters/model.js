@@ -28,8 +28,8 @@ mongoose.model('MajorDisaster', schema);
 			//arr[i].textContent.split("\n").filter(function (e) { return e !== "" })
 	        
 			var obj = {
-				inflation: parseFloat(row[0].split("[")[0].split("–").reverse()[0].replace("$", "").replace("≥", "").replace("~", "").replace(">", "").trim()), 
-				"no-inflation": parseFloat(row[1].split("–").reverse()[0].replace("$", "").replace("≥", "").replace("~", "").replace(">", "").trim()), 
+				inflation: parseFloat(row[1].split("[")[0].split("–").reverse()[0].replace("$", "").replace("≥", "").replace("~", "").replace(">", "").trim()), 
+				"no-inflation": parseFloat(row[0].split("–").reverse()[0].replace("$", "").replace("≥", "").replace("~", "").replace(">", "").trim()), 
 				country: country,//row[6].split(",").map(function (e) { return e.trim() }),
 				event: row[3].trim().replace(/[0-9]/g, ''), 
 				type: row[4].trim().split(",").map(function (e) { return e.trim() }), 
