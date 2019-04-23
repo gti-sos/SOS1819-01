@@ -12,53 +12,23 @@ function buildStatusPopup (data) {
 
 angular.module('majorDisastersApp.overview')
 
-	.controller('overviewCtrl', function ($scope, $q, MajorDisaster, initialData, ngDialog) {
+	.controller('overviewCtrl', function ($scope, $location, $q, MajorDisaster, initialData, ngDialog, autoLoad) {
+		var searchObj = $location.search();
 		$scope.loading = false;
-		$scope.nData = {};
 		$scope.data = initialData.data || [];
+		$scope.count = initialData.count;
 		$scope.filter =  {
-			offset: initialData.pagination.offset || 0,
-			limit: initialData.pagination.limit || 10,
-			count: initialData.pagination.count || 0,
-			event: null,
-			year: null,
-			death: null, 
-			inflation: null, 
-			"no-inflation": null, 
-			type: null, 
-			country: null,
-			from: null,
-			to: null
-		};
-
-		$scope.yearFilterSelector = {
-
-		};
-
-		function processFilter (obj) {
-			//var obj = JSON.parse(JSON.stringify($scope.filter));
-			obj.country = (obj.country) ? obj.country.split(',').map(e => {if (e) return e.trim(); }) : obj.country;
-			obj.type = (obj.type) ? obj.type.split(',').map(e => {if (e) return e.trim(); }) : obj.type;
-			return obj;
-		}
-
-		$scope.navigate = (index) => {
-			index = (index) ? index : 0;
-			reloadTableData(index, function (res) {
-				$scope.filter.offset = index;
-			});
-			/*
-			$q.all([MajorDisaster.list(processFilter()), MajorDisaster.count($scope.filter)]).then((res) => {
-				$scope.loading = false;
-				$scope.data = res[0].data;
-				$scope.filter.count = Math.ceil(res[1].data.count / $scope.filter.limit);
-			}).catch((res) => {
-				$scope.filter.offset = index;
-
-				$scope.loading = false;
-				window.alert(JSON.stringify(res));
-			});
-			*/
+			offset: parseInt(searchObj.offset) || 0,
+			limit: parseInt(searchObj.limit)  || 10,
+			event: searchObj.event || null,
+			year: parseInt(searchObj.year) || null,
+			death: parseInt(searchObj.death) || null, 
+			inflation: parseFloat(searchObj.inflation) || null, 
+			"no-inflation": parseFloat(searchObj['no-inflation']) || null, 
+			type: searchObj.type || null, 
+			country: searchObj.country || null,
+			from: parseInt(searchObj.from) || null,
+			to: parseInt(searchObj.to) || null
 		};
 
 		var reloadTableData = function (index, cb) {
@@ -74,13 +44,41 @@ angular.module('majorDisastersApp.overview')
 			filterObj.offset = index;
 			$q.all([MajorDisaster.v1.list(processFilter(filterObj)), MajorDisaster.v2.count(filterObj)]).then((res) => {
 				$scope.data = res[0].data;
-				$scope.filter.count = Math.ceil(res[1].data.count / $scope.filter.limit);
+				$scope.count = Math.ceil(res[1].data.count / $scope.filter.limit);
 				$scope.loading = false;
+				$scope.filter.offset = index;
+				var trimmedFilter = {};
+				for (var key in $scope.filter) {
+					if ($scope.filter[key] !== "" && $scope.filter[key] != null)
+						trimmedFilter[key] = $scope.filter[key];
+				}
+				$location.search(trimmedFilter);
 				if (cb) cb(res);
 			}).catch(function (res) {
 				$scope.loading = false;
 				if (cb) cb(res);
 			});
+		};
+
+		$scope.resetFilters = function () {
+			$scope.filter =  {
+				offset: 0,
+				limit:  10,
+				event: null,
+				year: null,
+				death: null, 
+				inflation: null, 
+				"no-inflation": null, 
+				type: searchObj.type || null, 
+				country: searchObj.country || null,
+				from: parseInt(searchObj.from) || null,
+				to: parseInt(searchObj.to) || null
+			};
+			reloadTableData();
+		};
+
+		$scope.getElement = function (item) {
+			$location.path('/overview/' + item.event);
 		};
 
 		$scope.create = () => {
@@ -98,7 +96,11 @@ angular.module('majorDisastersApp.overview')
 						inflation: null,
 						"no-inflation": null
 					}
-				}, preCloseCallback: reloadTableData
+				}, preCloseCallback: function () {
+					reloadTableData(function () {
+						$location.hash('');
+					});
+				}
 			});
 		};
 
@@ -107,7 +109,7 @@ angular.module('majorDisastersApp.overview')
 				if ($scope.data.length === 1 && $scope.filter.offset > 0) $scope.filter.offset -= 1;
 				reloadTableData(function (res) {
 					$scope.data = res[0].data;
-					$scope.filter.count = Math.ceil(res[1].data.count / $scope.filter.limit);
+					$scope.count = Math.ceil(res[1].data.count / $scope.filter.limit);
 					ngDialog.open(buildStatusPopup(rRes));
 				});
 			}).catch((rRes) => {
@@ -116,35 +118,72 @@ angular.module('majorDisastersApp.overview')
 		};
 
 		$scope.removeAll = () => {
-			if (window.confirm("¿Borrar TODOS los elementos?"))
-				MajorDisaster.v1.removeAll().then(function (res) {
-					reloadTableData(function () {
-						buildStatusPopup(res);
+			MajorDisaster.v2.count().then(function (cRes) {
+				if (window.confirm("¿Borrar las " + cRes.data.count + " entradas?"))
+					MajorDisaster.v1.removeAll().then(function (res) {
+						reloadTableData(function () {
+							ngDialog.open(buildStatusPopup(res));
+						});
+					}).catch(function (res) {
+						reloadTableData(function () {
+							ngDialog.open(buildStatusPopup(res));
+						});
 					});
-				}).catch(function (res) {
-					reloadTableData(function () {
-						buildStatusPopup(res);
-					});
+			}).catch(function (cRes) {
+				reloadTableData(function () {
+					ngDialog.open(buildStatusPopup(cRes));
 				});
-		};
-
-		$scope.modify = (item) => {
-			ngDialog.open({
-				template: '/ui/v1/major-disasters/overview/overviewItem.template.pug',
-				controller: "overviewModItemCtrl",
-				data: {
-					operation: 'modify',
-					item: item
-				}, preCloseCallback: reloadTableData
 			});
-			//window.alert(JSON.stringify(item))
+			
 		};
-	})
 
+		$scope.modify = (id) => {
+			$location.hash(id);
+			MajorDisaster.v1.get(id).then(function (res) {
+				ngDialog.open({
+					template: '/ui/v1/major-disasters/overview/overviewItem.template.pug',
+					controller: "overviewModItemCtrl",
+					data: {
+						operation: 'modify',
+						item: res.data
+					}, preCloseCallback: function () {
+						reloadTableData(function () {
+							$location.hash('');
+						});
+					}
+				});
+			}).catch(function (res) {
+				var p = buildStatusPopup(res);
+				p.preCloseCallback = function () {
+					reloadTableData(function () {
+						$location.hash('');
+					});
+				};
+					
+				ngDialog.open(p);
+			});
+		};
+		
+		if (autoLoad) $scope.modify(autoLoad);
+		
+
+		function processFilter (obj) {
+			obj.country = (obj.country) ? obj.country.split(',').map(e => {if (e) return e.trim(); }) : obj.country;
+			obj.type = (obj.type) ? obj.type.split(',').map(e => {if (e) return e.trim(); }) : obj.type;
+			return obj;
+		}
+
+		$scope.navigate = (index) => {
+			index = (index) ? index : 0;
+			reloadTableData(index);
+		};
+
+	})
 
 	.controller('overviewModItemCtrl', function ($scope, MajorDisaster, ngDialog) {
 		$scope.nData = JSON.parse(JSON.stringify($scope.ngDialogData.item));
 		$scope.operation = $scope.ngDialogData.operation;
+		
 		$scope.tmp = {
 			country: {
 				val: "",
@@ -222,29 +261,3 @@ angular.module('majorDisastersApp.overview')
 			return data;
 		})(res);
 	});
-
-
-
-function validate (obj) {
-	var keys = ["inflation", "no-inflation", "death", "year", "country", "type", "event"];
-	var validData = keys.every(val => Object.keys($scope.nData).includes(val));
-	var res = validData;
-	if (validData) {
-		var typesCheck = [
-			isFinite(obj.inflation),
-			isFinite(obj["no-inflation"]),
-			isFinite(obj.death),
-			isFinite(obj.year),
-			obj.type instanceof Array,
-			obj.country instanceof Array,
-			obj.event.trim() !== ""
-		].every(val =>  {return val === true;});
-		if (!typesCheck) window.alert('Datos incorrectos');
-		res = typesCheck;
-	} else {
-		window.alert('Faltan datos');
-	}
-	return res;
-}
-
-

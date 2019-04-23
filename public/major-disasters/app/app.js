@@ -6,11 +6,13 @@ angular.module('majorDisastersApp', ['ngRoute', "majorDisastersApp.miniPostman",
 			    templateUrl: '/ui/v1/major-disasters/mini-postman/minipostman.template.pug',
 			    controller: 'miniPostmanCtrl'
 			})
+			/*
 			.when('/overview', {
 				templateUrl: '/ui/v1/major-disasters/overview/overview.template.pug',
 				controller: 'overviewCtrl',
 				resolve: {
 					initialData: function (MajorDisaster) {
+						console.log('resolving');
 						var pagination = {offset: 0, limit: 10, count: 0};
 						var promises = [MajorDisaster.v1.list(pagination), MajorDisaster.v2.count()];
 						return Promise.all(promises).then(function (res) {
@@ -23,6 +25,7 @@ angular.module('majorDisastersApp', ['ngRoute', "majorDisastersApp.miniPostman",
 					}
 				}
 			})
+			*/
 			.when('/', {redirectTo: "/overview"});
 	});
 /*

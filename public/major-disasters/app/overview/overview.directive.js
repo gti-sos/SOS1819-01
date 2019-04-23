@@ -1,10 +1,9 @@
 angular.module('majorDisastersApp.overview')
-	.directive('arrayInput', function () {
+	.directive('colorPartialMatch', function () {
 		return {
 			restrict: "A",
 			require: 'ngModel',
 			link: function (scope, elm, attr, ngModel) {
-				
 						//scope.tmp[attr.name] = viewValue;
 						//console.log(modelValue)
 						/*
