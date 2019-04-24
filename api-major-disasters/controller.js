@@ -24,11 +24,6 @@ function buildSearch (req) {
 	}
 	return search;
 }
-exports.test = function (arg) {
-	console.log('hey', arg)
-	return arg;
-}
-
 exports.api = {
 	v1: {
 		init: function (req, res) {
