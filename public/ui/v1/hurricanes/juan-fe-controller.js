@@ -84,6 +84,10 @@ app.controller("juan-fe-controller", function ($scope,$http, $q) {
  
         });
     };
+    
+    $scope.load = function (item) {
+        $scope.body = item;
+    }
 
     $scope.put = function () {
         var bdy = {};
@@ -95,7 +99,7 @@ app.controller("juan-fe-controller", function ($scope,$http, $q) {
 
         $http.put($scope.url + '/' + bdy.name, bdy).then(function (response){
             //$scope.data = JSON.stringify(response.data, null, 2);
-            window.alert('sadsad')
+            window.alert(bdy.name+' modificado.')
             $scope.status = response.status + " " + response.statusText;
         }).catch(function (response) {
             //$scope.data = JSON.stringify(response.data, null, 2);
