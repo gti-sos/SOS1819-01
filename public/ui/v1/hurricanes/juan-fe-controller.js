@@ -88,13 +88,14 @@ app.controller("juan-fe-controller", function ($scope,$http, $q) {
     $scope.put = function () {
         var bdy = {};
         try {
-            bdy = JSON.parse($scope.body);
+            bdy = $scope.body;
         } catch (e) {
-            alert(e);
+            return alert(e);
         }
 
-        $http.put($scope.url, bdy).then(function (response){
+        $http.put($scope.url + '/' + bdy.name, bdy).then(function (response){
             //$scope.data = JSON.stringify(response.data, null, 2);
+            window.alert('sadsad')
             $scope.status = response.status + " " + response.statusText;
         }).catch(function (response) {
             //$scope.data = JSON.stringify(response.data, null, 2);
