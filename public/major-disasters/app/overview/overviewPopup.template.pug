@@ -1,0 +1,5 @@
+div(class="container")
+	div
+		div(class="text-center") {{data.msg}}
+		p &nbsp;
+		button(class="btn btn-block" ng-class="{'btn-success': data.type === 'success', 'btn-warning': data.type === 'warning', 'btn-danger': data.type === 'danger'}" ng-click="closeThisDialog(0)") Aceptar

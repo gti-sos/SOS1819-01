@@ -10,6 +10,34 @@ app.get("/api/v1/hurricanes/docs", (req, res)=>{
    res.redirect("https://documenter.getpostman.com/view/6916951/S17ut6v5");
 });
 
+app.get("/api/v2/hurricanes/count", (req, res)=>{
+  let search = {fields: {}, offset: 0, limit: 0};
+  for (let key in req.query) {
+      if (["from", "to"].indexOf(key) > -1) {
+          var nCondition = (key === "from") ? "$gte" : "$lte";
+          if (!search.fields.year) 
+              search.fields.year = {};
+          search.fields.year[nCondition] = parseInt(req.query[key]);
+      } else if (["offset", "limit"].indexOf(key) > -1)
+          search[key] = parseInt(req.query[key]);
+     // else if (["country", "type"].indexOf(key) > -1)
+       //   search.fields[key] = {"$in": req.query[key]};
+    
+      else {
+  
+          search.fields[key] = req.query[key];
+      }    
+  }
+
+  
+
+  hurricanes.countDocuments(search.fields, function (err, count) {
+        if (err) return res.json(err);
+        res.json({count: count});
+    });
+});
+
+
 
 app.get("/api/v1/hurricanes/loadInitialData", (req, res) => {
     var hurricanesAux = require("./populateData.json")
@@ -36,11 +64,11 @@ app.get("/api/v1/hurricanes", (req, res) => {
 */
 app.get("/api/v1/hurricanes", (req, res) => {
     
-    let search = {fields: {}, page: 0, limit: 100};
+    let search = {fields: {}, offset: 0, limit: 0};
 
     for (let key in req.query) {
         if (["from", "to"].indexOf(key) > -1) {
-            var nCondition = (key === "from") ? "$gt" : "$lt";
+            var nCondition = (key === "from") ? "$gte" : "$lte";
             if (!search.fields.year) 
                 search.fields.year = {};
             search.fields.year[nCondition] = parseInt(req.query[key]);
@@ -49,12 +77,13 @@ app.get("/api/v1/hurricanes", (req, res) => {
        // else if (["country", "type"].indexOf(key) > -1)
          //   search.fields[key] = {"$in": req.query[key]};
       
-        else{
+        else {
    
             search.fields[key] = req.query[key];
-}    }
+        }    
+    }
     
-    hurricanes.find(search.fields, {fields: {_id: 0}}).limit(search.limit).skip(search.page * search.limit).toArray((err,hurricanesArray)=>{
+    hurricanes.find(search.fields, {fields: {_id: 0}}).limit(search.limit).skip(search.offset * search.limit).toArray((err,hurricanesArray)=>{
         if(err)
             console.log("Error " + err)
             
@@ -204,7 +233,7 @@ app.put("/api/v1/hurricanes/:name", (req, res) => {
           return res.sendStatus(404);  
         }
         res.sendStatus((err) ? 404 : 200);
-    })
+    });
 
 
 });

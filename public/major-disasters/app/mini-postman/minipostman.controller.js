@@ -13,11 +13,11 @@ angular.module('majorDisastersApp.miniPostman')
 			seven: {event: "Great Hanshin earthquake", data: '{"country": ["China"],"type": ["earthquake"],"year": 2008,"no-inflation": 148,"inflation": 176.4,"death": 87587,"event": "Sichuan earthquake"}', response: emptyResponse},
 			eight: {response: emptyResponse}
 		};
-		$scope.apiUrl = MajorDisaster.apiUrl;
+		$scope.apiUrl = MajorDisaster.v1.__apiUrl;
 
 		
 		$scope.populate = function () {
-			MajorDisaster.populate().then(function (res) {
+			MajorDisaster.v1.populate().then(function (res) {
 				$scope.tests.eight.response = {status: res.status};
 			}).catch(function (res) {
 				$scope.tests.eight.response = {status: res.status};
@@ -25,8 +25,7 @@ angular.module('majorDisastersApp.miniPostman')
 		};
 
 		$scope.list = function () {
-			MajorDisaster.list({offset: 0, limit: 0}).then(function	 (res) {
-				console.log(res)
+			MajorDisaster.v1.list({offset: 0, limit: 0}).then(function	 (res) {
 				$scope.tests.four.response = {data: res.data, status: res.status};
 			}).catch(function (res) {
 				$scope.tests.four.response = {data: res.data, status: res.status};
@@ -34,7 +33,7 @@ angular.module('majorDisastersApp.miniPostman')
 		};
  
 		$scope.get = function (id) {
-			MajorDisaster.get(id).then(function (res) {
+			MajorDisaster.v1.get(id).then(function (res) {
 				$scope.tests.zero.response = {data: res.data, status: res.status};
 			}).catch(function (res) {
 				$scope.tests.zero.response = {data: res.data, status: res.status};
@@ -45,7 +44,7 @@ angular.module('majorDisastersApp.miniPostman')
 		$scope.add = function () {
 			try {
 			    var data = JSON.parse($scope.tests.one.data);
-				MajorDisaster.add(data).then(function(res) {
+				MajorDisaster.v1.add(data).then(function(res) {
 					$scope.tests.one.response = {data: res.data, status: res.status};
 				}).catch(function (res) {
 					$scope.tests.one.response = {data: res.data, status: res.status};
@@ -58,7 +57,7 @@ angular.module('majorDisastersApp.miniPostman')
 		$scope.addBad = function (id) {
 			try {
 			    var data = JSON.parse($scope.tests.six.data);
-				MajorDisaster.addBad(id, data).then(function(res) {
+				MajorDisaster.v1.addBad(id, data).then(function(res) {
 					$scope.tests.six.response = {data: res.data, status: res.status};
 				}).catch(function (res) {
 					$scope.tests.six.response = {data: res.data, status: res.status};
@@ -71,7 +70,7 @@ angular.module('majorDisastersApp.miniPostman')
 		$scope.update = function (id) {
 			try {
 			    var data = JSON.parse($scope.tests.two.data);
-				MajorDisaster.update(id, data).then(function(res) {
+				MajorDisaster.v1.update(id, data).then(function(res) {
 					$scope.tests.two.response = {data: res.data, status: res.status};
 				}).catch(function (res) {
 					$scope.tests.two.response = {data: res.data, status: res.status};
@@ -84,7 +83,7 @@ angular.module('majorDisastersApp.miniPostman')
 		$scope.updateBad = function () {
 			try {
 			    var data = JSON.parse($scope.tests.seven.data);
-				MajorDisaster.updateBad(data).then(function(res) {
+				MajorDisaster.v1.updateBad(data).then(function(res) {
 					$scope.tests.seven.response = {data: res.data, status: res.status};
 				}).catch(function (res) {
 					$scope.tests.seven.response = {data: res.data, status: res.status};
@@ -95,7 +94,7 @@ angular.module('majorDisastersApp.miniPostman')
 		};
 
 		$scope.remove = function (id) {
-			MajorDisaster.remove(id).then(function (res) {
+			MajorDisaster.v1.remove(id).then(function (res) {
 				$scope.tests.three.response = {data: res.data, status: res.status};
 			}).catch(function (res) {
 				$scope.tests.three.response = {data: res.data, status: res.status};
@@ -103,7 +102,7 @@ angular.module('majorDisastersApp.miniPostman')
 		};
 
 		$scope.removeAll = function () {
-			MajorDisaster.removeAll().then(function (res) {
+			MajorDisaster.v1.removeAll().then(function (res) {
 				$scope.tests.five.response = {data: res.data, status: res.status};
 			}).catch(function (res) {
 				$scope.tests.five.response = {data: res.data, status: res.status};

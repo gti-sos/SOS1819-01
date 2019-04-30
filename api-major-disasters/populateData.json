@@ -1,11 +1,1255 @@
 [
-	{"country": ["Japan"], "year": 2011, "no-inflation": 360, "inflation": 411.30, "death": 15894, "type": ["earthquake", "tsunami"], "event": "Tōhoku earthquake and tsunami"},
-	{"country": ["Japan"], "year":1995, "no-inflation": 197, "inflation": 329.80, "death":	5502, "type": ["earthquake"], "event": "Great Hanshin earthquake"},
-	{"country": ["China"], "year":2008, "no-inflation": 148, "inflation": 176.40, "death":	87587, "type": ["earthquake"], "event": "Sichuan earthquake"},
-	{"country": ["United States"], "year":2005, "no-inflation": 125, "inflation":	165, "death": 1245, "type":	["cyclone"], "event": "Hurricane Katrina"},
-	{"country": ["United States"], "year":2017, "no-inflation": 125, "inflation":	129.50, "death":	107, "type": ["cyclone"], "event": " Hurricane Harvey"},
-	{"country": ["Puerto Rico, Dominica, Guadeloupe"], "year":2017, "no-inflation":	91.60, "inflation":94.90, "death": 3057, "type": ["cylone"], "event": "Hurricane Maria"},
-	{"country": ["United States, Haiti, Saint Martin"], "year":2012, "no-inflation":	68.7, "inflation":76.30, "death": 233, "type":["cyclone"], "event": "Hurricane Sandy"},
-	{"country": ["United States"], "year":2017, "no-inflation": 64, "inflation": 66.50, "death":134, "type": ["cyclone"], "event":	"Hurricane Irma"},
-	{"country": ["United States", "Canada"], "year":2010, "no-inflation": 60, "inflation": 69.70, "death": 11, "type": ["contamination"], "event": "Deepwater Horizon oil spill"}
+  {
+    "no-inflation": 360,
+    "inflation": 411.3,
+    "country": [
+      "Japan"
+    ],
+    "event": "Tōhoku earthquake and tsunami",
+    "type": [
+      "Earthquake",
+      "Tsunami"
+    ],
+    "year": 2011,
+    "death": 15894
+  },
+  {
+    "no-inflation": 197,
+    "inflation": 329.8,
+    "country": [
+      "Japan"
+    ],
+    "event": "Great Hanshin earthquake",
+    "type": [
+      "Earthquake"
+    ],
+    "year": 1995,
+    "death": 6434
+  },
+  {
+    "no-inflation": 148,
+    "inflation": 176.4,
+    "country": [
+      "China"
+    ],
+    "event": "Sichuan earthquake",
+    "type": [
+      "Earthquake"
+    ],
+    "year": 2008,
+    "death": 87587
+  },
+  {
+    "no-inflation": 125,
+    "inflation": 164.9,
+    "country": [
+      "United States"
+    ],
+    "event": "Hurricane Katrina",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2005,
+    "death": 1836
+  },
+  {
+    "no-inflation": 125,
+    "inflation": 129.5,
+    "country": [
+      "United States"
+    ],
+    "event": "Hurricane Harvey",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2017,
+    "death": 107
+  },
+  {
+    "no-inflation": 91.6,
+    "inflation": 94.9,
+    "country": [
+      "Puerto Rico",
+      "Dominica",
+      "Guadeloupe"
+    ],
+    "event": "Hurricane Maria",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2017,
+    "death": 8498
+  },
+  {
+    "no-inflation": 68.7,
+    "inflation": 76.3,
+    "country": [
+      "United States",
+      "Haiti",
+      "Cuba"
+    ],
+    "event": "Hurricane Sandy",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2012,
+    "death": 233
+  },
+  {
+    "no-inflation": 64.8,
+    "inflation": 66.5,
+    "country": [
+      "United States",
+      "Sint Maarten",
+      "Collectivity of Saint Martin"
+    ],
+    "event": "Hurricane Irma",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2017,
+    "death": 134
+  },
+  {
+    "no-inflation": 100,
+    "inflation": 116.1,
+    "country": [
+      "United States"
+    ],
+    "event": "Deepwater Horizon oil spill",
+    "type": [
+      "Contamination (Oil)"
+    ],
+    "year": 2010,
+    "death": 11
+  },
+  {
+    "no-inflation": 53.25,
+    "inflation": 115.8,
+    "country": [
+      "United States",
+      "Canada"
+    ],
+    "event": "North American drought (89)",
+    "type": [
+      "Drought"
+    ],
+    "year": 1988,
+    "death": 17000
+  },
+  {
+    "no-inflation": 56.1,
+    "inflation": 60.3,
+    "country": [
+      "United States",
+      "Canada"
+    ],
+    "event": "North American drought (12)",
+    "type": [
+      "Drought"
+    ],
+    "year": 2012,
+    "death": 104
+  },
+  {
+    "no-inflation": 49,
+    "inflation": 81,
+    "country": [
+      "United States"
+    ],
+    "event": "Northridge earthquake",
+    "type": [
+      "Earthquake"
+    ],
+    "year": 1994,
+    "death": 57
+  },
+  {
+    "no-inflation": 45.7,
+    "inflation": 49.8,
+    "country": [
+      "Thailand"
+    ],
+    "event": "Thailand floods",
+    "type": [
+      "Flood"
+    ],
+    "year": 2011,
+    "death": 815
+  },
+  {
+    "no-inflation": 40,
+    "inflation": 44.6,
+    "country": [
+      "New Zealand"
+    ],
+    "event": "Christchurch earthquake",
+    "type": [
+      "Earthquake"
+    ],
+    "year": 2011,
+    "death": 185
+  },
+  {
+    "no-inflation": 433,
+    "inflation": 700,
+    "country": [
+      "Soviet Union",
+      "Ukraine",
+      "Belarus"
+    ],
+    "event": "Chernobyl disaster",
+    "type": [
+      "Contamination (Radiation)"
+    ],
+    "year": 1986,
+    "death": 46
+  },
+  {
+    "no-inflation": 38,
+    "inflation": 43.3,
+    "country": [
+      "United States",
+      "Haiti",
+      "Cuba"
+    ],
+    "event": "Hurricane Ike",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2008,
+    "death": 214
+  },
+  {
+    "no-inflation": 28,
+    "inflation": 36.2,
+    "country": [
+      "Japan"
+    ],
+    "event": "Chūetsu earthquake",
+    "type": [
+      "Earthquake"
+    ],
+    "year": 2004,
+    "death": 68
+  },
+  {
+    "no-inflation": 27.4,
+    "inflation": 34.4,
+    "country": [
+      "United States",
+      "Mexico",
+      "Haiti"
+    ],
+    "event": "Hurricane Wilma",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2005,
+    "death": 87
+  },
+  {
+    "no-inflation": 27.3,
+    "inflation": 47.6,
+    "country": [
+      "United States"
+    ],
+    "event": "Hurricane Andrew",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 1992,
+    "death": 65
+  },
+  {
+    "no-inflation": 26.1,
+    "inflation": 33.9,
+    "country": [
+      "United States",
+      "Grenada",
+      "Jamaica"
+    ],
+    "event": "Hurricane Ivan",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2004,
+    "death": 124
+  },
+  {
+    "no-inflation": 135,
+    "inflation": 186.9,
+    "country": [
+      "United States"
+    ],
+    "event": "September  terrorist attacks",
+    "type": [
+      "Terror attack"
+    ],
+    "year": 2001,
+    "death": 2996
+  },
+  {
+    "no-inflation": 18.5,
+    "inflation": 23.2,
+    "country": [
+      "United States"
+    ],
+    "event": "Hurricane Rita",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2005,
+    "death": 125
+  },
+  {
+    "no-inflation": 19.2,
+    "inflation": 24.6,
+    "country": [
+      "Czech Republic",
+      "Germany",
+      "Austria"
+    ],
+    "event": "European floods",
+    "type": [
+      "Flood"
+    ],
+    "year": 2002,
+    "death": 110
+  },
+  {
+    "no-inflation": 17.6,
+    "inflation": 23.9,
+    "country": [
+      "France",
+      "Germany",
+      "Italy"
+    ],
+    "event": "Cyclones Lothar and Martin",
+    "type": [
+      "European windstorm"
+    ],
+    "year": 1999,
+    "death": 140
+  },
+  {
+    "no-inflation": 16.9,
+    "inflation": 21.9,
+    "country": [
+      "United States",
+      "Jamaica",
+      "Cuba"
+    ],
+    "event": "Hurricane Charley",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2004,
+    "death": 35
+  },
+  {
+    "no-inflation": 15.8,
+    "inflation": 17,
+    "country": [
+      "Italy"
+    ],
+    "event": "Northern Italy earthquakes",
+    "type": [
+      "Earthquake"
+    ],
+    "year": 2012,
+    "death": 27
+  },
+  {
+    "no-inflation": 15.1,
+    "inflation": 15.4,
+    "country": [
+      "Haiti",
+      "United States",
+      "Cuba"
+    ],
+    "event": "Hurricane Matthew",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2016,
+    "death": 603
+  },
+  {
+    "no-inflation": 20,
+    "inflation": 34.1,
+    "country": [
+      "United States"
+    ],
+    "event": "Great Flood of",
+    "type": [
+      "Flood"
+    ],
+    "year": 1993,
+    "death": 47
+  },
+  {
+    "no-inflation": 15,
+    "inflation": 28.8,
+    "country": [
+      "United Kingdom",
+      "Germany",
+      "France"
+    ],
+    "event": "Cyclones Daria, Vivian, and Wiebke",
+    "type": [
+      "European windstorm"
+    ],
+    "year": 1990,
+    "death": 197
+  },
+  {
+    "no-inflation": 15,
+    "inflation": 19.4,
+    "country": [
+      "Indonesia",
+      "Sri Lanka",
+      "India"
+    ],
+    "event": "Indian Ocean earthquake and tsunami",
+    "type": [
+      "Earthquake",
+      "Tsunami"
+    ],
+    "year": 2004,
+    "death": 280000
+  },
+  {
+    "no-inflation": 14.2,
+    "inflation": 15.5,
+    "country": [
+      "United States",
+      "Puerto Rico",
+      "Canada"
+    ],
+    "event": "Hurricane Irene",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2011,
+    "death": 58
+  },
+  {
+    "no-inflation": 13,
+    "inflation": 13,
+    "country": [
+      "United States"
+    ],
+    "event": "Hurricane Florence",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2018,
+    "death": 53
+  },
+  {
+    "no-inflation": 12.9,
+    "inflation": 14.7,
+    "country": [
+      "Myanmar"
+    ],
+    "event": "Cyclone Nargis",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2008,
+    "death": 138366
+  },
+  {
+    "no-inflation": 12.7,
+    "inflation": 13.2,
+    "country": [
+      "France"
+    ],
+    "event": "November  Paris attacks",
+    "type": [
+      "Terror attack"
+    ],
+    "year": 2015,
+    "death": 130
+  },
+  {
+    "no-inflation": 18.9,
+    "inflation": 27.7,
+    "country": [
+      "Turkey"
+    ],
+    "event": "İzmit earthquake",
+    "type": [
+      "Earthquake"
+    ],
+    "year": 1999,
+    "death": 17127
+  },
+  {
+    "no-inflation": 10.4,
+    "inflation": 11,
+    "country": [
+      "China"
+    ],
+    "event": "Typhoon Fitow",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2013,
+    "death": 12
+  },
+  {
+    "no-inflation": 10.2,
+    "inflation": 11.1,
+    "country": [
+      "United States"
+    ],
+    "event": "Super Outbreak",
+    "type": [
+      "Tornado"
+    ],
+    "year": 2011,
+    "death": 348
+  },
+  {
+    "no-inflation": 15,
+    "inflation": 15.4,
+    "country": [
+      "United States"
+    ],
+    "event": "Louisiana floods",
+    "type": [
+      "Flood"
+    ],
+    "year": 2016,
+    "death": 13
+  },
+  {
+    "no-inflation": 10,
+    "inflation": 29.6,
+    "country": [
+      "United States"
+    ],
+    "event": "United States heat wave",
+    "type": [
+      "Drought"
+    ],
+    "year": 1980,
+    "death": 10000
+  },
+  {
+    "no-inflation": 10,
+    "inflation": 18,
+    "country": [
+      "Japan"
+    ],
+    "event": "Typhoon Mireille",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 1991,
+    "death": 64
+  },
+  {
+    "no-inflation": 10,
+    "inflation": 12.1,
+    "country": [
+      "United Kingdom",
+      "France",
+      "Germany"
+    ],
+    "event": "Cyclone Kyrill",
+    "type": [
+      "European windstorm"
+    ],
+    "year": 2007,
+    "death": 44
+  },
+  {
+    "no-inflation": 10,
+    "inflation": 11.3,
+    "country": [
+      "United States"
+    ],
+    "event": "June  Midwest floods",
+    "type": [
+      "Flood"
+    ],
+    "year": 2008,
+    "death": 16
+  },
+  {
+    "no-inflation": 9.8,
+    "inflation": 12.7,
+    "country": [
+      "United States",
+      "The Bahamas"
+    ],
+    "event": "Hurricane Frances",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2004,
+    "death": 50
+  },
+  {
+    "no-inflation": 9.5,
+    "inflation": 18.7,
+    "country": [
+      "United States",
+      "Puerto Rico",
+      "Guadeloupe"
+    ],
+    "event": "Hurricane Hugo",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 1989,
+    "death": 60
+  },
+  {
+    "no-inflation": 9.5,
+    "inflation": 9.7,
+    "country": [
+      "Canada"
+    ],
+    "event": "Fort McMurray Wildfire",
+    "type": [
+      "Wildfire"
+    ],
+    "year": 2016,
+    "death": 2
+  },
+  {
+    "no-inflation": 9.4,
+    "inflation": 14.1,
+    "country": [
+      "Puerto Rico",
+      "United States",
+      "Dominican Republic"
+    ],
+    "event": "Hurricane Georges",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 1998,
+    "death": 604
+  },
+  {
+    "no-inflation": 9.4,
+    "inflation": 9.4,
+    "country": [
+      "United States"
+    ],
+    "event": "October  Northern California wildfires",
+    "type": [
+      "Wildfire"
+    ],
+    "year": 2017,
+    "death": 44
+  },
+  {
+    "no-inflation": 9,
+    "inflation": 11.7,
+    "country": [
+      "Japan"
+    ],
+    "event": "Typhoon Songda",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2004,
+    "death": 28
+  },
+  {
+    "no-inflation": 8.5,
+    "inflation": 11.8,
+    "country": [
+      "United States"
+    ],
+    "event": "Tropical Storm Allison",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2001,
+    "death": 55
+  },
+  {
+    "no-inflation": 8.3,
+    "inflation": 9.5,
+    "country": [
+      "United States",
+      "Cuba",
+      "Haiti"
+    ],
+    "event": "Hurricane Gustav",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2008,
+    "death": 153
+  },
+  {
+    "no-inflation": 8.1,
+    "inflation": 16,
+    "country": [
+      "Haiti"
+    ],
+    "event": "Haiti earthquake",
+    "type": [
+      "Earthquake"
+    ],
+    "year": 2010,
+    "death": 220000
+  },
+  {
+    "no-inflation": 7.9,
+    "inflation": 10.3,
+    "country": [
+      "Haiti",
+      "United States",
+      "Dominican Republic"
+    ],
+    "event": "Hurricane Jeanne",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2004,
+    "death": 3035
+  },
+  {
+    "no-inflation": 7.13,
+    "inflation": 7.4,
+    "country": [
+      "Philippines",
+      "Vietnam",
+      "China"
+    ],
+    "event": "Typhoon Rammasun",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2014,
+    "death": 196
+  },
+  {
+    "no-inflation": 7,
+    "inflation": 13.8,
+    "country": [
+      "United States",
+      "Canada"
+    ],
+    "event": "Exxon Valdez oil spill",
+    "type": [
+      "Contamination (Oil)"
+    ],
+    "year": 1989,
+    "death": 0
+  },
+  {
+    "no-inflation": 6.5,
+    "inflation": 9.6,
+    "country": [
+      "United States",
+      "The Bahamas",
+      "Canada"
+    ],
+    "event": "Hurricane Floyd",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 1999,
+    "death": 74
+  },
+  {
+    "no-inflation": 6.2,
+    "inflation": 6.2,
+    "country": [
+      "Iran",
+      "Iraq"
+    ],
+    "event": "Iran–Iraq earthquake",
+    "type": [
+      "Earthquake"
+    ],
+    "year": 2017,
+    "death": 630
+  },
+  {
+    "no-inflation": 6.2,
+    "inflation": 7.1,
+    "country": [
+      "Taiwan",
+      "China",
+      "Philippines"
+    ],
+    "event": "Typhoon Morakot",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2009,
+    "death": 789
+  },
+  {
+    "no-inflation": 6.1,
+    "inflation": 9.1,
+    "country": [
+      "Honduras",
+      "Nicaragua",
+      "Guatemala"
+    ],
+    "event": "Hurricane Mitch",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 1998,
+    "death": 11374
+  },
+  {
+    "no-inflation": 6.1,
+    "inflation": 7,
+    "country": [
+      "France",
+      "Spain",
+      "Portugal"
+    ],
+    "event": "Cyclone Xynthia",
+    "type": [
+      "European windstorm"
+    ],
+    "year": 2010,
+    "death": 75
+  },
+  {
+    "no-inflation": 6.01,
+    "inflation": 8.6,
+    "country": [
+      "China",
+      "South Korea",
+      "Japan"
+    ],
+    "event": "Typhoon Prapiroon",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2000,
+    "death": 75
+  },
+  {
+    "no-inflation": 6,
+    "inflation": 7.01,
+    "country": [
+      "France",
+      "Spain",
+      "Italy"
+    ],
+    "event": "Cyclone Klaus",
+    "type": [
+      "European windstorm"
+    ],
+    "year": 2009,
+    "death": 26
+  },
+  {
+    "no-inflation": 6,
+    "inflation": 6.3,
+    "country": [
+      "Canada"
+    ],
+    "event": "Alberta floods",
+    "type": [
+      "Flood"
+    ],
+    "year": 2013,
+    "death": 5
+  },
+  {
+    "no-inflation": 5.5,
+    "inflation": 7.1,
+    "country": [
+      "United Kingdom",
+      "Denmark",
+      "Sweden"
+    ],
+    "event": "Cyclone Gudrun",
+    "type": [
+      "European windstorm"
+    ],
+    "year": 2005,
+    "death": 24
+  },
+  {
+    "no-inflation": 5.5,
+    "inflation": 7.3,
+    "country": [
+      "United States"
+    ],
+    "event": "Hurricane Isabel",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2003,
+    "death": 51
+  },
+  {
+    "no-inflation": 5,
+    "inflation": 11.4,
+    "country": [
+      "Mexico"
+    ],
+    "event": "Mexico City earthquake",
+    "type": [
+      "Earthquake"
+    ],
+    "year": 1985,
+    "death": 35000
+  },
+  {
+    "no-inflation": 5,
+    "inflation": 7.9,
+    "country": [
+      "China"
+    ],
+    "event": "Typhoon Herb",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 1996,
+    "death": 590
+  },
+  {
+    "no-inflation": 4.7,
+    "inflation": 7.6,
+    "country": [
+      "Mexico",
+      "Guatemala",
+      "United States"
+    ],
+    "event": "Hurricane Opal",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 1995,
+    "death": 63
+  },
+  {
+    "no-inflation": 4.6,
+    "inflation": 4.8,
+    "country": [
+      "Philippines",
+      "China",
+      "Taiwan"
+    ],
+    "event": "Typhoon Haiyan",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2013,
+    "death": 7403
+  },
+  {
+    "no-inflation": 4.4,
+    "inflation": 5.2,
+    "country": [
+      "Oman"
+    ],
+    "event": "Cyclone Gonu",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2007,
+    "death": 78
+  },
+  {
+    "no-inflation": 4.2,
+    "inflation": 4.4,
+    "country": [
+      "Mexico"
+    ],
+    "event": "Hurricane Manuel",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2013,
+    "death": 123
+  },
+  {
+    "no-inflation": 4,
+    "inflation": 8.8,
+    "country": [
+      "United Kingdom",
+      "France",
+      "Spain"
+    ],
+    "event": "Great Storm of",
+    "type": [
+      "European windstorm"
+    ],
+    "year": 1987,
+    "death": 22
+  },
+  {
+    "no-inflation": 3.1,
+    "inflation": 5.4,
+    "country": [
+      "United States"
+    ],
+    "event": "Hurricane Iniki",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 1992,
+    "death": 6
+  },
+  {
+    "no-inflation": 4,
+    "inflation": 4,
+    "country": [
+      "Mexico"
+    ],
+    "event": "Central Mexico earthquake",
+    "type": [
+      "Earthquake"
+    ],
+    "year": 2017,
+    "death": 370
+  },
+  {
+    "no-inflation": 3,
+    "inflation": 6.2,
+    "country": [
+      "Mexico",
+      "Jamaica",
+      "Haiti"
+    ],
+    "event": "Hurricane Gilbert",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 1988,
+    "death": 318
+  },
+  {
+    "no-inflation": 2.9,
+    "inflation": 3.1,
+    "country": [
+      "United States"
+    ],
+    "event": "June  North American derecho",
+    "type": [
+      "Severe storm"
+    ],
+    "year": 2012,
+    "death": 22
+  },
+  {
+    "no-inflation": 3.2,
+    "inflation": 6.9,
+    "country": [
+      "United States"
+    ],
+    "event": "Space Shuttle Challenger disaster",
+    "type": [
+      "Space flight accident"
+    ],
+    "year": 1986,
+    "death": 7
+  },
+  {
+    "no-inflation": 2.8,
+    "inflation": 3.1,
+    "country": [
+      "United States"
+    ],
+    "event": "Joplin tornado",
+    "type": [
+      "Tornado"
+    ],
+    "year": 2011,
+    "death": 158
+  },
+  {
+    "no-inflation": 2.68,
+    "inflation": 3.7,
+    "country": [
+      "France"
+    ],
+    "event": "AZF chemical plant explosion",
+    "type": [
+      "Explosion"
+    ],
+    "year": 2001,
+    "death": 29
+  },
+  {
+    "no-inflation": 2.5,
+    "inflation": 2.5,
+    "country": [
+      "United States"
+    ],
+    "event": "Montana wildfires",
+    "type": [
+      "Drought",
+      "Wildfire"
+    ],
+    "year": 2017,
+    "death": 2
+  },
+  {
+    "no-inflation": 2.5,
+    "inflation": 2.5,
+    "country": [
+      "United States"
+    ],
+    "event": "Minneapolis hailstorm",
+    "type": [
+      "Hailstorm"
+    ],
+    "year": 2017,
+    "death": 0
+  },
+  {
+    "no-inflation": 2.2,
+    "inflation": 2.2,
+    "country": [
+      "United States"
+    ],
+    "event": "Denver hailstorm",
+    "type": [
+      "Hailstorm"
+    ],
+    "year": 2017,
+    "death": 0
+  },
+  {
+    "no-inflation": 2.1,
+    "inflation": 2.1,
+    "country": [
+      "United States"
+    ],
+    "event": "Tornado outbreak of March –,",
+    "type": [
+      "Tornado"
+    ],
+    "year": 2017,
+    "death": 0
+  },
+  {
+    "no-inflation": 2,
+    "inflation": 2.2,
+    "country": [
+      "Italy"
+    ],
+    "event": "Costa Concordia disaster",
+    "type": [
+      "Maritime disaster"
+    ],
+    "year": 2012,
+    "death": 33
+  },
+  {
+    "no-inflation": 1.4,
+    "inflation": 1.4,
+    "country": [
+      "Fiji"
+    ],
+    "event": "Cyclone Winston",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 2016,
+    "death": 44
+  },
+  {
+    "no-inflation": 2,
+    "inflation": 2.7,
+    "country": [
+      "United States"
+    ],
+    "event": "Cedar Fire",
+    "type": [
+      "Wildfire"
+    ],
+    "year": 2003,
+    "death": 15
+  },
+  {
+    "no-inflation": 1.1,
+    "inflation": 3.8,
+    "country": [
+      "United States"
+    ],
+    "event": "Three Mile Island accident",
+    "type": [
+      "Contamination (Radiation)"
+    ],
+    "year": 1979,
+    "death": 0
+  },
+  {
+    "no-inflation": 1,
+    "inflation": 2.3,
+    "country": [
+      "Colombia"
+    ],
+    "event": "Armero tragedy",
+    "type": [
+      "Volcano"
+    ],
+    "year": 1985,
+    "death": 22540
+  },
+  {
+    "no-inflation": 1.1,
+    "inflation": 4.9,
+    "country": [
+      "Australia"
+    ],
+    "event": "Cyclone Tracy",
+    "type": [
+      "Tropical cyclone"
+    ],
+    "year": 1974,
+    "death": 71
+  },
+  {
+    "no-inflation": 1.3,
+    "inflation": 1.4,
+    "country": [
+      "France"
+    ],
+    "event": "Paris Hailstorm",
+    "type": [
+      "Hailstorm"
+    ],
+    "year": 2014,
+    "death": 0
+  },
+  {
+    "no-inflation": 0.7,
+    "inflation": 1.3,
+    "country": [
+      "Philippines"
+    ],
+    "event": "Mount Pinatubo eruption",
+    "type": [
+      "Volcano"
+    ],
+    "year": 1991,
+    "death": 800
+  },
+  {
+    "no-inflation": 0.7,
+    "inflation": 0.8,
+    "country": [
+      "Canada"
+    ],
+    "event": "Slave Lake wildfire",
+    "type": [
+      "Wildfire"
+    ],
+    "year": 2011,
+    "death": 1
+  }
 ]

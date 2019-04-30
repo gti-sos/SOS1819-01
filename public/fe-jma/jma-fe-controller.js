@@ -2,7 +2,7 @@
 var app = angular.module("MiniPostmanApp");
 app.controller("MainCtrl", function ($scope,$http) {
     console.log("MainCtrl initialized!");
-    $scope.url = "/api/v1/hurricanes";
+    $scope.url = "/api/v1/testing-of-nuclear-bombs";
     $scope.body = "";
     $scope.status = undefined;
     $scope.get = function (){

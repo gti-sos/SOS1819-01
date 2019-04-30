@@ -1,0 +1,136 @@
+<html ng-app="Fronti">
+    <head>
+        <title>Hurricanes</title>
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+        <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="/ui/v1/hurricanes/juan-fe-app.js"></script>
+        <script type="text/javascript" src="/ui/v1/hurricanes/juan-fe-controller.js"></script>
+    </head>
+    <body ng-controller="juan-fe-controller">
+        <h1 align='center'>Huracanes</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Año</th>
+                    <th>Pais</th>
+                    <th>Velocidad</th>
+                    <th>Daños hasta 2008</th>
+                    <th>Mbar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="hurricane in hurricanes track by $index">
+                    <td>{{ hurricane.name }}</td>
+                    <td>{{ hurricane.year }}</td>
+                    <td>{{ hurricane.country }}</td>
+                    <td>{{ hurricane.speed }}</td>
+                    <td>{{ hurricane.damagesuntil2008 }}</td>
+                    <td>{{ hurricane.mbar }}</td>
+                    <td>
+                        <button
+                            class="btn btn-danger"
+                            ng-click="delete(hurricane.name)";
+                        >Borrar</button></button>
+                    </td>
+                </tr>
+                
+                </tr>
+                <tr>
+                    <td>
+                        <input
+                            type="text"
+                            class = "form-control"
+                            ng-model = "body.name"
+                            placeholder = "nuevo nombre"/>
+                    </td><td>
+                        <input
+                            type="number"
+                            ng-model = "body.year"
+                            class = "form-control"
+                            placeholder = "nuevo año"/>
+                    </td><td>
+                        <input 
+                            type="text"
+                            ng-model = "body.country"
+                            class = "form-control"
+                            placeholder = "nuevo pais"/>
+                    </td><td>
+                        <input 
+                            type="number"
+                            ng-model = "body.speed"
+                            class = "form-control"
+                            placeholder = "nueva velocidad"/>
+                    </td><td>
+                        <input 
+                            type="number"
+                            step="0.01"
+                            ng-model = "body['damagesuntil2008']"
+                            class = "form-control"
+                            placeholder = "nuevo daños hasta 2008"/>
+                    </td><td>
+                        <input 
+                            type="number"
+                            step="0.01"
+                            ng-model = "body.mbar"
+                            class = "form-control"
+                            placeholder = "nuevo mbar"/>
+                    </td><td>
+                        <button
+                            class="btn btn-primary"
+                            ng-click="post()"
+                            >Añadir</button>
+                    
+                    <button
+                            class="btn btn-primary"
+                            ng-click="put()"
+                            >Modificar</button>
+                    </td>
+                    
+                </tr>
+                </tr>
+                <tr>
+                    <td>
+                        Búsqueda por año
+                    </td>
+                    <td>
+                        <input
+                            type="number"
+                            class = "form-control"
+                            ng-model = "filter.from"
+                            placeholder = "Desde"/>
+                    </td>
+                    <td>
+                        <input
+                             type="number"
+                            class = "form-control"
+                            ng-model = "filter.to"
+                            placeholder = "Hasta"/>
+                    </td>
+                    <td>
+                        <button
+                            class="btn btn-primary"
+                            ng-click="filtra(filter.from,hurricane.to)"
+                            >Filtrar por año</button>
+                    </td>
+                    <td></td>
+                    <td>
+                         <button
+                             class="btn btn-primary"
+                             ng-click="borraTodo()"
+                             >Borrar Datos</button>
+                     </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <div class="btn-group">
+                            <button ng-class="{'btn-info': $index == pagination.offset}" type="button" ng-click="navigate($index)"class="btn btn-primary btn-lg" ng-repeat="item in [].constructor(count) track by $index">{{$index + 1}}</button>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </body>
+</html>
