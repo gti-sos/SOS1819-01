@@ -20,7 +20,6 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}));
 
 
-/////////Conexion APIJOSE/////////
 const uri = "mongodb+srv://pema:pema@sos-wj0yb.mongodb.net/sos1819?retryWrites=true";
 const uri2 = "mongodb+srv://juajimbal:1234@cluster0-jate4.mongodb.net/test?retryWrites=true";
 const uri3 = "mongodb+srv://admin:sos1819@cluster-sos1819-accsm.mongodb.net/sos1819?retryWrites=true";
