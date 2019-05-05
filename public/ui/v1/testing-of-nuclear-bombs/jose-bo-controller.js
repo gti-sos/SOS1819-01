@@ -1,5 +1,5 @@
-var app = angular.module("Pema");
-app.controller("PemaController",function($scope,$http, $q){
+var app = angular.module("SOS1819-app.Pema");
+app.controller("PemaController", function ($scope,$http, $q){
     var url = "/api/v1/testing-of-nuclear-bombs";
     var url2 = "/api/v2/testing-of-nuclear-bombs";
 

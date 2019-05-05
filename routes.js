@@ -4,11 +4,12 @@ var path = require('path');
 
 router
 	.get('/', function (req, res) {
-     	res.render(path.join('index.pug'));
+     	res.send('index.html');
+     	//res.render(path.join('index.pug'));
    	 })
 
-	.get('/:directory/:file', function (req, res) {
-      res.render(path.join(__dirname, "public/major-disasters/app", req.params.directory + '/' + req.params.file));
+	.get('/major-disasters/:directory/:file', function (req, res) {
+      res.render(path.join(__dirname, "public/ui/v1/major-disasters/app", req.params.directory + '/' + req.params.file));
     });
 
 module.exports = router;

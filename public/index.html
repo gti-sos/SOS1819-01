@@ -1,29 +1,83 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-    </head>
-    <body>
-        <h1>SOS1819-01</h1>
-<h2>Team</h2>
+<html ng-app="SOS1819-app">
 
-<h3>Juan Jiménez Ballina</h3>
-<h3>Bernabé Ruiz Martinez</h3>
-<h3>José María Barrero Olmedo</h3>
-<h3>Deaths related to catastrophes in recent years</h3>
+<head>
+    <title>SOS 1819-01</title>
+    <!--############################### CSS ###############################-->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/bower_components/ng-dialog/css/ngDialog.min.css" />
+    <link rel="stylesheet" href="/bower_components/ng-dialog/css/ngDialog-theme-default.min.css" />
+    <link rel="stylesheet" href="/bower_components/ng-dialog/css/ngDialog-custom-width.css" />
+    <link rel="stylesheet" href="/bower_components/ng-dialog/css/ngDialog-theme-plain.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <!--###################################################################-->
+    <!--########################## ANGULAR CORE ###########################-->
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-route/angular-route.min.js"></script>
+    <!--###################################################################-->
+    <!--########################## APP MODULES ############################-->
+    <script src="/ui/v1/app.js"></script>
+    <script src="/ui/v1/major-disasters/overview.app.js"></script>
+    <script src="/ui/v1/hurricanes/juan-fe-app.js"></script>
+    <script src="/ui/v1/testing-of-nuclear-bombs/jose-bo-app.js"></script>
+    <!--################################################################## -->
+    <!--######################## APP COMPONENTS ###########################-->
+    <!--################################################################## -->
+    <!--########################## APP FILTERS ###########################-->
+    <!--###################################################################-->
+    <!--######################## APP CONTROLLERS ##########################-->
+    <script src="/ui/v1/major-disasters/overview.controller.js"></script>
+    <script src="/ui/v1/hurricanes/juan-fe-controller.js"></script>
+    <script src="/ui/v1/testing-of-nuclear-bombs/jose-bo-controller.js"></script>
+    <!--###################################################################-->
+    <!--######################### APP FACTORIES ###########################-->
+    <script src="/ui/v1/major-disasters/overview.factory.js"></script>
+    <!--###################################################################-->
+    <!--######################### APP DIRECTIVES ##########################-->
+    <!--###################################################################-->
+    <!--######################### ANGULAR EXTRAS ##########################-->
+    <script src="/bower_components/ng-dialog/js/ngDialog.min.js"></script>
+    <!--###################################################################-->
+</head>
 
-<h3>Repository: <a href= "https://github.com/gti-sos/SOS1819-01">gti-sos/SOS1819-01</h3></a>
+<body>
 
-<h3>URL: <a href= "http://sos1819-01.herokuapp.com">http://sos1819-01.herokuapp.com/</h3></a>
+    <div ng-controller="navCtrl">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="/">SOS1819-01</a>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" ng-class="{'active': activeUrl === '/about'}" href="#!/about">About <span class="sr-only">(current)</span></a>
+              <a class="nav-item nav-link" ng-class="{'active': activeUrl === '/major-disasters'}" href="#!/major-disasters">Major disasters</a>
+              <a class="nav-item nav-link" ng-class="{'active': activeUrl === '/hurricanes'}" href="#!/hurricanes">Hurricanes</a>
+              <a class="nav-item nav-link" ng-class="{'active': activeUrl === '/testing-of-nuclear-bombs'}" href="#!/testing-of-nuclear-bombs">Testing of nuclear bombs</a>
+          </div>
+      </div>
+  </nav>
+  <div class="container-fluid" ng-if="activeUrl === '/about'">
+    <h2>Team</h2>
 
-<h2>APIs:</h2>
+    <h5>Juan Jiménez Ballina</h5>
+    <h5>Bernabé Ruiz Martinez</h5>
+    <h5>José María Barrero Olmedo</h5>
+    <h5>Deaths related to catastrophes in recent years</h5>
 
-<a href="https://sos1819-01.herokuapp.com/api/v1/hurricanes/docs"><h3>https://sos1819-01.herokuapp.com/api/v1/hurricanes/docs</a> (developed by <a href="https://github.com/30ner">Juan Jiménez Ballina</a>)</h3>
-<a href="https://sos1819-01.herokuapp.com/api/v1/major-disasters/docs"><h3>https://sos1819-01.herokuapp.com/api/v1/major-disasters/docs</a> (developed by <a href="https://github.com/berruimar">Bernabé Ruiz Martínez</a>)</h3>
-<a href="https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/docs"><h3>https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/docs</a> (developed by <a href="https://github.com/josbarolm">José María Barrero Olmedo</a>)</h3>
-    
-<h2>Front-ends</h2>
-	<a href="https://sos1819-01.herokuapp.com/ui/v1/hurricanes"><h3>https://sos1819-01.herokuapp.com/ui/v1/hurricanes</a> (developed by <a href="https://github.com/30ner">Juan Jiménez Ballina</a>)</h3>
-	<a href="https://sos1819-01.herokuapp.com/ui/v1/major-disasters"><h3>https://sos1819-01.herokuapp.com/ui/v1/major-disasters</a> (developed by <a href="https://github.com/berruimar">Bernabé Ruiz Martínez</a>)</h3>
-	<a href="https://sos1819-01.herokuapp.com/ui/v1/testing-of-nuclear-bombs"><h3>https://sos1819-01.herokuapp.com/ui/v1/testing-of-nuclear-bombs</a> (developed by <a href="https://github.com/josbarolm">José María Barrero Olmedo</a>)</h3>
-    </body>
+    <h5>Repository: <a href= "https://github.com/gti-sos/SOS1819-01">gti-sos/SOS1819-01</h5></a>
+
+    <h5>URL: <a href= "http://sos1819-01.herokuapp.com">http://sos1819-01.herokuapp.com/</h5></a>
+
+    <h2>APIs:</h2>
+
+    <a href="https://sos1819-01.herokuapp.com/api/v1/hurricanes/docs"><h5>https://sos1819-01.herokuapp.com/api/v1/hurricanes/docs</a> (developed by <a href="https://github.com/30ner">Juan Jiménez Ballina</a>)</h5>
+    <a href="https://sos1819-01.herokuapp.com/api/v1/major-disasters/docs"><h5>https://sos1819-01.herokuapp.com/api/v1/major-disasters/docs</a> (developed by <a href="https://github.com/berruimar">Bernabé Ruiz Martínez</a>)</h5>
+    <a href="https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/docs"><h5>https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/docs</a> (developed by <a href="https://github.com/josbarolm">José María Barrero Olmedo</a>)</h5>
+
+    <h2>Front-ends</h2>
+    <a href="https://sos1819-01.herokuapp.com/ui/v1/hurricanes"><h5>https://sos1819-01.herokuapp.com/ui/v1/hurricanes</a> (developed by <a href="https://github.com/30ner">Juan Jiménez Ballina</a>)</h5>
+    <a href="https://sos1819-01.herokuapp.com/ui/v1/major-disasters"><h5>https://sos1819-01.herokuapp.com/ui/v1/major-disasters</a> (developed by <a href="https://github.com/berruimar">Bernabé Ruiz Martínez</a>)</h5>
+    <a href="https://sos1819-01.herokuapp.com/ui/v1/testing-of-nuclear-bombs"><h5>https://sos1819-01.herokuapp.com/ui/v1/testing-of-nuclear-bombs</a> (developed by <a href="https://github.com/josbarolm">José María Barrero Olmedo</a>)</h5>
+</div>
+</div>
+<div class="container-fluid" ng-view="ng-view"></div>
+</body>
+
 </html>

@@ -1,6 +1,6 @@
 /* global angular $scope */
-var app = angular.module("Fronti");
-app.controller("juan-fe-controller", function ($scope,$http, $q) {
+var app = angular.module("SOS1819-app.Fronti");
+app.controller("juan-fe-controller", function ($scope, $http, $q) {
     console.log("juan-fe-controller initialized!");
     $scope.url = "/api/v1/hurricanes";
     $scope.pagination = {
@@ -11,6 +11,15 @@ app.controller("juan-fe-controller", function ($scope,$http, $q) {
         from: null,
         to: null
     };
+
+    $scope.bodyEdit = {
+        name: "",
+        year: null,
+        country: "",
+        speed: null,
+        damagesuntil2008: null
+    };
+
     //$scope.count = 0;
 
     refresh();
@@ -84,22 +93,13 @@ app.controller("juan-fe-controller", function ($scope,$http, $q) {
  
         });
     };
-    
-    $scope.load = function (item) {
-        $scope.body = item;
-    }
 
     $scope.put = function () {
-        var bdy = {};
-        try {
-            bdy = $scope.body;
-        } catch (e) {
-            return alert(e);
-        }
+        var bdy = JSON.parse(JSON.stringify($scope.bodyEdit));
 
-        $http.put($scope.url + '/' + bdy.name, bdy).then(function (response){
+
+        $http.put($scope.url, bdy).then(function (response){
             //$scope.data = JSON.stringify(response.data, null, 2);
-            window.alert(bdy.name+' modificado.')
             $scope.status = response.status + " " + response.statusText;
         }).catch(function (response) {
             //$scope.data = JSON.stringify(response.data, null, 2);
@@ -131,7 +131,8 @@ app.controller("juan-fe-controller", function ($scope,$http, $q) {
         var filter = {};
         $scope.pagination.offset = 0;
         $scope.filter.from = ($scope.filter.from) ? $scope.filter.from : null;
-        $scope.filter.to = ($scope.filter.to) ? $scope.filter.to : null;
+        $scope.filter.to = ($scope.filter.to) ? $scope
+        .filter.to : null;
         refresh();
         //if ($scope.filter.from) filter.from = from;
        // if ($scope.filter.to) filter.to = to;

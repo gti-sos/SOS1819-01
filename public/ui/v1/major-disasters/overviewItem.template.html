@@ -1,0 +1,42 @@
+<style>
+    .ngdialog.ngdialog-theme-default .ngdialog-content {
+        width: 45%;
+    }
+</style>
+<div class="container-fluid">
+    <form name="formItem" ng-submit="submit()">
+        <fieldset class="form-group">
+            <legend>Evento</legend><input class="form-control" name="event" ng-disabled="operation === 'modify'" required="required" ng-trim="true" ng-model="nData.event" type="text" placeholder="Evento" /></fieldset>
+        <div class="row">
+            <fieldset class="col col-md-6 form-group">
+                <legend>Año</legend><input class="form-control" name="year" required="required" ng-model="nData.year" type="number" min="0" step="1" placeholder="Año" /></fieldset>
+            <fieldset class="col ol-md-6 form-group">
+                <legend>Muertes</legend><input class="form-control" name="death" required="required" ng-model="nData.death" type="number" placeholder="Muertes" min="0" step="1" /></fieldset>
+        </div>
+        <div class="row">
+            <fieldset class="col col-md-6 form-group">
+                <legend>Coste</legend><input class="form-control" name="inflation" required="required" ng-model="nData.inflation" type="number" placeholder="Coste" min="0" step="0.01" /></fieldset>
+            <fieldset class="col col-md-6 form-group">
+                <legend>Coste (sin inflación)</legend><input class="form-control" required="required" ng-model="nData['no-inflation']" type="number" placeholder="Coste sin inflación" min="0" step="0.01" /></fieldset>
+        </div>
+        <fieldset>
+            <legend>Tipo</legend>
+            <div class="btn-group form-group" role="group"><button class="btn btn-dark btn-xs" type="button" ng-click="removeFromArray('type', $index)" ng-repeat="nc in nData.type track by $index"> <i class="fas fa-times"></i><span>&nbsp;&nbsp;{{nc}}</span></button></div>
+            <div class="row form-group">
+                <div class="col col-md-10"><input class="form-control" novalidate="novalidate" ng-class="{'border border-danger': !tmp.type.valid}" ng-trim="true" ng-model="tmp.type.val" type="text" placeholder="Introduce un tipo" /><small class="text-danger" ng-if="!tmp.type.valid">Debe haber al menos un tipo</small></div>
+                <div
+                    class="col col-md-2"><button class="btn btn-outline-success btn-lg btn-block" type="button" ng-disabled="!tmp.type.val" ng-click="addToArray('type')"><i class="fas fa-plus"></i></button></div>
+</div>
+</fieldset>
+<fieldset>
+    <legend>Pais</legend>
+    <div class="btn-group form-group" role="group"><button class="btn btn-dark btn-xs" type="button" ng-click="removeFromArray('country', $index)" ng-repeat="nc in nData.country track by $index"><i class="fas fa-times"></i><span>&nbsp;&nbsp;{{nc}}</span></button></div>
+    <div class="row form-group">
+        <div class="col col-md-10"><input class="form-control" novalidate="novalidate" ng-model="tmp.country.val" type="text" placeholder="Introduce un pais" ng-class="{'border border-danger': !tmp.country.valid}" /><small class="text-danger" ng-if="!tmp.country.valid">Debe haber al menos un pais</small></div>
+        <iv
+            class="col col-md-2"><button class="btn btn-lg btn-outline-success btn-block" type="button" ng-disabled="!tmp.country.val" ng-click="addToArray('country')"><i class="fas fa-plus"></i></button></iv>
+    </div>
+</fieldset>
+<fieldset><button class="btn-block btn btn-info" type="submit" ng-disabled="formItem.$pristine || !tmp.country.valid || !tmp.type.valid">{{operation == "modify" ? 'Aplicar' : 'Crear'}}</button></fieldset>
+</form>
+</div>

@@ -9,14 +9,16 @@ const bombsAPI = require("./api-testing-of-nuclear-bombs");
 const hurricanesAPI = require("./api-hurricanes");
 const MongoClient = require("mongodb").MongoClient;
 const compression = require('compression');
+//var pugStatic = require('pug-static');
+//var pugStatic = require('express-pug-static');
 
 app.use(compression());
 app.use(morgan('dev'));
-app.set('views', [path.join(__dirname, 'public/major-disasters')]);
+app.set('views', [path.join(__dirname, 'public')]);
 app.set('view engine', 'pug');
 
 app.use(express.static(path.join(__dirname, "public")));
-app.use("/ui/v1/major-disasters", require('./routes.js'));
+//app.use("/ui/v1/", require('./routes.js'));
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}));
 
