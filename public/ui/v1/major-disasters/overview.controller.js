@@ -81,7 +81,7 @@ angular.module('SOS1819-app.majorDisastersApp')
 			$location.path('/overview/' + item.event);
 		};
 
-		$scope.create = () => {
+		$scope.create = function () {
 			ngDialog.open({
 				template: '/ui/v1/major-disasters/overviewItem.template.html',
 				controller: "overviewModItemCtrl",
@@ -104,15 +104,15 @@ angular.module('SOS1819-app.majorDisastersApp')
 			});
 		};
 
-		$scope.remove = (id) => {
-			MajorDisaster.v1.remove(id).then((rRes) => {
+		$scope.remove = function (id) {
+			MajorDisaster.v1.remove(id).then(function (rRes) {
 				if ($scope.data.length === 1 && $scope.filter.offset > 0) $scope.filter.offset -= 1;
 				reloadTableData(function (res) {
 					$scope.data = res[0].data;
 					$scope.count = Math.ceil(res[1].data.count / $scope.filter.limit);
 					ngDialog.open(buildStatusPopup(rRes));
 				});
-			}).catch((rRes) => {
+			}).catch(function (rRes) {
 				ngDialog.open(buildStatusPopup(rRes));
 			});
 		};
@@ -168,12 +168,12 @@ angular.module('SOS1819-app.majorDisastersApp')
 		
 
 		function processFilter (obj) {
-			obj.country = (obj.country) ? obj.country.split(',').map(e => {if (e) return e.trim(); }) : obj.country;
-			obj.type = (obj.type) ? obj.type.split(',').map(e => {if (e) return e.trim(); }) : obj.type;
+			obj.country = (obj.country) ? obj.country.split(',').map(function (e) {if (e) return e.trim(); }) : obj.country;
+			obj.type = (obj.type) ? obj.type.split(',').map(function (e) {if (e) return e.trim(); }) : obj.type;
 			return obj;
 		}
 
-		$scope.navigate = (index) => {
+		$scope.navigate = function (index) {
 			index = (index) ? index : 0;
 			reloadTableData(index);
 		};
@@ -181,7 +181,6 @@ angular.module('SOS1819-app.majorDisastersApp')
 	})
 
 	.controller('overviewModItemCtrl', function ($scope, MajorDisaster, $injector, ngDialog, $route) {
-		console.log($route.current.locals.initialData)
 		try {
 			$scope.nData = JSON.parse(JSON.stringify($scope.ngDialogData.item));
 			$scope.operation = $scope.ngDialogData.operation;
@@ -205,7 +204,7 @@ angular.module('SOS1819-app.majorDisastersApp')
 			}
 		};
 
-		$scope.addToArray = (prop) => {
+		$scope.addToArray = function (prop) {
 			if ($scope.tmp[prop].val.trim() !== "") {
 				$scope.formItem.$pristine = false;
 				$scope.nData[prop].push($scope.tmp[prop].val.trim());
@@ -214,22 +213,22 @@ angular.module('SOS1819-app.majorDisastersApp')
 			$scope.tmp[prop].val = "";
 		};
 
-		$scope.removeFromArray = (prop, index) => {
+		$scope.removeFromArray = function (prop, index) {
 			$scope.formItem.$pristine = false;
 			$scope.nData[prop].splice(index, 1);
 			$scope.tmp[prop].valid = $scope.nData[prop].length > 0;
 		};
 
-		$scope.submit = () => {
+		$scope.submit = function () {
 			if ($scope.formItem.$valid) {
 				if ($scope.nData.type.length > 0 && $scope.nData.country.length > 0) {
 					var action = ($scope.operation === 'modify') ? 
 						MajorDisaster.v1.update($scope.nData.event, $scope.nData) :
 						MajorDisaster.v1.add($scope.nData);
-					action.then((res) => {
+					action.then(function (res) {
 						ngDialog.close($scope.ngDialogId);
 						ngDialog.open(buildStatusPopup(res));
-					}).catch((res) => {
+					}).catch(function (res) {
 						ngDialog.open(buildStatusPopup(res));
 					});
 				} else {

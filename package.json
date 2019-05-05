@@ -35,6 +35,8 @@
     "mongoose": "^5.4.20",
     "morgan": "^1.9.1",
     "newman": "latest",
+    "nvm": "0.0.4",
+    "protractor": "^5.4.2",
     "pug": "^2.0.3",
     "pug-static": "^1.0.1"
   }

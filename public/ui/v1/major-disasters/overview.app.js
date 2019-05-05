@@ -6,7 +6,7 @@ angular.module('SOS1819-app.majorDisastersApp', ['ngRoute', 'SOS1819-app', 'ngDi
 				reloadOnSearch: false,
 				templateUrl: '/ui/v1/major-disasters/overview.template.html',
 				resolve: {
-					initialData: (MajorDisaster, $location) => {
+					initialData: function (MajorDisaster, $location) {
 						var searchObj = $location.search();
 						var filter = {
 							offset: parseInt(searchObj.offset) || 0,
@@ -28,7 +28,7 @@ angular.module('SOS1819-app.majorDisastersApp', ['ngRoute', 'SOS1819-app', 'ngDi
 							return {data: [], count: Math.ceil(res[1].data.count / filter.limit)};
 						});
 					},
-					autoLoad: ($location, MajorDisaster) => {
+					autoLoad: function ($location, MajorDisaster) {
 						if (!$location.hash()) return null;
 						else return $location.hash();
 					}
