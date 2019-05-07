@@ -10,13 +10,12 @@ exports.config = {
 	           args: ["--headless", "--disable-gpu", "--window-size=800x600"]
 	       }
 	   },*/
-	//chromeOnly: true,
+	chromeOnly: true,
 	capabilities: {
-	        'browserName': 'phantomjs',
+	    'browserName': 'phantomjs',
 	},
 	specs: [
-		//'TC01-loadData.js',
-		'TC02-createItem.js'
+		'TC-majorDisasters.js'
 	]
 
 };

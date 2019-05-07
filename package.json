@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "postinstall": "bower cache clean && bower install",
-    "test": "newman run https://www.getpostman.com/collections/a4e554c52652db1ae87e && newman run https://www.getpostman.com/collections/e932bf9cc89cbcf15301 && newman run https://www.getpostman.com/collections/5619caf6300fb705ece8",
+    "test": "newman run https://www.getpostman.com/collections/a4e554c52652db1ae87e && newman run https://www.getpostman.com/collections/5619caf6300fb705ece8 && newman run https://www.getpostman.com/collections/e932bf9cc89cbcf15301 && protractor ./tests/config.js",
     "test-testing-of-nuclear-bombs": "newman run https://www.getpostman.com/collections/a4e554c52652db1ae87e",
-    "test-major-disasters": "newman run https://www.getpostman.com/collections/e932bf9cc89cbcf15301",
+    "test-major-disasters": "newman run https://www.getpostman.com/collections/e932bf9cc89cbcf15301 && protractor ./tests/config.js",
     "test-hurricanes": "newman run https://www.getpostman.com/collections/5619caf6300fb705ece8"
   },
   "repository": {
@@ -35,7 +35,6 @@
     "mongoose": "^5.4.20",
     "morgan": "^1.9.1",
     "newman": "latest",
-    "nvm": "0.0.4",
     "protractor": "^5.4.2",
     "pug": "^2.0.3",
     "pug-static": "^1.0.1"
