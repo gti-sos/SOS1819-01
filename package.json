@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "pretest": "tests/runPhantom.sh",
     "postinstall": "bower cache clean && bower install",
     "test": "newman run https://www.getpostman.com/collections/a4e554c52652db1ae87e && newman run https://www.getpostman.com/collections/5619caf6300fb705ece8 && newman run https://www.getpostman.com/collections/e932bf9cc89cbcf15301 && protractor ./tests/config.js",
     "test-testing-of-nuclear-bombs": "newman run https://www.getpostman.com/collections/a4e554c52652db1ae87e",
     "test-major-disasters": "newman run https://www.getpostman.com/collections/e932bf9cc89cbcf15301 && protractor ./tests/config.js",
-    "test-hurricanes": "newman run https://www.getpostman.com/collections/5619caf6300fb705ece8"
+    "test-hurricanes": "newman run https://www.getpostman.com/collections/5619caf6300fb705ece8",
+    "posttest": "killall phantomjs"
   },
   "repository": {
     "type": "git",
