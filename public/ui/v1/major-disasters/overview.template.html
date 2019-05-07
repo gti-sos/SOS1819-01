@@ -69,7 +69,7 @@
                             <div class="btn-group"><button class="btn btn-primary btn-lg" ng-disabled="loading" ng-click="navigate($index)" ng-repeat="item in [].constructor(count) track by $index" ng-class="{'btn-info': $index == filter.offset}">{{$index + 1}}</button></div>
                         </div>
                     </td>
-                    <td colspan="1"><button class="btn btn-block btn-success" type="button" ng-click="create()"><i class="fas fa-plus"></i></button></td>
+                    <td colspan="1"><button id="openModal" class="btn btn-block btn-success" type="button" ng-click="create()"><i class="fas fa-plus"></i></button></td>
                 </tr>
             </tfoot>
         </table>

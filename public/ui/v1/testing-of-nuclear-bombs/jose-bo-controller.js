@@ -12,31 +12,32 @@ app.controller("PemaController", function ($scope,$http, $q){
     
     $scope.get = function(){
         var obj = JSON.parse(JSON.stringify($scope.filter));
-        var search = Object.assign(obj, $scope.pagination);
+        //var search = Object.assign(obj, $scope.pagination);
+        var search = angular.merge(obj, $scope.pagination);
         $q.all([$http.get(url,{params:search}), $http.get(url2 + '/count',{params:search})]).then(function(responses){
             $scope.data = responses[0].data;
-            $scope.count = Math.ceil(responses[1].data.count / $scope.pagination.limit)
+            $scope.count = Math.ceil(responses[1].data.count / $scope.pagination.limit);
         
         }).catch(function(response){
-            window.alert("No se han obtenido los datos.")
-        })
-    }
+            window.alert("No se han obtenido los datos.");
+        });
+    };
     $scope.navigate = function(index){
-        $scope.pagination.offset=index;
+        $scope.pagination.offset = index;
         $scope.get();
-    }
+    };
     $scope.get();
     $scope.delete = function(name){
-        $http.delete(url+"/"+name).then(function(response){
+        $http.delete(url + "/" + name).then(function (response) {
             $scope.get();
             window.alert("La operacion ha sido realizada con exito.");
         }).catch(function(response){
             window.alert("No se ha encontrado el objeto a borrar.");
-        })
-    }
+        });
+    };
     
     $scope.post = function(){
-        $http.post(url,$scope.body).then(function(response){
+        $http.post(url,$scope.body).then(function (response) {
             $scope.get();
             window.alert("La operacion ha sido realizada con exito.");
             $scope.body={};
@@ -48,10 +49,10 @@ app.controller("PemaController", function ($scope,$http, $q){
             } else {
                 window.alert("No se ha podido crear.");
             }
-        })
-    }
+        });
+    };
     $scope.put = function(){
-        $http.put(url + "/"+ $scope.body.name,$scope.body).then(function(response){ 
+        $http.put(url + "/"+ $scope.body.name,$scope.body).then(function (response) { 
             $scope.get();
             window.alert("La operacion ha sido realizada con exito.");
             $scope.body={};
@@ -63,14 +64,14 @@ app.controller("PemaController", function ($scope,$http, $q){
             } else {
                 window.alert("No se ha podido modificar.");
             }
-        })
-    }
+        });
+    };
     $scope.deleteAll = function(){
-        $http.delete(url).then(function(response){
+        $http.delete(url).then(function (response){
             $scope.get();
             window.alert("La operacion ha sido realizada con exito.");
         }).catch(function(response){
             window.alert("No se ha completado la operacion.");
-        })
-    }
-})
+        });
+    };
+});

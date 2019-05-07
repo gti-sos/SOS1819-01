@@ -1,4 +1,38 @@
 /* global angular $scope */
+
+if (!Object.assign) {
+  Object.defineProperty(Object, 'assign', {
+    enumerable: false,
+    configurable: true,
+    writable: true,
+    value: function(target) {
+      'use strict';
+      if (target === undefined || target === null) {
+        throw new TypeError('Cannot convert first argument to object');
+      }
+
+      var to = Object(target);
+      for (var i = 1; i < arguments.length; i++) {
+        var nextSource = arguments[i];
+        if (nextSource === undefined || nextSource === null) {
+          continue;
+        }
+        nextSource = Object(nextSource);
+
+        var keysArray = Object.keys(Object(nextSource));
+        for (var nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex++) {
+          var nextKey = keysArray[nextIndex];
+          var desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
+          if (desc !== undefined && desc.enumerable) {
+            to[nextKey] = nextSource[nextKey];
+          }
+        }
+      }
+      return to;
+    }
+  });
+}
+
 var app = angular.module("SOS1819-app.Fronti");
 app.controller("juan-fe-controller", function ($scope, $http, $q) {
     console.log("juan-fe-controller initialized!");
@@ -36,7 +70,7 @@ app.controller("juan-fe-controller", function ($scope, $http, $q) {
           offset: $scope.pagination.offset,
           limit: $scope.pagination.limit
         };
-        console.log('refresh', Object.assign(searchObj, $scope.filter), searchObj);
+        //console.log('refresh', Object.assign(searchObj, $scope.filter), searchObj);
         var promises = [$http.get($scope.url, {params: searchObj}), $http.get('/api/v2/hurricanes/count', {params:searchObj})];
         $q.all(promises).then(function (responses) {
             $scope.hurricanes = responses[0].data;

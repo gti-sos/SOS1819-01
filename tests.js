@@ -1,6 +1,22 @@
+
+
 exports.config = {
-	seleniumAddress: "http://localhost:4444/wd/hub",
-	chromeOnly: true,
-	fixSessionCapabilities: false,
-	specs: ["TC01-loadData.js"]
+	seleniumAddress: 'http://localhost:4444/wd/hub',
+	/*
+	capabilities: {
+	       'directConnect': true,
+	       'browserName': 'chrome',
+	       chromeOptions: {
+	           args: ["--headless", "--disable-gpu", "--window-size=800x600"]
+	       }
+	   },*/
+	//chromeOnly: true,
+	capabilities: {
+	        'browserName': 'phantomjs',
+	},
+	specs: [
+		//'TC01-loadData.js',
+		'TC02-createItem.js'
+	]
+
 };

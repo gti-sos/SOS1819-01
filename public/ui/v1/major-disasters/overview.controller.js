@@ -1,7 +1,7 @@
 
 
 function buildStatusPopup (data) {
-	return popupConfig = {
+	return {
 		template: '/ui/v1/major-disasters/overviewPopup.template.html',
 		className: 'ngdialog-theme-plain',
 		disableAnimation: true,
@@ -42,7 +42,7 @@ angular.module('SOS1819-app.majorDisastersApp')
 				index = $scope.filter.offset;
 			}
 			filterObj.offset = index;
-			$q.all([MajorDisaster.v1.list(processFilter(filterObj)), MajorDisaster.v2.count(filterObj)]).then((res) => {
+			$q.all([MajorDisaster.v1.list(processFilter(filterObj)), MajorDisaster.v2.count(filterObj)]).then(function (res) {
 				$scope.data = res[0].data;
 				$scope.count = Math.ceil(res[1].data.count / $scope.filter.limit);
 				$scope.loading = false;
@@ -117,7 +117,7 @@ angular.module('SOS1819-app.majorDisastersApp')
 			});
 		};
 
-		$scope.removeAll = () => {
+		$scope.removeAll = function () {
 			MajorDisaster.v2.count().then(function (cRes) {
 				if (window.confirm("¿Borrar las " + cRes.data.count + " entradas?"))
 					MajorDisaster.v1.removeAll().then(function (res) {
@@ -137,7 +137,7 @@ angular.module('SOS1819-app.majorDisastersApp')
 			
 		};
 
-		$scope.modify = (id) => {
+		$scope.modify = function (id) {
 			$location.hash(id);
 			MajorDisaster.v1.get(id).then(function (res) {
 				ngDialog.open({
