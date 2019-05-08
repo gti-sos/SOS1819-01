@@ -1,0 +1,45 @@
+{
+  "name": "sos1819-01",
+  "version": "7.1.0",
+  "description": "Find the relationship between investment and schooling with GDP growth in contrast to public spending and investment in R & D",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "pretest": "./tests/runPhantomJS.sh",
+    "postinstall": "bower cache clean && bower install",
+    "test": "newman run https://www.getpostman.com/collections/a4e554c52652db1ae87e || newman run https://www.getpostman.com/collections/5619caf6300fb705ece8 || newman run https://www.getpostman.com/collections/e932bf9cc89cbcf15301 && protractor ./tests/config.js || :",
+    "test-testing-of-nuclear-bombs": "newman run https://www.getpostman.com/collections/a4e554c52652db1ae87e",
+    "test-major-disasters": "newman run https://www.getpostman.com/collections/e932bf9cc89cbcf15301 && protractor ./tests/config.js",
+    "test-hurricanes": "newman run https://www.getpostman.com/collections/5619caf6300fb705ece8",
+    "posttest": "killall phantomjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gti-sos/SOS1819-01.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gti-sos/SOS1819-01/issues"
+  },
+  "engines": {
+    "node": ">=7"
+  },
+  "homepage": "https://github.com/gti-sos/SOS1819-01#readme",
+  "dependencies": {
+    "async": "^2.6.2",
+    "body-parser": "^1.18.3",
+    "bower": "^1.8.8",
+    "compression": "^1.7.4",
+    "express": "^4.16.4",
+    "express-pug-static": "^0.1.0",
+    "mongodb": "^3.2.2",
+    "mongoose": "^5.4.20",
+    "morgan": "^1.9.1",
+    "newman": "latest",
+    "protractor": "^5.4.2",
+    "pug": "^2.0.3",
+    "pug-static": "^1.0.1"
+  }
+}
+
