@@ -4,7 +4,7 @@ const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
-const pug = require('pug');
+//const pug = require('pug');
 const bombsAPI = require("./api-testing-of-nuclear-bombs");
 const hurricanesAPI = require("./api-hurricanes");
 const MongoClient = require("mongodb").MongoClient;
@@ -14,8 +14,8 @@ const compression = require('compression');
 
 app.use(compression());
 app.use(morgan('dev'));
-app.set('views', [path.join(__dirname, 'public')]);
-app.set('view engine', 'pug');
+//app.set('views', [path.join(__dirname, 'public')]);
+//app.set('view engine', 'pug');
 
 app.use(express.static(path.join(__dirname, "public")));
 //app.use("/ui/v1/", require('./routes.js'));
