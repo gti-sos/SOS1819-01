@@ -59,7 +59,9 @@
                     <td ng-class="{'border font-weight-bold': filter.death}"><span>{{d.death}}</span></td>
                     <td ng-class="{'border font-weight-bold': filter.inflation}"><span>{{d.inflation}}</span></td>
                     <td ng-class="{'border font-weight-bold': filter['no-inflation']}"><span>{{d["no-inflation"]}}</span></td>
-                    <td class="btn-group"><button class="btn btn-md btn-outline-dark" type="button" ng-click="modify(d.event)"><i class="fas fa-pen"></i></button><button class="btn btn-md btn-outline-danger" type="button" ng-click="remove(d.event)"><i class="fas fa-times"></i></button></td>
+                    <td class="btn-group">
+                        <a class="btn btn-md btn-outline-dark" href="#!/major-disasters/{{d.event}}"><i class="fas fa-pen"></i></a>
+                        <button class="btn btn-md btn-outline-danger" type="button" ng-click="remove(d.event)"><i class="fas fa-times"></i></button></td>
                 </tr>
             </tbody>
             <tfoot>
