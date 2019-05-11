@@ -5,7 +5,6 @@ var controller = require('./controller.js').api;
 function apiVersionMiddleware (fnName, req, res, next) {
 	if (!controller[req._apiVersion] || !controller[req._apiVersion][fnName])
 		return res.sendStatus(501);
-	console.log('returning', typeof controller[req._apiVersion][fnName]);
 	controller[req._apiVersion][fnName](req, res);
 }
 
