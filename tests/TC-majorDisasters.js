@@ -1,7 +1,10 @@
 describe("Testing for 'major-disasters'", function () {
 	var itemName = "testProtractor_" + Date.now();
 	var until = protractor.ExpectedConditions;
-	browser.get("http://localhost:8080/#!/major-disasters");
+	
+	beforeAll(function(){
+		browser.get("http://localhost:8080/#!/major-disasters");
+	});
 
 	it("Should be non empty", function () {
 		expect(element.all(by.repeater("d in data")).count()).toBeGreaterThan(0);
@@ -32,7 +35,6 @@ describe("Testing for 'major-disasters'", function () {
 	});
 	
 	it("Should show the created item", function () {
-		console.log('started show');
 		var filterInput = element(by.model('filter.event'));
 		browser.wait(until.visibilityOf(filterInput), 5000, 'Input filter field took too long!').then(function () {
 			filterInput.click().clear().sendKeys(itemName);
