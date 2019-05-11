@@ -111,7 +111,7 @@ exports.api = {
 	v2: {
 		count: function (req, res) {
 			var search = buildSearch(req);
-			console.log(search.fields);
+			//console.log(search.fields);
 			MajorDisaster.countDocuments(search.fields, function (err, count) {
 				if (err) return res.json(err);
 				res.json({count: count});
