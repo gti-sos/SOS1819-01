@@ -127,7 +127,6 @@ app.controller("juan-fe-controller", function ($scope, $http, $q) {
  
         });
     };
-<<<<<<< HEAD
     
     $scope.load = function (item) {
         var bdy = JSON.parse(JSON.stringify(item));
@@ -137,7 +136,7 @@ app.controller("juan-fe-controller", function ($scope, $http, $q) {
         $scope.body = bdy;
     }
 
-    $scope.put = function () {
+/*    $scope.put = function () {
         var bdy = {};
         try {
             bdy = $scope.body;
@@ -147,23 +146,23 @@ app.controller("juan-fe-controller", function ($scope, $http, $q) {
         } catch (e) {
             return alert(e);
         }
-=======
 
+*/
     $scope.put = function () {
         var bdy = JSON.parse(JSON.stringify($scope.bodyEdit));
 
->>>>>>> 84d8abbd1b88ee25e97c67b6679e8bcab47a616c
+
 
         $http.put($scope.url, bdy).then(function (response){
             //$scope.data = JSON.stringify(response.data, null, 2);
-<<<<<<< HEAD
+
             refresh();
 
             window.alert(bdy.name+' modificado.')
             //$scope.status = response.status + " " + response.statusText;
-=======
+
             $scope.status = response.status + " " + response.statusText;
->>>>>>> 84d8abbd1b88ee25e97c67b6679e8bcab47a616c
+
         }).catch(function (response) {
             //$scope.data = JSON.stringify(response.data, null, 2);
             //$scope.status = response.status + " " + response.statusText;
