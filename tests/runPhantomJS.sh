@@ -10,6 +10,7 @@ exec > $LOGFILE     # stdout replaced with file ""logfile.txt"".
 # ----------------------------------------------------------- #
 # All output from commands in this block sent to file $LOGFILE.
 
+killall phantomjs || :
 phantomjs --webdriver=4444 &
 
 # ----------------------------------------------------------- #
