@@ -86,26 +86,36 @@ app.controller("juan-fe-controller", function ($scope,$http, $q) {
     };
     
     $scope.load = function (item) {
-        $scope.body = item;
+        var bdy = JSON.parse(JSON.stringify(item));
+        bdy.mbar = parseFloat(bdy.mbar);
+        bdy.damagesuntil2008 = parseFloat(bdy.damagesuntil2008);
+        bdy.speed = parseFloat(bdy.speed);
+        $scope.body = bdy;
     }
 
     $scope.put = function () {
         var bdy = {};
         try {
             bdy = $scope.body;
+            
+            console.log('sadasdsad',bdy)
+            
         } catch (e) {
             return alert(e);
         }
 
         $http.put($scope.url + '/' + bdy.name, bdy).then(function (response){
             //$scope.data = JSON.stringify(response.data, null, 2);
+            refresh();
+
             window.alert(bdy.name+' modificado.')
-            $scope.status = response.status + " " + response.statusText;
+            //$scope.status = response.status + " " + response.statusText;
         }).catch(function (response) {
             //$scope.data = JSON.stringify(response.data, null, 2);
-            $scope.status = response.status + " " + response.statusText;
+            //$scope.status = response.status + " " + response.statusText;
+            window.alert('No se han podido guardar los cambios');
+
         });
-        refresh();
     };
 
     $scope.delete = function (hurricane){

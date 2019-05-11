@@ -8,7 +8,7 @@
     </head>
     <body ng-controller="juan-fe-controller">
         <h1 align='center'>Huracanes</h1>
-        <table class="table">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="hurricane in hurricanes track by $index">
+                <tr style="cursor:pointer;" ng-click="load(hurricane)" ng-repeat="hurricane in hurricanes track by $index">
                     <td>{{ hurricane.name }}</td>
                     <td>{{ hurricane.year }}</td>
                     <td>{{ hurricane.country }}</td>
@@ -65,7 +65,7 @@
                         <input 
                             type="number"
                             step="0.01"
-                            ng-model = "body['damagesuntil2008']"
+                            ng-model = "body.damagesuntil2008"
                             class = "form-control"
                             placeholder = "nuevo daños hasta 2008"/>
                     </td><td>
@@ -76,15 +76,18 @@
                             class = "form-control"
                             placeholder = "nuevo mbar"/>
                     </td><td>
-                        <button
+                        <div class="btn-group">
+                            <button
                             class="btn btn-primary"
                             ng-click="post()"
                             >Añadir</button>
                     
-                    <button
+                            <button
                             class="btn btn-primary"
                             ng-click="put()"
-                            >Modificar</button>
+                            >Modificar</button>    
+                        </div>
+                        
                     </td>
                     
                 </tr>
