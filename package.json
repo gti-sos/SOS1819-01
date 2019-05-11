@@ -1,15 +1,17 @@
 {
   "name": "sos1819-01",
-  "version": "7.1.0",
+  "version": "2.0.1",
   "description": "Find the relationship between investment and schooling with GDP growth in contrast to public spending and investment in R & D",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "pretest": "./tests/runPhantomJS.sh",
     "postinstall": "bower cache clean && bower install",
-    "test": "newman run https://www.getpostman.com/collections/a4e554c52652db1ae87e && newman run https://www.getpostman.com/collections/e932bf9cc89cbcf15301 && newman run https://www.getpostman.com/collections/5619caf6300fb705ece8",
+    "test": "npm run test-testing-of-nuclear-bombs; npm run test-hurricanes; npm run test-major-disasters; protractor ./tests/config.js",
     "test-testing-of-nuclear-bombs": "newman run https://www.getpostman.com/collections/a4e554c52652db1ae87e",
     "test-major-disasters": "newman run https://www.getpostman.com/collections/e932bf9cc89cbcf15301",
-    "test-hurricanes": "newman run https://www.getpostman.com/collections/5619caf6300fb705ece8"
+    "test-hurricanes": "newman run https://www.getpostman.com/collections/5619caf6300fb705ece8",
+    "posttest": "killall phantomjs"
   },
   "repository": {
     "type": "git",
@@ -34,6 +36,9 @@
     "mongoose": "^5.4.20",
     "morgan": "^1.9.1",
     "newman": "latest",
-    "pug": "^2.0.3"
+    "protractor": "^5.4.2",
+    "cryptiles": ">=4.1.2",
+    "hoek": ">=4.2.1"
   }
 }
+

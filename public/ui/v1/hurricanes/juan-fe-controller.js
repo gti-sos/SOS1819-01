@@ -1,6 +1,40 @@
 /* global angular $scope */
-var app = angular.module("Fronti");
-app.controller("juan-fe-controller", function ($scope,$http, $q) {
+
+if (!Object.assign) {
+  Object.defineProperty(Object, 'assign', {
+    enumerable: false,
+    configurable: true,
+    writable: true,
+    value: function(target) {
+      'use strict';
+      if (target === undefined || target === null) {
+        throw new TypeError('Cannot convert first argument to object');
+      }
+
+      var to = Object(target);
+      for (var i = 1; i < arguments.length; i++) {
+        var nextSource = arguments[i];
+        if (nextSource === undefined || nextSource === null) {
+          continue;
+        }
+        nextSource = Object(nextSource);
+
+        var keysArray = Object.keys(Object(nextSource));
+        for (var nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex++) {
+          var nextKey = keysArray[nextIndex];
+          var desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
+          if (desc !== undefined && desc.enumerable) {
+            to[nextKey] = nextSource[nextKey];
+          }
+        }
+      }
+      return to;
+    }
+  });
+}
+
+var app = angular.module("SOS1819-app.Fronti");
+app.controller("juan-fe-controller", function ($scope, $http, $q) {
     console.log("juan-fe-controller initialized!");
     $scope.url = "/api/v1/hurricanes";
     $scope.pagination = {
@@ -11,6 +45,15 @@ app.controller("juan-fe-controller", function ($scope,$http, $q) {
         from: null,
         to: null
     };
+
+    $scope.bodyEdit = {
+        name: "",
+        year: null,
+        country: "",
+        speed: null,
+        damagesuntil2008: null
+    };
+
     //$scope.count = 0;
 
     refresh();
@@ -27,7 +70,7 @@ app.controller("juan-fe-controller", function ($scope,$http, $q) {
           offset: $scope.pagination.offset,
           limit: $scope.pagination.limit
         };
-        console.log('refresh', Object.assign(searchObj, $scope.filter), searchObj);
+        //console.log('refresh', Object.assign(searchObj, $scope.filter), searchObj);
         var promises = [$http.get($scope.url, {params: searchObj}), $http.get('/api/v2/hurricanes/count', {params:searchObj})];
         $q.all(promises).then(function (responses) {
             $scope.hurricanes = responses[0].data;
@@ -84,6 +127,7 @@ app.controller("juan-fe-controller", function ($scope,$http, $q) {
  
         });
     };
+<<<<<<< HEAD
     
     $scope.load = function (item) {
         var bdy = JSON.parse(JSON.stringify(item));
@@ -103,13 +147,23 @@ app.controller("juan-fe-controller", function ($scope,$http, $q) {
         } catch (e) {
             return alert(e);
         }
+=======
 
-        $http.put($scope.url + '/' + bdy.name, bdy).then(function (response){
+    $scope.put = function () {
+        var bdy = JSON.parse(JSON.stringify($scope.bodyEdit));
+
+>>>>>>> 84d8abbd1b88ee25e97c67b6679e8bcab47a616c
+
+        $http.put($scope.url, bdy).then(function (response){
             //$scope.data = JSON.stringify(response.data, null, 2);
+<<<<<<< HEAD
             refresh();
 
             window.alert(bdy.name+' modificado.')
             //$scope.status = response.status + " " + response.statusText;
+=======
+            $scope.status = response.status + " " + response.statusText;
+>>>>>>> 84d8abbd1b88ee25e97c67b6679e8bcab47a616c
         }).catch(function (response) {
             //$scope.data = JSON.stringify(response.data, null, 2);
             //$scope.status = response.status + " " + response.statusText;
@@ -141,7 +195,8 @@ app.controller("juan-fe-controller", function ($scope,$http, $q) {
         var filter = {};
         $scope.pagination.offset = 0;
         $scope.filter.from = ($scope.filter.from) ? $scope.filter.from : null;
-        $scope.filter.to = ($scope.filter.to) ? $scope.filter.to : null;
+        $scope.filter.to = ($scope.filter.to) ? $scope
+        .filter.to : null;
         refresh();
         //if ($scope.filter.from) filter.from = from;
        // if ($scope.filter.to) filter.to = to;

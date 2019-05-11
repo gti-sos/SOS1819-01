@@ -4,24 +4,25 @@ const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
-const pug = require('pug');
+//const pug = require('pug');
 const bombsAPI = require("./api-testing-of-nuclear-bombs");
 const hurricanesAPI = require("./api-hurricanes");
 const MongoClient = require("mongodb").MongoClient;
 const compression = require('compression');
+//var pugStatic = require('pug-static');
+//var pugStatic = require('express-pug-static');
 
 app.use(compression());
 app.use(morgan('dev'));
-app.set('views', [path.join(__dirname, 'public/major-disasters')]);
-app.set('view engine', 'pug');
+//app.set('views', [path.join(__dirname, 'public')]);
+//app.set('view engine', 'pug');
 
 app.use(express.static(path.join(__dirname, "public")));
-app.use("/ui/v1/major-disasters", require('./routes.js'));
+//app.use("/ui/v1/", require('./routes.js'));
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}));
 
 
-/////////Conexion APIJOSE/////////
 const uri = "mongodb+srv://pema:pema@sos-wj0yb.mongodb.net/sos1819?retryWrites=true";
 const uri2 = "mongodb+srv://juajimbal:1234@cluster0-jate4.mongodb.net/test?retryWrites=true";
 //const uri3 = "mongodb://localhost/sos1819";

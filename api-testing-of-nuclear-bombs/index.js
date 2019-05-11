@@ -1,5 +1,8 @@
 var bombsAPI = {};
 module.exports = bombsAPI;
+
+
+
 bombsAPI.register = function(app,bombs){
 
 app.get("/api/v1/testing-of-nuclear-bombs/docs", (req, res)=>{
@@ -42,7 +45,7 @@ app.get("/api/v1/testing-of-nuclear-bombs", (req, res) => {
             search.fields[key] = req.query[key];
     }
     
-    bombs.find(search.fields, {fields:{_id:0}}).limit(search.limit).skip(search.page * search.limit).toArray((err,bombsArray)=>{
+    bombs.find(search.fields, {fields:{_id:0}}).limit(search.limit).skip(search.offset * search.limit).toArray((err,bombsArray)=>{
         if(err)
             console.log("Error " + err)
             
@@ -53,6 +56,31 @@ app.get("/api/v1/testing-of-nuclear-bombs", (req, res) => {
 
 
 //POST /testing-nuclear-bombs
+app.get("/api/v2/testing-of-nuclear-bombs/count", (req, res)=>{
+  let search = {fields: {}, offset: 0, limit: 0};
+  for (let key in req.query) {
+      if (["from", "to"].indexOf(key) > -1) {
+          var nCondition = (key === "from") ? "$gte" : "$lte";
+          if (!search.fields.year) 
+              search.fields.year = {};
+          search.fields.year[nCondition] = parseInt(req.query[key]);
+      } else if (["offset", "limit"].indexOf(key) > -1)
+          search[key] = parseInt(req.query[key]);
+     // else if (["country", "type"].indexOf(key) > -1)
+       //   search.fields[key] = {"$in": req.query[key]};
+    
+      else {
+  
+          search.fields[key] = req.query[key];
+      }
+       
+  }
+  bombs.countDocuments(search.fields, function (err, count) {
+        if (err) return res.json(err);
+        res.json({count: count});
+    });
+});
+
 app.post("/api/v1/testing-of-nuclear-bombs",(req, res)=>{
     
     var newBomb = req.body;
@@ -60,12 +88,12 @@ app.post("/api/v1/testing-of-nuclear-bombs",(req, res)=>{
     var keys = ["name","country","year","maxYield","shot","hob"];
     
     for (var i = keys.length-1; i >= 0; i--) {
-        if (!newBomb.hasOwnProperty(keys[i])) {
+        if (!newBomb.hasOwnProperty(keys[i]) || newBomb[keys[i]] === "" || newBomb[keys[i]] == null) {
             return res.sendStatus(400);
         }
     }
  
-    bombs.countDocuments(newBomb,function(err,c){
+    bombs.countDocuments({name:newBomb.name},function(err,c){
         if(c>0){
             res.sendStatus(409);
         } else {
@@ -115,8 +143,8 @@ app.put("/api/v1/testing-of-nuclear-bombs/:name", (req, res) => {
         
     var keys = ["name","country","year","maxYield","shot","hob"];
     
-    for (var i = keys.length - 1; i >= 0; i--) {
-        if (!req.body.hasOwnProperty(keys[i])) {
+      for (var i = keys.length-1; i >= 0; i--) {
+        if (!req.body.hasOwnProperty(keys[i]) || req.body[keys[i]] === "" || req.body[keys[i]] == null) {
             return res.sendStatus(400);
         }
     }
