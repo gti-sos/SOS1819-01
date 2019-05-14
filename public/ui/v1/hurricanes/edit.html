@@ -1,0 +1,47 @@
+<div>
+    <h1>Huracanes</h1>
+               <td>
+                <input
+                type="text"
+                class = "form-control"
+                ng-model = "body.name"
+                placeholder = "nuevo nombre"/>
+            </td><td>
+                <input
+                type="number"
+                ng-model = "body.year"
+                class = "form-control"
+                placeholder = "nuevo año"/>
+            </td><td>
+                <input 
+                type="text"
+                ng-model = "body.country"
+                class = "form-control"
+                placeholder = "nuevo pais"/>
+            </td><td>
+                <input 
+                type="number"
+                ng-model = "body.speed"
+                class = "form-control"
+                placeholder = "nueva velocidad"/>
+            </td><td>
+                <input 
+                type="number"
+                step="0.01"
+                ng-model = "body['damagesuntil2008']"
+                class = "form-control"
+                placeholder = "nuevo daños hasta 2008"/>
+            </td><td>
+                <input 
+                type="number"
+                step="0.01"
+                ng-model = "body.mbar"
+                class = "form-control"
+                placeholder = "nuevo mbar"/>
+            </td><td>
+                <button
+                class="btn btn-primary"
+                ng-click="put()"
+                >Añadir</button>
+            </td>
+</div>

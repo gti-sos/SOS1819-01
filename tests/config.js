@@ -15,7 +15,8 @@ exports.config = {
 	    'browserName': 'phantomjs',
 	},
 	specs: [
-		'TC-majorDisasters.js'
+		'TC-majorDisasters.js',
+		'TC-hurricanes.js'
 	]
 
 };
