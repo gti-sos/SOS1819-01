@@ -58,9 +58,6 @@ describe("Testing for 'testing-of-nuclear-bombs'", function () {
 	
 	it("Should delete the created item", function () {
 		element.all(by.repeater("item in data")).first().all(by.tagName("button")).last().click();
-		browser.takeScreenshot().then(function (png) {
-        writeScreenShot(png, 'exception.png');
-    });
 	});
 	
 });
