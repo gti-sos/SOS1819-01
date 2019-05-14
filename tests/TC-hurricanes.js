@@ -33,15 +33,14 @@ describe("Testing for 'hurricanes'", function () {
 			element(by.model("body.damagesuntil2008")).sendKeys('1');
 			element(by.model('body.mbar')).sendKeys('100');
 			element(by.id('añadir')).click();
-	});
-	
-	it("Should show the created item", function () {
 			element(by.model("filter.from")).sendKeys("1");
 			element(by.model("filter.to")).sendKeys("11");
 			element(by.id('busquedaPorAño')).click();
 
 			expect(element.all(by.repeater("hurricane in hurricanes")).count()).toBe(1);
-		});
+	});
+	
+	
 	
 	it("Should delete the created item", function () {
 		element.all(by.repeater("hurricane in hurricanes")).first().all(by.tagName("button")).last().click();

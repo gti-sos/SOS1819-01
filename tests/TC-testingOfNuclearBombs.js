@@ -38,26 +38,21 @@ describe("Testing for 'testing-of-nuclear-bombs'", function () {
 			element(by.model('body.maxYield')).sendKeys('500');
 			element(by.model('body.shot')).sendKeys('8');
 			element(by.model('body.hob')).sendKeys('210');
-			
 			element(by.id('Crear')).click();
 			
 			//console.log('filled no inflation')
 			//element(by.model('tmp.type.val')).click()
-			
 			//console.log('filled type')
-	
-	});
-	
-	it("Should show the created item", function () {
-		element(by.model('filter.from')).sendKeys("1111");
-		element(by.model('filter.to')).sendKeys("1112");
-		element(by.id('FiltrarAño')).click();
-		expect(element.all(by.repeater("item in data")).count()).toBe(1);
+			element(by.model('filter.from')).sendKeys("1111");
+			element(by.model('filter.to')).sendKeys("1112");
+			element(by.id('FiltrarAño')).click();
+			expect(element.all(by.repeater("item in data")).count()).toBe(1);
 	
 	});
 	
 	it("Should delete the created item", function () {
 		element.all(by.repeater("item in data")).first().all(by.tagName("button")).last().click();
+		expect(element.all(by.repeater("item in data")).count()).toBe(0);
 	});
 	
 });
