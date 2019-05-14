@@ -1,0 +1,45 @@
+ <tr>
+        <td>
+            <input
+            type="text"
+            class = "form-control"
+            ng-model = "body.name"
+            placeholder = "nuevo nombre"/>
+        </td><td>
+           <input 
+           type="text"
+           ng-model = "body.country"
+           class = "form-control"
+           placeholder = "nuevo pais"/>
+       </td><td>
+         <input
+         type="number"
+         ng-model = "body.year"
+         class = "form-control"
+         placeholder = "nuevo año"/>
+     </td><td>
+        <input 
+        type="number"
+        ng-model = "body.maxYield"
+        class = "form-control"
+        placeholder = "nueva carga"/>
+    </td><td>
+        <input 
+        type="number"
+        ng-model = "body.shot"
+        class = "form-control"
+        placeholder = "nuevo disparo"/>
+    </td><td>
+        <input 
+        type="number"
+        ng-model = "body.hob"
+        class = "form-control"
+        placeholder = "nuevo hob"/>
+    </td><td>
+        <button
+        class="btn btn-primary"
+        ng-click="put()"
+        >Modificar</button>
+    </td>
+
+</tr>

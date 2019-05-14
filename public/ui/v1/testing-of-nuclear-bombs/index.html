@@ -13,7 +13,11 @@
     </thead>
     <tbody>
         <tr ng-repeat="item in data track by $index">
-            <td>{{ item.name }}</td>
+            <td>
+                <a
+                href="/#!/testing-of-nuclear-bombs/{{item.name}}"
+                >{{ item.name }}</a>
+            </td>
             <td>{{ item.country }}</td>
             <td>{{ item.year }}</td>
             <td>{{ item.maxYield }}</td>
@@ -69,12 +73,8 @@
         <button
         class="btn btn-primary"
         ng-click="post()"
+        id="Crear"
         >Añadir</button>
-
-        <button
-        class="btn btn-primary"
-        ng-click="put()"
-        >Modificar</button>
     </td>
 
 </tr>
@@ -101,12 +101,13 @@
         <button
         class="btn btn-primary"
         ng-click="get()"
+        id="FiltrarAño"
         >Filtrar por año</button>
     </td>
     <td></td>
     <td>
        <button
-       class="btn btn-primary"
+       class="btn btn-danger"
        ng-click="deleteAll()"
        >Borrar Datos</button>
    </td>

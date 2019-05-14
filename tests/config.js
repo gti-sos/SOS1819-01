@@ -16,7 +16,8 @@ exports.config = {
 	},
 	specs: [
 		'TC-majorDisasters.js',
-		'TC-hurricanes.js'
+		'TC-hurricanes.js',
+		'TC-testingOfNuclearBombs.js'
 	]
 
 };
