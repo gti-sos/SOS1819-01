@@ -6,7 +6,7 @@ app.controller("PemaController", function ($scope,$http, $q){
     $scope.data=[];
     $scope.body={};
     $scope.filter={from:null,to:null};
-    $scope.pagination={offset:0,limit:2}
+    $scope.pagination={offset:0,limit:10}
     $scope.count = 0;
     
     
@@ -30,9 +30,9 @@ app.controller("PemaController", function ($scope,$http, $q){
     $scope.delete = function(name){
         $http.delete(url + "/" + name).then(function (response) {
             $scope.get();
-            window.alert("La operacion ha sido realizada con exito.");
+            //window.alert("La operacion ha sido realizada con exito.");
         }).catch(function(response){
-            window.alert("No se ha encontrado el objeto a borrar.");
+           // window.alert("No se ha encontrado el objeto a borrar.");
         });
     };
     
@@ -74,4 +74,31 @@ app.controller("PemaController", function ($scope,$http, $q){
             window.alert("No se ha completado la operacion.");
         });
     };
+});
+
+app.controller("PemaEditController", function ($scope,$http, $q, initialData,$location){
+    console.log(initialData);
+    var url = "/api/v1/testing-of-nuclear-bombs";
+    var url2 = "/api/v2/testing-of-nuclear-bombs";
+    
+    $scope.body={name:initialData.name,country:initialData.country,year:parseFloat(initialData.year),maxYield:parseFloat(initialData.maxYield),
+        shot:parseFloat(initialData.shot),hob:parseFloat(initialData.hob)};
+    
+    $scope.put = function(){
+        $http.put(url + "/"+ $scope.body.name,$scope.body).then(function (response) { 
+            //$scope.get();
+            window.alert("La operacion ha sido realizada con exito.");
+            $scope.body={};
+            $location.url("/testing-of-nuclear-bombs");
+        }).catch(function(response){
+            if(response.status===404){
+                window.alert("No existe el objeto."+ $scope.body.name);
+            } else if (response.status===400){
+                window.alert("Faltan campos por completar.");
+            } else {
+                window.alert("No se ha podido modificar.");
+            }
+        });
+    };
+    
 });
