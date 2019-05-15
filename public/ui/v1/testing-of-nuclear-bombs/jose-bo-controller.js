@@ -30,9 +30,9 @@ app.controller("PemaController", function ($scope,$http, $q){
     $scope.delete = function(name){
         $http.delete(url + "/" + name).then(function (response) {
             $scope.get();
-            //window.alert("La operacion ha sido realizada con exito.");
+            window.alert("La operacion ha sido realizada con exito.");
         }).catch(function(response){
-           // window.alert("No se ha encontrado el objeto a borrar.");
+           window.alert("No se ha encontrado el objeto a borrar.");
         });
     };
     
