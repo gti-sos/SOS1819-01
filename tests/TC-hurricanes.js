@@ -44,7 +44,7 @@ describe("Testing for 'hurricanes'", function () {
 	
 	it("Should delete the created item", function () {
 		element.all(by.repeater("hurricane in hurricanes")).first().all(by.tagName("button")).last().click();
-		expect(element.all(by.repeater("item in data")).count()).toBe(0);
+		expect(element.all(by.repeater("hurricane in hurricanes")).count()).toBe(0);
 		//browser.takeScreenshot().then(function (png) {
         //writeScreenShot(png, 'exception.png');
     
