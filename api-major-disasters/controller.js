@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Model = require('./model.js');
 const MajorDisaster = mongoose.model("MajorDisaster");
 const populateData = require("./populateData.json");
+const jwt = require('jsonwebtoken');
 
 function buildSearch (req) {
 	let search = {fields: {}, offset: undefined, limit: undefined};
@@ -116,6 +117,18 @@ exports.api = {
 				if (err) return res.json(err);
 				res.json({count: count});
 			});
+		},
+		login: function (req, res) {
+			if (!req.body.user || !req.body.password) return res.sendStatus(400);
+			var username = req.body.user;
+			var password = req.body.password;
+		  	if(!(username === 'test' && password === 'test'))
+			     return res.status(401).json({error: 'usuario o contraseña inválidos'});
+			
+			var token = jwt.sign({username: username, date: Date.now()}, 'Secret Password', {
+				expiresIn: 60 * 60 * 24
+			});
+			res.json(token);
 		}
 	}
 };

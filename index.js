@@ -9,6 +9,8 @@ const bombsAPI = require("./api-testing-of-nuclear-bombs");
 const hurricanesAPI = require("./api-hurricanes");
 const MongoClient = require("mongodb").MongoClient;
 const compression = require('compression');
+const simpleOauth2 = require('simple-oauth2');
+
 //var pugStatic = require('pug-static');
 //var pugStatic = require('express-pug-static');
 
@@ -50,7 +52,7 @@ mongoose.connect(uri3, {useNewUrlParser: true}).then(function () {
     //app.use("/api/:version/major-disasters", require('./api-major-disasters'));
     //app.use("/api/v2/major-disasters", require('./api-major-disasters'));
     
-    app.use("/api/v1/secure/major-disasters", require('./api-major-disasters/authMiddleware'), function (req, res, next) {
+    app.use("/api/:version/secure/major-disasters", require('./api-major-disasters/authMiddleware'), function (req, res, next) {
         req._apiVersion = req.params.version;
         next();
     }, require('./api-major-disasters'));
@@ -60,5 +62,57 @@ mongoose.connect(uri3, {useNewUrlParser: true}).then(function () {
 app.listen(process.env.PORT || 8080, () => {
     console.log("Servidor de NodeJS corriendo en", process.env.IP || "localhost", process.env.PORT || 8080);
 });
+
+const oauth2 = simpleOauth2.create({
+    client: {
+        id: "asd",
+        secret: "aaa"
+    },
+    auth: {
+        tokenHost: 'https://github.com',
+        tokenPath: '/login/oauth/access_token',
+        authorizePath: '/login/oauth/authorize'
+    }
+});
+
+const authorizationUri = oauth2.authorizationCode.authorizeURL({
+  redirect_uri: 'http://localhost:8080/callback',
+  scope: 'notifications',
+  state: '3(#0/!~',
+});
+
+// Initial page redirecting to Github
+app.get('/oauth/majorDisasters', (req, res) => {
+  console.log(authorizationUri);
+  res.redirect(authorizationUri);
+});
+
+  app.get('/callback/majorDisasters', function (req, res) {
+    const code = req.query.code;
+    const options = {
+      code
+    };
+    auth2.authorizationCode (function (as) {
+        console.log(as);
+    });
+});
+    /*
+    try {
+      const result = await oauth2.authorizationCode.getToken(options);
+
+      console.log('The resulting token: ', result);
+
+      const token = oauth2.accessToken.create(result);
+
+      return res.status(200).json(token)
+    } catch(error) {
+      console.error('Access Token Error', error.message);
+      return res.status(500).json('Authentication failed');
+    }
+  });
+    */
+  app.get('/test', (req, res) => {
+    res.send('Hello<br><a href="/oauth/majorDisasters">Log in with Github</a>');
+  });
 
 exports = module.exports = app;

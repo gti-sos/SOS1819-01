@@ -14,6 +14,7 @@ router.get('/docs', (req, res, next) => res.redirect("https://documenter.getpost
 router.get('',  apiVersionMiddleware.bind(this, 'list'));
 router.get('/:event', apiVersionMiddleware.bind(this, 'get'));
 router.post('', apiVersionMiddleware.bind(this, 'create'));
+router.post('/login', apiVersionMiddleware.bind(this, 'login'));
 router.post('/:event', (req, res) => res.status(405).json({code: 405, msg: "Method Not Allowed"}));
 router.put('', (req, res) => res.status(405).json({code: 405, msg: "Method Not Allowed"}));
 router.put('/:event', apiVersionMiddleware.bind(this, 'update'));
