@@ -4,23 +4,24 @@ const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser');
 //const pug = require('pug');
 const bombsAPI = require("./api-testing-of-nuclear-bombs");
 const hurricanesAPI = require("./api-hurricanes");
 const MongoClient = require("mongodb").MongoClient;
 const compression = require('compression');
-const simpleOauth2 = require('simple-oauth2');
 
 //var pugStatic = require('pug-static');
 //var pugStatic = require('express-pug-static');
 
+app.use(cookieParser());
 app.use(compression());
 app.use(morgan('dev'));
 //app.set('views', [path.join(__dirname, 'public')]);
 //app.set('view engine', 'pug');
 
 app.use(express.static(path.join(__dirname, "public")));
-//app.use("/ui/v1/", require('./routes.js'));
+app.use("/major-disasters", require('./majorDisastersRoutes.js'));
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}));
 
@@ -56,6 +57,7 @@ mongoose.connect(uri3, {useNewUrlParser: true}).then(function () {
         req._apiVersion = req.params.version;
         next();
     }, require('./api-major-disasters'));
+
     console.log("Connected DB Bernabé");
 });
 
@@ -63,61 +65,10 @@ app.listen(process.env.PORT || 8080, () => {
     console.log("Servidor de NodeJS corriendo en", process.env.IP || "localhost", process.env.PORT || 8080);
 });
 
-const oauth2 = simpleOauth2.create({
-    client: {
-        id: "c5c1e43e307942afbcbd",
-        secret: "4209f44f43e2037a86d97fe9052b12dd35dbb5cd"
-    },
-    auth: {
-        tokenHost: 'https://github.com',
-        tokenPath: '/login/oauth/access_token',
-        authorizePath: '/login/oauth/authorize'
-    }
-});
-
-const authorizationUri = oauth2.authorizationCode.authorizeURL({
-  redirect_uri: 'https://sos1819-01.herokuapp.com/callback/majorDisasters',
-  scope: 'notifications',
-  state: '3(#0/!~',
-});
-
-// Initial page redirecting to Github
-app.get('/oauth/majorDisasters', (req, res) => {
-  console.log(authorizationUri);
-  res.redirect(authorizationUri);
-});
-
 app.get('/callback/majorDisasters', function (req, res) {
-    const code = req.query.code;
-        const options = {code};
-
-        try {
-          oauth2.authorizationCode.getToken(options).then(function (result) {
-            console.log('The resulting token: ', result);
-            const token = oauth2.accessToken.create(result);
-            return res.status(200).json(token)
-          });
-          
-        } catch(error) {
-          console.error('Access Token Error', error.message);
-          return res.status(500).json('Authentication failed');
-        }    
+    
 });
-    /*
-    try {
-      const result = await oauth2.authorizationCode.getToken(options);
-
-      console.log('The resulting token: ', result);
-
-      const token = oauth2.accessToken.create(result);
-
-      return res.status(200).json(token)
-    } catch(error) {
-      console.error('Access Token Error', error.message);
-      return res.status(500).json('Authentication failed');
-    }
-  });
-    */
+    
   app.get('/test', (req, res) => {
     res.send('Hello<br><a href="/oauth/majorDisasters">Log in with Github</a>');
   });

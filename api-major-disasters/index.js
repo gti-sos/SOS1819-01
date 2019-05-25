@@ -15,6 +15,8 @@ router.get('',  apiVersionMiddleware.bind(this, 'list'));
 router.get('/:event', apiVersionMiddleware.bind(this, 'get'));
 router.post('', apiVersionMiddleware.bind(this, 'create'));
 router.post('/login', apiVersionMiddleware.bind(this, 'login'));
+//router.post('/oauth', apiVersionMiddleware.bind(this, 'oauth'));
+//router.post('/oauth/callback', apiVersionMiddleware.bind(this, 'oauthCallback'));
 router.post('/:event', (req, res) => res.status(405).json({code: 405, msg: "Method Not Allowed"}));
 router.put('', (req, res) => res.status(405).json({code: 405, msg: "Method Not Allowed"}));
 router.put('/:event', apiVersionMiddleware.bind(this, 'update'));

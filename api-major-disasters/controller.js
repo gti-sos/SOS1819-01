@@ -4,6 +4,7 @@ const MajorDisaster = mongoose.model("MajorDisaster");
 const populateData = require("./populateData.json");
 const jwt = require('jsonwebtoken');
 
+
 function buildSearch (req) {
 	let search = {fields: {}, offset: undefined, limit: undefined};
 	for (let key in req.query) {
@@ -124,11 +125,25 @@ exports.api = {
 			var password = req.body.password;
 		  	if(!(username === 'test' && password === 'test'))
 			     return res.status(401).json({error: 'usuario o contraseña inválidos'});
-			
 			var token = jwt.sign({username: username, date: Date.now()}, 'Secret Password', {
 				expiresIn: 60 * 60 * 24
 			});
 			res.json(token);
-		}
+		},/*
+		oauth: function (req, res) {
+			res.redirect(authorizationUri);
+		},
+		oauthCallback: function (req, res) {
+			const code = req.query.code;
+			const options = {code};
+			oauth2.authorizationCode.getToken(options).then(function (result) {
+				console.log('The resulting token: ', result);
+			    const token = oauth2.accessToken.create(result);
+			        return res.status(200).json(token)
+			    }).catch(function (error) {
+			    	console.error('Access Token Error', error.message);
+			    	return res.status(500).json('Authentication failed');
+				});
+		}*/
 	}
 };
