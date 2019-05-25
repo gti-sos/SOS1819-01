@@ -69,6 +69,7 @@ router
 
     .get('/oauth/user', function (req, res) {
     	console.log(req.cookies);
+    	return res.json(req.cookies);
     	if (!req.cookies || !req.cookies.oauth) return res.sendStatus(400);
     	request({
     	    headers: {
