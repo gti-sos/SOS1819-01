@@ -65,7 +65,7 @@ app.listen(process.env.PORT || 8080, () => {
 
 const oauth2 = simpleOauth2.create({
     client: {
-        id: "asd",
+        id: "bernabe-1993@hotmail.com",
         secret: "aaa"
     },
     auth: {
