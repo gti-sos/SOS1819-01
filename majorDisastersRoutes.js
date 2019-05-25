@@ -51,7 +51,7 @@ router
     	oauth2.authorizationCode.getToken(options).then(function (result) {
     		console.log('The resulting token: ', result);
     		const token = oauth2.accessToken.create(result);
-    		return res.status(200).cookie('oauth', token, {httpOnly: true, maxAge: 1000 * 60 * 15}).json(token);
+    		return res.status(200).cookie('oauth', token, {httpOnly: true}).send('<p>Got token: ' + token + '</p><p><a href="/major-disasters/oauth/user">Test: Get GitHub user profile info</a></p>');
     	}).catch(function (error) {
     		console.error('Access Token Error', error.message);
     		return res.status(500).json('Authentication failed');
@@ -68,8 +68,6 @@ router
     })
 
     .get('/oauth/user', function (req, res) {
-    	console.log(req.cookies);
-    	//return res.json(req.cookies);
     	if (!req.cookies || !req.cookies.oauth) return res.sendStatus(400);
     	request({
     	    headers: {
@@ -77,9 +75,9 @@ router
     	    	'Authorization': 'token ' + req.cookies.oauth.token.access_token
     	    },
     	    uri: 'https://api.github.com/user',
+    	    json: true,
     	    method: 'GET'
     	  }, function (err, rRes, body) {
-    	    console.log(body);
     	    res.json(body);
     	  });
     });
