@@ -69,22 +69,19 @@ router
 
     .get('/oauth/user', function (req, res) {
     	console.log(req.cookies);
-    	return res.json(req.cookies);
+    	//return res.json(req.cookies);
     	if (!req.cookies || !req.cookies.oauth) return res.sendStatus(400);
     	request({
     	    headers: {
     	    	'User-Agent': 'SOS1819-01',
-    	    	'Authorization': 'token ' + req.cookies.oauth.access_token
+    	    	'Authorization': 'token ' + req.cookies.oauth.token.access_token
     	    },
     	    uri: 'https://api.github.com/user',
     	    method: 'GET'
     	  }, function (err, rRes, body) {
-    	    console.log(rRes, body)
+    	    console.log(body);
     	    res.json(body);
-    	    //it works!
     	  });
-    	//res.json(req.cookies);
-    	//res.json()
     });
 
 
