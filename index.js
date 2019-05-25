@@ -76,7 +76,7 @@ const oauth2 = simpleOauth2.create({
 });
 
 const authorizationUri = oauth2.authorizationCode.authorizeURL({
-  redirect_uri: 'http://localhost:8080/callback',
+  redirect_uri: 'https://sos1819-01.herokuapp.com/callback/majorDisasters',
   scope: 'notifications',
   state: '3(#0/!~',
 });
