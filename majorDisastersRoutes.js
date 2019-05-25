@@ -72,7 +72,8 @@ router
     	if (!req.cookies || !req.cookies.oauth) return res.sendStatus(400);
     	request({
     	    headers: {
-    	      'Authorization': 'token ' + req.cookies.oauth.access_token
+    	    	'User-Agent': 'SOS1819-01',
+    	    	'Authorization': 'token ' + req.cookies.oauth.access_token
     	    },
     	    uri: 'https://api.github.com/user',
     	    method: 'GET'
