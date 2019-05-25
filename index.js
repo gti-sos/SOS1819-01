@@ -87,14 +87,21 @@ app.get('/oauth/majorDisasters', (req, res) => {
   res.redirect(authorizationUri);
 });
 
-  app.get('/callback/majorDisasters', function (req, res) {
+app.get('/callback/majorDisasters', function (req, res) {
     const code = req.query.code;
-    const options = {
-      code
-    };
-    auth2.authorizationCode (function (as) {
-        console.log(as);
-    });
+        const options = {code};
+
+        try {
+          oauth2.authorizationCode.getToken(options).then(function (result) {
+            console.log('The resulting token: ', result);
+            const token = oauth2.accessToken.create(result);
+            return res.status(200).json(token)
+          });
+          
+        } catch(error) {
+          console.error('Access Token Error', error.message);
+          return res.status(500).json('Authentication failed');
+        }    
 });
     /*
     try {
