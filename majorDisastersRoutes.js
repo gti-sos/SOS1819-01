@@ -58,12 +58,21 @@ router
     	});
     })
 
+    .get('/test', function (req, res) {
+    	res.cookie('test', {valorA: 1, valorB: 2}).end();
+    })
+
+    .get('/test2', function (req, res) {
+    	console.log(req.cookies);
+    	res.json(req.cookies);
+    })
+
     .get('/oauth/user', function (req, res) {
     	console.log(req.cookies);
-    	if (!req.cookies || !req.cookies.access_token) return res.sendStatus(400);
+    	if (!req.cookies || !req.cookies.oauth) return res.sendStatus(400);
     	request({
     	    headers: {
-    	      'Authorization': 'token ' + req.cookies.access_token
+    	      'Authorization': 'token ' + req.cookies.oauth.access_token
     	    },
     	    uri: 'https://api.github.com/user',
     	    method: 'GET'
