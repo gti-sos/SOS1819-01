@@ -65,12 +65,13 @@ router
     	      'Authorization': 'token ' + req.cookies.access_token
     	    },
     	    uri: 'https://api.github.com/user',
-    	    body: formData,
-    	    method: 'POST'
-    	  }, function (err, res, body) {
+    	    method: 'GET'
+    	  }, function (err, rRes, body) {
+    	    console.log(rRes, body)
+    	    res.json(body);
     	    //it works!
     	  });
-    	res.json(req.cookies);
+    	//res.json(req.cookies);
     	//res.json()
     });
 
