@@ -51,35 +51,42 @@ router
     	oauth2.authorizationCode.getToken(options).then(function (result) {
     		console.log('The resulting token: ', result);
     		const token = oauth2.accessToken.create(result);
-    		return res.status(200).cookie('oauth', token, {httpOnly: true}).send('<p>Got token: ' + token + '</p><p><a href="/major-disasters/oauth/user">Test: Get GitHub user profile info</a></p>');
+
+    		return res.status(200).cookie('oauth', token, {httpOnly: true}).send('<p>Got token: ' + JSON.stringify(token) + '</p><p><a href="/major-disasters/oauth/user">Get GitHub user profile info</a></p>');
     	}).catch(function (error) {
     		console.error('Access Token Error', error.message);
     		return res.status(500).json('Authentication failed');
     	});
     })
 
-    .get('/test', function (req, res) {
-    	res.cookie('test', {valorA: 1, valorB: 2}).end();
-    })
-
-    .get('/test2', function (req, res) {
-    	console.log(req.cookies);
-    	res.json(req.cookies);
-    })
-
     .get('/oauth/user', function (req, res) {
     	if (!req.cookies || !req.cookies.oauth) return res.sendStatus(400);
     	request({
-    	    headers: {
-    	    	'User-Agent': 'SOS1819-01',
-    	    	'Authorization': 'token ' + req.cookies.oauth.token.access_token
-    	    },
-    	    uri: 'https://api.github.com/user',
-    	    json: true,
-    	    method: 'GET'
-    	  }, function (err, rRes, body) {
-    	    res.json(body);
-    	  });
+    		headers: {
+    			'User-Agent': 'SOS1819-01',
+    			'Authorization': 'token ' + req.cookies.oauth.token.access_token
+    		},
+    		uri: 'https://api.github.com/user',
+    		json: true,
+    		method: 'GET'
+    	}, function (err, rRes, body) {
+    		var template = 
+    		"<div>" +
+    			'<img src="' + body.avatar_url + '">' +
+    			'<p>Name: ' + body.name + '</p>' + 
+    			'<p>Username: ' + body.login + '</p>' +
+    			'<p>Profile:' +
+    				'<a href="' + body.html_url + '">' + body.html_url + '</a>' + 
+    			'</p>' +
+    			'<p>Registered at: ' + new Date(body.created_at) + '</p>' +
+    			'<p></p><h4>JSON response</h4>' + 
+    			'<p><pre>' +
+    				JSON.stringify(body, undefined, 2) +
+    			'</p></pre>' +
+    		'<div>';
+
+    		res.send(template);   
+    	});
     });
 
 
