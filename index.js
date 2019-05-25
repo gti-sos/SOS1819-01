@@ -65,8 +65,8 @@ app.listen(process.env.PORT || 8080, () => {
 
 const oauth2 = simpleOauth2.create({
     client: {
-        id: "bernabe-1993@hotmail.com",
-        secret: "aaa"
+        id: "c5c1e43e307942afbcbd",
+        secret: "4209f44f43e2037a86d97fe9052b12dd35dbb5cd"
     },
     auth: {
         tokenHost: 'https://github.com',
