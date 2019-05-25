@@ -59,7 +59,8 @@ router
     })
 
     .get('/oauth/user', function (req, res) {
-    	if (!req.cookies || !req.cookies.access_token) return sendStatus(400);
+    	console.log(req.cookies);
+    	if (!req.cookies || !req.cookies.access_token) return res.sendStatus(400);
     	request({
     	    headers: {
     	      'Authorization': 'token ' + req.cookies.access_token
