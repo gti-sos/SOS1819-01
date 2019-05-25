@@ -2,7 +2,7 @@ const express = require('express');
 var router = express.Router();
 const path = require('path');
 const simpleOauth2 = require('simple-oauth2');
-
+const request = require('request');
 
 const oauth2 = simpleOauth2.create({
 	client: {
@@ -51,7 +51,7 @@ router
     	oauth2.authorizationCode.getToken(options).then(function (result) {
     		console.log('The resulting token: ', result);
     		const token = oauth2.accessToken.create(result);
-    		return res.status(200).cookie('oauth', JSON.stringify(token), {httpOnly: true, maxAge: 1000 * 60 * 15}).json(token);
+    		return res.status(200).cookie('oauth', token, {httpOnly: true, maxAge: 1000 * 60 * 15}).json(token);
     	}).catch(function (error) {
     		console.error('Access Token Error', error.message);
     		return res.status(500).json('Authentication failed');
@@ -59,6 +59,17 @@ router
     })
 
     .get('/oauth/user', function (req, res) {
+    	if (!req.cookies || !req.cookies.access_token) return sendStatus(400);
+    	request({
+    	    headers: {
+    	      'Authorization': 'token ' + req.cookies.access_token
+    	    },
+    	    uri: 'https://api.github.com/user',
+    	    body: formData,
+    	    method: 'POST'
+    	  }, function (err, res, body) {
+    	    //it works!
+    	  });
     	res.json(req.cookies);
     	//res.json()
     });
