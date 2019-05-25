@@ -3,7 +3,9 @@ const Model = require('./model.js');
 const MajorDisaster = mongoose.model("MajorDisaster");
 const populateData = require("./populateData.json");
 const jwt = require('jsonwebtoken');
-
+const app = require('../index.js').app;
+const io = require('../index.js').io;
+const nsp = io.of('/major-disasters');
 
 function buildSearch (req) {
 	let search = {fields: {}, offset: undefined, limit: undefined};
@@ -26,6 +28,7 @@ function buildSearch (req) {
 	}
 	return search;
 }
+
 exports.api = {
 	v1: {
 		init: function (req, res) {
@@ -71,6 +74,7 @@ exports.api = {
 				if (count > 0) 
 					return res.sendStatus(409);
 				majorDisaster.save(function (err, data) {
+					if (!err) nsp.emit('create', data); 
 					res.sendStatus(err ? 400 : 201);
 					//res.status(code).json({code: code, msg: msg, data: data});
 				});
@@ -80,6 +84,7 @@ exports.api = {
 			if (req.body.event && req.params.event !== req.body.event) return res.sendStatus(400);
 			MajorDisaster.findOne({event: req.params.event}).then(function (doc) {
 				if (!doc) return res.sendStatus(404);
+				var old = JSON.parse(JSON.stringify(doc._doc));
 				var oKeys = Object.keys(doc._doc).filter(e => {return e !== '_id' && e !== "__v";});
 				if (!oKeys.every(val => Object.keys(req.body).includes(val))) return res.sendStatus(400);
 				for (var key in req.body) doc[key] = req.body[key];
@@ -89,6 +94,7 @@ exports.api = {
 					doc.save(function (sErr) {
 						console.log('sErr', sErr);
 						if (sErr) return res.sendStatus(400);
+						nsp.emit('update', {old: old, new: req.body});
 						res.sendStatus(200);
 					});
 				});
@@ -98,11 +104,22 @@ exports.api = {
 			});
 		},
 		destroy: function (req, res) {
-			MajorDisaster.deleteOne({event: req.params.event}).catch(function (err) {
-				res.sendStatus(400);
-			}).then(function (result) {
-				return (result.n === 0) ? res.sendStatus(404) : res.sendStatus(200);
+			if (req.body.event && req.params.event !== req.body.event) return res.sendStatus(400);
+			MajorDisaster.findOne({event: req.params.event}).select("-__v -_id").exec(function (err, doc) {
+				if (err) return res.sendStatus(404);
+				MajorDisaster.deleteOne({event: req.params.event}).catch(function (err) {
+					res.sendStatus(400);
+				}).then(function (result) {
+					if (result.n === 0) 
+						res.sendStatus(404);
+					else {
+						nsp.emit('destroy', doc);
+						res.sendStatus(200);
+					}
+					return (result.n === 0) ? res.sendStatus(404) : res.sendStatus(200);
+				});
 			});
+			
 		},
 		destroyAll: function (req, res) {
 			MajorDisaster.deleteMany({}, function (err) {
@@ -113,6 +130,7 @@ exports.api = {
 	v2: {
 		count: function (req, res) {
 			var search = buildSearch(req);
+			nsp.emit('test', "huee")
 			//console.log(search.fields);
 			MajorDisaster.countDocuments(search.fields, function (err, count) {
 				if (err) return res.json(err);

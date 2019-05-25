@@ -1,6 +1,8 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+const http = require('http');
+const server = http.createServer(app);
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
@@ -10,6 +12,7 @@ const bombsAPI = require("./api-testing-of-nuclear-bombs");
 const hurricanesAPI = require("./api-hurricanes");
 const MongoClient = require("mongodb").MongoClient;
 const compression = require('compression');
+const io = require('socket.io')(server);
 
 //var pugStatic = require('pug-static');
 //var pugStatic = require('express-pug-static');
@@ -61,16 +64,8 @@ mongoose.connect(uri3, {useNewUrlParser: true}).then(function () {
     console.log("Connected DB Bernabé");
 });
 
-app.listen(process.env.PORT || 8080, () => {
+server.listen(process.env.PORT || 8080, () => {
     console.log("Servidor de NodeJS corriendo en", process.env.IP || "localhost", process.env.PORT || 8080);
 });
 
-app.get('/callback/majorDisasters', function (req, res) {
-    
-});
-    
-  app.get('/test', (req, res) => {
-    res.send('Hello<br><a href="/oauth/majorDisasters">Log in with Github</a>');
-  });
-
-exports = module.exports = app;
+exports = module.exports =  {app: app, io: io};

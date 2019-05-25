@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/bower_components/ng-dialog/css/ngDialog-custom-width.css" />
     <link rel="stylesheet" href="/bower_components/ng-dialog/css/ngDialog-theme-plain.min.css" />
     <link rel="stylesheet" href="/bower_components/font-awesome/css/all.css"/>
+    <link rel="stylesheet" href="/bower_components/chart.js/dist/Chart.css"/>
     <!--###################################################################-->
     <!--########################## ANGULAR CORE ###########################-->
     <script src="/bower_components/angular/angular.js"></script>
@@ -21,6 +22,9 @@
     <script src="/ui/v1/testing-of-nuclear-bombs/jose-bo-app.js"></script>
     <!--################################################################## -->
     <!--######################## APP COMPONENTS ###########################-->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/bower_components/chart.js/dist/Chart.js"></script>
+
     <!--################################################################## -->
     <!--########################## APP FILTERS ###########################-->
     <!--###################################################################-->
@@ -35,6 +39,7 @@
     <!--######################### APP DIRECTIVES ##########################-->
     <!--###################################################################-->
     <!--######################### ANGULAR EXTRAS ##########################-->
+    <script src="/bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
     <script src="/bower_components/ng-dialog/js/ngDialog.min.js"></script>
     <!--###################################################################-->
 </head>
@@ -54,14 +59,22 @@
       </div>
   </nav>
   <div class="container-fluid" ng-if="activeUrl === '/about'">
-    <h2>Team</h2>
+    <h2>Miembros</h2>
 
-    <h5>Juan Jiménez Ballina</h5>
-    <h5>Bernabé Ruiz Martinez</h5>
-    <h5>José María Barrero Olmedo</h5>
+    <h5>Juan Jiménez Ballina (hurricanes)</h5>
+    <h5>Bernabé Ruiz Martinez (major disasters)</h5>
+    <h5>José María Barrero Olmedo (testing of nuclear bombs)</h5>
 
-    <h5>API's theme: Deaths related to catastrophes in recent years</h5>
-    <h5>Repository: <a href= "https://github.com/gti-sos/SOS1819-01">gti-sos/SOS1819-01</h5></a>
+    <h5>Tema de las API: Muertes relacionadas con las catástrofes en los últimos años</h5>
+    <h5>Repositorio: <a href="https://github.com/gti-sos/SOS1819-01">gti-sos/SOS1819-01</h5></a>
+    <p></p>
+    <h2>Trabajos extra</h2>
+        <p></p>
+        <h5>Major disasters</h5>
+        <ul>
+            <li><a href="/major-disasters/oauth">Implementación de OAuth</a></li>
+            <li><a href="#!/major-disasters/live">Gráfica en tiempo real</a></li>
+        </ul>
 </div>
 </div>
 <div class="container-fluid" ng-view="ng-view"></div>

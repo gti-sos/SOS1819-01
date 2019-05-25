@@ -61,4 +61,9 @@ angular.module('SOS1819-app.majorDisastersApp')
 				}
 			}
 	    };
-	  });
+	  })
+
+	.factory('SocketIO', function () {
+		var socket = io('/major-disasters');
+		return socket;
+	});

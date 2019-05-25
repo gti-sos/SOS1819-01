@@ -12,7 +12,9 @@ function buildStatusPopup (data) {
 
 angular.module('SOS1819-app.majorDisastersApp')
 
-	.controller('overviewCtrl', function ($scope, $location, $q, MajorDisaster, initialData, ngDialog, autoLoad) {
+	.controller('overviewCtrl', function ($scope, $location, $q, MajorDisaster, initialData, ngDialog, autoLoad, SocketIO) {
+		
+
 		var searchObj = $location.search();
 		$scope.loading = false;
 		$scope.data = initialData.data || [];
@@ -270,4 +272,70 @@ angular.module('SOS1819-app.majorDisastersApp')
 			}
 			return data;
 		})(res);
+	})
+
+	.controller('overviewLiveGraphCtrl', function ($scope, MajorDisaster, initialData, SocketIO) {
+		var fields = {label: 'type', data: 'country'};
+		$scope.labels = [];
+		$scope.data = [];
+
+
+		$scope.init = (function () {
+			for (var i = 0; i < initialData.data.length; i++) {
+				var obj = initialData.data[i];
+				for (var j = 0; j < obj.type.length; j++) {
+					var index = $scope.labels.indexOf(obj.type[j]);
+					if (index === -1) {
+						$scope.labels.push(obj.type[j]);
+						$scope.data.push(obj.country.length);
+					} else {
+						$scope.data[index] += obj.country.length;
+					}
+				}
+			}
+		})();
+		/*
+		setTimeout(function () {
+			$scope.labels = $scope.labels;
+			$scope.$apply();
+		}, 1000)
+		*/
+		console.log($scope.labels, $scope.data)
+		//$scope.$apply();
+
+		$scope.updateChart = function (fields, op, data) {
+			var difference = 0;
+			if (op === 'update') {
+				difference = data.new[fields.data].length - data.old[fields.data].length;
+				data = data.new;
+			}
+			else if (op === 'destroy')
+				difference = data[fields.data].length * -1;
+			else
+				difference = data[fields.data].length;
+
+			for (var i = 0; i < data[fields.data].length; i++) {
+				var field = data[fields.label][i];
+				var index = $scope.labels.indexOf(field);
+				$scope.data[index] += difference;
+			}
+			$scope.$apply();
+		};
+
+		SocketIO.on('destroy', function (data) {
+			$scope.updateChart(fields, 'destroy', data);
+			console.log('destroy', data);
+		});
+
+		SocketIO.on('create', function (data) {
+			$scope.updateChart(fields, 'create', data);
+			console.log('create', data);
+		});
+
+		SocketIO.on('update', function (data) {
+			$scope.updateChart(fields, 'update', data);
+			console.log('update', data);
+		});
+
+
 	});

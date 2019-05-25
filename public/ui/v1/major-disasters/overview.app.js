@@ -1,4 +1,4 @@
-angular.module('SOS1819-app.majorDisastersApp', ['ngRoute', 'SOS1819-app', 'ngDialog'])
+angular.module('SOS1819-app.majorDisastersApp', ['ngRoute', 'SOS1819-app', 'ngDialog', 'chart.js'])
 	.config(function ($routeProvider, $locationProvider) {
 		$routeProvider
 			.when('/major-disasters', {
@@ -34,7 +34,22 @@ angular.module('SOS1819-app.majorDisastersApp', ['ngRoute', 'SOS1819-app', 'ngDi
 					}
 				}
 			})
-			
+
+			.when('/major-disasters/live', {
+				controller: 'overviewLiveGraphCtrl',
+				templateUrl: '/ui/v1/major-disasters/overviewLive.template.html',
+				resolve: {
+					initialData: function (MajorDisaster) {
+						return MajorDisaster.v1.list().then(function (res) {
+							return res;
+						}).catch(function (res) {
+							return [];
+						});
+						
+					}
+				}
+			})
+
 			.when('/major-disasters/:disaster', {
 				controller: 'overviewModItemCtrl',
 				reloadOnSearch: false,
@@ -51,6 +66,5 @@ angular.module('SOS1819-app.majorDisastersApp', ['ngRoute', 'SOS1819-app', 'ngDi
 						});
 					}
 				}
-			
-		});
+			})
 	});

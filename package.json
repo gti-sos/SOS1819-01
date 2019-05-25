@@ -42,6 +42,7 @@
     "newman": "latest",
     "protractor": "^5.4.2",
     "request": "^2.88.0",
-    "simple-oauth2": "^2.2.1"
+    "simple-oauth2": "^2.2.1",
+    "socketio": "^1.0.0"
   }
 }
