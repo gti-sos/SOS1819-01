@@ -12,3 +12,9 @@
 <h5>Tema de las API: Muertes relacionadas con las catástrofes en los últimos años</h5>
 <h5>Repositorio: <a href="https://github.com/gti-sos/SOS1819-01">gti-sos/SOS1819-01</h5></a>
 <h5>URL: <a href= "http://sos1819-01.herokuapp.com">http://sos1819-01.herokuapp.com/</h3></a>
+<h1>APIs</h1>
+<ul>
+<li><a href="https://sos1819-01.herokuapp.com/api/v1/hurricanes/docs" rel="nofollow">https://sos1819-01.herokuapp.com/api/v1/hurricanes/docs</a> (developed by <a href="https://github.com/30ner">Juan Jiménez Ballina</a>)</li>
+<li><a href="https://sos1819-01.herokuapp.com/api/v1/major-disasters/docs" rel="nofollow">https://sos1819-01.herokuapp.com/api/v1/major-disasters/docs</a> (developed by <a href="https://github.com/berruimar">Bernabé Ruiz Martínez</a>)</li>
+<li><a href="https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/docs" rel="nofollow">https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/docs</a> (developed by <a href="https://github.com/josbarolm">José María Barrero Olmedo</a>)</li>
+</ul>
