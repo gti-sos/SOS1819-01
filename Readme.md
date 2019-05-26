@@ -5,9 +5,9 @@
 <h1>SOS1819-01</h1>
 
 <h2>Miembros</h2>
-<h5>Juan Jiménez Ballina (hurricanes)</h5>
-<h5>Bernabé Ruiz Martinez (major disasters)</h5>
-<h5>José María Barrero Olmedo (testing of nuclear bombs)</h5>
+<h5>Juan Jiménez Ballina</h5>
+<h5>Bernabé Ruiz Martinez</h5>
+<h5>José María Barrero Olmedo</h5>
 
 <h5>Tema de las API: Muertes relacionadas con las catástrofes en los últimos años</h5>
 <h5>Repositorio: <a href="https://github.com/gti-sos/SOS1819-01">gti-sos/SOS1819-01</h5></a>
