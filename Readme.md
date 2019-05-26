@@ -15,7 +15,7 @@
 
 <h3>URL: <a href= "http://sos1819-01.herokuapp.com">http://sos1819-01.herokuapp.com/</h3></a>
 
-[![Build Status](https://travis-ci.org/berruimar/SOS1819-01.svg?branch=master)](https://travis-ci.org/berruimar/SOS1819-01)
+[![Build Status](https://travis-ci.org/berruimar/gti-sos/SOS1819-01.svg?branch=master)](https://travis-ci.org/berruimar/gti-sos/SOS1819-01)
 
 <h2>APIs:</h2>
 
