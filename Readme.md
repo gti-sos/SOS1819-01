@@ -12,12 +12,3 @@
 <h5>Tema de las API: Muertes relacionadas con las catástrofes en los últimos años</h5>
 <h5>Repositorio: <a href="https://github.com/gti-sos/SOS1819-01">gti-sos/SOS1819-01</h5></a>
 <h5>URL: <a href= "http://sos1819-01.herokuapp.com">http://sos1819-01.herokuapp.com/</h3></a>
-
-<p></p>
-<h2>Trabajos extra</h2>
-<p></p>
-<h5>Major disasters</h5>
-<ul>
-	<li><a href="/major-disasters/oauth">Implementación de OAuth</a></li>
-	<li><a href="#!/major-disasters/live">Gráfica en tiempo real</a></li>
-</ul>
