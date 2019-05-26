@@ -16,6 +16,8 @@
 <h3>URL: <a href= "http://sos1819-01.herokuapp.com">http://sos1819-01.herokuapp.com/</h3></a>
 
 [![Build Status](https://travis-ci.org/travis-ci/travis-web.svg?branch=master)](https://travis-ci.org/travis-ci/travis-web)
+[![codecov](https://codecov.io/gh/gti-sos/SOS1819-01/branch/master/graph/badge.svg)](https://codecov.io/gh/gti-sos/SOS1819-01)
+[![Coverage Status](https://coveralls.io/repos/github/gti-sos/SOS1819-01/badge.svg?branch=master)](https://coveralls.io/github/gti-sos/SOS1819-01?branch=master)
 
 <h2>APIs:</h2>
 
