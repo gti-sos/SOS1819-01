@@ -22,7 +22,6 @@
     "angular-route": "^1.7.8",
     "ng-dialog": "^1.4.0",
     "components-font-awesome": "^5.4.2",
-    "font-awesome": "^5.8.1",
     "angular-chart.js": "^1.1.1",
     "chart.js": "^2.8.0"
   }
