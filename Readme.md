@@ -15,6 +15,8 @@
 
 <h3>URL: <a href= "http://sos1819-01.herokuapp.com">http://sos1819-01.herokuapp.com/</h3></a>
 
+[![Build Status](https://travis-ci.org/berruimar/SOS1819-01.svg?branch=master)](https://travis-ci.org/berruimar/SOS1819-01)
+
 <h2>APIs:</h2>
 
 <a href="https://sos1819-01.herokuapp.com/api/v1/hurricanes/docs"><h3>https://sos1819-01.herokuapp.com/api/v1/hurricanes/docs</a> (developed by <a href="https://github.com/30ner">Juan Jiménez Ballina</a>)</h3>
