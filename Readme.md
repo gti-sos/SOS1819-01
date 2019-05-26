@@ -2,6 +2,8 @@
 [![codecov](https://codecov.io/gh/gti-sos/SOS1819-01/branch/master/graph/badge.svg)](https://codecov.io/gh/gti-sos/SOS1819-01)
 [![Coverage Status](https://coveralls.io/repos/github/gti-sos/SOS1819-01/badge.svg?branch=master)](https://coveralls.io/github/gti-sos/SOS1819-01?branch=master)
 
+<h1>SOS1819-01</h1>
+
 <h2>Miembros</h2>
 <h5>Juan Jiménez Ballina (hurricanes)</h5>
 <h5>Bernabé Ruiz Martinez (major disasters)</h5>
