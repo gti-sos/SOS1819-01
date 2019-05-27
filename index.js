@@ -13,10 +13,11 @@ const hurricanesAPI = require("./api-hurricanes");
 const MongoClient = require("mongodb").MongoClient;
 const compression = require('compression');
 const io = require('socket.io')(server);
-
+const cors = require('cors');
 //var pugStatic = require('pug-static');
 //var pugStatic = require('express-pug-static');
 
+app.use(cors());
 app.use(cookieParser());
 app.use(compression());
 app.use(morgan('dev'));
