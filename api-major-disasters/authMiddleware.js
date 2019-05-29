@@ -7,9 +7,10 @@ const isValidApiKey = function (req, res, next) {
 				error: "Es necesario el token de autenticación"
 		    });
 	    }
-	    token = token.replace('Bearer ', '');
+	console.log(token)    
+	token = token.replace('Bearer ', '');
 	    jwt.verify(token, 'salt', function(err, user) {
-		      if (err) {
+			if (err) {
 			        res.status(401).send({
 				          error: 'Token inválido'
 			        });

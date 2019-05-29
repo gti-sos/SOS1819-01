@@ -143,7 +143,7 @@ exports.api = {
 			var password = req.body.password;
 		  	if(!(username === 'test' && password === 'test'))
 			     return res.status(401).json({error: 'usuario o contraseña inválidos'});
-			var token = jwt.sign({username: username, date: Date.now()}, 'Secret Password', {
+			var token = jwt.sign({username: username, date: Date.now()}, 'salt', {
 				expiresIn: 60 * 60 * 24
 			});
 			res.json(token);
