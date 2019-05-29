@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/travis-ci/travis-web.svg?branch=master)](https://travis-ci.org/travis-ci/travis-web)
+[![Build Status](https://travis-ci.org/gti-sos/SOS1819-01.svg?branch=master)](https://travis-ci.org/gti-sos/SOS1819-01)
 [![codecov](https://codecov.io/gh/gti-sos/SOS1819-01/branch/master/graph/badge.svg)](https://codecov.io/gh/gti-sos/SOS1819-01)
 [![Coverage Status](https://coveralls.io/repos/github/gti-sos/SOS1819-01/badge.svg?branch=master)](https://coveralls.io/github/gti-sos/SOS1819-01?branch=master)
 
