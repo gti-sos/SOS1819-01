@@ -4,5 +4,6 @@ node_js:
 install:
   - npm install -g codecov istanbul
 script:
-  - istanbul cover ./node_modules/mocha/bin/_mocha --reporter lcovonly -- -R spec
+  - nyc cover ./node_modules/mocha/bin/_mocha --reporter lcovonly --reporter=text-summary ava
   - codecov
+
