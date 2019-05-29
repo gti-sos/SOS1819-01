@@ -4,6 +4,6 @@ node_js:
 install:
   - npm install -g codecov nyc
 script:
-  - nyc cover ./node_modules/mocha/bin/_mocha --reporter lcovonly --reporter=text-summary ava
+  - nyc cover mocha --reporter lcovonly --reporter=text-summary ava
   - codecov
 
