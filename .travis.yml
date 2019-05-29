@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - "7"
 install:
-  - npm install -g codecov istanbul
+  - npm install -g codecov nyc
 script:
   - nyc cover ./node_modules/mocha/bin/_mocha --reporter lcovonly --reporter=text-summary ava
   - codecov
