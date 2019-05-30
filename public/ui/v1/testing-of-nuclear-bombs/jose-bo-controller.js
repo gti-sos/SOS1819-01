@@ -17,6 +17,139 @@ app.controller("PemaController", function ($scope,$http, $q){
         $q.all([$http.get(url,{params:search}), $http.get(url2 + '/count',{params:search})]).then(function(responses){
             $scope.data = responses[0].data;
             $scope.count = Math.ceil(responses[1].data.count / $scope.pagination.limit);
+            
+            
+            
+            
+/////////////////////////////////////////////VISUALIZACION///////////////////////////////////////////////////////////
+
+            var aux = {};
+            var dataGraf = [];
+        
+            for (var i = 0; i<$scope.data.length;i++){
+                var object = $scope.data[i];
+                var exist = aux[object.country];
+                if(exist){
+                    aux[object.country] += object.shot;
+                } else {
+                    aux[object.country] = object.shot;
+                }
+            }
+            
+            for (var key in aux) {
+                dataGraf.push([key, aux[key]]);
+            }
+
+            // create a chart
+            chart = anychart.area();
+
+            // create an area series and set the data
+            var series = chart.area(dataGraf);
+    
+            // set the chart title
+            chart.title("Shot for Countries");
+
+            // set the titles of the axes
+            chart.xAxis().title("Countries");
+            chart.yAxis().title("Shot");
+
+            // set the container id
+            chart.container("migraf");
+
+            // initiate drawing the chart
+            chart.draw();
+            
+            
+            var aux2 = {};
+            var dataGraf2 = [];
+        
+            for (var i = 0; i<$scope.data.length;i++){
+                var object2 = $scope.data[i];
+                var exist = aux2[object.country];
+                if(exist){
+                    aux2[object2.country] += object2.maxYield;
+                } else {
+                    aux2[object2.country] = object2.maxYield;
+                }
+            }
+            
+            for (var key in aux2) {
+                dataGraf2.push({ name:key , y:aux2[key]});
+            }
+            
+            Highcharts.chart('migraf2', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Carga explosiva usada por cada pais.'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.y:.1f}</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    name: 'MaxYields',
+                    colorByPoint: true,
+                    data: dataGraf2
+                }]
+            });
+            
+            var aux3 = {};
+            var dataGraf3 = [];
+            dataGraf3.push(['Country', 'HOB']);
+            
+        
+            for (var i = 0; i<$scope.data.length;i++){
+                var object3 = $scope.data[i];
+                var exist = aux3[object3.country];
+                if(exist){
+                    aux3[object3.country] += 1;
+                } else {
+                    aux3[object3.country] = 1;
+                }
+            }
+            
+            for (var key in aux3) {
+                dataGraf3.push([key, aux3[key]]);
+            }
+            
+            google.charts.load('current', {
+                'packages':['geochart'],
+                // Note: you will need to get a mapsApiKey for your project.
+                // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+                'mapsApiKey': 'AIzaSyDKWisx0-8N-R7YqB2bbzYrjCwwTFBkTZ4'
+              });
+              google.charts.setOnLoadCallback(drawRegionsMap);
+        
+              function drawRegionsMap() {
+                var data = google.visualization.arrayToDataTable(dataGraf3);
+        
+                var options = {};
+        
+                var chart = new google.visualization.GeoChart(document.getElementById('migraf3'));
+        
+                chart.draw(data, options);
+              }
+        
+        
+//////////////////////////////////////////FINAL VISUALIZACIÓN//////////////////////////////////////////////////        
+        
         
         }).catch(function(response){
             window.alert("No se han obtenido los datos.");
@@ -73,8 +206,14 @@ app.controller("PemaController", function ($scope,$http, $q){
         }).catch(function(response){
             window.alert("No se ha completado la operacion.");
         });
+        
     };
+    
 });
+
+
+
+
 
 app.controller("PemaEditController", function ($scope,$http, $q, initialData,$location){
     console.log(initialData);
