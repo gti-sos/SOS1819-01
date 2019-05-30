@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const app = require('../index.js').app;
 const io = require('../index.js').io;
 const nsp = io.of('/major-disasters');
+const request = require('request');
 
 function buildSearch (req) {
 	let search = {fields: {}, offset: undefined, limit: undefined};
@@ -130,7 +131,6 @@ exports.api = {
 	v2: {
 		count: function (req, res) {
 			var search = buildSearch(req);
-			nsp.emit('test', "huee")
 			//console.log(search.fields);
 			MajorDisaster.countDocuments(search.fields, function (err, count) {
 				if (err) return res.json(err);
@@ -147,21 +147,9 @@ exports.api = {
 				expiresIn: 60 * 60 * 24
 			});
 			res.json(token);
-		},/*
-		oauth: function (req, res) {
-			res.redirect(authorizationUri);
 		},
-		oauthCallback: function (req, res) {
-			const code = req.query.code;
-			const options = {code};
-			oauth2.authorizationCode.getToken(options).then(function (result) {
-				console.log('The resulting token: ', result);
-			    const token = oauth2.accessToken.create(result);
-			        return res.status(200).json(token)
-			    }).catch(function (error) {
-			    	console.error('Access Token Error', error.message);
-			    	return res.status(500).json('Authentication failed');
-				});
-		}*/
+		test: function (req, res) {
+			request('https://sos1819-12.herokuapp.com/api/v1/pollution-stats')
+		}
 	}
 };
