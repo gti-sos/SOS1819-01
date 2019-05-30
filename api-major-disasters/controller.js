@@ -148,8 +148,23 @@ exports.api = {
 			});
 			res.json(token);
 		},
-		test: function (req, res) {
-			request('https://sos1819-12.herokuapp.com/api/v1/pollution-stats')
-		}
+		"pollution-stats": function (req, res) {
+			request({
+				url: 'https://sos1819-12.herokuapp.com/api/v1/pollution-stats',
+				json: true,
+				headers: {'Content-Type': 'application/json'}
+			}, function (err, httpCode, body) {
+				res.json(body);
+			});
+		},
+		"sports-centers": function (req, res) {
+			request({
+				url: 'https://sos1819-15.herokuapp.com/api/v1/sports-centers',
+				json: true,
+				headers: {'Content-Type': 'application/json'}
+			}, function (err, httpCode, body) {
+				res.json(body);
+			});
+		},
 	}
 };

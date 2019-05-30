@@ -335,7 +335,7 @@ app.get("/api/v1/secure/hurricanes", (req, res) => {
     
     hurricanes.find(search.fields, {fields: {_id: 0}}).limit(search.limit).skip(search.page * search.limit).toArray((err,hurricanesArray)=>{
         if(err)
-            console.log("Error " + err)
+            console.log("Error " + err);
             
         res.send(hurricanesArray);       
     });

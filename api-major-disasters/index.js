@@ -10,6 +10,7 @@ function apiVersionMiddleware (fnName, req, res, next) {
 
 router.get('/loadInitialData', apiVersionMiddleware.bind(this, 'init'));
 router.get('/count', apiVersionMiddleware.bind(this, 'count'));
+router.get('/pollution-stats', apiVersionMiddleware.bind(this, 'pollution-stats'));
 router.get('/docs', (req, res, next) => res.redirect("https://documenter.getpostman.com/view/6919343/S17tQ7ZH"));
 router.get('',  apiVersionMiddleware.bind(this, 'list'));
 router.get('/:event', apiVersionMiddleware.bind(this, 'get'));
