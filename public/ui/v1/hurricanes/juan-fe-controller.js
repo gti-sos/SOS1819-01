@@ -36,6 +36,13 @@ if (!Object.assign) {
 var app = angular.module("SOS1819-app.Fronti");
 app.controller("juan-fe-controller", function ($scope, $http, $q) {
     console.log("juan-fe-controller initialized!");
+    
+     //console.log(EJSC);
+    
+    var v1=1;
+    var v2=1;
+    var v3=1;
+    var v4=2;
     $scope.url = "/api/v1/hurricanes";
     $scope.url2 = "/api/v2/hurricanes";
 
@@ -73,6 +80,7 @@ app.controller("juan-fe-controller", function ($scope, $http, $q) {
         var search = angular.merge(obj, $scope.pagination);
         $q.all([$http.get($scope.url,{params:search}), $http.get($scope.url2 + '/count',{params:search})]).then(function(responses){
             $scope.hurricanes = responses[0].data;
+            cuentadanos();
             $scope.count = Math.ceil(responses[1].data.count / $scope.pagination.limit);
             if (cb) cb();
         }).catch(function(response){
@@ -80,7 +88,8 @@ app.controller("juan-fe-controller", function ($scope, $http, $q) {
         });
         
     }
-    
+
+     
     $scope.navigate = function (index) {
         $scope.pagination.offset = index;
         refresh();
@@ -197,6 +206,45 @@ app.controller("juan-fe-controller", function ($scope, $http, $q) {
         });
         refresh();
     };
+    
+ 
+    function cuentadanos(){
+        v1=0;
+        v2=0;
+        v3=0;
+        v4=0;
+        
+        $scope.hurricanes.forEach(function(e){
+            if(parseInt(e.damagesuntil2008)<25)
+                v1++;
+            else if(parseInt(e.damagesuntil2008)<50)
+                v2++;
+            else if(parseInt(e.damagesuntil2008)<75)
+                v3++;
+            else if(parseInt(e.damagesuntil2008)<100)
+                v4++;
+        });
+        console.log("v1="+v1);
+    
+     var chart = new EJSC.Chart("myChart9a", {show_legend: true, title: 'Damages-until-2008'} );
+    
+ //   cuentadanos();
+    
+        chart.addSeries(new EJSC.DoughnutSeries(
+            new EJSC.ArrayDataHandler( [
+                [v1,"0-25 Millones"], [v2,"26-50 Millones"], [v3,"51-75 Millones"],
+                [v4,"+75 Millones"]
+            ] ), {  
+                opacity: 80, //default: 50
+                doughnutOffset: .5, //default: .5
+                position: "center", //default: "center"
+                height: "100%", //default: "100%"
+                width: "100%" //default: "100%"
+            }            
+        ) );
+    };
+
+    
 })
 
 app.controller("juan-fe-edit-controller" ,function ($scope, $http, $q, dataToEdit,$location){
@@ -231,8 +279,7 @@ app.controller("juan-fe-edit-controller" ,function ($scope, $http, $q, dataToEdi
         });
      };
      
-     
-     
+    
     });
 
 

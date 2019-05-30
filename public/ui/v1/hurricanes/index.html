@@ -1,3 +1,4 @@
+<script type="text/javascript" src="vendor/EJSChart/EJSChart.js"></script>
 <div>
     <h1>Huracanes</h1>
     <table class="table">
@@ -117,6 +118,7 @@
             <div class="btn-group">
                 <button ng-class="{'btn-info': $index == pagination.offset}" type="button" ng-click="navigate($index)"class="btn btn-primary btn-lg" ng-repeat="item in [].constructor(count) track by $index">{{$index + 1}}</button>
             </div>
+            <div id="myChart9a" style="width:450px; height:330px;"></div>
         </td>
     </tr>
 </tfoot>
