@@ -1,11 +1,69 @@
-
+const request = require('request')
 var hurricanesAPI = {};
 module.exports = hurricanesAPI;
+
 
 //-------JuanAPI----------------------------
 hurricanesAPI.register = function(app, hurricanes){
 
+    
+    //Implementación API of ice and fire
+    
 
+app.get("/api/v1/hurricanes/got/:num", (req, res)=>{
+    console.log("aaaaaaaaaaaaa");
+   request.get({
+       url: "https://anapioficeandfire.com/api/characters/"+req.params.num,
+       json:true
+   },function(err, httpcode, body){
+   
+       return res.json(body);
+   }
+       
+   );
+});
+
+//Implementación pokeapi
+app.get("/api/v1/hurricanes/pok/:num", (req, res)=>{
+    console.log("aaaaaaaaaaaaa");
+   request.get({
+       url: "https://pokeapi.co/api/v2/pokemon/"+req.params.num,
+       json:true
+   },function(err, httpcode, body){
+   
+       return res.json(body);
+   }
+       
+   );
+});
+
+//Implementación country-stats
+app.get("/api/v1/hurricanes/country-stats/", (req, res)=>{
+    console.log("aaaaaaaaaaaaa");
+   request.get({
+       url: "https://sos1819-03.herokuapp.com/api/v1/country-stats",
+       json:true
+   },function(err, httpcode, body){
+   
+       return res.json(body);
+   }
+       
+   );
+});
+
+//Implementación country-stats
+app.get("/api/v1/hurricanes/computers-attacks-stats/", (req, res)=>{
+    console.log("aaaaaaaaaaaaa");
+   request.get({
+       url: "https://sos1819-03.herokuapp.com/api/v1/computers-attacks-stats",
+       json:true
+   },function(err, httpcode, body){
+   
+       return res.json(body);
+   }
+       
+   );
+});
 app.get("/api/v1/hurricanes/docs", (req, res)=>{
    res.redirect("https://documenter.getpostman.com/view/6916951/S17ut6v5");
 });
@@ -432,5 +490,4 @@ app.put("/api/v1/secure/hurricanes/:name", (req, res) => {
 
 
 });
-
 }
