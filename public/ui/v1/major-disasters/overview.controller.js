@@ -78,6 +78,35 @@ angular.module('SOS1819-app.majorDisastersApp')
 
 
 
+		function compare( a, b ) {
+		  if ( a.last_nom < b.last_nom ){
+		    return -1;
+		  }
+		  if ( a.last_nom > b.last_nom ){
+		    return 1;
+		  }
+		  return 0;
+		}
+
+
+		var nData2 = $scope.data.splice(0);
+		nData2.sort(function (a, b) {
+			if ( a.death < b.death ){
+			   return 1;
+			 }
+			 if ( a.death > b.death ){
+			   return -1;
+			 }
+			 return 0;
+		});
+
+		console.log(nData2);
+		/*
+		for (var i = 0; i < $scope.data.length; i++) {
+			var elm = $scope.data[i];
+
+		}
+	*/
 
 
 
