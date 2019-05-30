@@ -10,7 +10,7 @@ angular.module('SOS1819-app.majorDisastersApp', ['ngRoute', 'SOS1819-app', 'ngDi
 						var searchObj = $location.search();
 						var filter = {
 							offset: parseInt(searchObj.offset) || 0,
-							limit: parseInt(searchObj.limit) || 10,
+							limit: parseInt(searchObj.limit) || 100,
 							event: searchObj.event || null,
 							year: parseInt(searchObj.year) || null,
 							death: parseInt(searchObj.death) || null, 
