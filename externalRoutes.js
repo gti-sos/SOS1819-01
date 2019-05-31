@@ -8,7 +8,7 @@ router.
 	})
 
 	.get('/emigrations-by-countries', function (req, res) {
-		req.pipe(request('https://sos1819-08.herokuapp.com/ui/v1/emigrations-by-countries')).pipe(res);
+		req.pipe(request('https://sos1819-08.herokuapp.com/api/v1/emigrations-by-countries')).pipe(res);
 	})
 
 	.get('/pollution-stats', function (req, res) {

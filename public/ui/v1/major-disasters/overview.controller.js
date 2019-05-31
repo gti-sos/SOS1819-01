@@ -202,14 +202,15 @@ angular.module('SOS1819-app.majorDisastersApp')
 		      });
 		      google.charts.setOnLoadCallback(drawRegionsMap);
 
-		      var nData3 = $scope.data.splice(0);
-
+		      var nData3 = initialData.data.splice(0);
+		      var res3 = [['Country', 'Popularity']];
 		      for (var i = 0; i < nData3.length; i++) {
-		      	for (var i = nData3.country.length - 1; i >= 0; i--) {
+		      	for (var j = nData3.country.length - 1; j >= 0; j--) {
+		      		res3.push([nData3[i].country[j], nData3[i].death, nData3[i]['no-inflation']])
 	//		      		nData3.country[i] + 
 				}
 		      }
-
+		      console.log(res3)
 		      function drawRegionsMap() {
 		        var data = google.visualization.arrayToDataTable([
 		          ['Country', 'Popularity'],
