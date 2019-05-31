@@ -26,7 +26,6 @@ angular.module('SOS1819-app.majorDisastersApp', ['ngRoute', 'SOS1819-app', 'ngDi
 										PollutionStats.list({}),
 										SportsCenters.list({})];
 						return $q.all(promises).then(function (res) {
-							console.log(res)
 							return {data: res[0].data, ext1: res[2].data, ext2: res[3].data, count: Math.ceil(res[1].data.count / filter.limit)};
 						}).catch(function (res) {
 							return {data: [], count: Math.ceil(res[1].data.count / filter.limit)};

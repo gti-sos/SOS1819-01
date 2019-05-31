@@ -11,7 +11,7 @@ function buildStatusPopup (data) {
 
 angular.module('SOS1819-app.majorDisastersApp')
 .controller('overviewCtrl', function ($scope, $location, $q, MajorDisaster, initialData, ngDialog, autoLoad, SocketIO) {
-
+	console.log('oim ctrl', initialData.data)
 	var searchObj = $location.search();
 	$scope.loading = false;
 	$scope.data = initialData.data || [];
@@ -20,8 +20,9 @@ angular.module('SOS1819-app.majorDisastersApp')
 		xAxisData = []; //tags
 		seriesData = [];
 
-		for (var i = 0; i < initialData.data.length; i++) {
-			var elm = initialData.data[i];
+		var nData = $scope.data.slice(0);
+		for (var i = 0; i < nData.length; i++) {
+			var elm = nData[i];
 			var index = xAxisData.indexOf(elm.year);
 			if (index === -1) {
 				xAxisData.push(elm.year);
@@ -30,7 +31,6 @@ angular.module('SOS1819-app.majorDisastersApp')
 			else
 				seriesData[index] += 1;
 		}
-
 		function refSort (targetData, refData) {
 		  // Create an array of indices [0, 1, 2, ...N].
 		  var indices = Object.keys(refData);
@@ -76,20 +76,7 @@ angular.module('SOS1819-app.majorDisastersApp')
 		myChart.setOption(option);
 
 
-
-
-		function compare( a, b ) {
-		  if ( a.last_nom < b.last_nom ){
-		    return -1;
-		  }
-		  if ( a.last_nom > b.last_nom ){
-		    return 1;
-		  }
-		  return 0;
-		}
-
-
-		var nData2 = $scope.data.splice(0);
+		var nData2 = $scope.data.slice(0);
 		
 		nData2.sort(function (a, b) {
 			if ( a.death < b.death ){
@@ -101,13 +88,12 @@ angular.module('SOS1819-app.majorDisastersApp')
 			 return 0;
 		});
 
-		nData2 = nData2.slice(0, 50);
-		
-		var nData2 = nData2.map(function (e) {
+		nData2 = nData2.splice(0, 50);
+			
+		nData2 = nData2.map(function (e) {
 			return {x: e.year, y: e.inflation, z: e.death, name: e.event};
 		});
 
-		console.log(nData2, initialData)
 		
 		/*
 		for (var i = 0; i < $scope.data.length; i++) {
@@ -189,8 +175,6 @@ angular.module('SOS1819-app.majorDisastersApp')
 
 
 
-
-
 		////////////////GEO CHARTS ///////////////////////
 
 
@@ -201,27 +185,18 @@ angular.module('SOS1819-app.majorDisastersApp')
 		        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
 		      });
 		      google.charts.setOnLoadCallback(drawRegionsMap);
-
-		      var nData3 = initialData.data.splice(0);
-		      var res3 = [['Country', 'Popularity']];
+		      console.log('initial', initialData)
+		      var nData3 = initialData.data.slice(0);
+		      var res3 = [['País', 'Muertes', 'Coste millones $ (sin inflación)']];
 		      for (var i = 0; i < nData3.length; i++) {
-		      	for (var j = nData3.country.length - 1; j >= 0; j--) {
+		      	for (var j = nData3[i].country.length - 1; j >= 0; j--) {
 		      		res3.push([nData3[i].country[j], nData3[i].death, nData3[i]['no-inflation']])
 	//		      		nData3.country[i] + 
 				}
 		      }
 		      console.log(res3)
 		      function drawRegionsMap() {
-		        var data = google.visualization.arrayToDataTable([
-		          ['Country', 'Popularity'],
-		          ['Germany', 200],
-		          ['United States', 300],
-		          ['Brazil', 400],
-		          ['Canada', 500],
-		          ['France', 600],
-		          ['France', 600],
-		          ['RU', 700]
-		        ]);
+		        var data = google.visualization.arrayToDataTable(res3);
 
 		        var options = {};
 
