@@ -6,11 +6,11 @@ angular.module('SOS1819-app.majorDisastersApp', ['ngRoute', 'SOS1819-app', 'ngDi
 				reloadOnSearch: false,
 				templateUrl: '/ui/v1/major-disasters/overview.template.html',
 				resolve: {
-					initialData: function (MajorDisaster, $location, $q) {
+					initialData: function (MajorDisaster, PollutionStats, $location, $q) {
 						var searchObj = $location.search();
 						var filter = {
 							offset: parseInt(searchObj.offset) || 0,
-							limit: parseInt(searchObj.limit) || 100,
+							limit: parseInt(searchObj.limit) || 10,
 							event: searchObj.event || null,
 							year: parseInt(searchObj.year) || null,
 							death: parseInt(searchObj.death) || null, 
@@ -21,9 +21,12 @@ angular.module('SOS1819-app.majorDisastersApp', ['ngRoute', 'SOS1819-app', 'ngDi
 							from: parseInt(searchObj.from) || null,
 							to: parseInt(searchObj.to) || null	
 						};
-						var promises = [MajorDisaster.v1.list(filter), MajorDisaster.v2.count(filter)];
+						var promises = [MajorDisaster.v1.list(filter), 
+										MajorDisaster.v2.count(filter),
+										PollutionStats.list({})];
 						return $q.all(promises).then(function (res) {
-							return {data: res[0].data, count: Math.ceil(res[1].data.count / filter.limit)};
+							console.log(res)
+							return {data: res[0].data, ext: res.data[2], count: Math.ceil(res[1].data.count / filter.limit)};
 						}).catch(function (res) {
 							return {data: [], count: Math.ceil(res[1].data.count / filter.limit)};
 						});

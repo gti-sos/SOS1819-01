@@ -6,6 +6,7 @@ const server = http.createServer(app);
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
+const request = require('request');
 const cookieParser = require('cookie-parser');
 //const pug = require('pug');
 const bombsAPI = require("./api-testing-of-nuclear-bombs");
@@ -26,6 +27,8 @@ app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/major-disasters", require('./majorDisastersRoutes.js'));
+app.use("/proxy", require('./externalRoutes.js'));
+
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}));
 

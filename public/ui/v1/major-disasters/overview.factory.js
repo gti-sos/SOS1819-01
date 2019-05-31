@@ -63,6 +63,15 @@ angular.module('SOS1819-app.majorDisastersApp')
 	    };
 	  })
 
+	.factory('PollutionStats', function ($http, $q) {
+		return {
+			__apiUrl: '/proxy/youth-unemployment-stats',
+			list: function (config) {
+				return $http.get(this.__apiUrl, {params: config});
+			}
+		};
+	})
+
 	.factory('SocketIO', function () {
 		var socket = io('/major-disasters');
 		return socket;

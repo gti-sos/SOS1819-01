@@ -90,6 +90,7 @@ angular.module('SOS1819-app.majorDisastersApp')
 
 
 		var nData2 = $scope.data.splice(0);
+		
 		nData2.sort(function (a, b) {
 			if ( a.death < b.death ){
 			   return 1;
@@ -100,13 +101,20 @@ angular.module('SOS1819-app.majorDisastersApp')
 			 return 0;
 		});
 
-		console.log(nData2);
+		nData2 = nData2.slice(0, 50);
+		
+		var nData2 = nData2.map(function (e) {
+			return {x: e.year, y: e.inflation, z: e.death, name: e.event};
+		});
+
+		console.log(nData2, initialData)
+		
 		/*
 		for (var i = 0; i < $scope.data.length; i++) {
 			var elm = $scope.data[i];
 
 		}
-	*/
+		*/
 
 
 
@@ -123,7 +131,7 @@ angular.module('SOS1819-app.majorDisastersApp')
 		    },
 
 		    title: {
-		        text: 'Sugar and fat intake per country'
+		        text: 'Lista de las ' + nData2.length + ' catástrofes con más muertes'
 		    },
 
 		    subtitle: {
@@ -133,62 +141,32 @@ angular.module('SOS1819-app.majorDisastersApp')
 		    xAxis: {
 		        gridLineWidth: 1,
 		        title: {
-		            text: 'Daily fat intake'
+		            text: 'Año'
 		        },
 		        labels: {
-		            format: '{value} gr'
-		        },
-		        plotLines: [{
-		            color: 'black',
-		            dashStyle: 'dot',
-		            width: 2,
-		            value: 65,
-		            label: {
-		                rotation: 0,
-		                y: 15,
-		                style: {
-		                    fontStyle: 'italic'
-		                },
-		                text: 'Safe fat intake 65g/day'
-		            },
-		            zIndex: 3
-		        }]
+		            format: '{value}'
+		        }
 		    },
 
 		    yAxis: {
 		        startOnTick: false,
 		        endOnTick: false,
 		        title: {
-		            text: 'Daily sugar intake'
+		            text: 'Millones de dólares'
 		        },
 		        labels: {
-		            format: '{value} gr'
+		            format: '{value} $'
 		        },
-		        maxPadding: 0.2,
-		        plotLines: [{
-		            color: 'black',
-		            dashStyle: 'dot',
-		            width: 2,
-		            value: 50,
-		            label: {
-		                align: 'right',
-		                style: {
-		                    fontStyle: 'italic'
-		                },
-		                text: 'Safe sugar intake 50g/day',
-		                x: -10
-		            },
-		            zIndex: 3
-		        }]
+		        maxPadding: 0.2
 		    },
 
 		    tooltip: {
 		        useHTML: true,
-		        headerFormat: '<table>',
-		        pointFormat: '<tr><th colspan="2"><h3>{point.country}</h3></th></tr>' +
-		            '<tr><th>Fat intake:</th><td>{point.x}g</td></tr>' +
-		            '<tr><th>Sugar intake:</th><td>{point.y}g</td></tr>' +
-		            '<tr><th>Obesity (adults):</th><td>{point.z}%</td></tr>',
+		        headerFormat: '<table style="width:200px">',
+		        pointFormat: '<tr><th colspan="2"><h3>{point.name}</h3></th></tr>' +
+		            '<tr><th>Año:</th><td>{point.x}</td></tr>' +
+		            '<tr><th>Coste (millones USD):</th><td>{point.y}</td></tr>' +
+		            '<tr><th>Muertes:</th><td>{point.z}</td></tr>',
 		        footerFormat: '</table>',
 		        followPointer: true
 		    },
@@ -203,7 +181,7 @@ angular.module('SOS1819-app.majorDisastersApp')
 		    },
 
 		    series: [{
-		        data: [
+		        data: nData2 /*[
 		            { x: 95, y: 95, z: 13.8, name: 'BE', country: 'Belgium' },
 		            { x: 86.5, y: 102.9, z: 14.7, name: 'DE', country: 'Germany' },
 		            { x: 80.8, y: 91.5, z: 15.8, name: 'FI', country: 'Finland' },
@@ -219,7 +197,7 @@ angular.module('SOS1819-app.majorDisastersApp')
 		            { x: 65.4, y: 50.8, z: 28.5, name: 'HU', country: 'Hungary' },
 		            { x: 63.4, y: 51.8, z: 15.4, name: 'PT', country: 'Portugal' },
 		            { x: 64, y: 82.9, z: 31.3, name: 'NZ', country: 'New Zealand' }
-		        ]
+		        ]*/
 		    }]
 
 		});
