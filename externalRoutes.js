@@ -15,4 +15,9 @@ router.
 		req.pipe(request('https://sos1819-15.herokuapp.com/api/v1/sports-centers')).pipe(res);
 	})
 
+	.get('/sports-centers', function (req, res) {
+		req.pipe(request('https://sos1819-15.herokuapp.com/api/v1/sports-centers')).pipe(res);
+	});
+
+
 module.exports = router;
