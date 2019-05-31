@@ -1,174 +1,174 @@
 [{
         "name":"suffield 1959",
-        "country": "canada",
+        "country": "Canada",
         "year": 1959,
         "maxYield": 10000,
         "shot": 5,
         "hob": 0
     }, {
         "name":"blowdown",
-        "country": "australia",
+        "country": "Australia",
         "year": 1963,
         "maxYield": 100000,
         "shot": 1,
         "hob": 136
     }, {
         "name":"pacific proving ground he",
-        "country": "islandia",
+        "country": "Iceland",
         "year": 1958,
         "maxYield": 40000,
         "shot": 5,
         "hob": 0
     }, {
         "name":"dugway",
-        "country": "eeuu",
+        "country": "United States",
         "year": 1951,
         "maxYield": 320000,
         "shot": 68,
         "hob": 35
     }, {
         "name":"cawboy",
-        "country": "eeuu",
+        "country": "United States",
         "year": 1960,
         "maxYield": 2000,
         "shot": 15,
         "hob": 45
     },{
         "name":"suffield 1965",
-        "country": "canada",
+        "country": "Canada",
         "year": 1965,
         "maxYield": 500,
         "shot": 50,
         "hob": 10
     }, {
         "name":"blowdown 1969",
-        "country": "australia",
+        "country": "Australia",
         "year": 1969,
         "maxYield": 6000,
         "shot": 8,
         "hob": 158
     }, {
         "name":"pacific proving ground he 1966",
-        "country": "islandia",
+        "country": "Iceland",
         "year": 1966,
         "maxYield": 5000,
         "shot": 5,
         "hob": 350
     }, {
         "name":"dugway 1958",
-        "country": "eeuu",
+        "country": "United States",
         "year": 1958,
         "maxYield": 3000,
         "shot": 68,
         "hob": 315
     }, {
         "name":"cawboy 1964",
-        "country": "eeuu",
+        "country": "United States",
         "year": 1964,
         "maxYield": 1500,
         "shot": 15,
         "hob": 45
     },{
         "name":"suffield 1955",
-        "country": "canada",
+        "country": "Canada",
         "year": 1955,
         "maxYield": 522,
         "shot": 5,
         "hob": 60
     }, {
         "name":"blowdown 1965",
-        "country": "australia",
+        "country": "Australia",
         "year": 1965,
         "maxYield": 655,
         "shot": 1,
         "hob": 136
     }, {
         "name":"pacific proving ground he 1941",
-        "country": "islandia",
+        "country": "Iceland",
         "year": 1941,
         "maxYield": 500,
         "shot": 5,
         "hob": 0
     }, {
         "name":"dugway 1960",
-        "country": "eeuu",
+        "country": "United States",
         "year": 1960,
         "maxYield": 320000,
         "shot": 68,
         "hob": 35
     }, {
         "name":"cawboy 1965",
-        "country": "eeuu",
+        "country": "United States",
         "year": 1965,
         "maxYield": 2000,
         "shot": 15,
         "hob": 45
     },{
         "name":"suffield 1959",
-        "country": "canada",
+        "country": "Canada",
         "year": 1959,
         "maxYield": 10000,
         "shot": 5,
         "hob": 0
     }, {
         "name":"blowdown 1956",
-        "country": "australia",
+        "country": "Australia",
         "year": 1956,
         "maxYield": 100000,
         "shot": 1,
         "hob": 136
     }, {
         "name":"pacific proving ground he 1944",
-        "country": "islandia",
+        "country": "Iceland",
         "year": 1944,
         "maxYield": 40000,
         "shot": 5,
         "hob": 0
     }, {
         "name":"dugway 1969",
-        "country": "eeuu",
+        "country": "United States",
         "year": 1969,
         "maxYield": 320000,
         "shot": 68,
         "hob": 35
     }, {
         "name":"cawboy 1975",
-        "country": "eeuu",
+        "country": "United States",
         "year": 1975,
         "maxYield": 2000,
         "shot": 15,
         "hob": 45
     },{
         "name":"suffield 1953",
-        "country": "canada",
+        "country": "Canada",
         "year": 1953,
         "maxYield": 10000,
         "shot": 5,
         "hob": 0
     }, {
         "name":"blowdown 1953",
-        "country": "australia",
+        "country": "Australia",
         "year": 1953,
         "maxYield": 100000,
         "shot": 1,
         "hob": 136
     }, {
         "name":"pacific proving ground he 1956",
-        "country": "islandia",
+        "country": "Iceland",
         "year": 1956,
         "maxYield": 40000,
         "shot": 5,
         "hob": 0
     }, {
         "name":"dugway 1963",
-        "country": "eeuu",
+        "country": "United States",
         "year": 1963,
         "maxYield": 320000,
         "shot": 68,
         "hob": 35
     }, {
         "name":"cawboy 1967",
-        "country": "eeuu",
+        "country": "United States",
         "year": 1967,
         "maxYield": 2000,
         "shot": 15,
