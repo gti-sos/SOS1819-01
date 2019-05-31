@@ -1,112 +1,118 @@
 <html ng-app="SOS1819-app">
 
 <head>
-    <title>SOS 1819-01</title>
-    <!--############################### CSS ###############################-->
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/vendor/EJSCharts/EJSChart.css">
-    <link rel="stylesheet" href="/bower_components/ng-dialog/css/ngDialog.min.css" />
-    <link rel="stylesheet" href="/bower_components/ng-dialog/css/ngDialog-theme-default.min.css" />
-    <link rel="stylesheet" href="/bower_components/ng-dialog/css/ngDialog-custom-width.css" />
-    <link rel="stylesheet" href="/bower_components/ng-dialog/css/ngDialog-theme-plain.min.css" />
-    <link rel="stylesheet" href="/bower_components/components-font-awesome/css/fontawesome-all.css"/>
-    <link rel="stylesheet" href="/bower_components/chart.js/dist/Chart.css"/>
+  <title>SOS 1819-01</title>
+  <!--############################### CSS ###############################-->
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/vendor/EJSCharts/EJSChart.css">
+  <link rel="stylesheet" href="/bower_components/ng-dialog/css/ngDialog.min.css" />
+  <link rel="stylesheet" href="/bower_components/ng-dialog/css/ngDialog-theme-default.min.css" />
+  <link rel="stylesheet" href="/bower_components/ng-dialog/css/ngDialog-custom-width.css" />
+  <link rel="stylesheet" href="/bower_components/ng-dialog/css/ngDialog-theme-plain.min.css" />
+  <link rel="stylesheet" href="/bower_components/components-font-awesome/css/fontawesome-all.css" />
+  <link rel="stylesheet" href="/bower_components/chart.js/dist/Chart.css" />
 
-    <!--###################################################################-->
-    
-    <!--########################## ANGULAR CORE ###########################-->
-    <script src="https://code.highcharts.com/highcharts.src.js"></script>
-    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+  <!--###################################################################-->
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="/bower_components/angular/angular.js"></script>
-    <script src="/bower_components/angular-route/angular-route.min.js"></script>
-    <!--###################################################################-->
-    <!--########################## APP MODULES ############################-->
-    <script src="/ui/v1/app.js"></script>
-    <script src="/ui/v1/major-disasters/overview.app.js"></script>
-    <script src="/ui/v1/hurricanes/juan-fe-app.js"></script>
-    <script src="/ui/v1/testing-of-nuclear-bombs/jose-bo-app.js"></script>
-    <!--################################################################## -->
-    <!--######################## APP COMPONENTS ###########################-->
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/bower_components/echarts/dist/echarts.js"></script>
-    <script src="/bower_components/AnyChart/dist/js/anychart-bundle.min.js"></script>
-    <script src="/vendor/EJSCharts/EJSChart.js"></script>
+  <!--########################## ANGULAR CORE ###########################-->
+  <script src="https://code.highcharts.com/highcharts.src.js"></script>
+  <script src="https://code.highcharts.com/highcharts-more.js"></script>
+  <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+  <script src="https://code.highcharts.com/modules/cylinder.js"></script>
+  <script src="https://code.highcharts.com/modules/funnel3d.js"></script>
+  <script src="https://code.highcharts.com/modules/pyramid3d.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="/bower_components/angular/angular.js"></script>
+  <script src="/bower_components/angular-route/angular-route.min.js"></script>
+  <!--###################################################################-->
+  <!--########################## APP MODULES ############################-->
+  <script src="/ui/v1/app.js"></script>
+  <script src="/ui/v1/major-disasters/overview.app.js"></script>
+  <script src="/ui/v1/hurricanes/juan-fe-app.js"></script>
+  <script src="/ui/v1/testing-of-nuclear-bombs/jose-bo-app.js"></script>
+  <!--################################################################## -->
+  <!--######################## APP COMPONENTS ###########################-->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/bower_components/echarts/dist/echarts.js"></script>
+  <script src="/bower_components/AnyChart/dist/js/anychart-bundle.min.js"></script>
+  <script src="/vendor/EJSCharts/EJSChart.js"></script>
 
 
 
 
-    <script src="/bower_components/chart.js/dist/Chart.js"></script>
-    <!--################################################################## -->
-    <!--########################## APP FILTERS ###########################-->
-    <!--###################################################################-->
-    <!--######################## APP CONTROLLERS ##########################-->
-    <script src="/ui/v1/major-disasters/overview.controller.js"></script>
-    <script src="/ui/v1/hurricanes/juan-fe-controller.js"></script>
-    <script src="/ui/v1/testing-of-nuclear-bombs/jose-bo-controller.js"></script>
-    <!--###################################################################-->
-    <!--######################### APP FACTORIES ###########################-->
-    <script src="/ui/v1/major-disasters/overview.factory.js"></script>
-    <!--###################################################################-->
-    <!--######################### APP DIRECTIVES ##########################-->
-    <!--###################################################################-->
-    <!--######################### ANGULAR EXTRAS ##########################-->
-    <script src="/bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
-    
-    <script src="/bower_components/ng-dialog/js/ngDialog.min.js"></script>
-    <!--###################################################################-->
+  <script src="/bower_components/chart.js/dist/Chart.js"></script>
+  <!--################################################################## -->
+  <!--########################## APP FILTERS ###########################-->
+  <!--###################################################################-->
+  <!--######################## APP CONTROLLERS ##########################-->
+  <script src="/ui/v1/major-disasters/overview.controller.js"></script>
+  <script src="/ui/v1/hurricanes/juan-fe-controller.js"></script>
+  <script src="/ui/v1/testing-of-nuclear-bombs/jose-bo-controller.js"></script>
+  <!--###################################################################-->
+  <!--######################### APP FACTORIES ###########################-->
+  <script src="/ui/v1/major-disasters/overview.factory.js"></script>
+  <!--###################################################################-->
+  <!--######################### APP DIRECTIVES ##########################-->
+  <!--###################################################################-->
+  <!--######################### ANGULAR EXTRAS ##########################-->
+  <script src="/bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
+
+  <script src="/bower_components/ng-dialog/js/ngDialog.min.js"></script>
+  <!--###################################################################-->
 </head>
 
 <body>
-    <div ng-controller="navCtrl">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="/">SOS1819-01</a>
-          <div class="navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-item nav-link" ng-class="{'active': activeUrl === '/about'}" href="#!/about">About <span class="sr-only">(current)</span></a>
-              <a class="nav-item nav-link" ng-class="{'active': activeUrl === '/major-disasters'}" href="#!/major-disasters">Major disasters</a>
-              <a class="nav-item nav-link" ng-class="{'active': activeUrl === '/hurricanes'}" href="#!/hurricanes">Hurricanes</a>
-              <a class="nav-item nav-link" ng-class="{'active': activeUrl === '/testing-of-nuclear-bombs'}" href="#!/testing-of-nuclear-bombs">Testing of nuclear bombs</a>
-          </div>
+  <div ng-controller="navCtrl">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">SOS1819-01</a>
+      <div class="navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" ng-class="{'active': activeUrl === '/about'}" href="#!/about">About <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" ng-class="{'active': activeUrl === '/major-disasters'}" href="#!/major-disasters">Major disasters</a>
+          <a class="nav-item nav-link" ng-class="{'active': activeUrl === '/hurricanes'}" href="#!/hurricanes">Hurricanes</a>
+          <a class="nav-item nav-link" ng-class="{'active': activeUrl === '/testing-of-nuclear-bombs'}" href="#!/testing-of-nuclear-bombs">Testing of nuclear bombs</a>
+        </div>
       </div>
-  </nav>
-  <div class="container-fluid" ng-if="activeUrl === '/about'">
-    <h2>Miembros</h2>
+    </nav>
+    <div class="container-fluid" ng-if="activeUrl === '/about'">
+      <h2>Miembros</h2>
 
-    <h5>Juan Jiménez Ballina</h5>
-    <h5>Bernabé Ruiz Martinez</h5>
-    <h5>José María Barrero Olmedo</h5>
+      <h5>Juan Jiménez Ballina</h5>
+      <h5>Bernabé Ruiz Martinez</h5>
+      <h5>José María Barrero Olmedo</h5>
 
-    <h5>Tema de las API: Muertes relacionadas con las catástrofes en los últimos años</h5>
-    <h5>Repositorio: <a href="https://github.com/gti-sos/SOS1819-01">gti-sos/SOS1819-01</h5></a>
-    
-    <h1>API's USAGE</h1>
-    <ul>
-    <li><a href="https://sos1819-01.herokuapp.com/api/v1/hurricanes/docs" rel="nofollow">https://sos1819-01.herokuapp.com/api/v1/hurricanes/docs</a> (developed by <a href="https://github.com/30ner">Juan Jiménez Ballina</a>)</li>
-    <li><a href="https://sos1819-01.herokuapp.com/api/v1/major-disasters/docs" rel="nofollow">https://sos1819-01.herokuapp.com/api/v1/major-disasters/docs</a> (developed by <a href="https://github.com/berruimar">Bernabé Ruiz Martínez</a>)</li>
-    <li><a href="https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/docs" rel="nofollow">https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/docs</a> (developed by <a href="https://github.com/josbarolm">José María Barrero Olmedo</a>)</li>
-    </ul>
+      <h5>Tema de las API: Muertes relacionadas con las catástrofes en los últimos años</h5>
+      <h5>Repositorio: <a href="https://github.com/gti-sos/SOS1819-01">gti-sos/SOS1819-01</h5></a>
 
-    <h1>API's ENDPOINTS</h1>
-    <ul>
-    <li><a href="https://sos1819-01.herokuapp.com/api/v1/hurricanes" rel="nofollow">https://sos1819-01.herokuapp.com/api/v1/hurricanes</a> (developed by <a href="https://github.com/30ner">Juan Jiménez Ballina</a>)</li>
-    <li><a href="https://sos1819-01.herokuapp.com/api/v1/major-disasters" rel="nofollow">https://sos1819-01.herokuapp.com/api/v1/major-disasters</a> (developed by <a href="https://github.com/berruimar">Bernabé Ruiz Martínez</a>)</li>
-    <li><a href="https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs" rel="nofollow">https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs</a> (developed by <a href="https://github.com/josbarolm">José María Barrero Olmedo</a>)</li>
-    </ul>
+        <h1>API's USAGE</h1>
+        <ul>
+          <li><a href="https://sos1819-01.herokuapp.com/api/v1/hurricanes/docs" rel="nofollow">https://sos1819-01.herokuapp.com/api/v1/hurricanes/docs</a> (developed by <a href="https://github.com/30ner">Juan Jiménez Ballina</a>)</li>
+          <li><a href="https://sos1819-01.herokuapp.com/api/v1/major-disasters/docs" rel="nofollow">https://sos1819-01.herokuapp.com/api/v1/major-disasters/docs</a> (developed by <a href="https://github.com/berruimar">Bernabé Ruiz Martínez</a>)</li>
+          <li><a href="https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/docs" rel="nofollow">https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/docs</a> (developed by <a href="https://github.com/josbarolm">José María Barrero Olmedo</a>)</li>
+        </ul>
 
-    <p></p>
-    <h2>Trabajos extra</h2>
+        <h1>API's ENDPOINTS</h1>
+        <ul>
+          <li><a href="https://sos1819-01.herokuapp.com/api/v1/hurricanes" rel="nofollow">https://sos1819-01.herokuapp.com/api/v1/hurricanes</a> (developed by <a href="https://github.com/30ner">Juan Jiménez Ballina</a>)</li>
+          <li><a href="https://sos1819-01.herokuapp.com/api/v1/major-disasters" rel="nofollow">https://sos1819-01.herokuapp.com/api/v1/major-disasters</a> (developed by <a href="https://github.com/berruimar">Bernabé Ruiz Martínez</a>)</li>
+          <li><a href="https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs" rel="nofollow">https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs</a> (developed by <a href="https://github.com/josbarolm">José María Barrero Olmedo</a>)</li>
+        </ul>
+
+        <p></p>
+        <h2>Trabajos extra</h2>
         <p></p>
         <h5>Major disasters</h5>
         <ul>
-            <li><a href="/major-disasters/oauth">Implementación de OAuth</a></li>
-            <li><a href="#!/major-disasters/live">Gráfica en tiempo real</a></li>
-            <li><a href="https://balmy-wonder-241813.appspot.com">Despliegue de la aplicación en Google App Engine</a></li>
+          <li><a href="/major-disasters/oauth">Implementación de OAuth</a></li>
+          <li><a href="#!/major-disasters/live">Gráfica en tiempo real</a></li>
+          <li><a href="https://balmy-wonder-241813.appspot.com">Despliegue de la aplicación en Google App Engine</a></li>
         </ul>
-</div>
-</div>
-<div class="container-fluid" ng-view="ng-view"></div>
+    </div>
+  </div>
+  <div class="container-fluid" ng-view="ng-view"></div>
 </body>
 
 </html>

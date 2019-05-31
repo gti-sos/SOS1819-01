@@ -11,7 +11,7 @@ function buildStatusPopup (data) {
 
 angular.module('SOS1819-app.majorDisastersApp')
 .controller('overviewCtrl', function ($scope, $location, $q, MajorDisaster, initialData, ngDialog, autoLoad, SocketIO) {
-
+	console.log('oim ctrl', initialData.data)
 	var searchObj = $location.search();
 	$scope.loading = false;
 	$scope.data = initialData.data || [];
@@ -20,8 +20,9 @@ angular.module('SOS1819-app.majorDisastersApp')
 		xAxisData = []; //tags
 		seriesData = [];
 
-		for (var i = 0; i < initialData.data.length; i++) {
-			var elm = initialData.data[i];
+		var nData = $scope.data.slice(0);
+		for (var i = 0; i < nData.length; i++) {
+			var elm = nData[i];
 			var index = xAxisData.indexOf(elm.year);
 			if (index === -1) {
 				xAxisData.push(elm.year);
@@ -30,7 +31,6 @@ angular.module('SOS1819-app.majorDisastersApp')
 			else
 				seriesData[index] += 1;
 		}
-
 		function refSort (targetData, refData) {
 		  // Create an array of indices [0, 1, 2, ...N].
 		  var indices = Object.keys(refData);
@@ -61,7 +61,7 @@ angular.module('SOS1819-app.majorDisastersApp')
 			},
 			tooltip: {},
 			legend: {
-				data:['Nº de incidentes']
+				data:['Incidentes']
 			},
 			xAxis: {
 				data: xAxisData
@@ -76,8 +76,31 @@ angular.module('SOS1819-app.majorDisastersApp')
 		myChart.setOption(option);
 
 
+		var nData2 = $scope.data.slice(0);
+		
+		nData2.sort(function (a, b) {
+			if ( a.death < b.death ){
+			   return 1;
+			 }
+			 if ( a.death > b.death ){
+			   return -1;
+			 }
+			 return 0;
+		});
 
+		nData2 = nData2.splice(0, 50);
+			
+		nData2 = nData2.map(function (e) {
+			return {x: e.year, y: e.inflation, z: e.death, name: e.event};
+		});
 
+		
+		/*
+		for (var i = 0; i < $scope.data.length; i++) {
+			var elm = $scope.data[i];
+
+		}
+		*/
 
 
 
@@ -94,7 +117,7 @@ angular.module('SOS1819-app.majorDisastersApp')
 		    },
 
 		    title: {
-		        text: 'Sugar and fat intake per country'
+		        text: 'Lista de las ' + nData2.length + ' catástrofes con más muertes'
 		    },
 
 		    subtitle: {
@@ -104,62 +127,32 @@ angular.module('SOS1819-app.majorDisastersApp')
 		    xAxis: {
 		        gridLineWidth: 1,
 		        title: {
-		            text: 'Daily fat intake'
+		            text: 'Año'
 		        },
 		        labels: {
-		            format: '{value} gr'
-		        },
-		        plotLines: [{
-		            color: 'black',
-		            dashStyle: 'dot',
-		            width: 2,
-		            value: 65,
-		            label: {
-		                rotation: 0,
-		                y: 15,
-		                style: {
-		                    fontStyle: 'italic'
-		                },
-		                text: 'Safe fat intake 65g/day'
-		            },
-		            zIndex: 3
-		        }]
+		            format: '{value}'
+		        }
 		    },
 
 		    yAxis: {
 		        startOnTick: false,
 		        endOnTick: false,
 		        title: {
-		            text: 'Daily sugar intake'
+		            text: 'Millones de dólares'
 		        },
 		        labels: {
-		            format: '{value} gr'
+		            format: '{value} $'
 		        },
-		        maxPadding: 0.2,
-		        plotLines: [{
-		            color: 'black',
-		            dashStyle: 'dot',
-		            width: 2,
-		            value: 50,
-		            label: {
-		                align: 'right',
-		                style: {
-		                    fontStyle: 'italic'
-		                },
-		                text: 'Safe sugar intake 50g/day',
-		                x: -10
-		            },
-		            zIndex: 3
-		        }]
+		        maxPadding: 0.2
 		    },
 
 		    tooltip: {
 		        useHTML: true,
-		        headerFormat: '<table>',
-		        pointFormat: '<tr><th colspan="2"><h3>{point.country}</h3></th></tr>' +
-		            '<tr><th>Fat intake:</th><td>{point.x}g</td></tr>' +
-		            '<tr><th>Sugar intake:</th><td>{point.y}g</td></tr>' +
-		            '<tr><th>Obesity (adults):</th><td>{point.z}%</td></tr>',
+		        headerFormat: '<table style="width:200px">',
+		        pointFormat: '<tr><th colspan="2"><h3>{point.name}</h3></th></tr>' +
+		            '<tr><th>Año:</th><td>{point.x}</td></tr>' +
+		            '<tr><th>Coste (millones USD):</th><td>{point.y}</td></tr>' +
+		            '<tr><th>Muertes:</th><td>{point.z}</td></tr>',
 		        footerFormat: '</table>',
 		        followPointer: true
 		    },
@@ -174,23 +167,7 @@ angular.module('SOS1819-app.majorDisastersApp')
 		    },
 
 		    series: [{
-		        data: [
-		            { x: 95, y: 95, z: 13.8, name: 'BE', country: 'Belgium' },
-		            { x: 86.5, y: 102.9, z: 14.7, name: 'DE', country: 'Germany' },
-		            { x: 80.8, y: 91.5, z: 15.8, name: 'FI', country: 'Finland' },
-		            { x: 80.4, y: 102.5, z: 12, name: 'NL', country: 'Netherlands' },
-		            { x: 80.3, y: 86.1, z: 11.8, name: 'SE', country: 'Sweden' },
-		            { x: 78.4, y: 70.1, z: 16.6, name: 'ES', country: 'Spain' },
-		            { x: 74.2, y: 68.5, z: 14.5, name: 'FR', country: 'France' },
-		            { x: 73.5, y: 83.1, z: 10, name: 'NO', country: 'Norway' },
-		            { x: 71, y: 93.2, z: 24.7, name: 'UK', country: 'United Kingdom' },
-		            { x: 69.2, y: 57.6, z: 10.4, name: 'IT', country: 'Italy' },
-		            { x: 68.6, y: 20, z: 16, name: 'RU', country: 'Russia' },
-		            { x: 65.5, y: 126.4, z: 35.3, name: 'US', country: 'United States' },
-		            { x: 65.4, y: 50.8, z: 28.5, name: 'HU', country: 'Hungary' },
-		            { x: 63.4, y: 51.8, z: 15.4, name: 'PT', country: 'Portugal' },
-		            { x: 64, y: 82.9, z: 31.3, name: 'NZ', country: 'New Zealand' }
-		        ]
+		        data: nData2
 		    }]
 
 		});
@@ -198,9 +175,35 @@ angular.module('SOS1819-app.majorDisastersApp')
 
 
 
+		////////////////GEO CHARTS ///////////////////////
 
 
+		google.charts.load('current', {
+		        'packages':['geochart'],
+		        // Note: you will need to get a mapsApiKey for your project.
+		        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+		        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+		      });
+		      google.charts.setOnLoadCallback(drawRegionsMap);
+		      console.log('initial', initialData)
+		      var nData3 = initialData.data.slice(0);
+		      var res3 = [['País', 'Muertes', 'Coste millones $ (sin inflación)']];
+		      for (var i = 0; i < nData3.length; i++) {
+		      	for (var j = nData3[i].country.length - 1; j >= 0; j--) {
+		      		res3.push([nData3[i].country[j], nData3[i].death, nData3[i]['no-inflation']])
+	//		      		nData3.country[i] + 
+				}
+		      }
+		      console.log(res3)
+		      function drawRegionsMap() {
+		        var data = google.visualization.arrayToDataTable(res3);
 
+		        var options = {};
+
+		        var chart = new google.visualization.GeoChart(document.getElementById('main3'));
+
+		        chart.draw(data, options);
+		      }
 
 
 
