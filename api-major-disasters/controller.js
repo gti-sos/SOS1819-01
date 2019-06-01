@@ -30,6 +30,8 @@ function buildSearch (req) {
 	return search;
 }
 
+
+
 exports.api = {
 	v1: {
 		init: function (req, res) {
@@ -147,24 +149,6 @@ exports.api = {
 				expiresIn: 60 * 60 * 24
 			});
 			res.json(token);
-		},
-		"pollution-stats": function (req, res) {
-			request({
-				url: 'https://sos1819-12.herokuapp.com/api/v1/pollution-stats',
-				json: true,
-				headers: {'Content-Type': 'application/json'}
-			}, function (err, httpCode, body) {
-				res.json(body);
-			});
-		},
-		"sports-centers": function (req, res) {
-			request({
-				url: 'https://sos1819-15.herokuapp.com/api/v1/sports-centers',
-				json: true,
-				headers: {'Content-Type': 'application/json'}
-			}, function (err, httpCode, body) {
-				res.json(body);
-			});
-		},
+		}
 	}
 };
