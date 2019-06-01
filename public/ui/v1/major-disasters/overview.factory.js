@@ -65,7 +65,7 @@ angular.module('SOS1819-app.majorDisastersApp')
 
 .factory('PollutionStats', function ($http, $q) {
 	return {
-		__apiUrl: '/proxy/youth-unemployment-stats',
+		__apiUrl: '/proxy/pollution-stats',
 		list: function (config) {
 			return $http.get(this.__apiUrl, {params: config});
 		}
@@ -75,6 +75,15 @@ angular.module('SOS1819-app.majorDisastersApp')
 .factory('SportsCenters', function ($http, $q) {
 	return {
 		__apiUrl: '/proxy/sports-centers',
+		list: function (config) {
+			return $http.get(this.__apiUrl, {params: config});
+		}
+	};
+})
+
+.factory('WeatherStats', function ($http, $q) {
+	return {
+		__apiUrl: '/proxy/awhere/weather',
 		list: function (config) {
 			return $http.get(this.__apiUrl, {params: config});
 		}
