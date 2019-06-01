@@ -1,35 +1,35 @@
 [{
         "name": "Katrina",
         "year": 2005,
-        "country": "EEUU",
+        "country": "United States",
         "speed": "280",
         "damagesuntil2008": "81.2",
         "mbar": "902"
     }, {
         "name": "Mitch",
         "year": 1998,
-        "country": "EEUU",
+        "country": "United States",
         "speed": "285",
         "damagesuntil2008": "5.8",
         "mbar": "905"
     }, {
         "name": "Andrew",
         "year": 1992,
-        "country": "EEUU",
+        "country": "United States",
         "speed": "280",
         "damagesuntil2008": "52.4",
         "mbar": "922"
     }, {
         "name": "Ike",
         "year": 2008,
-        "country": "Islas de Sotavento",
+        "country": "Venezuela",
         "speed": "230",
         "damagesuntil2008": "32",
         "mbar": "935"
     }, {
         "name": "Wilma",
         "year": 2005,
-        "country": "Centro América",
+        "country": "Mexico",
         "speed": "295",
         "damagesuntil2008": "29.1",
         "mbar": "882"
@@ -37,179 +37,179 @@
 {
         "name": "Katrina2",
         "year": 2005,
-        "country": "EEUU",
+        "country": "United States",
         "speed": "280",
-        "damagesuntil2008": "81.2",
+        "damagesuntil2008": "74.6",
         "mbar": "902"
     }, {
         "name": "Mitch2",
         "year": 1998,
-        "country": "EEUU",
+        "country": "United States",
         "speed": "285",
-        "damagesuntil2008": "5.8",
+        "damagesuntil2008": "78",
         "mbar": "905"
     }, {
         "name": "Andrew2",
         "year": 1992,
-        "country": "EEUU",
+        "country": "United States",
         "speed": "280",
-        "damagesuntil2008": "52.4",
+        "damagesuntil2008": "14",
         "mbar": "922"
     }, {
         "name": "Ike2",
         "year": 2008,
-        "country": "Islas de Sotavento",
+        "country": "Venezuela",
         "speed": "230",
-        "damagesuntil2008": "32",
+        "damagesuntil2008": "29",
         "mbar": "935"
     }, {
         "name": "Wilma2",
         "year": 2005,
-        "country": "Centro América",
+        "country": "Mexico",
         "speed": "295",
-        "damagesuntil2008": "29.1",
+        "damagesuntil2008": "44",
         "mbar": "882"
     },
 {
         "name": "Katrina3",
         "year": 2005,
-        "country": "EEUU",
+        "country": "United States",
         "speed": "280",
-        "damagesuntil2008": "81.2",
+        "damagesuntil2008": "30",
         "mbar": "902"
     }, {
         "name": "Mitch3",
         "year": 1998,
-        "country": "EEUU",
+        "country": "United States",
         "speed": "285",
-        "damagesuntil2008": "5.8",
+        "damagesuntil2008": "61",
         "mbar": "905"
     }, {
         "name": "Andrew3",
         "year": 1992,
-        "country": "EEUU",
+        "country": "United States",
         "speed": "280",
-        "damagesuntil2008": "52.4",
+        "damagesuntil2008": "6",
         "mbar": "922"
     }, {
         "name": "Ike3",
         "year": 2008,
-        "country": "Islas de Sotavento",
+        "country": "Venezuela",
         "speed": "230",
-        "damagesuntil2008": "32",
+        "damagesuntil2008": "19",
         "mbar": "935"
     }, {
         "name": "Wilma3",
         "year": 2005,
-        "country": "Centro América",
+        "country": "Mexico",
         "speed": "295",
-        "damagesuntil2008": "29.1",
+        "damagesuntil2008": "47",
         "mbar": "882"
     },{
         "name": "Katrina4",
         "year": 2005,
-        "country": "EEUU",
+        "country": "United States",
         "speed": "280",
-        "damagesuntil2008": "81.2",
+        "damagesuntil2008": "83",
         "mbar": "902"
     }, {
         "name": "Mitch4",
         "year": 1998,
-        "country": "EEUU",
+        "country": "United States",
         "speed": "285",
-        "damagesuntil2008": "5.8",
+        "damagesuntil2008": "5",
         "mbar": "905"
     }, {
         "name": "Andrew4",
         "year": 1992,
-        "country": "EEUU",
+        "country": "United States",
         "speed": "280",
-        "damagesuntil2008": "52.4",
+        "damagesuntil2008": "85",
         "mbar": "922"
     }, {
         "name": "Ike4",
         "year": 2008,
-        "country": "Islas de Sotavento",
+        "country": "Venezuela",
         "speed": "230",
-        "damagesuntil2008": "32",
+        "damagesuntil2008": "66",
         "mbar": "935"
     }, {
         "name": "Wilma4",
         "year": 2005,
-        "country": "Centro América",
+        "country": "Mexico",
         "speed": "295",
-        "damagesuntil2008": "29.1",
+        "damagesuntil2008": "93",
         "mbar": "882"
     },
 {
         "name": "Katrina5",
         "year": 2005,
-        "country": "EEUU",
+        "country": "United States",
         "speed": "280",
-        "damagesuntil2008": "81.2",
+        "damagesuntil2008": "11",
         "mbar": "902"
     }, {
         "name": "Mitch5",
         "year": 1998,
-        "country": "EEUU",
+        "country": "United States",
         "speed": "285",
-        "damagesuntil2008": "5.8",
+        "damagesuntil2008": "89",
         "mbar": "905"
     }, {
         "name": "Andrew5",
         "year": 1992,
-        "country": "EEUU",
+        "country": "United States",
         "speed": "280",
-        "damagesuntil2008": "52.4",
+        "damagesuntil2008": "95",
         "mbar": "922"
     }, {
         "name": "Ike5",
         "year": 2008,
-        "country": "Islas de Sotavento",
+        "country": "Venezuela",
         "speed": "230",
-        "damagesuntil2008": "32",
+        "damagesuntil2008": "80",
         "mbar": "935"
     }, {
         "name": "Wilma5",
         "year": 2005,
-        "country": "Centro América",
+        "country": "Mexico",
         "speed": "295",
-        "damagesuntil2008": "29.1",
+        "damagesuntil2008": "7",
         "mbar": "882"
     },
     {
             "name": "Katrina6",
             "year": 2005,
-            "country": "EEUU",
+            "country": "United States",
             "speed": "280",
-            "damagesuntil2008": "81.2",
+            "damagesuntil2008": "17",
             "mbar": "902"
         }, {
             "name": "Mitch6",
             "year": 1998,
-            "country": "EEUU",
+            "country": "United States",
             "speed": "285",
-            "damagesuntil2008": "5.8",
+            "damagesuntil2008": "63",
             "mbar": "905"
         }, {
             "name": "Andrew6",
             "year": 1992,
-            "country": "EEUU",
+            "country": "United States",
             "speed": "280",
-            "damagesuntil2008": "52.4",
+            "damagesuntil2008": "37",
             "mbar": "922"
         }, {
             "name": "Ike6",
             "year": 2008,
-            "country": "Islas de Sotavento",
+            "country": "Venezuela",
             "speed": "230",
-            "damagesuntil2008": "32",
+            "damagesuntil2008": "55",
             "mbar": "935"
         }, {
             "name": "Wilma6",
             "year": 2005,
-            "country": "Centro América",
+            "country": "Mexico",
             "speed": "295",
-            "damagesuntil2008": "29.1",
+            "damagesuntil2008": "20",
             "mbar": "882"
         }]

@@ -82,6 +82,7 @@ app.controller("juan-fe-controller", function ($scope, $http, $q) {
             $scope.hurricanes = responses[0].data;
             cuentadanos();
             fium();
+            mapa();
             $scope.count = Math.ceil(responses[1].data.count / $scope.pagination.limit);
             if (cb) cb();
         }).catch(function(response){
@@ -254,10 +255,10 @@ app.controller("juan-fe-controller", function ($scope, $http, $q) {
             v= v +parseInt(e.speed);
             i++;
         });
-        console.log("speed="+v);
+      //  console.log("speed="+v);
         v=v/i;
-        console.log("i="+i);
-        console.log("medium speed="+v);
+    //    console.log("i="+i);
+     //   console.log("medium speed="+v);
         i=0;
         
         Highcharts.chart('fium', {
@@ -360,14 +361,14 @@ function (chart) {
     if (!chart.renderer.forExport) {
         setInterval(function () {
             
-            console.log("Value of o = ", o)    
+            //console.log("Value of o = ", o)    
             if(o==0){
             var point = chart.series[0].points[0],
                 newVal,
                 inc = -5;
 
             newVal = point.y + inc;
-            console.log("entra1");
+           // console.log("entra1");
             point.update(newVal);
             
             o++;    
@@ -378,7 +379,7 @@ function (chart) {
 
             newVal = point.y + inc;
             
-            console.log("entra2"+o);
+           // console.log("entra2"+o);
             point.update(newVal);
             
             o++;
@@ -390,7 +391,7 @@ function (chart) {
             newVal = point.y + inc;
 
             point.update(newVal);
-            console.log("entra3"+o);
+         //   console.log("entra3"+o);
             o++;
             }else{
                 var point = chart.series[0].points[0],
@@ -410,13 +411,55 @@ function (chart) {
 );
     }
 
+    function mapa(){
+        
+        
+        google.charts.load('current', {
+        'packages':['geochart'],
+        // Note: you will need to get a mapsApiKey for your project.
+        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
+
+      function drawRegionsMap() {
+        var auxdat={};
+        var auxdat2={};
+        var aux=[];
+        var dataMapa=[];
+        dataMapa.push(['Country', 'Damages']);
+        
+        $scope.hurricanes.forEach(function(e){
+            
+            var exist = auxdat2[e.country];
+            if (exist) {
+           // if(aux.includes(e.Country)){
+                auxdat2[e.country] += e.damagesuntil2008;
+                }
+            else {
+                    auxdat2[e.country] = e.damagesuntil2008;
+                
+                }
+        });
+        for (var key in auxdat2) {
+                dataMapa.push([key, auxdat2[key]]);
+            }
+        var data = google.visualization.arrayToDataTable(dataMapa);
+
+        var options = {};
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        chart.draw(data, options);
+      }
+    }
     
 })
 
 app.controller("juan-fe-edit-controller" ,function ($scope, $http, $q, dataToEdit,$location){
     
     
-    console.log(dataToEdit);
+   // console.log(dataToEdit);
     $scope.body = {
         name: dataToEdit.name,
         year: dataToEdit.year,
