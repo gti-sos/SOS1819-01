@@ -42,7 +42,6 @@ get('/youth-unemployment-stats', function (req, res) {
 		}
 	}
 
-	console.log(randommToken);
 
 		//var tries = 0;
 		/*
