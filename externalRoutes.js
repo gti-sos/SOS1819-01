@@ -1,6 +1,5 @@
 const express = require('express');
 const request = require('request');
-const requestP = require('request-promise-native');
 var router = express.Router();
 var async = require('async');
 var cache = null;

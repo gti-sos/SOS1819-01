@@ -43,7 +43,6 @@
     "newman": "latest",
     "protractor": "^5.4.2",
     "request": "^2.88.0",
-    "request-promise-native": "^1.0.7",
     "simple-oauth2": "^2.2.1",
     "socket.io": "^2.2.0"
   }
