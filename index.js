@@ -25,8 +25,6 @@ app.use(morgan('dev'));
 //app.set('views', [path.join(__dirname, 'public')]);
 //app.set('view engine', 'pug');
 
-console.log(__dirname)
-
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/major-disasters", require('./majorDisastersRoutes.js'));
 app.use("/proxy", require('./externalRoutes.js'));
