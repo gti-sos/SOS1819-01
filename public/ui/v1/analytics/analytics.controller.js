@@ -35,6 +35,4 @@ angular.module('SOS1819-app.analytics')
 	    new EJSC.ArrayDataHandler(hurricanesSeries),
 	    {title: "Daños hasta 2008"}
 	  ));
-
-	
 });
