@@ -90,6 +90,22 @@ angular.module('SOS1819-app.majorDisastersApp')
 	};
 })
 
+.factory('DonaldTrump', function ($http, $q) {
+	return {
+		__apiUrl: 'https://matchilling-tronald-dump-v1.p.rapidapi.com/random/quote',
+		random: function () {
+			var opt = {
+				params: {},
+				headers: {
+					'X-RapidAPI-Key': '749296e16emsh19b71465c3377a3p120f28jsn58424fc8ae24',
+					"X-RapidAPI-Host": 'matchilling-tronald-dump-v1.p.rapidapi.com'
+				}
+			};
+			return $http.get(this.__apiUrl, opt);
+		}
+	};
+})
+
 .factory('SocketIO', function () {
 	var socket = io('/major-disasters');
 	return socket;

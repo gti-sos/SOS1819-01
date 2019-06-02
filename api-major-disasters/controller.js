@@ -30,8 +30,6 @@ function buildSearch (req) {
 	return search;
 }
 
-
-
 exports.api = {
 	v1: {
 		init: function (req, res) {

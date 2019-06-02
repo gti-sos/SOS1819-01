@@ -1,0 +1,24 @@
+
+
+<button ng-click="berruimar.visualizations.echarts.toggle()">Echarts</button>
+<button ng-click="berruimar.visualizations.highcharts.toggle()">Highcharts</button>
+<button ng-click="berruimar.visualizations.geocharts.toggle()">Geocharts</button>
+<button ng-click="berruimar.integrations.sos1.toggle()">SOS 1</button>
+<button ng-click="berruimar.integrations.sos2.toggle()">SOS 2</button>
+<button ng-click="berruimar.integrations.ext1.toggle()">Ext 1</button>
+<button ng-click="berruimar.integrations.ext2.toggle()">Ext 2</button>
+
+
+<div ng-if="berruimar.visualizations.echarts.show" id="main" style="width:1000px; height:800px;"></div>
+
+<div ng-if="berruimar.visualizations.highcharts.show" id="main2" style="width:1000px; height:800px;"></div>
+
+<div ng-if="berruimar.visualizations.geocharts.show" id="main3" style="width:1000px; height:800px;"></div>
+
+<div ng-if="berruimar.integrations.sos1.show" id="main4" style="width:1000px; height:800px;"></div>
+
+<div ng-if="berruimar.integrations.sos2.show" id="main5" style="width:1000px; height:1000px;"></div>
+
+<div ng-if="berruimar.integrations.ext1.show" id="main6" style="width:1000px; height:1000px;"></div>
+
+<div ng-if="berruimar.integrations.ext2.show" id="main7" style="width:1200px; height:1000px;"></div>

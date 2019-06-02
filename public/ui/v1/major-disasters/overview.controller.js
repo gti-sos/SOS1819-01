@@ -15,14 +15,34 @@ angular.module('SOS1819-app.majorDisastersApp')
 	var searchObj = $location.search();
 	$scope.loading = false;
 	$scope.data = initialData.data || [];
+	
 
+	function refSort (targetData, refData) {
+	  // Create an array of indices [0, 1, 2, ...N].
+	  var indices = Object.keys(refData);
 
-		xAxisData = []; //tags
-		seriesData = [];
+	  // Sort array of indices according to the reference data.
+	  indices.sort(function(indexA, indexB) {
+	  	if (refData[indexA] < refData[indexB]) {
+	  		return -1;
+	  	} else if (refData[indexA] > refData[indexB]) {
+	  		return 1;
+	  	}
+	  	return 0;
+	  });
 
-		var nData = $scope.data.slice(0);
-		for (var i = 0; i < nData.length; i++) {
-			var elm = nData[i];
+	  // Map array of indices to corresponding values of the target array.
+	  return indices.map(function(index) {
+	  	return targetData[index];
+	  });
+	}
+
+	(function generateBarChart (ownData) {
+		var xAxisData = []; //tags
+		var seriesData = [];
+
+		for (var i = 0; i < ownData.length; i++) {
+			var elm = ownData[i];
 			var index = xAxisData.indexOf(elm.year);
 			if (index === -1) {
 				xAxisData.push(elm.year);
@@ -31,25 +51,7 @@ angular.module('SOS1819-app.majorDisastersApp')
 			else
 				seriesData[index] += 1;
 		}
-		function refSort (targetData, refData) {
-		  // Create an array of indices [0, 1, 2, ...N].
-		  var indices = Object.keys(refData);
-
-		  // Sort array of indices according to the reference data.
-		  indices.sort(function(indexA, indexB) {
-		  	if (refData[indexA] < refData[indexB]) {
-		  		return -1;
-		  	} else if (refData[indexA] > refData[indexB]) {
-		  		return 1;
-		  	}
-		  	return 0;
-		  });
-
-		  // Map array of indices to corresponding values of the target array.
-		  return indices.map(function(index) {
-		  	return targetData[index];
-		  });
-		}
+		
 		
 		var seriesDataSorted = refSort(seriesData, xAxisData);
 		xAxisData.sort();
@@ -76,11 +78,12 @@ angular.module('SOS1819-app.majorDisastersApp')
 			}]
 		};
 		myChart.setOption(option);
+	})(initialData.data.slice(0));
 
 
-		var nData2 = $scope.data.slice(0);
-		
-		nData2.sort(function (a, b) {
+	(function generateHighCharts (ownData) {
+
+		ownData.sort(function (a, b) {
 			if ( a.death < b.death ){
 				return 1;
 			}
@@ -90,235 +93,239 @@ angular.module('SOS1819-app.majorDisastersApp')
 			return 0;
 		});
 
-		nData2 = nData2.splice(0, 50);
+			//nData2 = nData2.splice(0, 50);
 
-		nData2 = nData2.map(function (e) {
-			return {x: e.year, y: e.inflation, z: e.death, name: e.event};
-		});
+			ownData = ownData.map(function (e) {
+				return {x: e.year, y: e.inflation, z: e.death, name: e.event};
+			});
 
+			Highcharts.chart('main2', {
 
+				chart: {
+					type: 'bubble',
+					plotBorderWidth: 1,
+					zoomType: 'xy'
+				},
 
+				legend: {
+					enabled: false
+				},
 
-
-		Highcharts.chart('main2', {
-
-			chart: {
-				type: 'bubble',
-				plotBorderWidth: 1,
-				zoomType: 'xy'
-			},
-
-			legend: {
-				enabled: false
-			},
-
-			title: {
-				text: 'Gráfico de las ' + nData2.length + ' catástrofes con más muertes y su coste'
-			},
-
-
-			xAxis: {
-				gridLineWidth: 1,
 				title: {
-					text: 'Año'
+					text: 'Gráfico de las ' + ownData.length + ' catástrofes con más muertes y su coste'
 				},
-				labels: {
-					format: '{value}'
-				}
-			},
 
-			yAxis: {
-				startOnTick: false,
-				endOnTick: false,
-				title: {
-					text: 'Millones de dólares'
-				},
-				labels: {
-					format: '{value} $'
-				},
-				maxPadding: 0.2
-			},
 
-			tooltip: {
-				useHTML: true,
-				headerFormat: '<table style="width:200px">',
-				pointFormat: '<tr><th colspan="2"><h3>{point.name}</h3></th></tr>' +
-				'<tr><th>Año:</th><td>{point.x}</td></tr>' +
-				'<tr><th>Coste (millones USD):</th><td>{point.y}</td></tr>' +
-				'<tr><th>Muertes:</th><td>{point.z}</td></tr>',
-				footerFormat: '</table>',
-				followPointer: true
-			},
-
-			plotOptions: {
-				series: {
-					dataLabels: {
-						enabled: true,
-						format: '{point.name}'
+				xAxis: {
+					gridLineWidth: 1,
+					title: {
+						text: 'Año'
+					},
+					labels: {
+						format: '{value}'
 					}
-				}
-			},
+				},
 
-			series: [{
-				data: nData2
-			}]
+				yAxis: {
+					startOnTick: false,
+					endOnTick: false,
+					title: {
+						text: 'Millones de dólares'
+					},
+					labels: {
+						format: '{value} $'
+					},
+					maxPadding: 0.2
+				},
 
-		});
+				tooltip: {
+					useHTML: true,
+					headerFormat: '<table style="width:200px">',
+					pointFormat: '<tr><th colspan="2"><h3>{point.name}</h3></th></tr>' +
+					'<tr><th>Año:</th><td>{point.x}</td></tr>' +
+					'<tr><th>Coste (millones USD):</th><td>{point.y}</td></tr>' +
+					'<tr><th>Muertes:</th><td>{point.z}</td></tr>',
+					footerFormat: '</table>',
+					followPointer: true
+				},
 
+				plotOptions: {
+					series: {
+						dataLabels: {
+							enabled: true,
+							format: '{point.name}'
+						}
+					}
+				},
 
+				series: [{
+					data: ownData
+				}]
 
+			});
+		})(initialData.data.slice(0));
 
 		////////////////GEO CHARTS ///////////////////////
 
+		(function generateGeoCharts (ownData) {
+			google.charts.load('current', {
+				'packages':['geochart'],
+			        // Note: you will need to get a mapsApiKey for your project.
+			        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+			        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+			    });
+			google.charts.setOnLoadCallback(drawRegionsMap);
+			var labels = [['País', 'Coste millones $ (sin inflación)', 'Muertes']];
 
-		google.charts.load('current', {
-			'packages':['geochart'],
-		        // Note: you will need to get a mapsApiKey for your project.
-		        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-		        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
-		    });
-		google.charts.setOnLoadCallback(drawRegionsMap);
-		var nData3 = initialData.data.slice(0);
-		var res3 = [['País', 'Coste millones $ (sin inflación)', 'Muertes']];
+			for (var i = 0; i < ownData.length; i++) {
+				var item = ownData[i];
+				for (var j = item.country.length - 1; j >= 0; j--) {
+					var itemCountry = item.country[j];
+					var founded = false;
+					for (var k = labels.length - 1; k >= 0; k--) {
+						if (labels[k][0] === itemCountry) {
+							founded = true;
+							labels[k][1] += item['no-inflation'];
+							labels[k][2] += item.death;
+						}
+					}
+					if (!founded)
+						labels.push([ownData[i].country[j], ownData[i]['no-inflation'], ownData[i].death]);
+				}
+			}
+			function drawRegionsMap() {
+				var data = google.visualization.arrayToDataTable(labels);
 
-		for (var i = 0; i < nData3.length; i++) {
-			var item = nData3[i];
-			for (var j = item.country.length - 1; j >= 0; j--) {
-				var itemCountry = item.country[j];
-				var founded = false;
-				for (var k = res3.length - 1; k >= 0; k--) {
-					if (res3[k][0] === itemCountry) {
-						founded = true;
-						res3[k][1] += item['no-inflation'];
-						res3[k][2] += item.death;
+				var options = {};
+
+				var chart = new google.visualization.GeoChart(document.getElementById('main3'));
+
+				chart.draw(data, options);
+			}
+		})(initialData.data.slice(0));
+
+
+		(function generateAreaChart (ownData, extData) {
+			var myChart2 = echarts.init(document.getElementById('main4'));
+			var xAxisData = []; 
+			var seriesData = [];
+			for (var i = 0; i < ownData.length; i++) {
+				var elm = ownData[i];
+				var index = xAxisData.indexOf(elm.year);
+				if (index === -1) {
+					xAxisData.push(elm.year);
+					seriesData.push(1);
+				}
+				else
+					seriesData[index] += 1;
+			}
+
+
+			var seriesDataSorted = refSort(seriesData, xAxisData);
+			xAxisData.sort();
+
+			var xAxisDataFiltered = [];
+			var seriesDataFiltered = [];
+
+			for (var i = 0; i < xAxisData.length; i++) {
+				for (var j = 0; j < extData.length; j++) {
+					if (extData[j].year === xAxisData[i] && xAxisDataFiltered.indexOf(xAxisData[i]) === -1) {
+						xAxisDataFiltered.push(xAxisData[i]);
+						seriesDataFiltered.push(seriesDataSorted[i]);
 					}
 				}
-				if (!founded)
-					res3.push([nData3[i].country[j], nData3[i]['no-inflation'], nData3[i].death]);
 			}
-		}
-		function drawRegionsMap() {
-			var data = google.visualization.arrayToDataTable(res3);
+			var ext1DataGrouped = {};
 
-			var options = {};
+			for (var i = extData.length - 1; i >= 0; i--) {
+				var elm = extData[i];
+				if (!ext1DataGrouped[elm.year])
+					ext1DataGrouped[elm.year] = elm.pollution_tco2;
+				else
+					ext1DataGrouped[elm.year] += elm.pollution_tco2;
+			}
+			
+			var seriesDataExt1 = [];
 
-			var chart = new google.visualization.GeoChart(document.getElementById('main3'));
-
-			chart.draw(data, options);
-		}
-
-
-
-		var myChart2 = echarts.init(document.getElementById('main4'));
-
-		//app.title = '折柱混合';
-
-		var ext1Data = initialData.ext1.slice(0);
-
-
-		var xAxisDataFiltered = [];
-		var seriesDataFiltered = [];
-
-		for (var i = 0; i < xAxisData.length; i++) {
-			for (var j = 0; j < ext1Data.length; j++) {
-				if (ext1Data[j].year === xAxisData[i] && xAxisDataFiltered.indexOf(xAxisData[i]) === -1) {
-					xAxisDataFiltered.push(xAxisData[i]);
-					seriesDataFiltered.push(seriesDataSorted[i]);
+			for (var key in ext1DataGrouped) {
+				var index = xAxisDataFiltered.indexOf(parseInt(key));
+				if (index > -1) {
+					seriesDataExt1[index] = parseInt(ext1DataGrouped[parseInt(key)]);
+				} else {
+					seriesDataExt1[index] = 0;
 				}
 			}
-		}
-		var ext1DataGrouped = {};
-
-		for (var i = ext1Data.length - 1; i >= 0; i--) {
-			var elm = ext1Data[i];
-			if (!ext1DataGrouped[elm.year])
-				ext1DataGrouped[elm.year] = elm.pollution_tco2;
-			else
-				ext1DataGrouped[elm.year] += elm.pollution_tco2;
-		}
-		
-		var seriesDataExt1 = [];
-
-		for (var key in ext1DataGrouped) {
-			var index = xAxisDataFiltered.indexOf(parseInt(key));
-			if (index > -1) {
-				seriesDataExt1[index] = parseInt(ext1DataGrouped[parseInt(key)]);
-			} else {
-				seriesDataExt1[index] = 0;
-			}
-		}
-
-		
-
-		
-		
-		var option2 = {
-			title: {
-				text: 'Integración major-disasters (G01) / pollution-stats (G08)'
-			},
-			tooltip: {
-				trigger: 'axis',
-				axisPointer: {
-					type: 'cross',
-					crossStyle: {
-						color: '#999'
+			
+			var option2 = {
+				title: {
+					text: 'Integración major-disasters (G01) / pollution-stats (G08)'
+				},
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {
+						type: 'cross',
+						crossStyle: {
+							color: '#999'
+						}
+					}
+				},
+				legend: {
+					align: 'right',
+					right: "5%",
+					data:['Emisiones globales de CO2','Catástrofes ambientales']
+				},
+				xAxis: [
+				{
+					type: 'category',
+					data: xAxisDataFiltered,
+					axisPointer: {
+						type: 'shadow'
 					}
 				}
-			},
-			legend: {
-				align: 'right',
-				right: "5%",
-				data:['Emisiones globales de CO2','Catástrofes ambientales']
-			},
-			xAxis: [
-			{
-				type: 'category',
-				data: xAxisDataFiltered,
-				axisPointer: {
-					type: 'shadow'
+				],
+				yAxis: [
+				{
+					type: 'value',
+					name: 'Toneladas de CO2',
+					min: 0,
+					max: 2200,
+					interval: 220,
+					axisLabel: {
+						formatter: '{value} t'
+					}
+				},
+				{
+					type: 'value',
+					name: 'Número de catástrofes ambientales',
+					min: 1,
+					max: 11,
+					interval: 1,
+					axisLabel: {
+						formatter: '{value}'
+					}
 				}
-			}
-			],
-			yAxis: [
-			{
-				type: 'value',
-				name: 'Toneladas de CO2',
-				min: 0,
-				max: 2200,
-				interval: 220,
-				axisLabel: {
-					formatter: '{value} t'
+				],
+				series: [
+				{
+					name:'Emisiones globales de CO2',
+					type:'line',
+					areaStyle: {normal: {}},
+					data: seriesDataExt1
+				},
+				{
+					name:'Catástrofes ambientales',
+					type:'line',
+					areaStyle: {normal: {}},
+					yAxisIndex: 1,
+					data: seriesDataFiltered
 				}
-			},
-			{
-				type: 'value',
-				name: 'Número de catástrofes ambientales',
-				min: 1,
-				max: 11,
-				interval: 1,
-				axisLabel: {
-					formatter: '{value}'
-				}
-			}
-			],
-			series: [
-			{
-				name:'Emisiones globales de CO2',
-				type:'line',
-				areaStyle: {normal: {}},
-				data: seriesDataExt1
-			},
-			{
-				name:'Catástrofes ambientales',
-				type:'line',
-				areaStyle: {normal: {}},
-				yAxisIndex: 1,
-				data: seriesDataFiltered
-			}
-			]
-		};
+				]
+			};
 
-		myChart2.setOption(option2);
+			myChart2.setOption(option2);
+		})(initialData.data.slice(0), initialData.ext1.slice(0));
+
+		
 
 
 		(function generateHeatmap(ownData, extData) {
@@ -456,20 +463,8 @@ angular.module('SOS1819-app.majorDisastersApp')
 			};
 			myChart3.setOption(option3);
 		})(initialData.data.slice(0), initialData.ext2.slice(0));
-
 		
 		(function generateRadar(ownData, extData) {
-			var dataSet = anychart.data.set([
-				['GDP', 1, 0.11982978723404256, 0.6180425531914894],
-				['GDP Real Growth Rate', 0.3666666666666667, 0.5583333333333333, 0.7583333333333333],
-				['Infant Mortality', 0.06578947368421052, 0.15576923076923077, 0.24473684210526317],
-				['Life Expectancy', 0.9576093653727663, 0.8268638324091188, 0.8905730129390017],
-				['Population', 0.22638827767366515, 0.10979008847837246, 1],
-				['Area', 0.5390698290165805, 1, 0.5487479259581779],
-				['Density', 0.02995156531259858, 0.00783120233080335, 0.1299664111937944],
-				['Population Growth Rate', 0.3087248322147651, -0.12416107382550336, 0.19463087248322147]
-				]);
-
 			var yearsTaken = [];
 			var eventsTaken = [];
 			for (var i = 0; i < ownData.length; i++) {
@@ -479,42 +474,29 @@ angular.module('SOS1819-app.majorDisastersApp')
 					yearsTaken.push(ownData[i].year);
 				}
 				if (eventsTaken.length === extData.length) break;
-					
+
 			}
 
 			var ownDataSet = [];
 			for (var i = 0; i < eventsTaken.length; i++) {
 				var event = eventsTaken[i];
 				var extValues = extData[i];
-				console.log(event, extValues)
 				ownDataSet.push([event, extValues.maxTemp.average, extValues.minHumidity.average, extValues.dailyMaxWind.average]);
 			}
 
-			console.log(ownDataSet)
-			dataSet = anychart.data.set(ownDataSet);
-			    // map data for the first series, take x from the zero column and value from the first column of data set
-			    var data1 = dataSet.mapAs({'x': 0, 'value': 1});
-			    // map data for the second series, take x from the zero column and value from the second column of data set
-			    var data2 = dataSet.mapAs({'x': 0, 'value': 2});
-			    // map data for the third series, take x from the zero column and value from the third column of data set
-			    var data3 = dataSet.mapAs({'x': 0, 'value': 3});
+			var dataSet = anychart.data.set(ownDataSet);
+			var data1 = dataSet.mapAs({'x': 0, 'value': 1});
+			var data2 = dataSet.mapAs({'x': 0, 'value': 2});
+			var data3 = dataSet.mapAs({'x': 0, 'value': 3});
 
-			    // create radar chart
-			    var chart = anychart.radar();
+			var chart = anychart.radar();
 
-			    // set chart title text settings
-			    chart.title('Catástrofes naturales y condiciones atmosféricas')
-			            // set chart legend
-			            .legend(true);
+			chart.title('Catástrofes naturales y condiciones atmosféricas').legend(true);
 
-			    // set chart padding settings
-			    chart.padding().bottom(70);
+			chart.padding().bottom(70);
 
 			    // set chart yScale settings
-			    chart.yScale()
-			    .minimum(0)
-			    .maximum(70)
-			    .ticks({'interval': 10});
+			    chart.yScale().minimum(0).maximum(70).ticks({'interval': 10});
 
 			    // create chart label with description
 			    chart.label()
@@ -542,6 +524,97 @@ angular.module('SOS1819-app.majorDisastersApp')
 			    // initiate chart drawing
 			    chart.draw();
 			})(initialData.data.slice(0), initialData.ext3.norms.slice(0));	
+
+			(function generateGraph(ownData, extData) {
+				var myChart7 = echarts.init(document.getElementById('main7'));
+
+				var parentNodes = [];
+				var childNodes = [];
+
+				for (var i = 0; i < extData.length; i++) {
+					var parentNode = extData[i];
+					var firstHalf = parentNode.value.slice(0, Math.ceil(parentNode.value.length / 2));
+					var secondHalf = parentNode.value.substr( Math.ceil(parentNode.value.length / 2)).replace(' ', " \n\r")
+
+					parentNode.value = firstHalf + secondHalf;
+					parentNodes.push({
+						name: parentNode.value,
+						label: {
+							fontWeight: "bolder",
+							position: 'top',
+							color: "black"
+						},
+						itemStyle: {color: '#0f5ddb'},
+						x: i*200,
+						y: Math.random() * (200 - 0) + 0
+					});
+				}
+
+				for (var i = 0; i < ownData.length; i++) {
+					var childNode = ownData[i];
+					childNodes.push({
+						itemStyle: {color: '#36933b'},
+						name: childNode.event,
+						label: {
+							color: "black"
+						},
+						x: (i * 100) + (Math.random() * (50 - 20) + 20),
+						y: Math.random() * (300 - 100) + 300
+					});
+				}
+
+				var links = [];
+
+				for (var i = 0; i < childNodes.length; i++) {
+					links.push({
+						target: childNodes[i].name,
+						source: parentNodes[i % parentNodes.length].name
+					});
+				}
+
+				var option7 = option = {
+					title: {
+						text: 'Declaraciones de Donald Trump y su relación con catástrofes naturales',
+						subtext: 'Integración major-disasters (G01) con https://matchilling-tronald-dump-v1.p.rapidapi.com'
+					},
+					tooltip: {},
+					animationDurationUpdate: 1500,
+					animationEasingUpdate: 'quinticInOut',
+					color: ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
+					series : [
+					{
+						type: 'graph',
+						layout: 'none',
+						symbolSize: 50,
+						roam: true,
+						label: {
+							normal: {
+								show: true
+							}
+						},
+						edgeSymbol: ['circle', 'arrow'],
+						edgeSymbolSize: [4, 10],
+						edgeLabel: {
+							normal: {
+								textStyle: {
+									fontSize: 20
+								}
+							}
+						},
+						data: parentNodes.concat(childNodes),
+						links: links,
+						lineStyle: {
+							normal: {
+								opacity: 0.9,
+								width: 2,
+								curveness: 0
+							}
+						}
+					}
+					]
+				};
+				myChart7.setOption(option7);
+			})(initialData.data.slice(0, 6), initialData.ext4.slice(0));
 
 
 			$scope.count = initialData.count;
@@ -826,7 +899,6 @@ angular.module('SOS1819-app.majorDisastersApp')
 			$scope.$apply();
 		}, 1000)
 		*/
-		console.log($scope.labels, $scope.data)
 		//$scope.$apply();
 
 		$scope.updateChart = function (fields, op, data) {
