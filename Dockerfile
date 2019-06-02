@@ -3,7 +3,7 @@ FROM node:10
 WORKDIR /usr/src/app
 
 COPY *.json ./
-RUN echo '{ "allow_root": true }' > /root/.bowerrc
+RUN echo '{ "allow_root": true }' > /usr/src/app/.bowerrc
 RUN npm install
 RUN npm install -g bower
 RUN bower install --allow-root
