@@ -6,7 +6,7 @@ angular.module('SOS1819-app.majorDisastersApp', ['ngRoute', 'SOS1819-app', 'ngDi
 				reloadOnSearch: false,
 				templateUrl: '/ui/v1/major-disasters/overview.template.html',
 				resolve: {
-					initialData: function (MajorDisaster, PollutionStats, SportsCenters, WeatherStats, DonaldTrump, $location, $q) {
+					initialData: function (MajorDisaster, $location, $q) {
 						var searchObj = $location.search();
 						var filter = {
 							offset: parseInt(searchObj.offset) || 0,
@@ -22,24 +22,10 @@ angular.module('SOS1819-app.majorDisastersApp', ['ngRoute', 'SOS1819-app', 'ngDi
 							to: parseInt(searchObj.to) || null	
 						};
 						var promises = [MajorDisaster.v1.list(filter), 
-										MajorDisaster.v2.count(filter),
-										PollutionStats.list({}),
-										SportsCenters.list({}),
-										WeatherStats.list({}),
-										DonaldTrump.random(),
-										DonaldTrump.random(),
-										DonaldTrump.random()];
+										MajorDisaster.v2.count(filter)];
 						return $q.all(promises).then(function (res) {
 							return {
 								data: res[0].data, 
-								ext1: res[2].data, 
-								ext2: res[3].data, 
-								ext3: res[4].data, 
-								ext4: [
-									res[5].data, 
-									res[6].data, 
-									res[7].data
-								],
 								count: Math.ceil(res[1].data.count / filter.limit)};
 						}).catch(function (res) {
 							return {data: [], count: Math.ceil(res[1].data.count / filter.limit)};
