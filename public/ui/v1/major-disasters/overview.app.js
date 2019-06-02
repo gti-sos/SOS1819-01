@@ -69,5 +69,5 @@ angular.module('SOS1819-app.majorDisastersApp', ['ngRoute', 'SOS1819-app', 'ngDi
 						});
 					}
 				}
-			})
+			});
 	});

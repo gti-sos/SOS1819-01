@@ -1,6 +1,7 @@
 angular.module('SOS1819-app.integrations')
 
-.controller('integrationsCtrl', function ($scope, majorDisastersInitialData) {
+.controller('integrationsCtrl', function ($scope, initialData) {
+	console.log(initialData)
 	function refSort (targetData, refData) {
 	  // Create an array of indices [0, 1, 2, ...N].
 	  var indices = Object.keys(refData);
@@ -21,7 +22,7 @@ angular.module('SOS1819-app.integrations')
 	  });
 	}
 
-	function generateBarChart (ownData) {
+	function generateBarChart (containerId, ownData) {
 		var xAxisData = []; //tags
 		var seriesData = [];
 
@@ -40,7 +41,7 @@ angular.module('SOS1819-app.integrations')
 		var seriesDataSorted = refSort(seriesData, xAxisData);
 		xAxisData.sort();
 
-		var myChart = echarts.init(document.getElementById('main'));
+		var myChart = echarts.init(document.getElementById(containerId));
 		var option = {
 			title: {
 				text: 'Incidentes por año'
@@ -64,7 +65,7 @@ angular.module('SOS1819-app.integrations')
 		myChart.setOption(option);
 	}
 
-	function generateHighCharts (ownData) {
+	function generateHighCharts (containerId, ownData) {
 
 		ownData.sort(function (a, b) {
 			if ( a.death < b.death ){
@@ -82,7 +83,7 @@ angular.module('SOS1819-app.integrations')
 			return {x: e.year, y: e.inflation, z: e.death, name: e.event};
 		});
 
-		Highcharts.chart('main2', {
+		Highcharts.chart(containerId, {
 
 			chart: {
 				type: 'bubble',
@@ -148,7 +149,7 @@ angular.module('SOS1819-app.integrations')
 			});
 	}
 
-	function generateGeoCharts (ownData) {
+	function generateGeoCharts (containerId, ownData) {
 		google.charts.load('current', {
 			'packages':['geochart'],
 		        // Note: you will need to get a mapsApiKey for your project.
@@ -179,14 +180,14 @@ angular.module('SOS1819-app.integrations')
 
 			var options = {};
 
-			var chart = new google.visualization.GeoChart(document.getElementById('main3'));
+			var chart = new google.visualization.GeoChart(document.getElementById(containerId));
 
 			chart.draw(data, options);
 		}
 	}
 	
-	function generateAreaChart (ownData, extData) {
-		var myChart2 = echarts.init(document.getElementById('main4'));
+	function generateAreaChart (containerId, ownData, extData) {
+		var myChart2 = echarts.init(document.getElementById(containerId));
 		var xAxisData = []; 
 		var seriesData = [];
 		for (var i = 0; i < ownData.length; i++) {
@@ -304,8 +305,8 @@ angular.module('SOS1819-app.integrations')
 		myChart2.setOption(option2);
 	}
 
-	function generateHeatmap(ownData, extData) {
-		var myChart3 = echarts.init(document.getElementById('main5'));
+	function generateHeatmap(containerId, ownData, extData) {
+		var myChart3 = echarts.init(document.getElementById(containerId));
 		var mixedData = ownData.concat(extData);
 		var mixedYears = [];
 		var mixedEvents = [];
@@ -440,7 +441,7 @@ angular.module('SOS1819-app.integrations')
 		myChart3.setOption(option3);
 	}
 		
-	function generateRadar(ownData, extData) {
+	function generateRadar(containerId, ownData, extData) {
 		var yearsTaken = [];
 		var eventsTaken = [];
 		for (var i = 0; i < ownData.length; i++) {
@@ -496,13 +497,13 @@ angular.module('SOS1819-app.integrations')
 		chart.tooltip().format('Value: {%Value}{decimalsCount: 2}');
 
 		// set container id for the chart
-		chart.container('main6');
+		chart.container(containerId);
 		// initiate chart drawing
 		chart.draw();
 	}
 
-	function generateGraph(ownData, extData) {
-		var myChart7 = echarts.init(document.getElementById('main7'));
+	function generateGraph(containerId, ownData, extData) {
+		var myChart7 = echarts.init(document.getElementById(containerId));
 
 		var parentNodes = [];
 		var childNodes = [];
@@ -592,81 +593,29 @@ angular.module('SOS1819-app.integrations')
 		myChart7.setOption(option7);
 	}
 
+	var graph = function (fn) {
+		var slicedArgs = Array.prototype.slice.call(arguments, 1);
+		this.show = false;
+		this.generate = fn.bind(this, ...slicedArgs);
+		this.toggle = function () {
+			this.show = !this.show;
+			if (this.show) setTimeout(this.generate, 0);
+		};
+	};
+
+
 	$scope.berruimar = {
-		initialData: majorDisastersInitialData,
 		visualizations: {
-			echarts: {
-				toggle: function () {
-					this.show = !this.show;
-					if (this.show) setTimeout(this.generate, 0);
-				},
-				show: false,
-				generate: function () {
-					generateBarChart(majorDisastersInitialData.data.slice(0));
-				}
-			},
-			highcharts: {
-				toggle: function () {
-					this.show = !this.show;
-					if (this.show) setTimeout(this.generate, 0);
-				},
-				show: false,
-				generate: function () {
-					generateHighCharts((majorDisastersInitialData.data.slice(0)));
-				}
-			},
-			geocharts: {
-				toggle: function () {
-					this.show = !this.show;
-					if (this.show) setTimeout(this.generate, 0);
-				},
-				show: false,
-				generate: function () {
-					generateGeoCharts(majorDisastersInitialData.data.slice(0));
-				}
-			}
+			echarts: new graph(generateBarChart, 'main1', initialData.disasters.data),
+			highcharts: new graph(generateHighCharts, 'main2', initialData.disasters.data),
+			geocharts: new graph(generateGeoCharts, 'main3', initialData.disasters.data)
 		},
 		integrations: {
-			sos1: {
-				toggle: function () {
-					this.show = !this.show;
-					if (this.show) setTimeout(this.generate, 0);
-				},
-				show: false,
-				generate: function () {
-					generateAreaChart(majorDisastersInitialData.data.slice(0), majorDisastersInitialData.ext1.slice(0));
-				}
-			},
-			sos2: {
-				toggle: function () {
-					this.show = !this.show;
-					if (this.show) setTimeout(this.generate, 0);
-				},
-				show: false,
-				generate: function () {
-					generateHeatmap(majorDisastersInitialData.data.slice(0), majorDisastersInitialData.ext2.slice(0));
-				}
-			},
-			ext1: {
-				toggle: function () {
-					this.show = !this.show;
-					if (this.show) setTimeout(this.generate, 0);
-				},
-				show: false,
-				generate: function () {
-					generateRadar(majorDisastersInitialData.data.slice(0), majorDisastersInitialData.ext3.norms.slice(0));
-				}
-			},
-			ext2: {
-				toggle: function () {
-					this.show = !this.show;
-					if (this.show) setTimeout(this.generate, 0);
-				},
-				show: false,
-				generate: function () {
-					generateGraph(majorDisastersInitialData.data.slice(0, 6), majorDisastersInitialData.ext4.slice(0));
-				}
-			}
+			ext1: new graph(generateAreaChart, 'main4', initialData.disasters.data, initialData.disasters.ext1),
+			ext2: new graph(generateHeatmap, 'main5', initialData.disasters.data, initialData.disasters.ext2),
+			ext3: new graph(generateRadar, 'main6', initialData.disasters.data, initialData.disasters.ext3.norms),
+			ext4: new graph(generateGraph, 'main7', initialData.disasters.data.slice(0, 8), initialData.disasters.ext4),
 		}
 	};
+	
 });
