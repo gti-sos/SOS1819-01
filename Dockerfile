@@ -3,7 +3,7 @@ FROM node:10
 WORKDIR /usr/src/app
 
 COPY *.json ./
-RUN npm install
+RUN npm install --unsafe-perm
 COPY . .
 EXPOSE 8080
 CMD ["npm", "start"]
