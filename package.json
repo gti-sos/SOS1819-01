@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "pretest": "killall phantomjs; ./tests/runPhantomJS.sh",
-    "postinstall": "bower cache clean && bower install",
+    "postinstall": "bower cache clean --allow-root && bower install --allow-root",
     "test": "npm run test-testing-of-nuclear-bombs; npm run test-hurricanes; npm run test-major-disasters; protractor ./tests/config.js",
     "test-testing-of-nuclear-bombs": "newman run https://www.getpostman.com/collections/a4e554c52652db1ae87e",
     "test-major-disasters": "newman run https://www.getpostman.com/collections/e932bf9cc89cbcf15301",
