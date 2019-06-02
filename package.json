@@ -1,23 +1,20 @@
 {
-  "name": "sos1819-01",
+  "name": "SOS1819-01",
   "version": "3.0.1",
   "description": "Deaths related to catastrophes in the recent years",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "pretest": "killall phantomjs; ./tests/runPhantomJS.sh",
-    "postinstall": "bower cache clean --allow-root && bower install --allow-root",
+    //"postinstall": "bower cache clean --allow-root && bower install --allow-root",
     "test": "npm run test-testing-of-nuclear-bombs; npm run test-hurricanes; npm run test-major-disasters; protractor ./tests/config.js",
     "test-testing-of-nuclear-bombs": "newman run https://www.getpostman.com/collections/a4e554c52652db1ae87e",
     "test-major-disasters": "newman run https://www.getpostman.com/collections/e932bf9cc89cbcf15301",
     "test-hurricanes": "newman run https://www.getpostman.com/collections/5619caf6300fb705ece8",
     "posttest": "killall phantomjs"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gti-sos/SOS1819-01.git"
-  },
-  "author": "",
+  "repository": "git+https://github.com/gti-sos/SOS1819-01.git",
+  "author": "berruimar <47628541+berruimar@users.noreply.github.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/gti-sos/SOS1819-01/issues"
@@ -29,7 +26,6 @@
   "dependencies": {
     "async": "^2.6.2",
     "body-parser": "^1.18.3",
-    "bower": "^1.8.8",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
