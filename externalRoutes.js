@@ -109,31 +109,4 @@ get('/youth-unemployment-stats', function (req, res) {
 	});
 });
 
-	/*
-
-.get('/donald-trump', function (req, res) {
-	var quoteOpt = {
-		uri: 'https://matchilling-tronald-dump-v1.p.rapidapi.com/random/quote',
-		method: 'GET',
-		json: true,
-		headers: {
-			'X-RapidAPI-Key': '749296e16emsh19b71465c3377a3p120f28jsn58424fc8ae24',
-			"X-RapidAPI-Host": 'matchilling-tronald-dump-v1.p.rapidapi.com'
-		}
-	};
-	req.pipe(request(quoteOpt)).pipe(res);
-	var quoteIds = [
-		requestP(quoteOpt),
-		requestP(quoteOpt),
-		requestP(quoteOpt),
-		requestP(quoteOpt),
-		requestP(quoteOpt)
-	];
-
-	Promise.all(quoteIds).then(function (responses) {
-		console.log(responses);
-		res.pipe(responses);
-	});
-});
-*/
 module.exports = router;

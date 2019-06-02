@@ -1,6 +1,9 @@
 angular.module('SOS1819-app.integrations')
 
 .controller('integrationsCtrl', function ($scope, initialData) {
+	$scope.apiName = '';
+	
+
 	function refSort (targetData, refData) {
 	  // Create an array of indices [0, 1, 2, ...N].
 	  var indices = Object.keys(refData);
@@ -603,7 +606,8 @@ angular.module('SOS1819-app.integrations')
 	};
 
 
-	$scope.berruimar = {
+	$scope.disasters = {
+		show: true,
 		visualizations: {
 			echarts: new graph(generateBarChart, 'main1', initialData.disasters.data),
 			highcharts: new graph(generateHighCharts, 'main2', initialData.disasters.data),

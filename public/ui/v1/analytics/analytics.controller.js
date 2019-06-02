@@ -2,7 +2,7 @@ angular.module('SOS1819-app.analytics')
 
 .controller('analyticsCtrl', function ($scope, initialData) {
 	console.log(initialData);
-
+	
 	var disastersSeries = initialData.disasters.data.map(function (e, i) {
 		return [i, e.inflation];
 	});
@@ -12,7 +12,7 @@ angular.module('SOS1819-app.analytics')
 	var hurricanesSeries = initialData.hurricanes.data.map(function (e, i) {
 		return [i, e.damagesuntil2008];
 	});
-	
+
 	var chart = new EJSC.Chart("main", {
 	    show_legend: true,
 	  });
