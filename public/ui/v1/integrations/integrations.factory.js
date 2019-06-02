@@ -4,7 +4,6 @@ angular.module('SOS1819-app.integrations')
 	return {
 		__apiUrl: '/api/v1/hurricanes',
 		get: function (config) {
-			console.log(this)
 			return $http.get(this.__apiUrl, {params: config});
 		}
 	};
