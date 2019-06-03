@@ -46,6 +46,9 @@ app.controller("juan-fe-controller", function ($scope, $http, $q) {
     $scope.url = "/api/v1/hurricanes";
     $scope.url2 = "/api/v2/hurricanes";
 
+    var countryStats = [];
+    var dataExt1 = [];
+
     $scope.pagination = {
         offset: 0,
         limit: 10
@@ -78,10 +81,14 @@ app.controller("juan-fe-controller", function ($scope, $http, $q) {
         var obj = JSON.parse(JSON.stringify($scope.filter));
         //var search = Object.assign(obj, $scope.pagination);
         var search = angular.merge(obj, $scope.pagination);
-        $q.all([$http.get($scope.url,{params:search}), $http.get($scope.url2 + '/count',{params:search})]).then(function(responses){
+        $q.all([$http.get($scope.url,{params:search}), $http.get($scope.url2 + '/count',{params:search}), $http.get($scope.url),$http.get("/proxy/country-stats")]).then(function(responses){
             $scope.hurricanes = responses[0].data;
+            $scope.hurricanes2 = responses[2].data;
+            countryStats = responses[3].data;
             cuentadanos();
             fium();
+            mapa();
+            cstats();
             $scope.count = Math.ceil(responses[1].data.count / $scope.pagination.limit);
             if (cb) cb();
         }).catch(function(response){
@@ -215,7 +222,7 @@ app.controller("juan-fe-controller", function ($scope, $http, $q) {
         v3=0;
         v4=0;
         
-        $scope.hurricanes.forEach(function(e){
+        $scope.hurricanes2.forEach(function(e){
             if(parseInt(e.damagesuntil2008)<25)
                 v1++;
             else if(parseInt(e.damagesuntil2008)<50)
@@ -230,7 +237,19 @@ app.controller("juan-fe-controller", function ($scope, $http, $q) {
      var chart = new EJSC.Chart("myChart9a", {show_legend: true, title: 'Damages-until-2008'} );
     
  //   cuentadanos();
+    var data2 = $scope.hurricanes2.map(function (e) {
+        return [e.damagesuntil2008, e.name];
+    })
     
+    chart.addSeries(new EJSC.DoughnutSeries(
+            new EJSC.ArrayDataHandler(data2), {  
+                opacity: 30, //default: 50
+                doughnutOffset: .2, //default: .5
+                position: "topRight", //default: "center"
+                height: "50%", //default: "100%"
+                width: "50%" //default: "100%"
+            }
+        ) );
         chart.addSeries(new EJSC.DoughnutSeries(
             new EJSC.ArrayDataHandler( [
                 [v1,"0-25 Millones"], [v2,"26-50 Millones"], [v3,"51-75 Millones"],
@@ -238,9 +257,9 @@ app.controller("juan-fe-controller", function ($scope, $http, $q) {
             ] ), {  
                 opacity: 80, //default: 50
                 doughnutOffset: .5, //default: .5
-                position: "center", //default: "center"
-                height: "100%", //default: "100%"
-                width: "100%" //default: "100%"
+                position: "bottomLeft", //default: "center"
+                height: "70%", //default: "100%"
+                width: "70%" //default: "100%"
             }            
         ) );
     }
@@ -254,10 +273,10 @@ app.controller("juan-fe-controller", function ($scope, $http, $q) {
             v= v +parseInt(e.speed);
             i++;
         });
-        console.log("speed="+v);
+      //  console.log("speed="+v);
         v=v/i;
-        console.log("i="+i);
-        console.log("medium speed="+v);
+    //    console.log("i="+i);
+     //   console.log("medium speed="+v);
         i=0;
         
         Highcharts.chart('fium', {
@@ -360,14 +379,14 @@ function (chart) {
     if (!chart.renderer.forExport) {
         setInterval(function () {
             
-            console.log("Value of o = ", o)    
+            //console.log("Value of o = ", o)    
             if(o==0){
             var point = chart.series[0].points[0],
                 newVal,
                 inc = -5;
 
             newVal = point.y + inc;
-            console.log("entra1");
+           // console.log("entra1");
             point.update(newVal);
             
             o++;    
@@ -378,7 +397,7 @@ function (chart) {
 
             newVal = point.y + inc;
             
-            console.log("entra2"+o);
+           // console.log("entra2"+o);
             point.update(newVal);
             
             o++;
@@ -390,7 +409,7 @@ function (chart) {
             newVal = point.y + inc;
 
             point.update(newVal);
-            console.log("entra3"+o);
+         //   console.log("entra3"+o);
             o++;
             }else{
                 var point = chart.series[0].points[0],
@@ -410,13 +429,174 @@ function (chart) {
 );
     }
 
+    function mapa(){
+        
+        
+        google.charts.load('current', {
+        'packages':['geochart'],
+        // Note: you will need to get a mapsApiKey for your project.
+        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
+
+      function drawRegionsMap() {
+        var hur={};
+        var auxdat2={};
+        var aux=[];
+        var dataMapa=[['Country', 'Damages','Hurricanes']];
+        
+        $scope.hurricanes.forEach(function(e){
+            var country = e.country;
+            var exist = auxdat2[country];
+            e.damagesuntil2008 = parseFloat(e.damagesuntil2008);
+            
+            if (exist) {
+           // if(aux.includes(e.Country)){
+                //auxdat2[country].damages += e.damagesuntil2008;
+                //auxdat2[country] = {damages: e.damagesuntil2008, hurricanes: ""}
+                auxdat2[country].damages +=e.damagesuntil2008;
+                auxdat2[country].hurricanes += 1//e.name + "\n\r";
+                
+            }
+            else {
+                auxdat2[country] = {damages: e.damagesuntil2008, hurricanes: 2}
+                //auxdat2[country] = e.damagesuntil2008;
+                
+                }
+        });
+        
+        for (var key in auxdat2) {
+                dataMapa.push([key, auxdat2[key].damages, auxdat2[key].hurricanes]);
+            }
+        console.log(dataMapa);
+        var data = google.visualization.arrayToDataTable(dataMapa);
+        console.log(data);
+        var options = {};
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        chart.draw(data, options);
+      }
+    }
+    
+    function cstats(){
+        console.log(echarts)
+        //app.title = 'POP VS DMG';
+    //    var data2 
+    /*
+        var data0=$scope.hurricanes.map(function(e, i){
+            return [e.speed,e.damagesuntil2008,countryStats[i].population,e.country,2017];
+        });*/
+       // var dat=countryStats{}
+var myChart2 = echarts.init(document.getElementById("supernenaazul"));
+console.log(myChart2)
+var data = [
+    [[28604,77,17096869,'Australia',1990],[31163,77.4,27662440,'Canada',1990],[1516,68,1154605773,'China',1990],[13670,74.7,10582082,'Cuba',1990],[28599,75,4986705,'Finland',1990],[29476,77.1,56943299,'France',1990],[31476,75.4,78958237,'Germany',1990],[28666,78.1,254830,'Iceland',1990],[1777,57.7,870601776,'India',1990],[29550,79.1,122249285,'Japan',1990],[2076,67.9,20194354,'North Korea',1990],[12087,72,42972254,'South Korea',1990],[24021,75.4,3397534,'New Zealand',1990],[43296,76.8,4240375,'Norway',1990],[10088,70.8,38195258,'Poland',1990],[19349,69.6,147568552,'Russia',1990],[10670,67.3,53994605,'Turkey',1990],[26424,75.7,57110117,'United Kingdom',1990],[37062,75.4,252847810,'United States',1990]],
+    [[44056,81.8,23968973,'Australia',2015],[43294,81.7,35939927,'Canada',2015],[13334,76.9,1376048943,'China',2015],[21291,78.5,11389562,'Cuba',2015],[38923,80.8,5503457,'Finland',2015],[37599,81.9,64395345,'France',2015],[44053,81.1,80688545,'Germany',2015],[42182,82.8,329425,'Iceland',2015],[5903,66.8,1311050527,'India',2015],[36162,83.5,126573481,'Japan',2015],[1390,71.4,25155317,'North Korea',2015],[34644,80.7,50293439,'South Korea',2015],[34186,80.6,4528526,'New Zealand',2015],[64304,81.6,5210967,'Norway',2015],[24787,77.3,38611794,'Poland',2015],[23038,73.13,143456918,'Russia',2015],[19360,76.5,78665830,'Turkey',2015],[38225,81.4,64715810,'United Kingdom',2015],[53354,79.1,321773631,'United States',2015]]
+];
+
+var option = {
+    backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
+        offset: 0,
+        color: '#f7f8fa'
+    }, {
+        offset: 1,
+        color: '#cdd0d5'
+    }]),
+    title: {
+        text: '1990 与 2015 年各国家人均寿命与 GDP'
+    },
+    legend: {
+        right: 10,
+        data: ['1990', '2015']
+    },
+    xAxis: {
+        splitLine: {
+            lineStyle: {
+                type: 'dashed'
+            }
+        }
+    },
+    yAxis: {
+        splitLine: {
+            lineStyle: {
+                type: 'dashed'
+            }
+        },
+        scale: true
+    },
+    series: [{
+        name: '1990',
+        data: data[0],
+        type: 'scatter',
+        symbolSize: function (data) {
+            return Math.sqrt(data[2]) / 5e2;
+        },
+        label: {
+            emphasis: {
+                show: true,
+                formatter: function (param) {
+                    return param.data[3];
+                },
+                position: 'top'
+            }
+        },
+        itemStyle: {
+            normal: {
+                shadowBlur: 10,
+                shadowColor: 'rgba(120, 36, 50, 0.5)',
+                shadowOffsetY: 5,
+                color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                    offset: 0,
+                    color: 'rgb(251, 118, 123)'
+                }, {
+                    offset: 1,
+                    color: 'rgb(204, 46, 72)'
+                }])
+            }
+        }
+    }, {
+        name: '2015',
+        data: data[1],
+        type: 'scatter',
+        symbolSize: function (data) {
+            return Math.sqrt(data[2]) / 5e2;
+        },
+        label: {
+            emphasis: {
+                show: true,
+                formatter: function (param) {
+                    return param.data[3];
+                },
+                position: 'top'
+            }
+        },
+        itemStyle: {
+            normal: {
+                shadowBlur: 10,
+                shadowColor: 'rgba(25, 100, 150, 0.5)',
+                shadowOffsetY: 5,
+                color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                    offset: 0,
+                    color: 'rgb(129, 227, 238)'
+                }, {
+                    offset: 1,
+                    color: 'rgb(25, 183, 207)'
+                }])
+            }
+        }
+    }]
+};
+myChart2.setOption(option);
+    };
     
 })
 
 app.controller("juan-fe-edit-controller" ,function ($scope, $http, $q, dataToEdit,$location){
     
     
-    console.log(dataToEdit);
+   // console.log(dataToEdit);
     $scope.body = {
         name: dataToEdit.name,
         year: dataToEdit.year,

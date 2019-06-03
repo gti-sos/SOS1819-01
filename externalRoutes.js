@@ -37,6 +37,12 @@ get('/youth-unemployment-stats', function (req, res) {
 .get('/sports-centers', function (req, res) {
 	req.pipe(request('https://sos1819-15.herokuapp.com/api/v1/sports-centers')).pipe(res);
 })
+.get('/country-stats', function (req, res) {
+	req.pipe(request('https://sos1819-03.herokuapp.com/api/v1/country-stats')).pipe(res);
+})
+.get('/computers-attacks-stats', function (req, res) {
+	req.pipe(request('https://sos1819-03.herokuapp.com/api/v1/computers-attacks-stats')).pipe(res);
+})
 
 .get('/awhere/weather', function (req,res) {
 	var randomToken = aweatherCredentials[Math.floor(Math.random() * aweatherCredentials.length)];

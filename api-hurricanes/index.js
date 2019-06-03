@@ -488,6 +488,15 @@ app.put("/api/v1/secure/hurricanes/:name", (req, res) => {
         res.sendStatus((err) ? 404 : 200);
     })
 
+var countryStatsAPI='/api';
+var apiServerHost = 'http://echo.httpkit.com';
+
+var app = express();  
+app.use(paths, function(req, res) {
+  var url = apiServerHost + req.baseUrl + req.url;
+  console.log('piped: '+req.baseUrl + req.url);
+  req.pipe(request(url)).pipe(res);
+});
 
 });
 }
