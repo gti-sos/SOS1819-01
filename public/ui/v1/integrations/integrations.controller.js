@@ -4,6 +4,8 @@ angular.module('SOS1819-app.integrations')
 	$scope.apiName = '';
 	
 	console.log(initialData);
+
+
 	function getRandomColor() {
 		var letters = '0123456789ABCDEF';
 		var color = '#';
@@ -218,11 +220,11 @@ angular.module('SOS1819-app.integrations')
 			Highcharts.chart(containerId, {
 
 				title: {
-					text: 'Solar Employment Growth by Sector, 2010-2016'
+					text: 'Relación polución - inflación'
 				},
 
 				subtitle: {
-					text: 'Source: thesolarfoundation.com'
+					text: 'Integración major-disasters / pollution-stats'
 				},
 
 				yAxis: {
@@ -549,142 +551,142 @@ angular.module('SOS1819-app.integrations')
 			chart.padding().bottom(70);
 
 		// set chart yScale settings
-			chart.yScale().minimum(0).maximum(70).ticks({'interval': 10});
+		chart.yScale().minimum(0).maximum(70).ticks({'interval': 10});
 
 		// create chart label with description
-			chart.label()
-			.text('Integración major-disasters (G01) con https://api.awhere.com usando OAuth')
-			.anchor('center-bottom')
-			.position('center-bottom')
-			.fontWeight('normal')
-			.fontSize(11)
-			.fontFamily('tahoma')
-			.fontColor('rgb(35,35,35)')
-			.offsetY(15);
-	
+		chart.label()
+		.text('Integración major-disasters (G01) con https://api.awhere.com usando OAuth')
+		.anchor('center-bottom')
+		.position('center-bottom')
+		.fontWeight('normal')
+		.fontSize(11)
+		.fontFamily('tahoma')
+		.fontColor('rgb(35,35,35)')
+		.offsetY(15);
+
 			// create first series with mapped data
 			chart.line(data1).name('Temperatura').markers(true);
 			// create second series with mapped data
 			chart.line(data2).name('Humedad').markers(true);
 			// create third series with mapped data
 			chart.line(data3).name('Velocidad del viento').markers(true);
-	
+
 			// set tooltip format
 			chart.tooltip().format('Value: {%Value}{decimalsCount: 2}');
-	
+
 			// set container id for the chart
 			chart.container(containerId);
 			// initiate chart drawing
 			chart.draw();
-	}
-
-	function generateGraph(containerId, ownData, extData) {
-		var myChart7 = echarts.init(document.getElementById(containerId));
-
-		var parentNodes = [];
-		var childNodes = [];
-
-		for (var i = 0; i < extData.length; i++) {
-			var parentNode = extData[i];
-			var firstHalf = parentNode.value.slice(0, Math.ceil(parentNode.value.length / 2));
-			var secondHalf = parentNode.value.substr( Math.ceil(parentNode.value.length / 2)).replace(' ', " \n\r")
-
-			parentNode.value = firstHalf + secondHalf;
-			parentNodes.push({
-				name: parentNode.value,
-				label: {
-					fontWeight: "bolder",
-					position: 'top',
-					color: "black"
-				},
-				itemStyle: {color: '#0f5ddb'},
-				x: i*200,
-				y: Math.random() * (200 - 0) + 0
-			});
 		}
 
-		for (var i = 0; i < ownData.length; i++) {
-			var childNode = ownData[i];
-			childNodes.push({
-				itemStyle: {color: '#36933b'},
-				name: childNode.event,
-				label: {
-					color: "black"
+		function generateGraph(containerId, ownData, extData) {
+			var myChart7 = echarts.init(document.getElementById(containerId));
+
+			var parentNodes = [];
+			var childNodes = [];
+
+			for (var i = 0; i < extData.length; i++) {
+				var parentNode = extData[i];
+				var firstHalf = parentNode.value.slice(0, Math.ceil(parentNode.value.length / 2));
+				var secondHalf = parentNode.value.substr( Math.ceil(parentNode.value.length / 2)).replace(' ', " \n\r")
+
+				parentNode.value = firstHalf + secondHalf;
+				parentNodes.push({
+					name: parentNode.value,
+					label: {
+						fontWeight: "bolder",
+						position: 'top',
+						color: "black"
+					},
+					itemStyle: {color: '#0f5ddb'},
+					x: i*200,
+					y: Math.random() * (200 - 0) + 0
+				});
+			}
+
+			for (var i = 0; i < ownData.length; i++) {
+				var childNode = ownData[i];
+				childNodes.push({
+					itemStyle: {color: '#36933b'},
+					name: childNode.event,
+					label: {
+						color: "black"
+					},
+					x: (i * 100) + (Math.random() * (50 - 20) + 20),
+					y: Math.random() * (300 - 100) + 300
+				});
+			}
+
+			var links = [];
+
+			for (var i = 0; i < childNodes.length; i++) {
+				links.push({
+					target: childNodes[i].name,
+					source: parentNodes[i % parentNodes.length].name
+				});
+			}
+
+			var option7 = {
+				title: {
+					text: 'Declaraciones de Donald Trump y su relación con catástrofes naturales',
+					subtext: 'Integración major-disasters (G01) con https://matchilling-tronald-dump-v1.p.rapidapi.com'
 				},
-				x: (i * 100) + (Math.random() * (50 - 20) + 20),
-				y: Math.random() * (300 - 100) + 300
-			});
-		}
-
-		var links = [];
-
-		for (var i = 0; i < childNodes.length; i++) {
-			links.push({
-				target: childNodes[i].name,
-				source: parentNodes[i % parentNodes.length].name
-			});
-		}
-
-		var option7 = {
-			title: {
-				text: 'Declaraciones de Donald Trump y su relación con catástrofes naturales',
-				subtext: 'Integración major-disasters (G01) con https://matchilling-tronald-dump-v1.p.rapidapi.com'
-			},
-			tooltip: {},
-			animationDurationUpdate: 1500,
-			animationEasingUpdate: 'quinticInOut',
-			color: ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
-			series : [
-			{
-				type: 'graph',
-				layout: 'none',
-				symbolSize: 50,
-				roam: true,
-				label: {
-					normal: {
-						show: true
-					}
-				},
-				edgeSymbol: ['circle', 'arrow'],
-				edgeSymbolSize: [4, 10],
-				edgeLabel: {
-					normal: {
-						textStyle: {
-							fontSize: 20
+				tooltip: {},
+				animationDurationUpdate: 1500,
+				animationEasingUpdate: 'quinticInOut',
+				color: ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
+				series : [
+				{
+					type: 'graph',
+					layout: 'none',
+					symbolSize: 50,
+					roam: true,
+					label: {
+						normal: {
+							show: true
+						}
+					},
+					edgeSymbol: ['circle', 'arrow'],
+					edgeSymbolSize: [4, 10],
+					edgeLabel: {
+						normal: {
+							textStyle: {
+								fontSize: 20
+							}
+						}
+					},
+					data: parentNodes.concat(childNodes),
+					links: links,
+					lineStyle: {
+						normal: {
+							opacity: 0.9,
+							width: 2,
+							curveness: 0
 						}
 					}
-				},
-				data: parentNodes.concat(childNodes),
-				links: links,
-				lineStyle: {
-					normal: {
-						opacity: 0.9,
-						width: 2,
-						curveness: 0
-					}
 				}
-			}
-			]
-		};
-		myChart7.setOption(option7);
-	}
+				]
+			};
+			myChart7.setOption(option7);
+		}
 
-	function generateScatter(containerId, ownData, extData) {
-		var ctx = document.getElementById(containerId).getContext('2d');
-		
-		var series2 = [];
-		var k = 0;
-		for (var key in extData) {
-			if (k > 8)
-				break;
-			k++;
-			var obj = {
-				label: key,
-				borderColor: getRandomColor(),
-				data: []
-			}
-			for (var i = 3; i >= 0; i--) {
-				var item = ownData[Math.floor(Math.random()*ownData.length)];
+		function generateScatter(containerId, ownData, extData) {
+			var ctx = document.getElementById(containerId).getContext('2d');
+
+			var series2 = [];
+			var k = 0;
+			for (var key in extData) {
+				if (k > 8)
+					break;
+				k++;
+				var obj = {
+					label: key,
+					borderColor: getRandomColor(),
+					data: []
+				}
+				for (var i = 3; i >= 0; i--) {
+					var item = ownData[Math.floor(Math.random()*ownData.length)];
 				//obj.data.push({x: 5, y: 1})
 				obj.data.push({x: parseInt(item.inflation), y: parseInt(item['no-inflation'])});
 			}
@@ -708,84 +710,17 @@ angular.module('SOS1819-app.integrations')
 	function generateWordTree(containerId, ownData, extData) {
 		var treeData = [{parent: -1, name: 'TEst', id: 0}]; //parent: (i) % 15
 		var treeExtData = extData.map(function (e, i) {
-			return {id: i + 1, name: e.advice, fontColor: getRandomColor(), fontSize: 12, parent: 0};
+			return {id: i + 1, value: e.advice, fontSize: 12, parent: 0};
 		});
-		
+		treeData = treeData.concat(treeExtData);
 		var treeLeafs = ownData.map(function (e, i) {
 			var item = treeData[Math.floor(Math.random() * treeData.length)];
-			return {id: treeExtData.length + i, parent: item.id, name: e.event, fontColor: getRandomColor(), fontSize: 10};
+			return {id: treeExtData.length + i, parent: item.id, value: e.event, fontColor: getRandomColor(), fontSize: 10};
 		});
-		//treeExtData = treeExtData.concat(treeLeafs);
-		treeData = treeData.concat(treeExtData);
-		//treeData = treeData.concat(treeLeafs);
-		console.table(treeData);
-
-		//console.table(treeLeafs);
-		/*treeData = [
-            {"id": 0, "value": "AnyChart", "parent": -1},
-            {"id": 1, "value": "is", "parent": 0, "fontSize": 12, "fontWeight": "bold"},
-            {"id": 2, "value": "was", "parent": 0, "fontSize": 12, "fontWeight": "bold"},
-            {"id": 3, "value": "began", "parent": 0, "fontSize": 12, "fontWeight": "bold"},
-            {"id": 4, "value": "said", "parent": 0, "fontSize": 12, "fontWeight": "bold"},
-            {"id": 5, "value": "supports", "parent": 0, "fontSize": 12, "fontWeight": "bold"},
-            {"id": 6, "value": "a lightweight and robust JavaScript charting library", "parent": 1},
-            {"id": 7, "value": "a US based graphics software development company", "parent": 1 },
-            {"id": 8, "value": "reported to have more than 70% of Fortune 1000 companies using its solutions, including", "parent": 1, "fontSize": 10},
-            {"id": 9, "value": "Oracle (Oracle APEX)", "parent": 8, "fontColor": "#CA1E23", "fontSize": 12},
-            {"id": 10, "value": "Microsoft", "parent": 8, "fontColor": "#6A6A6A", "fontSize": 12},
-            {"id": 11, "value": "Ford", "parent": 8, "fontColor": "#405B91", "fontSize": 12},
-            {"id": 12, "value": "Volkswagen", "parent": 8, "fontColor": "#3266BC", "fontSize": 12},
-            {"id": 13, "value": "AT&T", "parent": 8, "fontColor": "#00A8E0", "fontSize": 12},
-            {"id": 14, "value": "Samsung", "parent": 8, "fontColor": "#0B2188", "fontSize": 12},
-            {"id": 15, "value": "Nokia", "parent": 8, "fontColor": "#1C4598", "fontSize": 12},
-            {"id": 16, "value": "BP", "parent": 8, "fontColor": "#00A02A", "fontSize": 12},
-            {"id": 17, "value": "Bosch", "parent": 8, "fontColor": "#C62628", "fontSize": 12},
-            {"id": 18, "value": "Orange", "parent": 8, "fontColor": "#FF6600", "fontSize": 12},
-            {"id": 19, "value": "Exxon Mobil", "parent": 8, "fontColor": "#EC0819", "fontSize": 12},
-            {"id": 20, "value": "UBS", "parent": 8, "fontColor": "#FD3B35", "fontSize": 12},
-            {"id": 21, "value": "Citigroup", "parent": 8, "fontColor": "#003B70", "fontSize": 12},
-            {"id": 22, "value": "Merck Group", "parent": 8, "fontColor": "#1B54AC", "fontSize": 12},
-            {"id": 23, "value": "McDonald's", "parent": 8, "fontColor": "#E51A23", "fontSize": 12},
-            {"id": 24, "value": "3M", "parent": 8, "fontColor": "#EE1A2D", "fontSize": 12},
-            {"id": 25, "value": "JPMorgan", "parent": 8, "fontColor": "#626262", "fontSize": 12},
-            {"id": 26, "value": "Lockheed Martin", "parent": 8, "fontColor": "#7D7E80", "fontSize": 12},
-            {"id": 27, "value": "Novo Nordisk", "parent": 8, "fontColor": "#295B9A", "fontSize": 12},
-            {"id": 28, "value": "Tencent", "parent": 8, "fontColor": "#2952AE", "fontSize": 12},
-            {"id": 29, "value": "Bank of China", "parent": 8, "fontColor": "#B00731", "fontSize": 12},
-            {"id": 30, "value": "Ericsson", "parent": 8, "fontColor": "#042559", "fontSize": 12},
-            {"id": 31, "value": "Swisscom", "parent": 8, "fontColor": "#24376E", "fontSize": 12},
-            {"id": 32, "value": "Juniper", "parent": 8, "fontColor": "#000000", "fontSize": 12},
-            {"id": 33, "value": "MTV", "parent": 8, "fontColor": "#BA1A20", "fontSize": 12},
-            {"id": 34, "value": "General Electric", "parent": 8, "fontColor": "#023578", "fontSize": 12},
-            {"id": 35, "value": "NXP", "parent": 8, "fontColor": "#B9D02D", "fontSize": 12},
-            {"id": 36, "value": "Rolex", "parent": 8, "fontColor": "#015D37", "fontSize": 12},
-            {"id": 37, "value": "Caltrans", "parent": 8, "fontColor": "#3B96D1", "fontSize": 12},
-            {"id": 38, "value": "Reuters", "parent": 8, "fontColor": "#F77B00", "fontSize": 12},
-            {"id": 39, "value": "and others", "fontColor": "#333", "parent": 8},
-            {"id": 40, "value": "bar", "parent": 5},
-            {"id": 41, "value": "line", "parent": 5},
-            {"id": 42, "value": "area", "parent": 5},
-            {"id": 43, "value": "scatter", "parent": 5},
-            {"id": 44, "value": "waterfall", "parent": 5},
-            {"id": 45, "value": "spline", "parent": 5},
-            {"id": 46, "value": "funnel", "parent": 5},
-            {"id": 47, "value": "bubble", "parent": 5},
-            {"id": 48, "value": "polar", "parent": 5},
-            {"id": 49, "value": "column", "parent": 5},
-            {"id": 50, "value": "columnrange", "parent": 5},
-            {"id": 51, "value": "pie", "parent": 5},
-            {"id": 52, "value": "box plot", "parent": 5},
-            {"id": 53, "value": "angular gauge", "parent": 5},
-            {"id": 54, "value": "areasplinerange", "parent": 5},
-            {"id": 55, "value": "and other types of charts", "parent": 5},
-            {"id": 56, "value": "founded in 2003.", "parent": 2},
-            {"id": 57, "value": "to shift to HTML5 and in 2011 added an HTML5 (SVG based) version of its components.", "parent": 3},
-            {"id": 58, "value": " they were \"leaving behind Flash and moving to a more modern and promising technology, JavaScript HTML5\"", "parent": 4}
-            ];*/
+		treeData = treeData.concat(treeLeafs)
+		
 		anychart.data.set(treeData);
-		// The data used in this sample can be obtained from the CDN
-		// https://cdn.anychart.com/samples-data/word-tree/anychart-word-tree/data.json
-		    // create data tree
+
 		var tableData = anychart.data.tree(treeData, 'as-table');
 
 		// create word-tree charts
@@ -814,70 +749,96 @@ angular.module('SOS1819-app.integrations')
 		chart.draw();
 	}
 
+	function generatePie (containerId, extData) {
+		var ctx = document.getElementById(containerId).getContext('2d');
+		var labels = [];
+		var backgroundColor = [];
+		var data = extData.map(function (e, i) {
+			labels.push(e.city);
+			backgroundColor.push(getRandomColor());
+			return e.count;
+		});
+
+		var config = {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: data,
+					backgroundColor: backgroundColor,
+					label: 'Dataset 1'
+				}],
+				labels: labels
+			},
+			options: {
+				responsive: true
+			}
+		};
+		window.myPie = new Chart(ctx, config);
+	}
+
 
 	///GRAFICAS JUAN
 	function cuentadanos(id, datos) {
-	    var v1 = 0;
-	    var v2 = 0;
-	    var v3 = 0;
-	    var v4 = 0;
+		var v1 = 0;
+		var v2 = 0;
+		var v3 = 0;
+		var v4 = 0;
 
-	    datos.forEach(function(e) {
-	        if (parseInt(e.damagesuntil2008) < 25)
-	            v1++;
-	        else if (parseInt(e.damagesuntil2008) < 50)
-	            v2++;
-	        else if (parseInt(e.damagesuntil2008) < 75)
-	            v3++;
-	        else if (parseInt(e.damagesuntil2008) < 100)
-	            v4++;
-	    });
-	    console.log("v1=" + v1);
+		datos.forEach(function(e) {
+			if (parseInt(e.damagesuntil2008) < 25)
+				v1++;
+			else if (parseInt(e.damagesuntil2008) < 50)
+				v2++;
+			else if (parseInt(e.damagesuntil2008) < 75)
+				v3++;
+			else if (parseInt(e.damagesuntil2008) < 100)
+				v4++;
+		});
 
-	    var chart = new EJSC.Chart(id, {
-	        show_legend: true,
-	        title: 'Damages-until-2008'
-	    });
+		var chart = new EJSC.Chart(id, {
+			show_legend: true,
+			title: 'Damages-until-2008'
+		});
 
 	    //   cuentadanos();
 	    var data2 = datos.map(function(e) {
-	        return [e.damagesuntil2008, e.name];
-	    })
+	    	return [e.damagesuntil2008, e.name];
+	    });
 
 	    chart.addSeries(new EJSC.DoughnutSeries(
-	        new EJSC.ArrayDataHandler(data2), {
+	    	new EJSC.ArrayDataHandler(data2), {
 	            opacity: 30, //default: 50
 	            doughnutOffset: .2, //default: .5
 	            position: "topRight", //default: "center"
 	            height: "50%", //default: "100%"
 	            width: "50%" //default: "100%"
 	        }
-	    ));
+	        ));
 	    chart.addSeries(new EJSC.DoughnutSeries(
-	        new EJSC.ArrayDataHandler([
-	            [v1, "0-25 Millones"],
-	            [v2, "26-50 Millones"],
-	            [v3, "51-75 Millones"],
-	            [v4, "+75 Millones"]
-	        ]), {
+	    	new EJSC.ArrayDataHandler([
+	    		[v1, "0-25 Millones"],
+	    		[v2, "26-50 Millones"],
+	    		[v3, "51-75 Millones"],
+	    		[v4, "+75 Millones"]
+	    		]), {
 	            opacity: 80, //default: 50
 	            doughnutOffset: .5, //default: .5
 	            position: "bottomLeft", //default: "center"
 	            height: "70%", //default: "100%"
 	            width: "70%" //default: "100%"
 	        }
-	    ));
+	        ));
 	}
 
 	function fium(id, datos) {
-	    var v = 0;
-	    var i = 0;
-	    var o = 0;
+		var v = 0;
+		var i = 0;
+		var o = 0;
 
-	    datos.forEach(function(e) {
-	        v = v + parseInt(e.speed);
-	        i++;
-	    });
+		datos.forEach(function(e) {
+			v = v + parseInt(e.speed);
+			i++;
+		});
 	    //  console.log("speed="+v);
 	    v = v / i;
 	    //    console.log("i="+i);
@@ -886,190 +847,190 @@ angular.module('SOS1819-app.integrations')
 
 	    Highcharts.chart(id, {
 
-	            chart: {
-	                type: 'gauge',
-	                plotBackgroundColor: null,
-	                plotBackgroundImage: null,
-	                plotBorderWidth: 0,
-	                plotShadow: false
-	            },
+	    	chart: {
+	    		type: 'gauge',
+	    		plotBackgroundColor: null,
+	    		plotBackgroundImage: null,
+	    		plotBorderWidth: 0,
+	    		plotShadow: false
+	    	},
 
-	            title: {
-	                text: 'speed'
-	            },
+	    	title: {
+	    		text: 'speed'
+	    	},
 
-	            pane: {
-	                startAngle: 0,
-	                endAngle: 360,
-	                background: [{
-	                    backgroundColor: {
-	                        linearGradient: {
-	                            x1: 0,
-	                            y1: 0,
-	                            x2: 0,
-	                            y2: 1
-	                        },
-	                        stops: [
-	                            [0, '#FFF'],
-	                            [1, '#333']
-	                        ]
-	                    },
-	                    borderWidth: 0,
-	                    outerRadius: '109%'
-	                }, {
-	                    backgroundColor: {
-	                        linearGradient: {
-	                            x1: 0,
-	                            y1: 0,
-	                            x2: 0,
-	                            y2: 1
-	                        },
-	                        stops: [
-	                            [0, '#333'],
-	                            [1, '#FFF']
-	                        ]
-	                    },
-	                    borderWidth: 1,
-	                    outerRadius: '107%'
-	                }, {
+	    	pane: {
+	    		startAngle: 0,
+	    		endAngle: 360,
+	    		background: [{
+	    			backgroundColor: {
+	    				linearGradient: {
+	    					x1: 0,
+	    					y1: 0,
+	    					x2: 0,
+	    					y2: 1
+	    				},
+	    				stops: [
+	    				[0, '#FFF'],
+	    				[1, '#333']
+	    				]
+	    			},
+	    			borderWidth: 0,
+	    			outerRadius: '109%'
+	    		}, {
+	    			backgroundColor: {
+	    				linearGradient: {
+	    					x1: 0,
+	    					y1: 0,
+	    					x2: 0,
+	    					y2: 1
+	    				},
+	    				stops: [
+	    				[0, '#333'],
+	    				[1, '#FFF']
+	    				]
+	    			},
+	    			borderWidth: 1,
+	    			outerRadius: '107%'
+	    		}, {
 	                    // default background
 	                }, {
-	                    backgroundColor: '#DDD',
-	                    borderWidth: 0,
-	                    outerRadius: '105%',
-	                    innerRadius: '103%'
+	                	backgroundColor: '#DDD',
+	                	borderWidth: 0,
+	                	outerRadius: '105%',
+	                	innerRadius: '103%'
 	                }]
 	            },
 
 	            // the value axis
 	            yAxis: {
-	                min: 0,
-	                max: 300,
+	            	min: 0,
+	            	max: 300,
 
-	                minorTickInterval: 'auto',
-	                minorTickWidth: 1,
-	                minorTickLength: 10,
-	                minorTickPosition: 'inside',
-	                minorTickColor: '#666',
+	            	minorTickInterval: 'auto',
+	            	minorTickWidth: 1,
+	            	minorTickLength: 10,
+	            	minorTickPosition: 'inside',
+	            	minorTickColor: '#666',
 
-	                tickPixelInterval: 30,
-	                tickWidth: 2,
-	                tickPosition: 'inside',
-	                tickLength: 10,
-	                tickColor: '#666',
-	                labels: {
-	                    step: 2,
-	                    rotation: 'auto'
-	                },
-	                title: {
-	                    text: 'km/h'
-	                },
-	                plotBands: [{
-	                    from: 0,
-	                    to: 200,
+	            	tickPixelInterval: 30,
+	            	tickWidth: 2,
+	            	tickPosition: 'inside',
+	            	tickLength: 10,
+	            	tickColor: '#666',
+	            	labels: {
+	            		step: 2,
+	            		rotation: 'auto'
+	            	},
+	            	title: {
+	            		text: 'km/h'
+	            	},
+	            	plotBands: [{
+	            		from: 0,
+	            		to: 200,
 	                    color: '#55BF3B' // green
 	                }, {
-	                    from: 200,
-	                    to: 250,
+	                	from: 200,
+	                	to: 250,
 	                    color: '#DDDF0D' // yellow
 	                }, {
-	                    from: 250,
-	                    to: 300,
+	                	from: 250,
+	                	to: 300,
 	                    color: '#DF5353' // red
 	                }]
 	            },
 
 
 	            series: [{
-	                name: 'speed',
-	                data: [v],
-	                tooltip: {
-	                    valueSuffix: ' km/h '
-	                }
+	            	name: 'speed',
+	            	data: [v],
+	            	tooltip: {
+	            		valueSuffix: ' km/h '
+	            	}
 	            }]
 
 	        },
 	        // Add some life
 	        function(chart) {
-	            if (!chart.renderer.forExport) {
-	                setInterval(function() {
+	        	if (!chart.renderer.forExport) {
+	        		setInterval(function() {
 
 	                    //console.log("Value of o = ", o)    
 	                    if (o == 0) {
-	                        var point = chart.series[0].points[0],
-	                            newVal,
-	                            inc = -5;
+	                    	var point = chart.series[0].points[0],
+	                    	newVal,
+	                    	inc = -5;
 
-	                        newVal = point.y + inc;
+	                    	newVal = point.y + inc;
 	                        // console.log("entra1");
 	                        point.update(newVal);
 
 	                        o++;
 	                    } else if (o == 1) {
-	                        var point = chart.series[0].points[0],
-	                            newVal,
-	                            inc = 5;
+	                    	var point = chart.series[0].points[0],
+	                    	newVal,
+	                    	inc = 5;
 
-	                        newVal = point.y + inc;
+	                    	newVal = point.y + inc;
 
 	                        // console.log("entra2"+o);
 	                        point.update(newVal);
 
 	                        o++;
 	                    } else if (o == 2) {
-	                        var point = chart.series[0].points[0],
-	                            newVal,
-	                            inc = 5;
+	                    	var point = chart.series[0].points[0],
+	                    	newVal,
+	                    	inc = 5;
 
-	                        newVal = point.y + inc;
+	                    	newVal = point.y + inc;
 
-	                        point.update(newVal);
+	                    	point.update(newVal);
 	                        //   console.log("entra3"+o);
 	                        o++;
 	                    } else {
-	                        var point = chart.series[0].points[0],
-	                            newVal,
-	                            inc = -5;
+	                    	var point = chart.series[0].points[0],
+	                    	newVal,
+	                    	inc = -5;
 
-	                        newVal = point.y + inc;
+	                    	newVal = point.y + inc;
 
-	                        point.update(newVal);
+	                    	point.update(newVal);
 
-	                        o = 0;
+	                    	o = 0;
 	                    }
 
 	                }, 100);
 
-	            }
+	        	}
 	        }
-	    );
+	        );
 	}
 
 	function mapa(id, datos) {
 
 
-	    google.charts.load('current', {
-	        'packages': ['geochart'],
+		google.charts.load('current', {
+			'packages': ['geochart'],
 	        // Note: you will need to get a mapsApiKey for your project.
 	        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
 	        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
 	    });
-	    google.charts.setOnLoadCallback(drawRegionsMap);
+		google.charts.setOnLoadCallback(drawRegionsMap);
 
-	    function drawRegionsMap() {
-	        var hur = {};
-	        var auxdat2 = {};
-	        var aux = [];
-	        var dataMapa = [
-	            ['Country', 'Damages', 'Hurricanes']
-	        ];
+		function drawRegionsMap() {
+			var hur = {};
+			var auxdat2 = {};
+			var aux = [];
+			var dataMapa = [
+			['Country', 'Damages', 'Hurricanes']
+			];
 
-	        datos.forEach(function(e) {
-	            var country = e.country;
-	            var exist = auxdat2[country];
-	            e.damagesuntil2008 = parseFloat(e.damagesuntil2008);
+			datos.forEach(function(e) {
+				var country = e.country;
+				var exist = auxdat2[country];
+				e.damagesuntil2008 = parseFloat(e.damagesuntil2008);
 
-	            if (exist) {
+				if (exist) {
 	                // if(aux.includes(e.Country)){
 	                //auxdat2[country].damages += e.damagesuntil2008;
 	                //auxdat2[country] = {damages: e.damagesuntil2008, hurricanes: ""}
@@ -1077,207 +1038,207 @@ angular.module('SOS1819-app.integrations')
 	                auxdat2[country].hurricanes += 1 //e.name + "\n\r";
 
 	            } else {
-	                auxdat2[country] = {
-	                    damages: e.damagesuntil2008,
-	                    hurricanes: 2
-	                }
+	            	auxdat2[country] = {
+	            		damages: e.damagesuntil2008,
+	            		hurricanes: 2
+	            	}
 	                //auxdat2[country] = e.damagesuntil2008;
 
 	            }
 	        });
 
-	        for (var key in auxdat2) {
-	            dataMapa.push([key, auxdat2[key].damages, auxdat2[key].hurricanes]);
-	        }
-	        var data = google.visualization.arrayToDataTable(dataMapa);
-	        var options = {};
+			for (var key in auxdat2) {
+				dataMapa.push([key, auxdat2[key].damages, auxdat2[key].hurricanes]);
+			}
+			var data = google.visualization.arrayToDataTable(dataMapa);
+			var options = {};
 
-	        var chartM = new google.visualization.GeoChart(document.getElementById(id));
+			var chartM = new google.visualization.GeoChart(document.getElementById(id));
 
-	        chartM.draw(data, options);
-	    }
+			chartM.draw(data, options);
+		}
 	}
 
 	function cstats(id, datos1, datos2) {
-	    console.log(datos1)
-	    var data = datos1.map(function(e, i) {
-	        console.log(e)
-	        if (datos2[i].population) {
-	            return [
-	                parseInt(e.speed),
-	                parseInt(e.mbar),
-	                datos2[i].population,
-	                e.country,
-	                '2016'
-	            ];
-	        } else {
-	            return [
-	                parseInt(e.speed),
-	                parseInt(e.mbar),
-	                0,
-	                e.country,
-	                '2016'
-	            ];
-	        }
-	    });
-	    var myChart2 = echarts.init(document.getElementById(id));
+		console.log(datos1)
+		var data = datos1.map(function(e, i) {
+			console.log(e)
+			if (datos2[i].population) {
+				return [
+				parseInt(e.speed),
+				parseInt(e.mbar),
+				datos2[i].population,
+				e.country,
+				'2016'
+				];
+			} else {
+				return [
+				parseInt(e.speed),
+				parseInt(e.mbar),
+				0,
+				e.country,
+				'2016'
+				];
+			}
+		});
+		var myChart2 = echarts.init(document.getElementById(id));
 
-	    var option = {
-	        backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
-	            offset: 0,
-	            color: '#f7f8fa'
-	        }, {
-	            offset: 1,
-	            color: '#cdd0d5'
-	        }]),
-	        title: {
-	            text: '1990 与 2015 年各国家人均寿命与 GDP'
-	        },
-	        legend: {
-	            right: 10,
-	            data: ['2016']
-	        },
-	        xAxis: {
-	            splitLine: {
-	                lineStyle: {
-	                    type: 'dashed'
-	                }
-	            }
-	        },
-	        yAxis: {
-	            splitLine: {
-	                lineStyle: {
-	                    type: 'dashed'
-	                }
-	            },
-	            scale: true
-	        },
-	        series: [{
-	            name: '2016',
-	            data: data[0],
-	            type: 'scatter',
+		var option = {
+			backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
+				offset: 0,
+				color: '#f7f8fa'
+			}, {
+				offset: 1,
+				color: '#cdd0d5'
+			}]),
+			title: {
+				text: '1990 与 2015 年各国家人均寿命与 GDP'
+			},
+			legend: {
+				right: 10,
+				data: ['2016']
+			},
+			xAxis: {
+				splitLine: {
+					lineStyle: {
+						type: 'dashed'
+					}
+				}
+			},
+			yAxis: {
+				splitLine: {
+					lineStyle: {
+						type: 'dashed'
+					}
+				},
+				scale: true
+			},
+			series: [{
+				name: '2016',
+				data: data[0],
+				type: 'scatter',
 	            /*symbolSize: function(data) {
 	                return Math.sqrt(data[2]) / 5e2;
 	            },*/
 	            label: {
-	                emphasis: {
-	                    show: true,
-	                    formatter: function(param) {
-	                        return param.data[3];
-	                    },
-	                    position: 'top'
-	                }
+	            	emphasis: {
+	            		show: true,
+	            		formatter: function(param) {
+	            			return param.data[3];
+	            		},
+	            		position: 'top'
+	            	}
 	            },
 	            itemStyle: {
-	                normal: {
-	                    shadowBlur: 10,
-	                    shadowColor: 'rgba(120, 36, 50, 0.5)',
-	                    shadowOffsetY: 5,
-	                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
-	                        offset: 0,
-	                        color: 'rgb(251, 118, 123)'
-	                    }, {
-	                        offset: 1,
-	                        color: 'rgb(204, 46, 72)'
-	                    }])
-	                }
+	            	normal: {
+	            		shadowBlur: 10,
+	            		shadowColor: 'rgba(120, 36, 50, 0.5)',
+	            		shadowOffsetY: 5,
+	            		color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+	            			offset: 0,
+	            			color: 'rgb(251, 118, 123)'
+	            		}, {
+	            			offset: 1,
+	            			color: 'rgb(204, 46, 72)'
+	            		}])
+	            	}
 	            }
 	        }, {
-	            name: '2015',
-	            data: data[1],
-	            type: 'scatter',
+	        	name: '2015',
+	        	data: data[1],
+	        	type: 'scatter',
 	            /*symbolSize: function(data) {
 	                return Math.sqrt(data[2]) / 5e2;
 	            },*/
 	            label: {
-	                emphasis: {
-	                    show: true,
-	                    formatter: function(param) {
-	                        return param.data[3];
-	                    },
-	                    position: 'top'
-	                }
+	            	emphasis: {
+	            		show: true,
+	            		formatter: function(param) {
+	            			return param.data[3];
+	            		},
+	            		position: 'top'
+	            	}
 	            },
 	            itemStyle: {
-	                normal: {
-	                    shadowBlur: 10,
-	                    shadowColor: 'rgba(25, 100, 150, 0.5)',
-	                    shadowOffsetY: 5,
-	                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
-	                        offset: 0,
-	                        color: 'rgb(129, 227, 238)'
-	                    }, {
-	                        offset: 1,
-	                        color: 'rgb(25, 183, 207)'
-	                    }])
-	                }
+	            	normal: {
+	            		shadowBlur: 10,
+	            		shadowColor: 'rgba(25, 100, 150, 0.5)',
+	            		shadowOffsetY: 5,
+	            		color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+	            			offset: 0,
+	            			color: 'rgb(129, 227, 238)'
+	            		}, {
+	            			offset: 1,
+	            			color: 'rgb(25, 183, 207)'
+	            		}])
+	            	}
 	            }
 	        }]
 	    };
 
 	    option = {
-	        backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
-	            offset: 0,
-	            color: '#f7f8fa'
-	        }, {
-	            offset: 1,
-	            color: '#cdd0d5'
-	        }]),
-	        title: {
-	            text: 'Integración country-stats / hurricanes'
-	        },
-	        legend: {
-	            right: 10,
-	            data: ['1990', '2015']
-	        },
-	        xAxis: {
-	            name: 'Velocidad',
-	            splitLine: {
-	                lineStyle: {
-	                    type: 'dashed'
-	                }
-	            }
-	        },
-	        yAxis: {
-	            name: 'Mbar',
-	            splitLine: {
-	                lineStyle: {
-	                    type: 'dashed'
-	                }
-	            },
-	            scale: true
-	        },
-	        series: [{
-	            name: '2016',
-	            data: data,
-	            type: 'scatter',
-	            symbolSize: function(data) {
-	                return Math.sqrt(data[2]) / 5e2;
-	            },
-	            label: {
-	                emphasis: {
-	                    show: true,
-	                    formatter: function(param) {
-	                        return param.data[3] + " , población: " + param.data[2];
-	                    },
-	                    position: 'top'
-	                }
-	            },
-	            itemStyle: {
-	                normal: {
-	                    shadowBlur: 10,
-	                    shadowColor: 'rgba(120, 36, 50, 0.5)',
-	                    shadowOffsetY: 5,
-	                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
-	                        offset: 0,
-	                        color: 'rgb(251, 118, 123)'
-	                    }, {
-	                        offset: 1,
-	                        color: 'rgb(204, 46, 72)'
-	                    }])
-	                }
-	            }
-	        }]
+	    	backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
+	    		offset: 0,
+	    		color: '#f7f8fa'
+	    	}, {
+	    		offset: 1,
+	    		color: '#cdd0d5'
+	    	}]),
+	    	title: {
+	    		text: 'Integración country-stats / hurricanes'
+	    	},
+	    	legend: {
+	    		right: 10,
+	    		data: ['1990', '2015']
+	    	},
+	    	xAxis: {
+	    		name: 'Velocidad',
+	    		splitLine: {
+	    			lineStyle: {
+	    				type: 'dashed'
+	    			}
+	    		}
+	    	},
+	    	yAxis: {
+	    		name: 'Mbar',
+	    		splitLine: {
+	    			lineStyle: {
+	    				type: 'dashed'
+	    			}
+	    		},
+	    		scale: true
+	    	},
+	    	series: [{
+	    		name: '2016',
+	    		data: data,
+	    		type: 'scatter',
+	    		symbolSize: function(data) {
+	    			return Math.sqrt(data[2]) / 5e2;
+	    		},
+	    		label: {
+	    			emphasis: {
+	    				show: true,
+	    				formatter: function(param) {
+	    					return param.data[3] + " , población: " + param.data[2];
+	    				},
+	    				position: 'top'
+	    			}
+	    		},
+	    		itemStyle: {
+	    			normal: {
+	    				shadowBlur: 10,
+	    				shadowColor: 'rgba(120, 36, 50, 0.5)',
+	    				shadowOffsetY: 5,
+	    				color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+	    					offset: 0,
+	    					color: 'rgb(251, 118, 123)'
+	    				}, {
+	    					offset: 1,
+	    					color: 'rgb(204, 46, 72)'
+	    				}])
+	    			}
+	    		}
+	    	}]
 	    };
 
 	    myChart2.setOption(option);
@@ -1285,7 +1246,7 @@ angular.module('SOS1819-app.integrations')
 
 	function cataques(id, datos1, datos2) {
 
-	    anychart.onDocumentReady(function() {
+		anychart.onDocumentReady(function() {
 	        // To work with the data adapter you need to reference the data adapter script file from AnyChart CDN
 	        // https://cdn.anychart.com/releases/v8/js/anychart-data-adapter.min.js
 	        anychart.theme('darkBlue');
@@ -1299,23 +1260,23 @@ angular.module('SOS1819-app.integrations')
 	            var founded = {};
 	            var test = []
 	            datos2.forEach(function(e, i) {
-	                if (!founded[e.attacktype]) {
-	                    founded[e.attacktype] = 1;
+	            	if (!founded[e.attacktype]) {
+	            		founded[e.attacktype] = 1;
 
-	                    test.push({
-	                        x: e.attacktype,
-	                        value: datos1[i].damagesuntil2008
-	                    });
-	                } else
-	                    founded[e.attacktype] = 1;
+	            		test.push({
+	            			x: e.attacktype,
+	            			value: datos1[i].damagesuntil2008
+	            		});
+	            	} else
+	            	founded[e.attacktype] = 1;
 	            })
 
 	            console.log(test)
 	            var chart = anychart.pie(test);
 	            chart.labels()
-	                .hAlign('center')
-	                .position('outside')
-	                .format('{%Value} km/h({%PercentOfCategory}%)');
+	            .hAlign('center')
+	            .position('outside')
+	            .format('{%Value} km/h({%PercentOfCategory}%)');
 
 	            // set chart title text settings
 	            chart.title('Types of computer attack with the speed of a random hurricane.')
@@ -1341,32 +1302,32 @@ angular.module('SOS1819-app.integrations')
 
 	function pokeGraph(id, datos1, datos2) {
 
-	    console.log(datos2)
-	    var chart = new EJSC.Chart(id, {
-	        show_legend: false
-	    });
+		console.log(datos2)
+		var chart = new EJSC.Chart(id, {
+			show_legend: false
+		});
 
-	    var tipos = datos2.map(function(e, i) {
-	        return [datos1[i].mbar, e.name];
-	    });
-	    console.log('asddadsaadasdasd', tipos)
+		var tipos = datos2.map(function(e, i) {
+			return [datos1[i].mbar, e.name];
+		});
+		console.log('asddadsaadasdasd', tipos)
 	    //return;
 	    var mySeries = new EJSC.BarSeries(
-	        new EJSC.ArrayDataHandler(tipos), {
-	            orientation: "horizontal",
-	            title: "Hurricanes' mbars as pokémon types. ",
-	            intervalOffset: .5,
-	            useColorArray: true
-	        }
-	    );
+	    	new EJSC.ArrayDataHandler(tipos), {
+	    		orientation: "horizontal",
+	    		title: "Hurricanes' mbars as pokémon types. ",
+	    		intervalOffset: .5,
+	    		useColorArray: true
+	    	}
+	    	);
 
 	    mySeries.x_axis_formatter = new EJSC.NumberFormatter({
-	        forced_decimals: 2,
-	        title: "ayuwoki"
+	    	forced_decimals: 2,
+	    	title: "ayuwoki"
 	    });
 
 	    mySeries.y_axis_formatter = new EJSC.NumberFormatter({
-	        forced_decimals: 2
+	    	forced_decimals: 2
 	    });
 
 	    chart.addSeries(mySeries);
@@ -1377,63 +1338,63 @@ angular.module('SOS1819-app.integrations')
 	function chanchachachanchan(id, datos1, datos2) {
 
 
-	    var myGot = echarts.init(document.getElementById(id));
+		var myGot = echarts.init(document.getElementById(id));
 
 
-	    var lista = [100, 1000, 300, 2050, 100, 1000, 300, 2050, 300, 2050];
+		var lista = [100, 1000, 300, 2050, 100, 1000, 300, 2050, 300, 2050];
 
-	    console.table(datos1)
-	    var gotDat = datos1.map(function(e, i) {
+		console.table(datos1)
+		var gotDat = datos1.map(function(e, i) {
 
 
-	        return [
-	            parseInt(e.damagesuntil2008),
-	            parseInt(e.mbar),
-	            parseInt(e.speed),
-	            parseInt(e.year),
-	            parseInt(e.damagesuntil2008),
-	            parseInt(e.mbar),
-	            parseInt(e.speed),
-	            parseInt(e.year),
-	            parseInt(e.speed),
-	            parseInt(e.year)
-	        ];
-	    });
+			return [
+			parseInt(e.damagesuntil2008),
+			parseInt(e.mbar),
+			parseInt(e.speed),
+			parseInt(e.year),
+			parseInt(e.damagesuntil2008),
+			parseInt(e.mbar),
+			parseInt(e.speed),
+			parseInt(e.year),
+			parseInt(e.speed),
+			parseInt(e.year)
+			];
+		});
 
 	    //console.table(gotDat)
 	    var indiGot = datos2.map(function(e, i) {
-	        return {
-	            name: e.name,
-	            max: lista[i]
-	        }
+	    	return {
+	    		name: e.name,
+	    		max: lista[i]
+	    	}
 	    })
 	    console.table(indiGot)
 	    var lineStyle = {
-	        normal: {
-	            width: 1,
-	            opacity: 0.5
-	        }
+	    	normal: {
+	    		width: 1,
+	    		opacity: 0.5
+	    	}
 	    };
 
 	    option = {
-	        backgroundColor: '#161627',
-	        title: {
-	            text: 'GOT Books with a random hurricane data',
-	            left: 'center',
-	            textStyle: {
-	                color: '#eee'
-	            }
-	        },
-	        legend: {
-	            bottom: 5,
-	            data: [],
-	            itemGap: 20,
-	            textStyle: {
-	                color: '#fff',
-	                fontSize: 14
-	            },
-	            selectedMode: 'single'
-	        },
+	    	backgroundColor: '#161627',
+	    	title: {
+	    		text: 'GOT Books with a random hurricane data',
+	    		left: 'center',
+	    		textStyle: {
+	    			color: '#eee'
+	    		}
+	    	},
+	    	legend: {
+	    		bottom: 5,
+	    		data: [],
+	    		itemGap: 20,
+	    		textStyle: {
+	    			color: '#fff',
+	    			fontSize: 14
+	    		},
+	    		selectedMode: 'single'
+	    	},
 	        // visualMap: {
 	        //     show: true,
 	        //     min: 0,
@@ -1444,48 +1405,48 @@ angular.module('SOS1819-app.integrations')
 	        //     }
 	        // },
 	        radar: {
-	            indicator: indiGot,
-	            shape: 'circle',
-	            splitNumber: 5,
-	            name: {
-	                textStyle: {
-	                    color: 'rgb(238, 197, 102)'
-	                }
-	            },
-	            splitLine: {
-	                lineStyle: {
-	                    color: [
-	                        'rgba(238, 197, 102, 0.1)', 'rgba(238, 197, 102, 0.2)',
-	                        'rgba(238, 197, 102, 0.4)', 'rgba(238, 197, 102, 0.6)',
-	                        'rgba(238, 197, 102, 0.8)', 'rgba(238, 197, 102, 1)'
-	                    ].reverse()
-	                }
-	            },
-	            splitArea: {
-	                show: false
-	            },
-	            axisLine: {
-	                lineStyle: {
-	                    color: 'rgba(238, 197, 102, 0.5)'
-	                }
-	            }
+	        	indicator: indiGot,
+	        	shape: 'circle',
+	        	splitNumber: 5,
+	        	name: {
+	        		textStyle: {
+	        			color: 'rgb(238, 197, 102)'
+	        		}
+	        	},
+	        	splitLine: {
+	        		lineStyle: {
+	        			color: [
+	        			'rgba(238, 197, 102, 0.1)', 'rgba(238, 197, 102, 0.2)',
+	        			'rgba(238, 197, 102, 0.4)', 'rgba(238, 197, 102, 0.6)',
+	        			'rgba(238, 197, 102, 0.8)', 'rgba(238, 197, 102, 1)'
+	        			].reverse()
+	        		}
+	        	},
+	        	splitArea: {
+	        		show: false
+	        	},
+	        	axisLine: {
+	        		lineStyle: {
+	        			color: 'rgba(238, 197, 102, 0.5)'
+	        		}
+	        	}
 	        },
 	        series: [{
-	            name: '北京',
-	            type: 'radar',
-	            lineStyle: lineStyle,
-	            data: gotDat,
-	            symbol: 'none',
-	            itemStyle: {
-	                normal: {
-	                    color: '#F9713C'
-	                }
-	            },
-	            areaStyle: {
-	                normal: {
-	                    opacity: 0.1
-	                }
-	            }
+	        	name: '北京',
+	        	type: 'radar',
+	        	lineStyle: lineStyle,
+	        	data: gotDat,
+	        	symbol: 'none',
+	        	itemStyle: {
+	        		normal: {
+	        			color: '#F9713C'
+	        		}
+	        	},
+	        	areaStyle: {
+	        		normal: {
+	        			opacity: 0.1
+	        		}
+	        	}
 	        }]
 	    };
 
@@ -1798,7 +1759,7 @@ angular.module('SOS1819-app.integrations')
 				},
 				tooltip: {
 					pointFormat: 'Codigo: <b> {point.y}</b><br>' +
-						'Proyectiles: <b> {point.z} </b><br>'
+					'Proyectiles: <b> {point.z} </b><br>'
 				},
 				colorByPoint: true
 			}]
@@ -1865,7 +1826,8 @@ angular.module('SOS1819-app.integrations')
 			ext3: new graph(generateRadar, 'main6', initialData.disasters.data.slice(0), initialData.disasters.ext3.norms),
 			ext4: new graph(generateGraph, 'main7', initialData.disasters.data.slice(0, 8), initialData.disasters.ext4),
 			ext5: new graph(generateScatter, 'main8', initialData.disasters.data, initialData.disasters.ext5.message),
-			ext6: new graph(generateWordTree, 'main9', initialData.disasters.data.slice(0, 5), initialData.disasters.ext6.slips)
+			ext6: new graph(generateWordTree, 'main9', initialData.disasters.data.slice(0, 25), initialData.disasters.ext6.slips),
+			ext7: new graph(generatePie, 'main10', initialData.disasters.ext7.results)
 		}
 	};
 

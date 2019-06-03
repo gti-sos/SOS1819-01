@@ -125,6 +125,15 @@ angular.module('SOS1819-app.majorDisastersApp')
 	};
 })
 
+.factory('Cities', function ($http, $q) {
+	return {
+		__apiUrl: 'https://api.openaq.org/v1/cities',
+		list: function () {
+			return $http.get(this.__apiUrl);
+		}
+	};
+})
+
 .factory('SocketIO', function () {
 	var socket = io('/major-disasters');
 	return socket;

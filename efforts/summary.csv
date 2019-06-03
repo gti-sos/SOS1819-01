@@ -1,0 +1,16 @@
+﻿Project,Client,Title,Duration
+SOS1819-01,,#1 Milestone F01,00:00:11
+SOS1819-01,,#10 Crear al menos una issue en el repositorio del principal del proyecto,06:31:37
+SOS1819-01,,#11 Tener sincronizado el repositorio del grupo en el workspace personal de C9. (de forma que al hacer ejecutar el comando “git pull” se muestre “up to date”).,04:15:36
+SOS1819-01,,#12 Tener un conjunto de pruebas de postman de la API en una colección denominada SOS1819-XX-YYYYYY lista para ser lanzada,01:49:43
+SOS1819-01,,#13 Tiempo de toggl,09:42:29
+SOS1819-01,,#14 Haber realizado una API REST que ofrezca todos los métodos del recurso con la fuente de datos (tal como se presentó en el documento de diseño de la API presentado en el F02) con una funcionalidad similar a la presentada a la API desarrollada en el L06 pero adaptada a la fuente de datos.,05:31:55
+SOS1819-01,,#2 Configurar Workspace de Toggl,00:02:33
+SOS1819-01,,#3 Proyecto de Toggl,00:00:54
+SOS1819-01,,#4 Realizar tracking de tiempo con Toggl de la(s) issue(s) asignadas.,00:00:10
+SOS1819-01,,#6 Registrar información en el repositorio común de la asignatura,00:38:12
+SOS1819-01,,#7 Crear issues.,07:27:26
+SOS1819-01,,#9 Completar ficha de trabajo.,00:25:15
+SOS1819-01,,,00:00:16
+,,Prueba Toggl,00:00:05
+,,,00:01:12
