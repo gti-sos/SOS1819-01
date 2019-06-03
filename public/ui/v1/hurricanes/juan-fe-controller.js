@@ -46,6 +46,9 @@ app.controller("juan-fe-controller", function ($scope, $http, $q) {
     $scope.url = "/api/v1/hurricanes";
     $scope.url2 = "/api/v2/hurricanes";
 
+    var countryStats = [];
+    var dataExt1 = [];
+
     $scope.pagination = {
         offset: 0,
         limit: 10
@@ -78,8 +81,9 @@ app.controller("juan-fe-controller", function ($scope, $http, $q) {
         var obj = JSON.parse(JSON.stringify($scope.filter));
         //var search = Object.assign(obj, $scope.pagination);
         var search = angular.merge(obj, $scope.pagination);
-        $q.all([$http.get($scope.url,{params:search}), $http.get($scope.url2 + '/count',{params:search})]).then(function(responses){
+        $q.all([$http.get($scope.url,{params:search}), $http.get($scope.url2 + '/count',{params:search}), $http.get("/proxy/country-stats")]).then(function(responses){
             $scope.hurricanes = responses[0].data;
+            countryStats = responses[2].data;
             cuentadanos();
             fium();
             mapa();
