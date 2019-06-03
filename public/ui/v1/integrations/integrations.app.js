@@ -90,4 +90,4 @@ angular.module('SOS1819-app.integrations', ['ngRoute', 'SOS1819-app', 'SOS1819-a
 			}
 		}
 	});
-})
+});
