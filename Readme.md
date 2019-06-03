@@ -19,4 +19,4 @@
 <li><a href="https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/docs" rel="nofollow">https://sos1819-01.herokuapp.com/api/v1/testing-of-nuclear-bombs/docs</a> (developed by <a href="https://github.com/josbarolm">José María Barrero Olmedo</a>)</li>
 </ul>
 <h1>Docker</h1>
-docker run -p 8080:8080 -d frotunato/sos1819-01
+<h5>docker run -p 8080:8080 -d frotunato/sos1819-01</h5>
