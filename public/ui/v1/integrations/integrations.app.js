@@ -184,5 +184,9 @@ angular.module('SOS1819-app.integrations', ['ngRoute', 'SOS1819-app', 'SOS1819-a
 			}
 		}
 	});
+<<<<<<< HEAD
 >>>>>>> 040b1f86f33305247cc8d2b739fbbc14b27b82c5
 })
+=======
+});
+>>>>>>> 40ee60013ed1c8c89583f25a16c2d3cc62772737
