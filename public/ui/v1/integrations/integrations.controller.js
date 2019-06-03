@@ -625,7 +625,7 @@ angular.module('SOS1819-app.integrations')
 			});
 		}
 
-		var option7 = option = {
+		var option7 = {
 			title: {
 				text: 'Declaraciones de Donald Trump y su relación con catástrofes naturales',
 				subtext: 'Integración major-disasters (G01) con https://matchilling-tronald-dump-v1.p.rapidapi.com'
@@ -691,8 +691,6 @@ angular.module('SOS1819-app.integrations')
 			series2.push(obj);
 		}
 
-		f
-
 		window.myScatter = Chart.Scatter(ctx, {
 			data: {datasets: series2},
 			options: {
@@ -708,18 +706,82 @@ angular.module('SOS1819-app.integrations')
 	}
 
 	function generateWordTree(containerId, ownData, extData) {
-		var treeData = extData.map(function (e, i) {
-			return {id: i, name: e.advice, fontColor: getRandomColor(), fontSize: 12, parent: (i *7) % 2};
+		var treeData = [{parent: -1, name: 'TEst', id: 0}]; //parent: (i) % 15
+		var treeExtData = extData.map(function (e, i) {
+			return {id: i + 1, name: e.advice, fontColor: getRandomColor(), fontSize: 12, parent: 0};
 		});
-		console.table(treeData);
-		//treeData.push(parent: -1, name: 'TEst', id: )
+		
 		var treeLeafs = ownData.map(function (e, i) {
 			var item = treeData[Math.floor(Math.random() * treeData.length)];
-			return {parent: item.id, name: e.event, fontColor: getRandomColor(), fontSize: 10};
+			return {id: treeExtData.length + i, parent: item.id, name: e.event, fontColor: getRandomColor(), fontSize: 10};
 		});
-
+		//treeExtData = treeExtData.concat(treeLeafs);
+		treeData = treeData.concat(treeExtData);
 		//treeData = treeData.concat(treeLeafs);
-		console.table(treeLeafs);
+		console.table(treeData);
+
+		//console.table(treeLeafs);
+		/*treeData = [
+            {"id": 0, "value": "AnyChart", "parent": -1},
+            {"id": 1, "value": "is", "parent": 0, "fontSize": 12, "fontWeight": "bold"},
+            {"id": 2, "value": "was", "parent": 0, "fontSize": 12, "fontWeight": "bold"},
+            {"id": 3, "value": "began", "parent": 0, "fontSize": 12, "fontWeight": "bold"},
+            {"id": 4, "value": "said", "parent": 0, "fontSize": 12, "fontWeight": "bold"},
+            {"id": 5, "value": "supports", "parent": 0, "fontSize": 12, "fontWeight": "bold"},
+            {"id": 6, "value": "a lightweight and robust JavaScript charting library", "parent": 1},
+            {"id": 7, "value": "a US based graphics software development company", "parent": 1 },
+            {"id": 8, "value": "reported to have more than 70% of Fortune 1000 companies using its solutions, including", "parent": 1, "fontSize": 10},
+            {"id": 9, "value": "Oracle (Oracle APEX)", "parent": 8, "fontColor": "#CA1E23", "fontSize": 12},
+            {"id": 10, "value": "Microsoft", "parent": 8, "fontColor": "#6A6A6A", "fontSize": 12},
+            {"id": 11, "value": "Ford", "parent": 8, "fontColor": "#405B91", "fontSize": 12},
+            {"id": 12, "value": "Volkswagen", "parent": 8, "fontColor": "#3266BC", "fontSize": 12},
+            {"id": 13, "value": "AT&T", "parent": 8, "fontColor": "#00A8E0", "fontSize": 12},
+            {"id": 14, "value": "Samsung", "parent": 8, "fontColor": "#0B2188", "fontSize": 12},
+            {"id": 15, "value": "Nokia", "parent": 8, "fontColor": "#1C4598", "fontSize": 12},
+            {"id": 16, "value": "BP", "parent": 8, "fontColor": "#00A02A", "fontSize": 12},
+            {"id": 17, "value": "Bosch", "parent": 8, "fontColor": "#C62628", "fontSize": 12},
+            {"id": 18, "value": "Orange", "parent": 8, "fontColor": "#FF6600", "fontSize": 12},
+            {"id": 19, "value": "Exxon Mobil", "parent": 8, "fontColor": "#EC0819", "fontSize": 12},
+            {"id": 20, "value": "UBS", "parent": 8, "fontColor": "#FD3B35", "fontSize": 12},
+            {"id": 21, "value": "Citigroup", "parent": 8, "fontColor": "#003B70", "fontSize": 12},
+            {"id": 22, "value": "Merck Group", "parent": 8, "fontColor": "#1B54AC", "fontSize": 12},
+            {"id": 23, "value": "McDonald's", "parent": 8, "fontColor": "#E51A23", "fontSize": 12},
+            {"id": 24, "value": "3M", "parent": 8, "fontColor": "#EE1A2D", "fontSize": 12},
+            {"id": 25, "value": "JPMorgan", "parent": 8, "fontColor": "#626262", "fontSize": 12},
+            {"id": 26, "value": "Lockheed Martin", "parent": 8, "fontColor": "#7D7E80", "fontSize": 12},
+            {"id": 27, "value": "Novo Nordisk", "parent": 8, "fontColor": "#295B9A", "fontSize": 12},
+            {"id": 28, "value": "Tencent", "parent": 8, "fontColor": "#2952AE", "fontSize": 12},
+            {"id": 29, "value": "Bank of China", "parent": 8, "fontColor": "#B00731", "fontSize": 12},
+            {"id": 30, "value": "Ericsson", "parent": 8, "fontColor": "#042559", "fontSize": 12},
+            {"id": 31, "value": "Swisscom", "parent": 8, "fontColor": "#24376E", "fontSize": 12},
+            {"id": 32, "value": "Juniper", "parent": 8, "fontColor": "#000000", "fontSize": 12},
+            {"id": 33, "value": "MTV", "parent": 8, "fontColor": "#BA1A20", "fontSize": 12},
+            {"id": 34, "value": "General Electric", "parent": 8, "fontColor": "#023578", "fontSize": 12},
+            {"id": 35, "value": "NXP", "parent": 8, "fontColor": "#B9D02D", "fontSize": 12},
+            {"id": 36, "value": "Rolex", "parent": 8, "fontColor": "#015D37", "fontSize": 12},
+            {"id": 37, "value": "Caltrans", "parent": 8, "fontColor": "#3B96D1", "fontSize": 12},
+            {"id": 38, "value": "Reuters", "parent": 8, "fontColor": "#F77B00", "fontSize": 12},
+            {"id": 39, "value": "and others", "fontColor": "#333", "parent": 8},
+            {"id": 40, "value": "bar", "parent": 5},
+            {"id": 41, "value": "line", "parent": 5},
+            {"id": 42, "value": "area", "parent": 5},
+            {"id": 43, "value": "scatter", "parent": 5},
+            {"id": 44, "value": "waterfall", "parent": 5},
+            {"id": 45, "value": "spline", "parent": 5},
+            {"id": 46, "value": "funnel", "parent": 5},
+            {"id": 47, "value": "bubble", "parent": 5},
+            {"id": 48, "value": "polar", "parent": 5},
+            {"id": 49, "value": "column", "parent": 5},
+            {"id": 50, "value": "columnrange", "parent": 5},
+            {"id": 51, "value": "pie", "parent": 5},
+            {"id": 52, "value": "box plot", "parent": 5},
+            {"id": 53, "value": "angular gauge", "parent": 5},
+            {"id": 54, "value": "areasplinerange", "parent": 5},
+            {"id": 55, "value": "and other types of charts", "parent": 5},
+            {"id": 56, "value": "founded in 2003.", "parent": 2},
+            {"id": 57, "value": "to shift to HTML5 and in 2011 added an HTML5 (SVG based) version of its components.", "parent": 3},
+            {"id": 58, "value": " they were \"leaving behind Flash and moving to a more modern and promising technology, JavaScript HTML5\"", "parent": 4}
+            ];*/
 		anychart.data.set(treeData);
 		// The data used in this sample can be obtained from the CDN
 		// https://cdn.anychart.com/samples-data/word-tree/anychart-word-tree/data.json
@@ -776,7 +838,7 @@ angular.module('SOS1819-app.integrations')
 			ext3: new graph(generateRadar, 'main6', initialData.disasters.data.slice(0), initialData.disasters.ext3.norms),
 			ext4: new graph(generateGraph, 'main7', initialData.disasters.data.slice(0, 8), initialData.disasters.ext4),
 			ext5: new graph(generateScatter, 'main8', initialData.disasters.data, initialData.disasters.ext5.message),
-			ext6: new graph(generateWordTree, 'main9', initialData.disasters.data, initialData.disasters.ext6.slips)
+			ext6: new graph(generateWordTree, 'main9', initialData.disasters.data.slice(0, 5), initialData.disasters.ext6.slips)
 		}
 	};
 
