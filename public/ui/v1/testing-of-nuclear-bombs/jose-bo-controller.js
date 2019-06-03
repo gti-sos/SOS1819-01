@@ -308,7 +308,8 @@ app.controller("PemaController", function($scope, $http, $q) {
             
             console.table(dataGraf7);
             
-            //////////////////////////////////////////FINAL VISUALIZACIÓN//////////////////////////////////////////////////        
+            
+//////////////////////////////////////////FINAL VISUALIZACIÓN//////////////////////////////////////////////////        
 
 
         }).catch(function(response) {

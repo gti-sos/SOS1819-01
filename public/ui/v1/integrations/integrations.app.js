@@ -6,7 +6,7 @@ angular.module('SOS1819-app.integrations', ['ngRoute', 'SOS1819-app', 'SOS1819-a
 		reloadOnSearch: true,
 		templateUrl: '/ui/v1/integrations/integrations.template.html',
 		resolve: {
-			initialData: function (MajorDisaster, Hurricanes, TestingOfNuclearBombs, PollutionStats, SportsCenters, WeatherStats, DonaldTrump, $location, $q) {
+			initialData: function (MajorDisaster, Hurricanes, Dogs, Advice, TestingOfNuclearBombs, PollutionStats, SportsCenters, WeatherStats, DonaldTrump, $location, $q) {
 				var initialData = {};
 				var majorDisastersPromises = [
 					MajorDisaster.v1.list({}), 
@@ -16,7 +16,9 @@ angular.module('SOS1819-app.integrations', ['ngRoute', 'SOS1819-app', 'SOS1819-a
 					WeatherStats.list({}),
 					DonaldTrump.random(),
 					DonaldTrump.random(),
-					DonaldTrump.random()
+					DonaldTrump.random(),
+					Dogs.list(),
+					Advice.list()
 				];
 
 				var hurricanesPromises = [
@@ -37,7 +39,9 @@ angular.module('SOS1819-app.integrations', ['ngRoute', 'SOS1819-app', 'SOS1819-a
 						res[5].data, 
 						res[6].data, 
 						res[7].data
-						]
+						],
+						ext5: res[8].data,
+						ext6: res[9].data
 					};
 
 				}).catch(function (res) {
