@@ -497,9 +497,9 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
             console.log(data);
             var options = {};
 
-            var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+            var chartM = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
-            chart.draw(data, options);
+            chartM.draw(data, options);
         }
     }
 
@@ -507,14 +507,15 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
         console.log(echarts)
         //app.title = 'POP VS DMG';
         //    var data2 
-        /*
+        
             var data0=$scope.hurricanes.map(function(e, i){
-                return [e.speed,e.damagesuntil2008,countryStats[i].population,e.country,2017];
-            });*/
+                return [parseInt(e.speed),parseInt(e.mbar),countryStats[i].population,e.country,2016];
+            });
         // var dat=countryStats{}
         var myChart2 = echarts.init(document.getElementById("supernenaazul"));
-        console.log(myChart2)
-        var data = [
+        console.log(data0);
+        
+        var data = data0/*[
             [
                 [28604, 77, 17096869, 'Australia', 1990],
                 [31163, 77.4, 27662440, 'Canada', 1990],
@@ -557,7 +558,7 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
                 [38225, 81.4, 64715810, 'United Kingdom', 2015],
                 [53354, 79.1, 321773631, 'United States', 2015]
             ]
-        ];
+        ]*/;
 
         var option = {
             backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
@@ -572,7 +573,7 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
             },
             legend: {
                 right: 10,
-                data: ['1990', '2015']
+                data: ['2016', '2015']
             },
             xAxis: {
                 splitLine: {
@@ -590,7 +591,7 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
                 scale: true
             },
             series: [{
-                name: '1990',
+                name: '2016',
                 data: data[0],
                 type: 'scatter',
                 symbolSize: function(data) {
