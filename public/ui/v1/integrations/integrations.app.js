@@ -6,7 +6,7 @@ angular.module('SOS1819-app.integrations', ['ngRoute', 'SOS1819-app', 'SOS1819-a
 		reloadOnSearch: true,
 		templateUrl: '/ui/v1/integrations/integrations.template.html',
 		resolve: {
-			initialData: function (MajorDisaster, Hurricanes, Dogs, Advice, TestingOfNuclearBombs, PollutionStats, SportsCenters, WeatherStats, DonaldTrump, $location, $q) {
+			initialData: function ($http, MajorDisaster, Hurricanes, TestingOfNuclearBombs, PollutionStats, SportsCenters, WeatherStats, DonaldTrump, $location, $q) {
 				var initialData = {};
 				var majorDisastersPromises = [
 					MajorDisaster.v1.list({}), 
@@ -22,7 +22,11 @@ angular.module('SOS1819-app.integrations', ['ngRoute', 'SOS1819-app', 'SOS1819-a
 				];
 
 				var hurricanesPromises = [
-					Hurricanes.get()
+					Hurricanes.get(),
+					$http.get("/proxy/country-stats"),
+            		$http.get("/proxy/computers-attacks-stats"),
+            		$http.get("/proxy/poke"),
+            		$http.get("/proxy/got")
 				];
 				
 				var bombsPromises = [
@@ -47,13 +51,18 @@ angular.module('SOS1819-app.integrations', ['ngRoute', 'SOS1819-app', 'SOS1819-a
 				}).catch(function (res) {
 					console.log('integrations.app.js majorDisastersInitialData exception on resolve', res);
 					return {
-						data: [], ext1: [], ext2: [], ext3: [], ext4: [], count: 0
+						data: [], ext1: [], ext2: [], ext3: [], ext4: []
 					};
 				});
 
 				initialData.hurricanes = $q.all(hurricanesPromises).then(function (res) {
 					return {
-						data: res[0].data
+						data: res[0].data,
+						ext1: res[1].data, 
+						ext2: res[2].data, 
+						ext3: res[3].data,
+						ext4: res[4].data
+						
 					};
 				}).catch(function (res) {
 					console.log('integrations.app.js hurricanes exception on resolve', res);
