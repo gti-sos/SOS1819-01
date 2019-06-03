@@ -492,9 +492,7 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
             for (var key in auxdat2) {
                 dataMapa.push([key, auxdat2[key].damages, auxdat2[key].hurricanes]);
             }
-            console.log(dataMapa);
             var data = google.visualization.arrayToDataTable(dataMapa);
-            console.log(data);
             var options = {};
 
             var chartM = new google.visualization.GeoChart(document.getElementById('regions_div'));
@@ -508,14 +506,20 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
         //app.title = 'POP VS DMG';
         //    var data2 
         
-            var data0=$scope.hurricanes.map(function(e, i){
-                return [parseInt(e.speed),parseInt(e.mbar),countryStats[i].population,e.country,2016];
+            var data = $scope.hurricanes.map(function(e, i){
+                return [
+                    parseInt(e.speed),
+                    parseInt(e.mbar),
+                    countryStats[i].population,
+                    e.country,
+                    '2016'
+                ];
             });
+        console.log(data)
         // var dat=countryStats{}
         var myChart2 = echarts.init(document.getElementById("supernenaazul"));
-        console.log(data0);
         
-        var data = data0/*[
+        /*data = data0[
             [
                 [28604, 77, 17096869, 'Australia', 1990],
                 [31163, 77.4, 27662440, 'Canada', 1990],
@@ -573,7 +577,7 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
             },
             legend: {
                 right: 10,
-                data: ['2016', '2015']
+                data: ['2016']
             },
             xAxis: {
                 splitLine: {
@@ -594,9 +598,9 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
                 name: '2016',
                 data: data[0],
                 type: 'scatter',
-                symbolSize: function(data) {
+                /*symbolSize: function(data) {
                     return Math.sqrt(data[2]) / 5e2;
-                },
+                },*/
                 label: {
                     emphasis: {
                         show: true,
@@ -624,9 +628,9 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
                 name: '2015',
                 data: data[1],
                 type: 'scatter',
-                symbolSize: function(data) {
+                /*symbolSize: function(data) {
                     return Math.sqrt(data[2]) / 5e2;
-                },
+                },*/
                 label: {
                     emphasis: {
                         show: true,
@@ -652,6 +656,102 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
                 }
             }]
         };
+
+        option = {
+            backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
+                offset: 0,
+                color: '#f7f8fa'
+            }, {
+                offset: 1,
+                color: '#cdd0d5'
+            }]),
+            title: {
+                text: 'Integración country-stats / hurricanes'
+            },
+            legend: {
+                right: 10,
+                data: ['1990', '2015']
+            },
+            xAxis: {
+                name: 'Velocidad',
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed'
+                    }
+                }
+            },
+            yAxis: {
+                name: 'Mbar',
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed'
+                    }
+                },
+                scale: true
+            },
+            series: [{
+                name: '2016',
+                data: data,
+                type: 'scatter',
+                symbolSize: function (data) {
+                    return Math.sqrt(data[2]) / 5e2;
+                },
+                label: {
+                    emphasis: {
+                        show: true,
+                        formatter: function (param) {
+                            return param.data[3] + " , población: " + param.data[2];
+                        },
+                        position: 'top'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        shadowBlur: 10,
+                        shadowColor: 'rgba(120, 36, 50, 0.5)',
+                        shadowOffsetY: 5,
+                        color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                            offset: 0,
+                            color: 'rgb(251, 118, 123)'
+                        }, {
+                            offset: 1,
+                            color: 'rgb(204, 46, 72)'
+                        }])
+                    }
+                }
+            }, /*{
+                name: '2015',
+                data: data[1],
+                type: 'scatter',
+                symbolSize: function (data) {
+                    return Math.sqrt(data[2]) / 5e2;
+                },
+                label: {
+                    emphasis: {
+                        show: true,
+                        formatter: function (param) {
+                            return param.data[3];
+                        },
+                        position: 'top'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        shadowBlur: 10,
+                        shadowColor: 'rgba(25, 100, 150, 0.5)',
+                        shadowOffsetY: 5,
+                        color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                            offset: 0,
+                            color: 'rgb(129, 227, 238)'
+                        }, {
+                            offset: 1,
+                            color: 'rgb(25, 183, 207)'
+                        }])
+                    }
+                }
+            }*/]
+        };
+
         myChart2.setOption(option);
     };
 
