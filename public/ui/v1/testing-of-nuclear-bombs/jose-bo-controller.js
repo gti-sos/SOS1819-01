@@ -6,7 +6,7 @@ app.controller("PemaController", function($scope, $http, $q) {
     $scope.data = [];
     $scope.body = {};
     $scope.filter = { from: null, to: null };
-    $scope.pagination = { offset: 0, limit: 100 }
+    $scope.pagination = { offset: 0, limit: 10 }
     $scope.count = 0;
     var dataExt = [];
     var dataExt1 = [];
@@ -32,7 +32,7 @@ app.controller("PemaController", function($scope, $http, $q) {
             dataExt2 = responses[4].data;
             dataExt3 = responses[5].data;
 
-            /////////////////////////////////////////////VISUALIZACION///////////////////////////////////////////////////////////
+/////////////////////////////////////////////VISUALIZACION///////////////////////////////////////////////////////////
 
             function view1(id, data) {
                 var aux = {};
