@@ -43,6 +43,15 @@ get('/youth-unemployment-stats', function (req, res) {
 .get('/computers-attacks-stats', function (req, res) {
 	req.pipe(request('https://sos1819-03.herokuapp.com/api/v1/computers-attacks-stats')).pipe(res);
 })
+.get('/poke', function (req, res) {
+	/*
+	request('https://pokeapi.co/api/v2/type', function (err, httpcode, resp) {
+		console.log(resp)
+		res.json({})
+	})
+	*/
+	req.pipe(request('https://pokeapi.co/api/v2/type')).pipe(res);
+})
 
 .get('/awhere/weather', function (req,res) {
 	var randomToken = aweatherCredentials[Math.floor(Math.random() * aweatherCredentials.length)];

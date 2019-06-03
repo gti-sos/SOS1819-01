@@ -46,6 +46,8 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
     $scope.url2 = "/api/v2/hurricanes";
 
     var countryStats = [];
+    var comAta=[];
+    var poke=[];
     var dataExt1 = [];
 
     $scope.pagination = {
@@ -80,21 +82,29 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
             var obj = JSON.parse(JSON.stringify($scope.filter));
         //var search = Object.assign(obj, $scope.pagination);
         var search = angular.merge(obj, $scope.pagination);
-        $q.all([$http.get($scope.url, {
-            params: search
-        }), $http.get($scope.url2 + '/count', {
-            params: search
-        }), $http.get($scope.url), $http.get("/proxy/country-stats")]).then(function(responses) {
+        $q.all([
+            $http.get($scope.url, {params: search}), 
+            $http.get($scope.url2 + '/count', {params: search}), 
+            $http.get($scope.url), 
+            $http.get("/proxy/country-stats"),
+            $http.get("/proxy/computers-attacks-stats"),
+            $http.get("/proxy/poke")]).then(function(responses) {
             $scope.hurricanes = responses[0].data;
             $scope.hurricanes2 = responses[2].data;
             countryStats = responses[3].data;
+            comAta =responses[4].data;
+            poke =responses[5].data.results;
+            console.log(responses)
             cuentadanos();
             fium();
             mapa();
             cstats();
+            cataques();
+            pokeGraph();
             $scope.count = Math.ceil(responses[1].data.count / $scope.pagination.limit);
             if (cb) cb();
         }).catch(function(response) {
+            console.log(response)
             window.alert("No se han obtenido los datos.");
         });
 
@@ -673,6 +683,93 @@ function cstats() {
 
         myChart2.setOption(option);
     };
+
+function cataques(){
+    
+    anychart.onDocumentReady(function () {
+    // To work with the data adapter you need to reference the data adapter script file from AnyChart CDN
+    // https://cdn.anychart.com/releases/v8/js/anychart-data-adapter.min.js
+    anychart.theme('darkBlue');
+
+    // Load JSON data and create a chart by JSON data
+    // The data used in this sample can be obtained from the CDN
+    // https://cdn.anychart.com/samples/general-features/load-json-data/data.json
+    anychart.data.loadJsonFile('https://cdn.anychart.com/samples/general-features/load-json-data/data.json', function (data) {
+       console.log(comAta)
+        
+        var founded = {};
+        var test = []
+        comAta.forEach(function (e, i) {
+            if (!founded[e.attacktype]) {
+                founded[e.attacktype] = 1;
+
+                test.push({x: e.attacktype, value: $scope.hurricanes[i].damagesuntil2008});
+            } else
+                founded[e.attacktype] = 1;
+        })
+        
+        console.log(test)
+        var chart = anychart.pie(test);
+        chart.labels()
+                .hAlign('center')
+                .position('outside')
+                .format('{%Value} km/h({%PercentOfCategory}%)');
+
+        // set chart title text settings
+        chart.title('Types of computer attack with the speed of a random hurricane.')
+                //set chart radius
+                .radius('43%')
+                // create empty area in pie chart
+                .innerRadius('30%');
+
+        // set legend title text settings
+        chart.legend()
+                // set legend position and items layout
+                .position('center-bottom')
+                .itemsLayout('horizontal')
+                .align('center');
+
+        // set container id for the chart
+        chart.container('donutataques');
+        // initiate chart drawing
+        chart.draw();
+    });
+});
+}
+
+function pokeGraph(){
+    
+    console.log("aaaaaaaaaaaaaaaaaa1")
+     var chart = new EJSC.Chart("pokeG", {
+      show_legend: false
+    } );
+    
+    var tipos= poke.map(function(e, i) {
+        return [$scope.hurricanes2[i].mbar, e.name];
+    });
+    console.log('asddadsaadasdasd', tipos)
+    //return;
+    var mySeries = new EJSC.BarSeries(
+      new EJSC.ArrayDataHandler(tipos) , {
+          orientation: "horizontal",
+          intervalOffset: .5,
+          useColorArray: true
+      }
+    );
+    
+    mySeries.x_axis_formatter = new EJSC.NumberFormatter({
+        forced_decimals: 2
+    } );
+    
+    mySeries.y_axis_formatter = new EJSC.NumberFormatter({
+        forced_decimals: 2
+    } );
+  
+    chart.addSeries(mySeries);
+
+    
+}
+
 
 })
 
