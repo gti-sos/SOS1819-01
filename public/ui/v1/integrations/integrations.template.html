@@ -26,6 +26,9 @@
 				<button class="btn btn-primary" ng-class="{'btn-info': disasters.integrations.ext2.show}" ng-click="disasters.integrations.ext2.toggle()">Integración 2 (SOS1819-15)</button>
 				<button class="btn btn-primary" ng-class="{'btn-info': disasters.integrations.ext3.show}" ng-click="disasters.integrations.ext3.toggle()">Integración 3 (api.awhere)</button>
 				<button class="btn btn-primary" ng-class="{'btn-info': disasters.integrations.ext4.show}" ng-click="disasters.integrations.ext4.toggle()">Integración 4 (matchilling-tronald-dump)</button>
+				<button class="btn btn-primary" ng-class="{'btn-info': disasters.integrations.ext5.show}" ng-click="disasters.integrations.ext5.toggle()">Integración 5 (dogs)</button>
+				<button class="btn btn-primary" ng-class="{'btn-info': disasters.integrations.ext6.show}" ng-click="disasters.integrations.ext6.toggle()">Integración 6 (consejos)</button>
+
 			</div>
 		</div>
 		<p></p>
@@ -45,6 +48,10 @@
 			<div ng-if="disasters.integrations.ext3.show" id="main6" style="width:inherit; height:inherit;"></div>
 
 			<div ng-if="disasters.integrations.ext4.show" id="main7" style="width:inherit; height:inherit;"></div>
+
+			<canvas ng-if="disasters.integrations.ext5.show" id="main8" style="width:inherit; height:inherit;"></canvas>
+
+			<div ng-if="disasters.integrations.ext6.show" id="main9" style="width:inherit; height:inherit;"></div>
 
 		</div>
 	</div>

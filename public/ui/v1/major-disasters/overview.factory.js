@@ -97,11 +97,30 @@ angular.module('SOS1819-app.majorDisastersApp')
 			var opt = {
 				params: {},
 				headers: {
+					'Access-Control-Allow-Origin': "*", 
 					'X-RapidAPI-Key': '749296e16emsh19b71465c3377a3p120f28jsn58424fc8ae24',
 					"X-RapidAPI-Host": 'matchilling-tronald-dump-v1.p.rapidapi.com'
 				}
 			};
 			return $http.get(this.__apiUrl, opt);
+		}
+	};
+})
+
+.factory('Dogs', function ($http, $q) {
+	return {
+		__apiUrl: 'https://dog.ceo/api/breeds/list/all',
+		list: function () {
+			return $http.get(this.__apiUrl);
+		}
+	};
+})
+
+.factory('Advice', function ($http, $q) {
+	return {
+		__apiUrl: 'https://api.adviceslip.com/advice/search/day',
+		list: function () {
+			return $http.get(this.__apiUrl);
 		}
 	};
 })

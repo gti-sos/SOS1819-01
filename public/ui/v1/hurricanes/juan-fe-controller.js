@@ -672,9 +672,9 @@ function cstats() {
         };
 
         myChart2.setOption(option);
-    };
+    }
 
-})
+});
 
 app.controller("juan-fe-edit-controller", function($scope, $http, $q, dataToEdit, $location) {
 
