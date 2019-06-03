@@ -751,6 +751,8 @@ angular.module('SOS1819-app.integrations')
 		// initiate chart drawing
 		chart.draw();
 	}
+	
+///////////////////////////////////////Visua
 
 	var graph = function (fn) {
 		var slicedArgs = Array.prototype.slice.call(arguments, 1);
@@ -767,6 +769,23 @@ angular.module('SOS1819-app.integrations')
 		show: true,
 		visualizations: {
 			echarts: new graph(generateBarChart, 'main1', initialData.disasters.data),
+			highcharts: new graph(generateHighCharts, 'main2', initialData.disasters.data),
+			geocharts: new graph(generateGeoCharts, 'main3', initialData.disasters.data)
+		},
+		integrations: {
+			ext1: new graph(generateLineChart, 'main4', initialData.disasters.data.slice(0), initialData.disasters.ext1),
+			ext2: new graph(generateHeatmap, 'main5', initialData.disasters.data.slice(0), initialData.disasters.ext2),
+			ext3: new graph(generateRadar, 'main6', initialData.disasters.data.slice(0), initialData.disasters.ext3.norms),
+			ext4: new graph(generateGraph, 'main7', initialData.disasters.data.slice(0, 8), initialData.disasters.ext4),
+			ext5: new graph(generateScatter, 'main8', initialData.disasters.data, initialData.disasters.ext5.message),
+			ext6: new graph(generateWordTree, 'main9', initialData.disasters.data, initialData.disasters.ext6.slips)
+		}
+	};
+	
+	$scope.bombs = {
+		show: true,
+		visualizations: {
+			anychart: new graph(generateBarChart, 'main1', initialData.disasters.data),
 			highcharts: new graph(generateHighCharts, 'main2', initialData.disasters.data),
 			geocharts: new graph(generateGeoCharts, 'main3', initialData.disasters.data)
 		},
