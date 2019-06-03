@@ -1,4 +1,4 @@
-angular.module('SOS1819-app', ['ngRoute', "SOS1819-app.majorDisastersApp", "SOS1819-app.Pema", "SOS1819-app.Fronti"])
+angular.module('SOS1819-app', ['ngRoute', "SOS1819-app.majorDisastersApp", "SOS1819-app.Pema", "SOS1819-app.Fronti", "SOS1819-app.integrations", 'SOS1819-app.analytics'])
 	.config(function ($routeProvider) {
   		$routeProvider
 			/*
