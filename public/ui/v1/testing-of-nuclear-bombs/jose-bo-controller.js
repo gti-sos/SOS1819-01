@@ -10,19 +10,22 @@ app.controller("PemaController", function($scope, $http, $q) {
     $scope.count = 0;
     var dataExt = [];
     var dataExt1 = [];
+    var dataExt2 = [];
+    var dataExt3 = [];
 
     $scope.get = function() {
         var obj = JSON.parse(JSON.stringify($scope.filter));
         //var search = Object.assign(obj, $scope.pagination);
         var search = angular.merge(obj, $scope.pagination);
         $q.all([$http.get(url, { params: search }), $http.get(url2 + '/count', { params: search }), $http.get("/proxy/youth-unemployment-stats"),
-            $http.get("/proxy/emigrations-by-countries")
+            $http.get("/proxy/emigrations-by-countries"), $http.get("/proxy/marcas-vehiculos") ,$http.get("/proxy/albums")
         ]).then(function(responses) {
             $scope.data = responses[0].data;
             $scope.count = Math.ceil(responses[1].data.count / $scope.pagination.limit);
             dataExt = responses[2].data;
             dataExt1 = responses[3].data;
-
+            dataExt2 = responses[4].data;
+            dataExt3 = responses[5].data;
 
             /////////////////////////////////////////////VISUALIZACION///////////////////////////////////////////////////////////
 
@@ -56,8 +59,8 @@ app.controller("PemaController", function($scope, $http, $q) {
             // set the titles of the axes
             chart.xAxis().title("Countries");
             chart.yAxis().title("Shot");
-            
-            
+
+
             //Configurar tooltip
             chart.tooltip().title("Shot for Countries");
             chart.tooltip().format("Countries: {%categoryName} \n Shot: {%value}");
@@ -174,6 +177,8 @@ app.controller("PemaController", function($scope, $http, $q) {
                 dataGraf4.push([key, aux4[key]]);
             }
 
+            dataGraf4 = dataGraf4.concat(dataGraf);
+
             // create a chart
             chart = anychart.bar();
 
@@ -181,15 +186,15 @@ app.controller("PemaController", function($scope, $http, $q) {
             var series = chart.bar(dataGraf4);
 
             // set the chart title
-            chart.title("Nivel de paro en ciertos paises.");
+            chart.title("Integración entre API testing y unemployment.");
 
             // set the titles of the axes
-            chart.xAxis().title("Paro");
-            chart.yAxis().title("País");
-            
+            chart.xAxis().title("País");
+            chart.yAxis().title("Paro y Proyectiles");
+
             //Configurar tooltip
             chart.tooltip().title("Countries");
-            chart.tooltip().format("Countries: {%categoryName} \n Paro: {%value}");
+            chart.tooltip().format("Countries: {%categoryName} \n Paro y Proyectiles: {%value}");
             // set the container id
             chart.container("grafAnd");
 
@@ -205,8 +210,10 @@ app.controller("PemaController", function($scope, $http, $q) {
                     dataGraf5.push([object5.country, object5.totalemigrant])
                 }
 
+
+                dataGraf5 = dataGraf5.concat(dataGraf2);
+
             }
-            console.log(dataGraf5);
             // Set up the chart
             Highcharts.chart('grafEmi', {
                 chart: {
@@ -219,7 +226,7 @@ app.controller("PemaController", function($scope, $http, $q) {
                     }
                 },
                 title: {
-                    text: 'Emigrantes por paises'
+                    text: 'Integración entre las API testing y emigrations'
                 },
                 plotOptions: {
                     series: {
@@ -237,15 +244,75 @@ app.controller("PemaController", function($scope, $http, $q) {
                     }
                 },
                 series: [{
-                    name: 'Emigrantes',
+                    name: 'Emigrantes y Carga explosiva',
                     data: dataGraf5
                 }]
             });
 
+            var dataGraf6 = [];
+
+            for (var i = 0; i < dataExt2.length; i++) {
+                if (i >= $scope.data.length)
+                    break;
+                var object6 = dataExt2[i];
+                dataGraf6.push([object6.nome, parseInt(object6.codigo), $scope.data[i].shot]);
+
+            }
+
+            Highcharts.chart('grafVeh', {
+
+                chart: {
+                    type: 'variwide'
+                },
+
+                title: {
+                    text: 'Integración Api externa 1'
+                },
+
+                xAxis: {
+                    type: 'category',
+                    title: {
+                        text: 'Nombre Vehiculos'
+                    }
+                },
+
+                legend: {
+                    enabled: false
+                },
+
+                series: [{
+                    name: 'Labor Costs',
+                    data: dataGraf6,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.y:.0f}'
+                    },
+                    tooltip: {
+                        pointFormat: 'Codigo: <b> {point.y}</b><br>' +
+                            'Proyectiles: <b> {point.z} </b><br>'
+                    },
+                    colorByPoint: true
+                }]
+
+            });
+            
+            var dataGraf7 = [];
+
+            for (var i = 0; i < dataExt3.length; i++) {
+                if (i >= $scope.data.length)
+                    break;
+                var object7 = dataExt3[i];
+                dataGraf7.push([object7.name,object7.albums, $scope.data[i].hob]);
+
+            }
+            
+            console.table(dataGraf7);
+            
             //////////////////////////////////////////FINAL VISUALIZACIÓN//////////////////////////////////////////////////        
 
 
         }).catch(function(response) {
+            console.log(response);
             window.alert("No se han obtenido los datos.");
         });
     };
