@@ -50,6 +50,7 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
     var poke=[];
     var got=[];
     var dataExt1 = [];
+    var cnjoke=[];
 
     $scope.pagination = {
         offset: 0,
@@ -90,7 +91,8 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
             $http.get("/proxy/country-stats"),
             $http.get("/proxy/computers-attacks-stats"),
             $http.get("/proxy/poke"),
-            $http.get("/proxy/got")
+            $http.get("/proxy/got"),
+            $http.get("/proxy/cn")
             ]).then(function(responses) {
             $scope.hurricanes = responses[0].data;
             $scope.hurricanes2 = responses[2].data;
@@ -98,7 +100,8 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
             comAta =responses[4].data;
             poke =responses[5].data.results;
             got=responses[6].data;
-            console.table(got)
+            cnjoke=responses[7].data;
+            console.table(cnjoke)
             console.log(responses)
             cuentadanos();
             fium();
@@ -107,6 +110,7 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
             cataques();
             pokeGraph();
             chanchachachanchan();
+            cncall();
             $scope.count = Math.ceil(responses[1].data.count / $scope.pagination.limit);
             if (cb) cb();
         }).catch(function(response) {
@@ -854,7 +858,7 @@ var lineStyle = {
 option = {
     backgroundColor: '#161627',
     title: {
-        text: 'AQI - 雷达图',
+        text: 'GOT Books with a random hurricane data',
         left: 'center',
         textStyle: {
             color: '#eee'
@@ -931,6 +935,63 @@ option = {
 
 }
 
+function cncall(){
+    
+    var data=$scope.hurricanes.map(function(e, i) {
+        return {from: e.name, to: cnjoke.value.joke, value: 100};
+    });
+    
+    anychart.onDocumentReady(function () {
+    // create sankey chart
+    chart = anychart.sankey();
+
+    // set chart's data
+    chart.data(data);
+
+    // set curve factor for the flow
+    chart.curveFactor(0);
+
+    // set chart's palette
+    chart.palette(['#47659b', '#355691', '#314f84', '#2c4777', '#273f6a', '#22375d', '#1d2f50',
+        '#192842', '#1d2f50', '#22375d', '#273f6a', '#2c4777', '#314f84', '#355691', '#47659b'
+    ]);
+
+    // // set nodes width and padding
+    chart.nodeWidth(200);
+
+    // set node's label font color and weight
+    chart.node().normal().labels()
+        .fontColor('#fff')
+        .fontWeight('bold');
+
+    //disable tooltips for thew node
+    chart.node().tooltip().enabled(false);
+
+    // disable tooltip and label in hovered state for the flow
+    chart.flow().tooltip().enabled(false);
+    chart.flow().hovered().labels().enabled(false);
+
+    // set flow's normal and hovered fill
+    chart.flow({
+        normal: {
+            fill: function () {
+                return this.sourceColor + ' ' + .3
+            },
+        },
+        hovered: {
+            fill: function () {
+                return this.sourceColor + ' ' + .9
+            },
+        }
+    });
+
+    // set container id for the chart
+    chart.container('chuck');
+
+    // initiate chart drawing
+    chart.draw();
+});
+}
 
 //###################################
 

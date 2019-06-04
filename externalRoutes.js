@@ -63,6 +63,9 @@ get('/youth-unemployment-stats', function(req, res) {
 	.get('/got', function(req, res) {
 		req.pipe(request('https://anapioficeandfire.com/api/books')).pipe(res);
 	})
+	.get('/cn', function(req, res) {
+		req.pipe(request('http://api.icndb.com/jokes/random')).pipe(res);
+	})
 
 	.get('/awhere/weather', function(req, res) {
 		var randomToken = aweatherCredentials[Math.floor(Math.random() * aweatherCredentials.length)];
