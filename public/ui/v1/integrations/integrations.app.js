@@ -9,16 +9,16 @@ angular.module('SOS1819-app.integrations', ['ngRoute', 'SOS1819-app', 'SOS1819-a
 			initialData: function ($http, MajorDisaster, Hurricanes, Cities, Dogs, Advice, TestingOfNuclearBombs, PollutionStats, SportsCenters, WeatherStats, DonaldTrump, $location, $q) {
 				var initialData = {};
 				var majorDisastersPromises = [
-				MajorDisaster.v1.list({}), 
-				PollutionStats.list({}),
-				SportsCenters.list({}),
-				WeatherStats.list({}),
-				DonaldTrump.random(),
-				DonaldTrump.random(),
-				DonaldTrump.random(),
-				Dogs.list(),
-				Advice.list(),
-				Cities.list()
+					MajorDisaster.v1.list({}), 
+					PollutionStats.list({}),
+					SportsCenters.list({}),
+					WeatherStats.list({}),
+					DonaldTrump.random(),
+					DonaldTrump.random(),
+					DonaldTrump.random(),
+					Dogs.list(),
+					Advice.list(),
+					Cities.list()
 				];
 
 				var hurricanesPromises = [
