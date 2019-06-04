@@ -26,7 +26,9 @@ angular.module('SOS1819-app.integrations', ['ngRoute', 'SOS1819-app', 'SOS1819-a
 				$http.get("/proxy/country-stats"),
 				$http.get("/proxy/computers-attacks-stats"),
 				$http.get("/proxy/poke"),
-				$http.get("/proxy/got")
+				$http.get("/proxy/got"),
+				$http.get("/proxy/cn"),
+				$http.get("https://breaking-bad-quotes.herokuapp.com/v1/quotes")
 				];
 				
 				var bombsPromises = [
@@ -34,7 +36,10 @@ angular.module('SOS1819-app.integrations', ['ngRoute', 'SOS1819-app', 'SOS1819-a
 				$http.get("/proxy/youth-unemployment-stats"),
 				$http.get("/proxy/emigrations-by-countries"),
 				$http.get("/proxy/marcas-vehiculos"), 
-				$http.get("/proxy/albums")
+				$http.get("/proxy/albums"),
+				$http.get("/proxy/poblacionUSA"),
+				$http.get("/proxy/middleUS"),
+				$http.get("/proxy/NFLarrestos")
 				];
 				
 				initialData.disasters = $q.all(majorDisastersPromises).then(function (res) {
@@ -63,7 +68,10 @@ angular.module('SOS1819-app.integrations', ['ngRoute', 'SOS1819-app', 'SOS1819-a
 						ext1: res[1].data, 
 						ext2: res[2].data, 
 						ext3: res[3].data,
-						ext4: res[4].data
+						ext4: res[4].data,
+						ext5: res[5].data,
+						ext6: res[6].data
+
 
 					};
 				}).catch(function (res) {
@@ -76,7 +84,10 @@ angular.module('SOS1819-app.integrations', ['ngRoute', 'SOS1819-app', 'SOS1819-a
 						ext1: res[1].data,
 						ext2: res[2].data,
 						ext3: res[3].data,
-						ext4: res[4].data
+						ext4: res[4].data,
+						ext5: res[5].data,
+						ext6: res[6].data,
+						ext7: res[7].data
 					};
 				}).catch(function (res) {
 					return {data: []};

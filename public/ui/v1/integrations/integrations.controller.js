@@ -1242,7 +1242,7 @@ angular.module('SOS1819-app.integrations')
 	    };
 
 	    myChart2.setOption(option);
-	};
+	}
 
 	function cataques(id, datos1, datos2) {
 
@@ -1331,8 +1331,64 @@ angular.module('SOS1819-app.integrations')
 	    });
 
 	    chart.addSeries(mySeries);
+	}
 
+	function cncall(id, ownData, extData){
+	    
+	    var data = ownData.map(function(e, i) {
+	        return {from: e.name, to: extData.value.joke, value: 100};
+	    });
+	    
+	    anychart.onDocumentReady(function () {
+	    // create sankey chart
+	    chart = anychart.sankey();
 
+	    // set chart's data
+	    chart.data(data);
+
+	    // set curve factor for the flow
+	    chart.curveFactor(0);
+
+	    // set chart's palette
+	    chart.palette(['#47659b', '#355691', '#314f84', '#2c4777', '#273f6a', '#22375d', '#1d2f50',
+	        '#192842', '#1d2f50', '#22375d', '#273f6a', '#2c4777', '#314f84', '#355691', '#47659b'
+	    ]);
+
+	    // // set nodes width and padding
+	    chart.nodeWidth(200);
+
+	    // set node's label font color and weight
+	    chart.node().normal().labels()
+	        .fontColor('#fff')
+	        .fontWeight('bold');
+
+	    //disable tooltips for thew node
+	    chart.node().tooltip().enabled(false);
+
+	    // disable tooltip and label in hovered state for the flow
+	    chart.flow().tooltip().enabled(false);
+	    chart.flow().hovered().labels().enabled(false);
+
+	    // set flow's normal and hovered fill
+	    chart.flow({
+	        normal: {
+	            fill: function () {
+	                return this.sourceColor + ' ' + .3
+	            },
+	        },
+	        hovered: {
+	            fill: function () {
+	                return this.sourceColor + ' ' + .9
+	            },
+	        }
+	    });
+
+	    // set container id for the chart
+	    chart.container(id);
+
+	    // initiate chart drawing
+	    chart.draw();
+	});
 	}
 
 	function chanchachachanchan(id, datos1, datos2) {
@@ -1802,6 +1858,247 @@ angular.module('SOS1819-app.integrations')
 
 	}
 
+	function view8(id, data, dataExt) {
+		var dataGraf = [];
+		dataExt = dataExt.data;
+		for (var i = 0; i < dataExt.length; i++) {
+			if (i >= dataExt.length)
+				break;
+			var object6 = dataExt[i];
+			dataGraf.push([object6.Year, data[i].maxYield * 1000, object6.Population]);
+
+		}
+
+
+		var data = anychart.data.set(dataGraf);
+
+		// map the data
+		var seriesData_1 = data.mapAs({ x: 0, value: 1 });
+		var seriesData_2 = data.mapAs({ x: 0, value: 2 });
+
+		// create a chart
+		chart = anychart.vertical();
+
+		// create the first series (bar)
+		var series1 = chart.splineArea(seriesData_1);
+
+		// create the second series (spline)
+		var series2 = chart.spline(seriesData_2);
+
+		// set the container id
+		chart.container(id);
+
+		// initiate drawing the chart
+		chart.draw();
+	}
+
+	var graph = function(fn) {
+		var slicedArgs = Array.prototype.slice.call(arguments, 1);
+		this.show = false;
+		this.generate = fn.bind(this, ...slicedArgs);
+		this.toggle = function() {
+			this.show = !this.show;
+			if (this.show) setTimeout(this.generate, 0);
+		};
+	};
+
+	function view9(id, data, dataExt) {
+		var aux = {};
+		var dataGraf = [];
+
+		for (var i = 0; i < dataExt.length; i++) {
+			var object = dataExt[i];
+			var exist = aux[object.country];
+			if (!exist) {
+				aux[object.country] = object.name;
+			}
+		}
+		var i = 0;
+		for (var key in aux) {
+			dataGraf.push({ name: aux[key], value: data[i].shot });
+			i++;
+
+		};
+
+
+		var myChart44 = echarts.init(document.getElementById(id));
+		var option = {
+			backgroundColor: '#2c343c',
+
+			title: {
+				text: 'Integración 6',
+				left: 'center',
+				top: 20,
+				textStyle: {
+					color: '#ccc'
+				}
+			},
+
+			tooltip: {
+				trigger: 'item',
+				formatter: "{a} <br/>{b} : {c} ({d}%)"
+			},
+
+			visualMap: {
+				show: false,
+				min: 80,
+				max: 600,
+				inRange: {
+					colorLightness: [0, 1]
+				}
+			},
+			series: [{
+				name: 'Universidades Middle',
+				type: 'pie',
+				radius: '55%',
+				center: ['50%', '50%'],
+				data: dataGraf.sort(function(a, b) { return a.value - b.value; }),
+				roseType: 'radius',
+				label: {
+					normal: {
+						textStyle: {
+							color: 'rgba(255, 255, 255, 0.3)'
+						}
+					}
+				},
+				labelLine: {
+					normal: {
+						lineStyle: {
+							color: 'rgba(255, 255, 255, 0.3)'
+						},
+						smooth: 0.2,
+						length: 10,
+						length2: 20
+					}
+				},
+				itemStyle: {
+					normal: {
+						color: '#c23531',
+						shadowBlur: 200,
+						shadowColor: 'rgba(230, 50, 0, 0.5)'
+					}
+				},
+
+				animationType: 'scale',
+				animationEasing: 'elasticOut',
+				animationDelay: function(idx) {
+					return Math.random() * 200;
+				}
+			}]
+		};
+		myChart44.setOption(option);
+	};
+
+	function view10(id, data, dataExt) {
+		var aux = {};
+		var dataGraf = [];
+		var dataGraf1 = [];
+		var dataGraf2 = [];
+
+		for (var i = 0; i < dataExt.length; i++) {
+			var object = dataExt[i];
+			var exist = aux[object.Name];
+			if (!exist) {
+				aux[object.Name] = object.arrest_count;
+			}
+		}
+		var i = 0;
+		for (var key in aux) {
+			if (i >= data.length) {
+				break;
+			}
+			dataGraf.push(key);
+			dataGraf1.push(aux[key]);
+			dataGraf2.push(data[i].shot);
+
+			i++;
+
+		}
+
+		var ctx = document.getElementById(id).getContext('2d');
+		var config = {
+			type: 'line',
+			data: {
+				labels: dataGraf,
+				datasets: [{
+					label: 'My First dataset',
+					//backgroundColor: window.chartColors.red,
+					//borderColor: window.chartColors.red,
+					data: dataGraf1,
+					fill: false,
+				}, {
+					label: 'My Second dataset',
+					fill: false,
+					//backgroundColor: window.chartColors.blue,
+					//borderColor: window.chartColors.blue,
+					data: dataGraf2,
+				}]
+			},
+			options: {
+				responsive: true,
+				title: {
+					display: true,
+					text: 'Chart.js Line Chart'
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Month'
+						}
+					}],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Value'
+						}
+					}]
+				}
+			}
+		};
+		window.myLine = new Chart(ctx, config);
+	};
+
+
+	function bbcall (id, ownData, bbad){
+	    
+	    google.charts.load('current', {packages: ['corechart', 'bar']});
+	    google.charts.setOnLoadCallback(drawBarColors);
+
+	    function drawBarColors () {
+	    var auxbb =[];
+	    auxbb.push(['Breaking bad character',"mbar"])
+	    auxbb.push([bbad[0].author,parseInt(ownData[1].mbar)])
+	    var data = google.visualization.arrayToDataTable(auxbb);
+	    
+	    var options = {
+	        title: '',
+	        chartArea: {width: '50%'},
+	        colors: ['#b0120a', '#ffab91'],
+	        hAxis: {
+	          title: bbad[0].author,
+	          minValue: 0
+	        },
+	        vAxis: {
+	          title: "mbar"
+	        }
+	      };
+	    
+	      var chart = new google.visualization.BarChart(document.getElementById(id));
+	      chart.draw(data, options);
+	    }
+	}
+
 	var graph = function (fn) {
 		var slicedArgs = Array.prototype.slice.call(arguments, 1);
 		this.show = false;
@@ -1842,7 +2139,10 @@ angular.module('SOS1819-app.integrations')
 			ext1: new graph(view4, 'vista4', initialData.bombs.data.slice(0), initialData.bombs.ext1),
 			ext2: new graph(view5, 'vista5', initialData.bombs.data.slice(0), initialData.bombs.ext2),
 			ext3: new graph(view6, 'vista6', initialData.bombs.data.slice(0), initialData.bombs.ext3),
-			ext4: new graph(view7, 'vista7', initialData.bombs.data.slice(0), initialData.bombs.ext4)
+			ext4: new graph(view7, 'vista7', initialData.bombs.data.slice(0), initialData.bombs.ext4),
+			ext5: new graph(view8, 'vista8', initialData.bombs.data.slice(0), initialData.bombs.ext5),
+			ext6: new graph(view9, 'vista9', initialData.bombs.data.slice(0), initialData.bombs.ext6),
+			ext7: new graph(view10, 'vista10', initialData.bombs.data.slice(0), initialData.bombs.ext7)
 		}
 	};
 
@@ -1858,6 +2158,8 @@ angular.module('SOS1819-app.integrations')
 			ext2: new graph(cataques, 'main5h', initialData.hurricanes.data, initialData.hurricanes.ext2),
 			ext3: new graph(pokeGraph, 'main6h', initialData.hurricanes.data, initialData.hurricanes.ext3.results),//
 			ext4: new graph(chanchachachanchan, 'main7h', initialData.hurricanes.data, initialData.hurricanes.ext4),
+			ext5: new graph(cncall, 'main8h', initialData.hurricanes.data, initialData.hurricanes.ext5),
+			ext6: new graph(bbcall, 'main9h', initialData.hurricanes.data, initialData.hurricanes.ext6)
 		}
 	};
 

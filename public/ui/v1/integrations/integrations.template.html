@@ -67,6 +67,8 @@
 				<button class="btn btn-primary" ng-class="{'btn-info': hurricanes.integrations.ext2.show}" ng-click="hurricanes.integrations.ext2.toggle()">Integración 2 (SOS1819-03)</button>
 				<button class="btn btn-primary" ng-class="{'btn-info': hurricanes.integrations.ext3.show}" ng-click="hurricanes.integrations.ext3.toggle()">Integración 3 (pokeapi)</button>
 				<button class="btn btn-primary" ng-class="{'btn-info': hurricanes.integrations.ext4.show}" ng-click="hurricanes.integrations.ext4.toggle()">Integración 4 (An Api Of Ice And Fire)</button>
+				<button class="btn btn-primary" ng-class="{'btn-info': hurricanes.integrations.ext5.show}" ng-click="hurricanes.integrations.ext5.toggle()">Integración 5 (Random Chuck Norris)</button>
+				<button class="btn btn-primary" ng-class="{'btn-info': hurricanes.integrations.ext6.show}" ng-click="hurricanes.integrations.ext6.toggle()">Integración 6 (Breaking Bad)</button>
 			</div>
 		</div>
 		<p></p>
@@ -85,6 +87,10 @@
 			<div ng-if="hurricanes.integrations.ext3.show" id="main6h" style="width:inherit; height:inherit;"></div>
 
 			<div ng-if="hurricanes.integrations.ext4.show" id="main7h" style="width:inherit; height:inherit;"></div>
+
+			<div ng-if="hurricanes.integrations.ext5.show" id="main8h" style="width:inherit; height:inherit;"></div>
+
+			<div ng-if="hurricanes.integrations.ext6.show" id="main9h" style="width:inherit; height:inherit;"></div>
 
 		</div>
 	</div>
@@ -107,6 +113,9 @@
 				<button class="btn btn-primary" ng-class="{'btn-info': bombs.integrations.ext2.show}" ng-click="bombs.integrations.ext2.toggle()">Integración 2 (SOS1819-08)</button>
 				<button class="btn btn-primary" ng-class="{'btn-info': bombs.integrations.ext3.show}" ng-click="bombs.integrations.ext3.toggle()">Integración 3 (Vehiculos)</button>
 				<button class="btn btn-primary" ng-class="{'btn-info': bombs.integrations.ext4.show}" ng-click="bombs.integrations.ext4.toggle()">Integración 4 (Albums)</button>
+				<button class="btn btn-primary" ng-class="{'btn-info': bombs.integrations.ext5.show}" ng-click="bombs.integrations.ext5.toggle()">Integración 5 (Poblacion USA)</button>
+				<button class="btn btn-primary" ng-class="{'btn-info': bombs.integrations.ext6.show}" ng-click="bombs.integrations.ext6.toggle()">Integración 6 (Universidades)</button>
+				<button class="btn btn-primary" ng-class="{'btn-info': bombs.integrations.ext7.show}" ng-click="bombs.integrations.ext7.toggle()">Integración 7 (Arrestos NFL)</button>
 
 			</div>
 		</div>
@@ -126,7 +135,12 @@
 			<div ng-if="bombs.integrations.ext3.show" id="vista6" style="width:inherit; height:inherit;"></div>
 
 			<div ng-if="bombs.integrations.ext4.show" id="vista7" style="width:inherit; height:inherit;"></div>
-
+			
+			<div ng-if="bombs.integrations.ext5.show" id="vista8" style="width:inherit; height:inherit;"></div>
+						
+			<div ng-if="bombs.integrations.ext6.show" id="vista9" style="width:inherit; height:inherit;"></div>
+			
+			<canvas ng-if="bombs.integrations.ext7.show" id="vista10" style="width:inherit; height:inherit;"></canvas>
 		</div>
 	</div>
 

@@ -21,8 +21,9 @@ var aweatherCredentials = [
 
 
 
-router.
-get('/youth-unemployment-stats', function(req, res) {
+router
+
+	.get('/youth-unemployment-stats', function(req, res) {
 		req.pipe(request('https://sos1819-12.herokuapp.com/api/v1/youth-unemployment-stats')).pipe(res);
 	})
 
@@ -51,13 +52,19 @@ get('/youth-unemployment-stats', function(req, res) {
 		req.pipe(request('https://api.myjson.com/bins/1lzv8')).pipe(res);
 	})
 
+	.get('/poblacionUSA', function(req, res) {
+		req.pipe(request('https://datausa.io/api/data?drilldowns=Nation&measures=Population')).pipe(res);
+	})
+
+	.get('/middleUS', function(req, res) {
+		req.pipe(request('http://universities.hipolabs.com/search?name=middle')).pipe(res);
+	})
+
+	.get('/NFLarrestos', function(req, res) {
+		req.pipe(request('http://nflarrest.com/api/v1/crime/topPlayers/Theft')).pipe(res);
+	})
+
 	.get('/poke', function(req, res) {
-		/*
-		request('https://pokeapi.co/api/v2/type', function (err, httpcode, resp) {
-			console.log(resp)
-			res.json({})
-		})
-		*/
 		req.pipe(request('https://pokeapi.co/api/v2/type')).pipe(res);
 	})
 	.get('/got', function(req, res) {
