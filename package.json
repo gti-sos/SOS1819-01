@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "pretest": "killall phantomjs; ./tests/runPhantomJS.sh",
+    "pretest": "killall phantomjs; ./tests/runPhantomJS.sh; npm test && exec 1>&6 6>&-",
     "test": "npm start;npm run test-testing-of-nuclear-bombs; npm run test-hurricanes; npm run test-major-disasters; protractor ./tests/config.js",
     "test-testing-of-nuclear-bombs": "newman run https://www.getpostman.com/collections/a4e554c52652db1ae87e",
     "test-major-disasters": "newman run https://www.getpostman.com/collections/e932bf9cc89cbcf15301",
