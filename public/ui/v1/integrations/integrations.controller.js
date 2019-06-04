@@ -1,9 +1,103 @@
 angular.module('SOS1819-app.integrations')
 
-.controller('integrationsCtrl', function($scope, initialData) {
+.controller('integrationsCtrl', function($scope, $http, MajorDisaster, Hurricanes, Cities, Dogs, Advice, TestingOfNuclearBombs, PollutionStats, SportsCenters, WeatherStats, DonaldTrump, $location, $q) {
     $scope.apiName = '';
+    $scope.loading = true;
+    console.log(initialPromises);
+    var initialData = [];
 
-    console.log(initialData);
+
+    var initialPromises = {};
+    var majorDisastersPromises = [
+        MajorDisaster.v1.list({}),
+        PollutionStats.list({}),
+        SportsCenters.list({}),
+        WeatherStats.list({}),
+        DonaldTrump.random(),
+        DonaldTrump.random(),
+        DonaldTrump.random(),
+        Dogs.list(),
+        Advice.list(),
+        Cities.list()
+    ];
+
+    var hurricanesPromises = [
+        Hurricanes.get(),
+        $http.get("/proxy/country-stats"),
+        $http.get("/proxy/computers-attacks-stats"),
+        $http.get("/proxy/poke"),
+        $http.get("/proxy/got"),
+        $http.get("/proxy/cn"),
+        $http.get("https://breaking-bad-quotes.herokuapp.com/v1/quotes"),
+        $http.get("https://swapi.co/api/people/")
+    ];
+
+    var bombsPromises = [
+        TestingOfNuclearBombs.get(),
+        $http.get("/proxy/youth-unemployment-stats"),
+        $http.get("/proxy/emigrations-by-countries"),
+        $http.get("/proxy/marcas-vehiculos"),
+        $http.get("/proxy/albums"),
+        $http.get("/proxy/poblacionUSA"),
+        $http.get("/proxy/middleUS"),
+        $http.get("/proxy/NFLarrestos")
+    ];
+
+    initialPromises.disasters = $q.all(majorDisastersPromises).then(function(res) {
+        return {
+            data: res[0].data,
+            ext1: res[1].data,
+            ext2: res[2].data,
+            ext3: res[3].data,
+            ext4: [
+                res[4].data,
+                res[5].data,
+                res[6].data
+            ],
+            ext5: res[7].data,
+            ext6: res[8].data,
+            ext7: res[9].data
+        };
+
+    }).catch(function(res) {
+        return {
+            data: [], ext1: [], ext2: [], ext3: [], ext4: [], ext5: [], ext6: [], ext7: []
+        };
+    });
+
+    initialPromises.hurricanes = $q.all(hurricanesPromises).then(function(res) {
+        return {
+            data: res[0].data,
+            ext1: res[1].data,
+            ext2: res[2].data,
+            ext3: res[3].data,
+            ext4: res[4].data,
+            ext5: res[5].data,
+            ext6: res[6].data,
+            ext7: res[7].data
+        };
+    }).catch(function(res) {
+        return {
+            data: [], ext1: [], ext2: [], ext3: [], ext4: [], ext5: [], ext6: [], ext7: []
+        };
+    });
+
+    initialPromises.bombs = $q.all(bombsPromises).then(function(res) {
+        return {
+            data: res[0].data,
+            ext1: res[1].data,
+            ext2: res[2].data,
+            ext3: res[3].data,
+            ext4: res[4].data,
+            ext5: res[5].data,
+            ext6: res[6].data,
+            ext7: res[7].data
+        };
+    }).catch(function(res) {
+        return {
+            data: [], ext1: [], ext2: [], ext3: [], ext4: [], ext5: [], ext6: [], ext7: []
+        };
+    });
 
 
     function getRandomColor() {
@@ -2192,58 +2286,61 @@ function cstats(id, datos1, datos2) {
             }
         }
 
-      $scope.disasters = {
-        show: true,
-        visualizations: {
-            echarts: new graph(generateBarChart, 'main1', initialData.disasters.data),
-            highcharts: new graph(generateHighCharts, 'main2', initialData.disasters.data),
-            geocharts: new graph(generateGeoCharts, 'main3', initialData.disasters.data)
-        },
-        integrations: {
-            ext1: new graph(generateLineChart, 'main4', initialData.disasters.data.slice(0), initialData.disasters.ext1),
-            ext2: new graph(generateHeatmap, 'main5', initialData.disasters.data.slice(0), initialData.disasters.ext2),
-            ext3: new graph(generateRadar, 'main6', initialData.disasters.data.slice(0), initialData.disasters.ext3.norms),
-            ext4: new graph(generateGraph, 'main7', initialData.disasters.data.slice(0, 8), initialData.disasters.ext4),
-            ext5: new graph(generateScatter, 'main8', initialData.disasters.data, initialData.disasters.ext5.message),
-            ext6: new graph(generateWordTree, 'main9', initialData.disasters.data.slice(0, 25), initialData.disasters.ext6.slips),
-            ext7: new graph(generatePie, 'main10', initialData.disasters.ext7.results)
-        }
-    };
+        $q.all(initialPromises).then(function (res) {
+          initialData = res;
+          $scope.loading = false;
+          $scope.disasters = {
+              show: true,
+              visualizations: {
+                  echarts: new graph(generateBarChart, 'main1', initialData.disasters.data),
+                  highcharts: new graph(generateHighCharts, 'main2', initialData.disasters.data),
+                  geocharts: new graph(generateGeoCharts, 'main3', initialData.disasters.data)
+              },
+              integrations: {
+                  ext1: new graph(generateLineChart, 'main4', initialData.disasters.data.slice(0), initialData.disasters.ext1),
+                  ext2: new graph(generateHeatmap, 'main5', initialData.disasters.data.slice(0), initialData.disasters.ext2),
+                  ext3: new graph(generateRadar, 'main6', initialData.disasters.data.slice(0), initialData.disasters.ext3.norms),
+                  ext4: new graph(generateGraph, 'main7', initialData.disasters.data.slice(0, 8), initialData.disasters.ext4),
+                  ext5: new graph(generateScatter, 'main8', initialData.disasters.data, initialData.disasters.ext5.message),
+                  ext6: new graph(generateWordTree, 'main9', initialData.disasters.data.slice(0, 25), initialData.disasters.ext6.slips),
+                  ext7: new graph(generatePie, 'main10', initialData.disasters.ext7.results)
+              }
+          };
 
-    $scope.bombs = {
-        show: true,
-        visualizations: {
-            anychart: new graph(view1, 'vista1', initialData.bombs.data),
-            highcharts: new graph(view2, 'vista2', initialData.bombs.data),
-            geocharts: new graph(view3, 'vista3', initialData.bombs.data)
-        },
-        integrations: {
-            ext1: new graph(view4, 'vista4', initialData.bombs.data.slice(0), initialData.bombs.ext1),
-            ext2: new graph(view5, 'vista5', initialData.bombs.data.slice(0), initialData.bombs.ext2),
-            ext3: new graph(view6, 'vista6', initialData.bombs.data.slice(0), initialData.bombs.ext3),
-            ext4: new graph(view7, 'vista7', initialData.bombs.data.slice(0), initialData.bombs.ext4),
-            ext5: new graph(view8, 'vista8', initialData.bombs.data.slice(0), initialData.bombs.ext5),
-            ext6: new graph(view9, 'vista9', initialData.bombs.data.slice(0), initialData.bombs.ext6),
-            ext7: new graph(view10, 'vista10', initialData.bombs.data.slice(0), initialData.bombs.ext7)
-        }
-    };
+          $scope.bombs = {
+              show: true,
+              visualizations: {
+                  anychart: new graph(view1, 'vista1', initialData.bombs.data),
+                  highcharts: new graph(view2, 'vista2', initialData.bombs.data),
+                  geocharts: new graph(view3, 'vista3', initialData.bombs.data)
+              },
+              integrations: {
+                  ext1: new graph(view4, 'vista4', initialData.bombs.data.slice(0), initialData.bombs.ext1),
+                  ext2: new graph(view5, 'vista5', initialData.bombs.data.slice(0), initialData.bombs.ext2),
+                  ext3: new graph(view6, 'vista6', initialData.bombs.data.slice(0), initialData.bombs.ext3),
+                  ext4: new graph(view7, 'vista7', initialData.bombs.data.slice(0), initialData.bombs.ext4),
+                  ext5: new graph(view8, 'vista8', initialData.bombs.data.slice(0), initialData.bombs.ext5),
+                  ext6: new graph(view9, 'vista9', initialData.bombs.data.slice(0), initialData.bombs.ext6),
+                  ext7: new graph(view10, 'vista10', initialData.bombs.data.slice(0), initialData.bombs.ext7)
+              }
+          };
 
-    $scope.hurricanes = {
-        show: true,
-        visualizations: {
-                ejscharts: new graph(cuentadanos, 'main1h', initialData.hurricanes.data), //
-                highcharts: new graph(fium, 'main2h', initialData.hurricanes.data),
-                geocharts: new graph(mapa, 'main3h', initialData.hurricanes.data)
-            },
-            integrations: {
-                ext1: new graph(cstats, 'main4h', initialData.hurricanes.data.slice(0, 10), initialData.hurricanes.ext1),
-                ext2: new graph(cataques, 'main5h', initialData.hurricanes.data, initialData.hurricanes.ext2),
-                ext3: new graph(pokeGraph, 'main6h', initialData.hurricanes.data, initialData.hurricanes.ext3.results), //
-                ext4: new graph(chanchachachanchan, 'main7h', initialData.hurricanes.data, initialData.hurricanes.ext4),
-                ext5: new graph(cncall, 'main8h', initialData.hurricanes.data, initialData.hurricanes.ext5),
-                ext6: new graph(bbcall, 'main9h', initialData.hurricanes.data, initialData.hurricanes.ext6),
-                ext7: new graph(balon, 'main10h', initialData.hurricanes.data, initialData.hurricanes.ext7.results)
-            }
-        };
-
+          $scope.hurricanes = {
+              show: true,
+              visualizations: {
+                      ejscharts: new graph(cuentadanos, 'main1h', initialData.hurricanes.data), //
+                      highcharts: new graph(fium, 'main2h', initialData.hurricanes.data),
+                      geocharts: new graph(mapa, 'main3h', initialData.hurricanes.data)
+                  },
+                  integrations: {
+                      ext1: new graph(cstats, 'main4h', initialData.hurricanes.data.slice(0, 10), initialData.hurricanes.ext1),
+                      ext2: new graph(cataques, 'main5h', initialData.hurricanes.data, initialData.hurricanes.ext2),
+                      ext3: new graph(pokeGraph, 'main6h', initialData.hurricanes.data, initialData.hurricanes.ext3.results), //
+                      ext4: new graph(chanchachachanchan, 'main7h', initialData.hurricanes.data, initialData.hurricanes.ext4),
+                      ext5: new graph(cncall, 'main8h', initialData.hurricanes.data, initialData.hurricanes.ext5),
+                      ext6: new graph(bbcall, 'main9h', initialData.hurricanes.data, initialData.hurricanes.ext6),
+                      ext7: new graph(balon, 'main10h', initialData.hurricanes.data, initialData.hurricanes.ext7.results)
+                  }
+              };
+          });
     });
