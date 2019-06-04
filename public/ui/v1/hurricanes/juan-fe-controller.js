@@ -51,6 +51,7 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
     var got=[];
     var dataExt1 = [];
     var cnjoke=[];
+    var bbad=[];
 
     $scope.pagination = {
         offset: 0,
@@ -92,7 +93,8 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
             $http.get("/proxy/computers-attacks-stats"),
             $http.get("/proxy/poke"),
             $http.get("/proxy/got"),
-            $http.get("/proxy/cn")
+            $http.get("/proxy/cn"),
+            $http.get("https://breaking-bad-quotes.herokuapp.com/v1/quotes")
             ]).then(function(responses) {
             $scope.hurricanes = responses[0].data;
             $scope.hurricanes2 = responses[2].data;
@@ -101,7 +103,8 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
             poke =responses[5].data.results;
             got=responses[6].data;
             cnjoke=responses[7].data;
-            console.table(cnjoke)
+            bbad=responses[8].data;
+            console.table(bbad)
             console.log(responses)
             cuentadanos();
             fium();
@@ -111,6 +114,7 @@ app.controller("juan-fe-controller", function($scope, $http, $q) {
             pokeGraph();
             chanchachachanchan();
             cncall();
+            bbcall();
             $scope.count = Math.ceil(responses[1].data.count / $scope.pagination.limit);
             if (cb) cb();
         }).catch(function(response) {
@@ -993,9 +997,39 @@ function cncall(){
 });
 }
 
+function bbcall(){
+    
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawBarColors);
+
+    function drawBarColors () {
+    var auxbb =[];
+    auxbb.push(['Breaking bad character',"mbar"])
+    auxbb.push([bbad[0].author,parseInt($scope.hurricanes[1].mbar)])
+    var data = google.visualization.arrayToDataTable(auxbb);
+    
+    var options = {
+        title: '',
+        chartArea: {width: '50%'},
+        colors: ['#b0120a', '#ffab91'],
+        hAxis: {
+          title: bbad[0].author,
+          minValue: 0
+        },
+        vAxis: {
+          title: "mbar"
+        }
+      };
+    
+      var chart = new google.visualization.BarChart(document.getElementById('bbada'));
+      chart.draw(data, options);
+    }
+}
+}
+
 //###################################
 
-})
+)
 
 app.controller("juan-fe-edit-controller", function($scope, $http, $q, dataToEdit, $location) {
 
