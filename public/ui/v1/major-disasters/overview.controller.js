@@ -84,6 +84,7 @@ angular.module('SOS1819-app.majorDisastersApp')
 		ngDialog.open({
 			template: '/ui/v1/major-disasters/overviewItem.template.html',
 			controller: "overviewModItemCtrl",
+			disableAnimation: true,
 			data: {
 				operation: 'create',
 				item: {

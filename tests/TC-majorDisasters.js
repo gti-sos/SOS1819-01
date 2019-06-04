@@ -17,7 +17,7 @@ describe("Testing for 'major-disasters'", function () {
 		//browser.takeScreenshot().then(function (png) {
 			//expect(resultModal.getText()).toContain('La operación se ha completado con éxito');
 			//console.log('tested created')
-		browser.get("http://localhost:8080/#!/major-disasters");
+		browser.get("https://localhost:8080/#!/major-disasters");
 			//element(by.css('[ng-click="closeThisDialog(0)"]')).click();
 			//writeScreenShot(png, 'exception.png');
     	//});
@@ -31,7 +31,7 @@ describe("Testing for 'major-disasters'", function () {
 	});
 
 	it("Should create an item with event '" + itemName + "'", function () {
-		browser.wait(until.presenceOf((element(by.id('openModal')))))//.then(function () {
+		//browser.wait(until.presenceOf((element(by.id('openModal'))))).then(function () {
 			element(by.id('openModal')).click();
 			var modal = element(by.name('formItem'));
 			browser.wait(until.presenceOf(modal), 5000, "Modal took too long to appear!");
@@ -72,7 +72,7 @@ describe("Testing for 'major-disasters'", function () {
 			//console.log('tested created')
 			element(by.css('[ng-click="closeThisDialog(0)"]')).click();
 			//writeScreenShot(png, 'exception.png');
-    		//});
+    	//});
 			
 
     // ...
