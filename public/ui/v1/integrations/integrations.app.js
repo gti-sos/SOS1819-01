@@ -28,7 +28,8 @@ angular.module('SOS1819-app.integrations', ['ngRoute', 'SOS1819-app', 'SOS1819-a
                             $http.get("/proxy/poke"),
                             $http.get("/proxy/got"),
                             $http.get("/proxy/cn"),
-                            $http.get("https://breaking-bad-quotes.herokuapp.com/v1/quotes")
+                            $http.get("https://breaking-bad-quotes.herokuapp.com/v1/quotes"),
+                            $http.get("https://swapi.co/api/people/")
                         ];
 
                         var bombsPromises = [
@@ -60,11 +61,7 @@ angular.module('SOS1819-app.integrations', ['ngRoute', 'SOS1819-app', 'SOS1819-a
 
                         }).catch(function(res) {
                             return {
-                                data: [],
-                                ext1: [],
-                                ext2: [],
-                                ext3: [],
-                                ext4: []
+                                data: [], ext1: [], ext2: [], ext3: [], ext4: [], ext5: [], ext6: [], ext7: []
                             };
                         });
 
@@ -76,13 +73,12 @@ angular.module('SOS1819-app.integrations', ['ngRoute', 'SOS1819-app', 'SOS1819-a
                                 ext3: res[3].data,
                                 ext4: res[4].data,
                                 ext5: res[5].data,
-                                ext6: res[6].data
-
-
+                                ext6: res[6].data,
+                                ext7: res[7].data
                             };
                         }).catch(function(res) {
                             return {
-                                data: []
+                                data: [], ext1: [], ext2: [], ext3: [], ext4: [], ext5: [], ext6: [], ext7: []
                             };
                         });
 
@@ -99,7 +95,7 @@ angular.module('SOS1819-app.integrations', ['ngRoute', 'SOS1819-app', 'SOS1819-a
                             };
                         }).catch(function(res) {
                             return {
-                                data: []
+                                data: [], ext1: [], ext2: [], ext3: [], ext4: [], ext5: [], ext6: [], ext7: []
                             };
                         });
 

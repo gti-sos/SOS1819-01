@@ -1,21 +1,21 @@
 angular.module('SOS1819-app.integrations')
 
-    .controller('integrationsCtrl', function($scope, initialData) {
-        $scope.apiName = '';
+.controller('integrationsCtrl', function($scope, initialData) {
+    $scope.apiName = '';
 
-        console.log(initialData);
+    console.log(initialData);
 
 
-        function getRandomColor() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
         }
+        return color;
+    }
 
-        function refSort(targetData, refData) {
+    function refSort(targetData, refData) {
             // Create an array of indices [0, 1, 2, ...N].
             var indices = Object.keys(refData);
 
@@ -46,7 +46,7 @@ angular.module('SOS1819-app.integrations')
                     xAxisData.push(elm.year);
                     seriesData.push(1);
                 } else
-                    seriesData[index] += 1;
+                seriesData[index] += 1;
             }
 
 
@@ -143,9 +143,9 @@ angular.module('SOS1819-app.integrations')
                     useHTML: true,
                     headerFormat: '<table style="width:200px">',
                     pointFormat: '<tr><th colspan="2"><h3>{point.name}</h3></th></tr>' +
-                        '<tr><th>Año:</th><td>{point.x}</td></tr>' +
-                        '<tr><th>Coste (millones USD):</th><td>{point.y}</td></tr>' +
-                        '<tr><th>Muertes:</th><td>{point.z}</td></tr>',
+                    '<tr><th>Año:</th><td>{point.x}</td></tr>' +
+                    '<tr><th>Coste (millones USD):</th><td>{point.y}</td></tr>' +
+                    '<tr><th>Muertes:</th><td>{point.z}</td></tr>',
                     footerFormat: '</table>',
                     followPointer: true
                 },
@@ -175,7 +175,7 @@ angular.module('SOS1819-app.integrations')
             });
             google.charts.setOnLoadCallback(drawRegionsMap);
             var labels = [
-                ['País', 'Coste millones $ (sin inflación)', 'Muertes']
+            ['País', 'Coste millones $ (sin inflación)', 'Muertes']
             ];
 
             for (var i = 0; i < ownData.length; i++) {
@@ -282,7 +282,7 @@ angular.module('SOS1819-app.integrations')
                     xAxisData.push(elm.year);
                     seriesData.push(1);
                 } else
-                    seriesData[index] += 1;
+                seriesData[index] += 1;
             }
 
 
@@ -347,43 +347,43 @@ angular.module('SOS1819-app.integrations')
                     }
                 }],
                 yAxis: [{
-                        type: 'value',
-                        name: 'Toneladas de CO2',
-                        min: 0,
-                        max: 2200,
-                        interval: 220,
-                        axisLabel: {
-                            formatter: '{value} t'
-                        }
-                    },
-                    {
-                        type: 'value',
-                        name: 'Número de catástrofes ambientales',
-                        min: 1,
-                        max: 11,
-                        interval: 1,
-                        axisLabel: {
-                            formatter: '{value}'
-                        }
+                    type: 'value',
+                    name: 'Toneladas de CO2',
+                    min: 0,
+                    max: 2200,
+                    interval: 220,
+                    axisLabel: {
+                        formatter: '{value} t'
                     }
+                },
+                {
+                    type: 'value',
+                    name: 'Número de catástrofes ambientales',
+                    min: 1,
+                    max: 11,
+                    interval: 1,
+                    axisLabel: {
+                        formatter: '{value}'
+                    }
+                }
                 ],
                 series: [{
-                        name: 'Emisiones globales de CO2',
-                        type: 'line',
-                        areaStyle: {
-                            normal: {}
-                        },
-                        data: seriesDataExt1
+                    name: 'Emisiones globales de CO2',
+                    type: 'line',
+                    areaStyle: {
+                        normal: {}
                     },
-                    {
-                        name: 'Catástrofes ambientales',
-                        type: 'line',
-                        areaStyle: {
-                            normal: {}
-                        },
-                        yAxisIndex: 1,
-                        data: seriesDataFiltered
-                    }
+                    data: seriesDataExt1
+                },
+                {
+                    name: 'Catástrofes ambientales',
+                    type: 'line',
+                    areaStyle: {
+                        normal: {}
+                    },
+                    yAxisIndex: 1,
+                    data: seriesDataFiltered
+                }
                 ]
             };
 
@@ -576,14 +576,14 @@ angular.module('SOS1819-app.integrations')
 
             // create chart label with description
             chart.label()
-                .text('Integración major-disasters (G01) con https://api.awhere.com usando OAuth')
-                .anchor('center-bottom')
-                .position('center-bottom')
-                .fontWeight('normal')
-                .fontSize(11)
-                .fontFamily('tahoma')
-                .fontColor('rgb(35,35,35)')
-                .offsetY(15);
+            .text('Integración major-disasters (G01) con https://api.awhere.com usando OAuth')
+            .anchor('center-bottom')
+            .position('center-bottom')
+            .fontWeight('normal')
+            .fontSize(11)
+            .fontFamily('tahoma')
+            .fontColor('rgb(35,35,35)')
+            .offsetY(15);
 
             // create first series with mapped data
             chart.line(data1).name('Temperatura').markers(true);
@@ -781,9 +781,9 @@ angular.module('SOS1819-app.integrations')
 
             // set chart connectors settings
             chart.connectors()
-                .curveFactor(.9)
-                .length(35)
-                .stroke('#2485d0');
+            .curveFactor(.9)
+            .length(35)
+            .stroke('#2485d0');
 
             // set container id for the chart
             chart.container(containerId);
@@ -856,21 +856,21 @@ angular.module('SOS1819-app.integrations')
                     height: "50%", //default: "100%"
                     width: "50%" //default: "100%"
                 }
-            ));
+                ));
             chart.addSeries(new EJSC.DoughnutSeries(
                 new EJSC.ArrayDataHandler([
                     [v1, "0-25 Millones"],
                     [v2, "26-50 Millones"],
                     [v3, "51-75 Millones"],
                     [v4, "+75 Millones"]
-                ]), {
+                    ]), {
                     opacity: 80, //default: 50
                     doughnutOffset: .5, //default: .5
                     position: "bottomLeft", //default: "center"
                     height: "70%", //default: "100%"
                     width: "70%" //default: "100%"
                 }
-            ));
+                ));
         }
 
         function fium(id, datos) {
@@ -890,52 +890,52 @@ angular.module('SOS1819-app.integrations')
 
             Highcharts.chart(id, {
 
-                    chart: {
-                        type: 'gauge',
-                        plotBackgroundColor: null,
-                        plotBackgroundImage: null,
-                        plotBorderWidth: 0,
-                        plotShadow: false
-                    },
+                chart: {
+                    type: 'gauge',
+                    plotBackgroundColor: null,
+                    plotBackgroundImage: null,
+                    plotBorderWidth: 0,
+                    plotShadow: false
+                },
 
-                    title: {
-                        text: 'speed'
-                    },
+                title: {
+                    text: 'speed'
+                },
 
-                    pane: {
-                        startAngle: 0,
-                        endAngle: 360,
-                        background: [{
-                            backgroundColor: {
-                                linearGradient: {
-                                    x1: 0,
-                                    y1: 0,
-                                    x2: 0,
-                                    y2: 1
-                                },
-                                stops: [
-                                    [0, '#FFF'],
-                                    [1, '#333']
-                                ]
+                pane: {
+                    startAngle: 0,
+                    endAngle: 360,
+                    background: [{
+                        backgroundColor: {
+                            linearGradient: {
+                                x1: 0,
+                                y1: 0,
+                                x2: 0,
+                                y2: 1
                             },
-                            borderWidth: 0,
-                            outerRadius: '109%'
-                        }, {
-                            backgroundColor: {
-                                linearGradient: {
-                                    x1: 0,
-                                    y1: 0,
-                                    x2: 0,
-                                    y2: 1
-                                },
-                                stops: [
-                                    [0, '#333'],
-                                    [1, '#FFF']
-                                ]
+                            stops: [
+                            [0, '#FFF'],
+                            [1, '#333']
+                            ]
+                        },
+                        borderWidth: 0,
+                        outerRadius: '109%'
+                    }, {
+                        backgroundColor: {
+                            linearGradient: {
+                                x1: 0,
+                                y1: 0,
+                                x2: 0,
+                                y2: 1
                             },
-                            borderWidth: 1,
-                            outerRadius: '107%'
-                        }, {
+                            stops: [
+                            [0, '#333'],
+                            [1, '#FFF']
+                            ]
+                        },
+                        borderWidth: 1,
+                        outerRadius: '107%'
+                    }, {
                             // default background
                         }, {
                             backgroundColor: '#DDD',
@@ -1001,8 +1001,8 @@ angular.module('SOS1819-app.integrations')
                             //console.log("Value of o = ", o)    
                             if (o == 0) {
                                 var point = chart.series[0].points[0],
-                                    newVal,
-                                    inc = -5;
+                                newVal,
+                                inc = -5;
 
                                 newVal = point.y + inc;
                                 // console.log("entra1");
@@ -1011,8 +1011,8 @@ angular.module('SOS1819-app.integrations')
                                 o++;
                             } else if (o == 1) {
                                 var point = chart.series[0].points[0],
-                                    newVal,
-                                    inc = 5;
+                                newVal,
+                                inc = 5;
 
                                 newVal = point.y + inc;
 
@@ -1022,8 +1022,8 @@ angular.module('SOS1819-app.integrations')
                                 o++;
                             } else if (o == 2) {
                                 var point = chart.series[0].points[0],
-                                    newVal,
-                                    inc = 5;
+                                newVal,
+                                inc = 5;
 
                                 newVal = point.y + inc;
 
@@ -1032,8 +1032,8 @@ angular.module('SOS1819-app.integrations')
                                 o++;
                             } else {
                                 var point = chart.series[0].points[0],
-                                    newVal,
-                                    inc = -5;
+                                newVal,
+                                inc = -5;
 
                                 newVal = point.y + inc;
 
@@ -1046,34 +1046,34 @@ angular.module('SOS1819-app.integrations')
 
                     }
                 }
-            );
-        }
+                );
+}
 
-        function mapa(id, datos) {
+function mapa(id, datos) {
 
 
-            google.charts.load('current', {
-                'packages': ['geochart'],
+    google.charts.load('current', {
+        'packages': ['geochart'],
                 // Note: you will need to get a mapsApiKey for your project.
                 // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
                 'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
             });
-            google.charts.setOnLoadCallback(drawRegionsMap);
+    google.charts.setOnLoadCallback(drawRegionsMap);
 
-            function drawRegionsMap() {
-                var hur = {};
-                var auxdat2 = {};
-                var aux = [];
-                var dataMapa = [
-                    ['Country', 'Damages', 'Hurricanes']
-                ];
+    function drawRegionsMap() {
+        var hur = {};
+        var auxdat2 = {};
+        var aux = [];
+        var dataMapa = [
+        ['Country', 'Damages', 'Hurricanes']
+        ];
 
-                datos.forEach(function(e) {
-                    var country = e.country;
-                    var exist = auxdat2[country];
-                    e.damagesuntil2008 = parseFloat(e.damagesuntil2008);
+        datos.forEach(function(e) {
+            var country = e.country;
+            var exist = auxdat2[country];
+            e.damagesuntil2008 = parseFloat(e.damagesuntil2008);
 
-                    if (exist) {
+            if (exist) {
                         // if(aux.includes(e.Country)){
                         //auxdat2[country].damages += e.damagesuntil2008;
                         //auxdat2[country] = {damages: e.damagesuntil2008, hurricanes: ""}
@@ -1090,76 +1090,76 @@ angular.module('SOS1819-app.integrations')
                     }
                 });
 
-                for (var key in auxdat2) {
-                    dataMapa.push([key, auxdat2[key].damages, auxdat2[key].hurricanes]);
-                }
-                var data = google.visualization.arrayToDataTable(dataMapa);
-                var options = {};
-
-                var chartM = new google.visualization.GeoChart(document.getElementById(id));
-
-                chartM.draw(data, options);
-            }
+        for (var key in auxdat2) {
+            dataMapa.push([key, auxdat2[key].damages, auxdat2[key].hurricanes]);
         }
+        var data = google.visualization.arrayToDataTable(dataMapa);
+        var options = {};
 
-        function cstats(id, datos1, datos2) {
-            console.log(datos1)
-            var data = datos1.map(function(e, i) {
-                console.log(e)
-                if (datos2[i].population) {
-                    return [
-                        parseInt(e.speed),
-                        parseInt(e.mbar),
-                        datos2[i].population,
-                        e.country,
-                        '2016'
-                    ];
-                } else {
-                    return [
-                        parseInt(e.speed),
-                        parseInt(e.mbar),
-                        0,
-                        e.country,
-                        '2016'
-                    ];
+        var chartM = new google.visualization.GeoChart(document.getElementById(id));
+
+        chartM.draw(data, options);
+    }
+}
+
+function cstats(id, datos1, datos2) {
+    console.log(datos1)
+    var data = datos1.map(function(e, i) {
+        console.log(e)
+        if (datos2[i].population) {
+            return [
+            parseInt(e.speed),
+            parseInt(e.mbar),
+            datos2[i].population,
+            e.country,
+            '2016'
+            ];
+        } else {
+            return [
+            parseInt(e.speed),
+            parseInt(e.mbar),
+            0,
+            e.country,
+            '2016'
+            ];
+        }
+    });
+    var myChart2 = echarts.init(document.getElementById(id));
+
+    var option = {
+        backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
+            offset: 0,
+            color: '#f7f8fa'
+        }, {
+            offset: 1,
+            color: '#cdd0d5'
+        }]),
+        title: {
+            text: '1990 与 2015 年各国家人均寿命与 GDP'
+        },
+        legend: {
+            right: 10,
+            data: ['2016']
+        },
+        xAxis: {
+            splitLine: {
+                lineStyle: {
+                    type: 'dashed'
                 }
-            });
-            var myChart2 = echarts.init(document.getElementById(id));
-
-            var option = {
-                backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
-                    offset: 0,
-                    color: '#f7f8fa'
-                }, {
-                    offset: 1,
-                    color: '#cdd0d5'
-                }]),
-                title: {
-                    text: '1990 与 2015 年各国家人均寿命与 GDP'
-                },
-                legend: {
-                    right: 10,
-                    data: ['2016']
-                },
-                xAxis: {
-                    splitLine: {
-                        lineStyle: {
-                            type: 'dashed'
-                        }
-                    }
-                },
-                yAxis: {
-                    splitLine: {
-                        lineStyle: {
-                            type: 'dashed'
-                        }
-                    },
-                    scale: true
-                },
-                series: [{
-                    name: '2016',
-                    data: data[0],
-                    type: 'scatter',
+            }
+        },
+        yAxis: {
+            splitLine: {
+                lineStyle: {
+                    type: 'dashed'
+                }
+            },
+            scale: true
+        },
+        series: [{
+            name: '2016',
+            data: data[0],
+            type: 'scatter',
                     /*symbolSize: function(data) {
                         return Math.sqrt(data[2]) / 5e2;
                     },*/
@@ -1311,15 +1311,15 @@ angular.module('SOS1819-app.integrations')
                                 value: datos1[i].damagesuntil2008
                             });
                         } else
-                            founded[e.attacktype] = 1;
+                        founded[e.attacktype] = 1;
                     })
 
                     console.log(test)
                     var chart = anychart.pie(test);
                     chart.labels()
-                        .hAlign('center')
-                        .position('outside')
-                        .format('{%Value} km/h({%PercentOfCategory}%)');
+                    .hAlign('center')
+                    .position('outside')
+                    .format('{%Value} km/h({%PercentOfCategory}%)');
 
                     // set chart title text settings
                     chart.title('Types of computer attack with the speed of a random hurricane.')
@@ -1360,7 +1360,7 @@ angular.module('SOS1819-app.integrations')
                     intervalOffset: .5,
                     useColorArray: true
                 }
-            );
+                );
 
             mySeries.x_axis_formatter = new EJSC.NumberFormatter({
                 forced_decimals: 2,
@@ -1397,15 +1397,15 @@ angular.module('SOS1819-app.integrations')
                 // set chart's palette
                 chart.palette(['#47659b', '#355691', '#314f84', '#2c4777', '#273f6a', '#22375d', '#1d2f50',
                     '#192842', '#1d2f50', '#22375d', '#273f6a', '#2c4777', '#314f84', '#355691', '#47659b'
-                ]);
+                    ]);
 
                 // // set nodes width and padding
                 chart.nodeWidth(200);
 
                 // set node's label font color and weight
                 chart.node().normal().labels()
-                    .fontColor('#fff')
-                    .fontWeight('bold');
+                .fontColor('#fff')
+                .fontWeight('bold');
 
                 //disable tooltips for thew node
                 chart.node().tooltip().enabled(false);
@@ -1443,16 +1443,16 @@ angular.module('SOS1819-app.integrations')
 
 
                 return [
-                    parseInt(e.damagesuntil2008),
-                    parseInt(e.mbar),
-                    parseInt(e.speed),
-                    parseInt(e.year),
-                    parseInt(e.damagesuntil2008),
-                    parseInt(e.mbar),
-                    parseInt(e.speed),
-                    parseInt(e.year),
-                    parseInt(e.speed),
-                    parseInt(e.year)
+                parseInt(e.damagesuntil2008),
+                parseInt(e.mbar),
+                parseInt(e.speed),
+                parseInt(e.year),
+                parseInt(e.damagesuntil2008),
+                parseInt(e.mbar),
+                parseInt(e.speed),
+                parseInt(e.year),
+                parseInt(e.speed),
+                parseInt(e.year)
                 ];
             });
 
@@ -1511,9 +1511,9 @@ angular.module('SOS1819-app.integrations')
                     splitLine: {
                         lineStyle: {
                             color: [
-                                'rgba(238, 197, 102, 0.1)', 'rgba(238, 197, 102, 0.2)',
-                                'rgba(238, 197, 102, 0.4)', 'rgba(238, 197, 102, 0.6)',
-                                'rgba(238, 197, 102, 0.8)', 'rgba(238, 197, 102, 1)'
+                            'rgba(238, 197, 102, 0.1)', 'rgba(238, 197, 102, 0.2)',
+                            'rgba(238, 197, 102, 0.4)', 'rgba(238, 197, 102, 0.6)',
+                            'rgba(238, 197, 102, 0.8)', 'rgba(238, 197, 102, 1)'
                             ].reverse()
                         }
                     },
@@ -1855,7 +1855,7 @@ angular.module('SOS1819-app.integrations')
                     },
                     tooltip: {
                         pointFormat: 'Codigo: <b> {point.y}</b><br>' +
-                            'Proyectiles: <b> {point.z} </b><br>'
+                        'Proyectiles: <b> {point.z} </b><br>'
                     },
                     colorByPoint: true
                 }]
@@ -2164,46 +2164,73 @@ angular.module('SOS1819-app.integrations')
             };
         };
 
+        function balon(id, ownData, extData) {
+            //   var chart = new EJSC.Chart("cesto", { show_legend: true });
+            var datasw2 = [];
+            datasw2.push(["Nombre", "mbar"]);
+            extData.forEach(function(e, i) {
+                datasw2.push([e.name, parseInt(ownData[i].mbar)]);
+                //datasw2.push([extData[i].name, parseInt(e.mbar)]);
+            })
+            //datasw2.push(datasw);
+            google.charts.load('current', {
+                'packages': ['corechart']
+            });
+            google.charts.setOnLoadCallback(drawChart);
 
-        $scope.disasters = {
-            show: true,
-            visualizations: {
-                echarts: new graph(generateBarChart, 'main1', initialData.disasters.data),
-                highcharts: new graph(generateHighCharts, 'main2', initialData.disasters.data),
-                geocharts: new graph(generateGeoCharts, 'main3', initialData.disasters.data)
-            },
-            integrations: {
-                ext1: new graph(generateLineChart, 'main4', initialData.disasters.data.slice(0), initialData.disasters.ext1),
-                ext2: new graph(generateHeatmap, 'main5', initialData.disasters.data.slice(0), initialData.disasters.ext2),
-                ext3: new graph(generateRadar, 'main6', initialData.disasters.data.slice(0), initialData.disasters.ext3.norms),
-                ext4: new graph(generateGraph, 'main7', initialData.disasters.data.slice(0, 8), initialData.disasters.ext4),
-                ext5: new graph(generateScatter, 'main8', initialData.disasters.data, initialData.disasters.ext5.message),
-                ext6: new graph(generateWordTree, 'main9', initialData.disasters.data.slice(0, 25), initialData.disasters.ext6.slips),
-                ext7: new graph(generatePie, 'main10', initialData.disasters.ext7.results)
+            function drawChart() {
+
+                var data = google.visualization.arrayToDataTable(datasw2);
+
+                var options = {
+                    title: 'SW characters as mbars'
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById(id));
+
+                chart.draw(data, options);
             }
-        };
+        }
 
-        $scope.bombs = {
-            show: true,
-            visualizations: {
-                anychart: new graph(view1, 'vista1', initialData.bombs.data),
-                highcharts: new graph(view2, 'vista2', initialData.bombs.data),
-                geocharts: new graph(view3, 'vista3', initialData.bombs.data)
-            },
-            integrations: {
-                ext1: new graph(view4, 'vista4', initialData.bombs.data.slice(0), initialData.bombs.ext1),
-                ext2: new graph(view5, 'vista5', initialData.bombs.data.slice(0), initialData.bombs.ext2),
-                ext3: new graph(view6, 'vista6', initialData.bombs.data.slice(0), initialData.bombs.ext3),
-                ext4: new graph(view7, 'vista7', initialData.bombs.data.slice(0), initialData.bombs.ext4),
-                ext5: new graph(view8, 'vista8', initialData.bombs.data.slice(0), initialData.bombs.ext5),
-                ext6: new graph(view9, 'vista9', initialData.bombs.data.slice(0), initialData.bombs.ext6),
-                ext7: new graph(view10, 'vista10', initialData.bombs.data.slice(0), initialData.bombs.ext7)
-            }
-        };
+      $scope.disasters = {
+        show: true,
+        visualizations: {
+            echarts: new graph(generateBarChart, 'main1', initialData.disasters.data),
+            highcharts: new graph(generateHighCharts, 'main2', initialData.disasters.data),
+            geocharts: new graph(generateGeoCharts, 'main3', initialData.disasters.data)
+        },
+        integrations: {
+            ext1: new graph(generateLineChart, 'main4', initialData.disasters.data.slice(0), initialData.disasters.ext1),
+            ext2: new graph(generateHeatmap, 'main5', initialData.disasters.data.slice(0), initialData.disasters.ext2),
+            ext3: new graph(generateRadar, 'main6', initialData.disasters.data.slice(0), initialData.disasters.ext3.norms),
+            ext4: new graph(generateGraph, 'main7', initialData.disasters.data.slice(0, 8), initialData.disasters.ext4),
+            ext5: new graph(generateScatter, 'main8', initialData.disasters.data, initialData.disasters.ext5.message),
+            ext6: new graph(generateWordTree, 'main9', initialData.disasters.data.slice(0, 25), initialData.disasters.ext6.slips),
+            ext7: new graph(generatePie, 'main10', initialData.disasters.ext7.results)
+        }
+    };
 
-        $scope.hurricanes = {
-            show: true,
-            visualizations: {
+    $scope.bombs = {
+        show: true,
+        visualizations: {
+            anychart: new graph(view1, 'vista1', initialData.bombs.data),
+            highcharts: new graph(view2, 'vista2', initialData.bombs.data),
+            geocharts: new graph(view3, 'vista3', initialData.bombs.data)
+        },
+        integrations: {
+            ext1: new graph(view4, 'vista4', initialData.bombs.data.slice(0), initialData.bombs.ext1),
+            ext2: new graph(view5, 'vista5', initialData.bombs.data.slice(0), initialData.bombs.ext2),
+            ext3: new graph(view6, 'vista6', initialData.bombs.data.slice(0), initialData.bombs.ext3),
+            ext4: new graph(view7, 'vista7', initialData.bombs.data.slice(0), initialData.bombs.ext4),
+            ext5: new graph(view8, 'vista8', initialData.bombs.data.slice(0), initialData.bombs.ext5),
+            ext6: new graph(view9, 'vista9', initialData.bombs.data.slice(0), initialData.bombs.ext6),
+            ext7: new graph(view10, 'vista10', initialData.bombs.data.slice(0), initialData.bombs.ext7)
+        }
+    };
+
+    $scope.hurricanes = {
+        show: true,
+        visualizations: {
                 ejscharts: new graph(cuentadanos, 'main1h', initialData.hurricanes.data), //
                 highcharts: new graph(fium, 'main2h', initialData.hurricanes.data),
                 geocharts: new graph(mapa, 'main3h', initialData.hurricanes.data)
@@ -2214,7 +2241,8 @@ angular.module('SOS1819-app.integrations')
                 ext3: new graph(pokeGraph, 'main6h', initialData.hurricanes.data, initialData.hurricanes.ext3.results), //
                 ext4: new graph(chanchachachanchan, 'main7h', initialData.hurricanes.data, initialData.hurricanes.ext4),
                 ext5: new graph(cncall, 'main8h', initialData.hurricanes.data, initialData.hurricanes.ext5),
-                ext6: new graph(bbcall, 'main9h', initialData.hurricanes.data, initialData.hurricanes.ext6)
+                ext6: new graph(bbcall, 'main9h', initialData.hurricanes.data, initialData.hurricanes.ext6),
+                ext7: new graph(balon, 'main10h', initialData.hurricanes.data, initialData.hurricanes.ext7.results)
             }
         };
 
