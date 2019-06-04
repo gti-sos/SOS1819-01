@@ -6,11 +6,11 @@
   "scripts": {
     "start": "node index.js",
     "pretest": "killall phantomjs; ./tests/runPhantomJS.sh",
-    "test": "npm run test-testing-of-nuclear-bombs; npm run test-hurricanes; npm run test-major-disasters; protractor ./tests/config.js",
+    "test": "npm start;npm run test-testing-of-nuclear-bombs; npm run test-hurricanes; npm run test-major-disasters; protractor ./tests/config.js",
     "test-testing-of-nuclear-bombs": "newman run https://www.getpostman.com/collections/a4e554c52652db1ae87e",
     "test-major-disasters": "newman run https://www.getpostman.com/collections/e932bf9cc89cbcf15301",
     "test-hurricanes": "newman run https://www.getpostman.com/collections/5619caf6300fb705ece8",
-    "posttest": "killall phantomjs"
+    "posttest": "killall phantomjs; killall node"
   },
   "repository": "git+https://github.com/gti-sos/SOS1819-01.git",
   "author": "berruimar <47628541+berruimar@users.noreply.github.com>",
