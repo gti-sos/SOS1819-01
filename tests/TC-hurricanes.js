@@ -17,7 +17,7 @@ describe("Testing for 'hurricanes'", function () {
 	var until = protractor.ExpectedConditions;
 	
 	beforeAll(function(){
-		browser.get("https://localhost:8080/#!/hurricanes");
+		browser.get("http://localhost:8080/#!/hurricanes");
 	});
 
 	it("Should be non empty", function () {

@@ -17,7 +17,7 @@ describe("Testing for 'major-disasters'", function () {
 		//browser.takeScreenshot().then(function (png) {
 			//expect(resultModal.getText()).toContain('La operación se ha completado con éxito');
 			//console.log('tested created')
-		browser.get("https://localhost:8080/#!/major-disasters");
+		browser.get("http://localhost:8080/#!/major-disasters");
 			//element(by.css('[ng-click="closeThisDialog(0)"]')).click();
 			//writeScreenShot(png, 'exception.png');
     	//});

@@ -17,7 +17,7 @@ describe("Testing for 'testing-of-nuclear-bombs'", function () {
 		//browser.takeScreenshot().then(function (png) {
 			//expect(resultModal.getText()).toContain('La operación se ha completado con éxito');
 			//console.log('tested created')
-		browser.get("https://localhost:8080/#!/testing-of-nuclear-bombs");
+		browser.get("http://localhost:8080/#!/testing-of-nuclear-bombs");
 			//element(by.css('[ng-click="closeThisDialog(0)"]')).click();
 			//writeScreenShot(png, 'exception.png');
     	//});
