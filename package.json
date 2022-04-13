@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/gti-sos/SOS1819-01#readme",
   "dependencies": {
-    "async": "^2.6.2",
+    "async": "^3.2.2",
     "body-parser": "^1.18.3",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.4",
